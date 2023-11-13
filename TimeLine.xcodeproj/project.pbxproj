@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CEC2FBCF2B0212AF002E3046 /* SeSACAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* SeSACAPI.swift */; };
+		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
+		CEC2FBD62B021796002E3046 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* APIManager.swift */; };
+		CEC2FBD92B021C51002E3046 /* LoginToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD82B021C51002E3046 /* LoginToken.swift */; };
+		CEC2FBDD2B026DD9002E3046 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = CEC2FBDC2B026DD9002E3046 /* Moya */; };
+		CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */; };
+		CEC2FBE12B0270DC002E3046 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBE02B0270DC002E3046 /* LoginError.swift */; };
 		CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87542B01E30000AC375F /* AppDelegate.swift */; };
 		CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87562B01E30000AC375F /* SceneDelegate.swift */; };
 		CEEA87592B01E30000AC375F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87582B01E30000AC375F /* ViewController.swift */; };
@@ -20,7 +27,6 @@
 		CEEA877D2B01EECB00AC375F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA877C2B01EECB00AC375F /* RxCocoa */; };
 		CEEA877F2B01EECB00AC375F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA877E2B01EECB00AC375F /* RxSwift */; };
 		CEEA87822B01EEDB00AC375F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA87812B01EEDB00AC375F /* RxDataSources */; };
-		CEEA87852B01EF4C00AC375F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA87842B01EF4C00AC375F /* Moya */; };
 		CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87862B01F0A000AC375F /* BaseView.swift */; };
 		CEEA87892B01F10900AC375F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87882B01F10900AC375F /* Constants.swift */; };
 		CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA878A2B01F1A400AC375F /* BaseViewController.swift */; };
@@ -30,11 +36,16 @@
 		CEEA87942B01F82000AC375F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA87932B01F82000AC375F /* IQKeyboardManagerSwift */; };
 		CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87962B01F87500AC375F /* CustomTextField.swift */; };
 		CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87982B01F9FF00AC375F /* MainButton.swift */; };
-		CEEA879B2B01FC5200AC375F /* ValidCheckLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA879A2B01FC5200AC375F /* ValidCheckLabel.swift */; };
 		CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CEC2FBCE2B0212AF002E3046 /* SeSACAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACAPI.swift; sourceTree = "<group>"; };
+		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		CEC2FBD52B021796002E3046 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		CEC2FBD82B021C51002E3046 /* LoginToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToken.swift; sourceTree = "<group>"; };
+		CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
+		CEC2FBE02B0270DC002E3046 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		CEEA87512B01E30000AC375F /* TimeLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA87542B01E30000AC375F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEA87562B01E30000AC375F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +65,6 @@
 		CEEA87902B01F3D900AC375F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CEEA87962B01F87500AC375F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		CEEA87982B01F9FF00AC375F /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
-		CEEA879A2B01FC5200AC375F /* ValidCheckLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidCheckLabel.swift; sourceTree = "<group>"; };
 		CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUnderline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,8 +75,8 @@
 			files = (
 				CEEA877F2B01EECB00AC375F /* RxSwift in Frameworks */,
 				CEEA87822B01EEDB00AC375F /* RxDataSources in Frameworks */,
+				CEC2FBDD2B026DD9002E3046 /* Moya in Frameworks */,
 				CEEA877D2B01EECB00AC375F /* RxCocoa in Frameworks */,
-				CEEA87852B01EF4C00AC375F /* Moya in Frameworks */,
 				CEEA877A2B01EEAA00AC375F /* SnapKit in Frameworks */,
 				CEEA87942B01F82000AC375F /* IQKeyboardManagerSwift in Frameworks */,
 			);
@@ -75,6 +85,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CEC2FBD22B02174A002E3046 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2FBD72B021C3D002E3046 /* Login */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEC2FBD72B021C3D002E3046 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2FBD32B021750002E3046 /* Login.swift */,
+				CEC2FBD82B021C51002E3046 /* LoginToken.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CEC2FBDA2B021D35002E3046 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */,
+				CEC2FBE02B0270DC002E3046 /* LoginError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		CEEA87482B01E30000AC375F = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +130,8 @@
 		CEEA87532B01E30000AC375F /* TimeLine */ = {
 			isa = PBXGroup;
 			children = (
+				CEC2FBDA2B021D35002E3046 /* Error */,
+				CEC2FBD22B02174A002E3046 /* Model */,
 				CEEA87952B01F85E00AC375F /* View */,
 				CEEA87772B01EE9200AC375F /* Utility */,
 				CEEA876D2B01EC9E00AC375F /* Network */,
@@ -133,6 +171,8 @@
 			children = (
 				CEEA87722B01ED4700AC375F /* APIKey.swift */,
 				CEEA87742B01ED5000AC375F /* BaseURL.swift */,
+				CEC2FBCE2B0212AF002E3046 /* SeSACAPI.swift */,
+				CEC2FBD52B021796002E3046 /* APIManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -160,7 +200,6 @@
 			children = (
 				CEEA87962B01F87500AC375F /* CustomTextField.swift */,
 				CEEA87982B01F9FF00AC375F /* MainButton.swift */,
-				CEEA879A2B01FC5200AC375F /* ValidCheckLabel.swift */,
 				CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */,
 			);
 			path = View;
@@ -187,8 +226,8 @@
 				CEEA877C2B01EECB00AC375F /* RxCocoa */,
 				CEEA877E2B01EECB00AC375F /* RxSwift */,
 				CEEA87812B01EEDB00AC375F /* RxDataSources */,
-				CEEA87842B01EF4C00AC375F /* Moya */,
 				CEEA87932B01F82000AC375F /* IQKeyboardManagerSwift */,
+				CEC2FBDC2B026DD9002E3046 /* Moya */,
 			);
 			productName = TimeLine;
 			productReference = CEEA87512B01E30000AC375F /* TimeLine.app */;
@@ -222,8 +261,8 @@
 				CEEA87782B01EEAA00AC375F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CEEA87802B01EEDB00AC375F /* XCRemoteSwiftPackageReference "RxDataSources" */,
-				CEEA87832B01EF4C00AC375F /* XCRemoteSwiftPackageReference "Moya" */,
 				CEEA87922B01F82000AC375F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				CEC2FBDB2B026DD9002E3046 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = CEEA87522B01E30000AC375F /* Products */;
 			projectDirPath = "";
@@ -253,21 +292,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEEA879B2B01FC5200AC375F /* ValidCheckLabel.swift in Sources */,
 				CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */,
 				CEEA87592B01E30000AC375F /* ViewController.swift in Sources */,
+				CEC2FBE12B0270DC002E3046 /* LoginError.swift in Sources */,
 				CEEA87912B01F3D900AC375F /* LoginViewModel.swift in Sources */,
 				CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */,
 				CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */,
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
+				CEC2FBCF2B0212AF002E3046 /* SeSACAPI.swift in Sources */,
+				CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
+				CEC2FBD62B021796002E3046 /* APIManager.swift in Sources */,
+				CEC2FBD92B021C51002E3046 /* LoginToken.swift in Sources */,
 				CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */,
 				CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */,
 				CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */,
+				CEC2FBD42B021750002E3046 /* Login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +536,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CEC2FBDB2B026DD9002E3046 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
 		CEEA87782B01EEAA00AC375F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -516,14 +568,6 @@
 				minimumVersion = 5.0.2;
 			};
 		};
-		CEEA87832B01EF4C00AC375F /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.3;
-			};
-		};
 		CEEA87922B01F82000AC375F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
@@ -535,6 +579,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CEC2FBDC2B026DD9002E3046 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEC2FBDB2B026DD9002E3046 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
 		CEEA87792B01EEAA00AC375F /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CEEA87782B01EEAA00AC375F /* XCRemoteSwiftPackageReference "SnapKit" */;
@@ -554,11 +603,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CEEA87802B01EEDB00AC375F /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
-		};
-		CEEA87842B01EF4C00AC375F /* Moya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CEEA87832B01EF4C00AC375F /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
 		};
 		CEEA87932B01F82000AC375F /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
