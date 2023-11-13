@@ -27,6 +27,11 @@
 		CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA878C2B01F3C700AC375F /* LoginViewController.swift */; };
 		CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA878E2B01F3D200AC375F /* LoginView.swift */; };
 		CEEA87912B01F3D900AC375F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87902B01F3D900AC375F /* LoginViewModel.swift */; };
+		CEEA87942B01F82000AC375F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA87932B01F82000AC375F /* IQKeyboardManagerSwift */; };
+		CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87962B01F87500AC375F /* CustomTextField.swift */; };
+		CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87982B01F9FF00AC375F /* MainButton.swift */; };
+		CEEA879B2B01FC5200AC375F /* ValidCheckLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA879A2B01FC5200AC375F /* ValidCheckLabel.swift */; };
+		CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +52,10 @@
 		CEEA878C2B01F3C700AC375F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CEEA878E2B01F3D200AC375F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CEEA87902B01F3D900AC375F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CEEA87962B01F87500AC375F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		CEEA87982B01F9FF00AC375F /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
+		CEEA879A2B01FC5200AC375F /* ValidCheckLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidCheckLabel.swift; sourceTree = "<group>"; };
+		CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUnderline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +68,7 @@
 				CEEA877D2B01EECB00AC375F /* RxCocoa in Frameworks */,
 				CEEA87852B01EF4C00AC375F /* Moya in Frameworks */,
 				CEEA877A2B01EEAA00AC375F /* SnapKit in Frameworks */,
+				CEEA87942B01F82000AC375F /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +94,7 @@
 		CEEA87532B01E30000AC375F /* TimeLine */ = {
 			isa = PBXGroup;
 			children = (
+				CEEA87952B01F85E00AC375F /* View */,
 				CEEA87772B01EE9200AC375F /* Utility */,
 				CEEA876D2B01EC9E00AC375F /* Network */,
 				CEEA876B2B01EC7D00AC375F /* Scene */,
@@ -144,6 +155,17 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		CEEA87952B01F85E00AC375F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA87962B01F87500AC375F /* CustomTextField.swift */,
+				CEEA87982B01F9FF00AC375F /* MainButton.swift */,
+				CEEA879A2B01FC5200AC375F /* ValidCheckLabel.swift */,
+				CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -166,6 +188,7 @@
 				CEEA877E2B01EECB00AC375F /* RxSwift */,
 				CEEA87812B01EEDB00AC375F /* RxDataSources */,
 				CEEA87842B01EF4C00AC375F /* Moya */,
+				CEEA87932B01F82000AC375F /* IQKeyboardManagerSwift */,
 			);
 			productName = TimeLine;
 			productReference = CEEA87512B01E30000AC375F /* TimeLine.app */;
@@ -200,6 +223,7 @@
 				CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CEEA87802B01EEDB00AC375F /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				CEEA87832B01EF4C00AC375F /* XCRemoteSwiftPackageReference "Moya" */,
+				CEEA87922B01F82000AC375F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = CEEA87522B01E30000AC375F /* Products */;
 			projectDirPath = "";
@@ -229,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEA879B2B01FC5200AC375F /* ValidCheckLabel.swift in Sources */,
 				CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */,
 				CEEA87592B01E30000AC375F /* ViewController.swift in Sources */,
 				CEEA87912B01F3D900AC375F /* LoginViewModel.swift in Sources */,
@@ -237,8 +262,11 @@
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
+				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
+				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
 				CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */,
+				CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */,
 				CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +524,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		CEEA87922B01F82000AC375F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.16;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -523,6 +559,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CEEA87832B01EF4C00AC375F /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		CEEA87932B01F82000AC375F /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEEA87922B01F82000AC375F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
