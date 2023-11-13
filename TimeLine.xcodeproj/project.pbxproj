@@ -14,6 +14,19 @@
 		CEEA875E2B01E30200AC375F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEA875D2B01E30200AC375F /* Assets.xcassets */; };
 		CEEA87612B01E30200AC375F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEA875F2B01E30200AC375F /* LaunchScreen.storyboard */; };
 		CEEA87712B01ECF300AC375F /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = CEEA87702B01ECF300AC375F /* .gitIgnore */; };
+		CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87722B01ED4700AC375F /* APIKey.swift */; };
+		CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87742B01ED5000AC375F /* BaseURL.swift */; };
+		CEEA877A2B01EEAA00AC375F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA87792B01EEAA00AC375F /* SnapKit */; };
+		CEEA877D2B01EECB00AC375F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA877C2B01EECB00AC375F /* RxCocoa */; };
+		CEEA877F2B01EECB00AC375F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA877E2B01EECB00AC375F /* RxSwift */; };
+		CEEA87822B01EEDB00AC375F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA87812B01EEDB00AC375F /* RxDataSources */; };
+		CEEA87852B01EF4C00AC375F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA87842B01EF4C00AC375F /* Moya */; };
+		CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87862B01F0A000AC375F /* BaseView.swift */; };
+		CEEA87892B01F10900AC375F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87882B01F10900AC375F /* Constants.swift */; };
+		CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA878A2B01F1A400AC375F /* BaseViewController.swift */; };
+		CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA878C2B01F3C700AC375F /* LoginViewController.swift */; };
+		CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA878E2B01F3D200AC375F /* LoginView.swift */; };
+		CEEA87912B01F3D900AC375F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87902B01F3D900AC375F /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +39,14 @@
 		CEEA87602B01E30200AC375F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEEA87622B01E30200AC375F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEEA87702B01ECF300AC375F /* .gitIgnore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
+		CEEA87722B01ED4700AC375F /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		CEEA87742B01ED5000AC375F /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
+		CEEA87862B01F0A000AC375F /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		CEEA87882B01F10900AC375F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CEEA878A2B01F1A400AC375F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		CEEA878C2B01F3C700AC375F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CEEA878E2B01F3D200AC375F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		CEEA87902B01F3D900AC375F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +54,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEA877F2B01EECB00AC375F /* RxSwift in Frameworks */,
+				CEEA87822B01EEDB00AC375F /* RxDataSources in Frameworks */,
+				CEEA877D2B01EECB00AC375F /* RxCocoa in Frameworks */,
+				CEEA87852B01EF4C00AC375F /* Moya in Frameworks */,
+				CEEA877A2B01EEAA00AC375F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +84,7 @@
 		CEEA87532B01E30000AC375F /* TimeLine */ = {
 			isa = PBXGroup;
 			children = (
+				CEEA87772B01EE9200AC375F /* Utility */,
 				CEEA876D2B01EC9E00AC375F /* Network */,
 				CEEA876B2B01EC7D00AC375F /* Scene */,
 				CEEA87542B01E30000AC375F /* AppDelegate.swift */,
@@ -75,6 +102,7 @@
 		CEEA876B2B01EC7D00AC375F /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CEEA87762B01EDBB00AC375F /* Login */,
 				CEEA876C2B01EC8400AC375F /* Base */,
 			);
 			path = Scene;
@@ -83,6 +111,8 @@
 		CEEA876C2B01EC8400AC375F /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				CEEA87862B01F0A000AC375F /* BaseView.swift */,
+				CEEA878A2B01F1A400AC375F /* BaseViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -90,8 +120,28 @@
 		CEEA876D2B01EC9E00AC375F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CEEA87722B01ED4700AC375F /* APIKey.swift */,
+				CEEA87742B01ED5000AC375F /* BaseURL.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		CEEA87762B01EDBB00AC375F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA878C2B01F3C700AC375F /* LoginViewController.swift */,
+				CEEA878E2B01F3D200AC375F /* LoginView.swift */,
+				CEEA87902B01F3D900AC375F /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		CEEA87772B01EE9200AC375F /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA87882B01F10900AC375F /* Constants.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,6 +160,13 @@
 			dependencies = (
 			);
 			name = TimeLine;
+			packageProductDependencies = (
+				CEEA87792B01EEAA00AC375F /* SnapKit */,
+				CEEA877C2B01EECB00AC375F /* RxCocoa */,
+				CEEA877E2B01EECB00AC375F /* RxSwift */,
+				CEEA87812B01EEDB00AC375F /* RxDataSources */,
+				CEEA87842B01EF4C00AC375F /* Moya */,
+			);
 			productName = TimeLine;
 			productReference = CEEA87512B01E30000AC375F /* TimeLine.app */;
 			productType = "com.apple.product-type.application";
@@ -138,6 +195,12 @@
 				Base,
 			);
 			mainGroup = CEEA87482B01E30000AC375F;
+			packageReferences = (
+				CEEA87782B01EEAA00AC375F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */,
+				CEEA87802B01EEDB00AC375F /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				CEEA87832B01EF4C00AC375F /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = CEEA87522B01E30000AC375F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -166,8 +229,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */,
 				CEEA87592B01E30000AC375F /* ViewController.swift in Sources */,
+				CEEA87912B01F3D900AC375F /* LoginViewModel.swift in Sources */,
 				CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */,
+				CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */,
+				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
+				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
+				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
+				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
+				CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */,
 				CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,6 +462,69 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CEEA87782B01EEAA00AC375F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+		CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
+		CEEA87802B01EEDB00AC375F /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+		CEEA87832B01EF4C00AC375F /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CEEA87792B01EEAA00AC375F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEEA87782B01EEAA00AC375F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		CEEA877C2B01EECB00AC375F /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		CEEA877E2B01EECB00AC375F /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		CEEA87812B01EEDB00AC375F /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEEA87802B01EEDB00AC375F /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
+		CEEA87842B01EF4C00AC375F /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEEA87832B01EF4C00AC375F /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CEEA87492B01E30000AC375F /* Project object */;
 }
