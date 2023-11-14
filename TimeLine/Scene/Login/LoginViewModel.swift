@@ -12,8 +12,8 @@ import RxCocoa
 final class LoginViewModel {
     
     
-    let email = BehaviorRelay(value: "")
-    let pass = BehaviorRelay(value: "")
+    private let email = BehaviorRelay(value: "")
+    private let pass = BehaviorRelay(value: "")
     
     private let disposeBag = DisposeBag()
     
@@ -45,14 +45,21 @@ final class LoginViewModel {
         input.buttonTap
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .flatMap {
-                APIManager.shared.request(api: .login(email: self.email.value, password: self.pass.value))
+                return APIManager.shared.request(api: .login(email: self.email.value, password: self.pass.value), successType: LoginToken.self)
             }
-            .subscribe(with: self) { owner, result in
-                tokens.onNext(result)
-            } onError: { owner, error in
-                errorMsg.onNext(error.localizedDescription)
-            }
+            .subscribe(with: self, onNext: { owner, result in
+                switch result {
+                case .success(let result):
+                    tokens.onNext(result)
+                case .failure(let error):
+                    errorMsg.onNext(error.localizedDescription)
+                }
+            })
             .disposed(by: disposeBag)
+        
+        
+            
+            
         
         return Output(successToken: tokens, errorMsg: errorMsg)
         

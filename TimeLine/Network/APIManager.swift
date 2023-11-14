@@ -8,6 +8,7 @@
 import Foundation
 import Moya
 import RxSwift
+import RxCocoa
 
 final class APIManager {
     
@@ -16,31 +17,38 @@ final class APIManager {
     
     let provider = MoyaProvider<SeSACAPI>()
     
-    func request(api: SeSACAPI) -> Observable<LoginToken> {
+    
+    func request<T: Codable>(api: SeSACAPI, successType: T.Type) -> Single<Result<T, Error>> {
         
-        return Observable.create { value in
+        return Single.create { single in
             self.provider.request(api) { response in
                 
                 switch response {
                 case .success(let data):
                     let statusCode = data.statusCode
                     if statusCode == 200 {
-                        let result = try! JSONDecoder().decode(LoginToken.self, from: data.data)
-                        value.onNext(result)
+                        let result = try! JSONDecoder().decode(T.self, from: data.data)
+                        single(.success(.success(result)))
                     } else {
                         let result = try! JSONDecoder().decode(ErrorModel.self, from: data.data)
-                        value.onError(NSError(domain: result.message, code: statusCode))
+                        let error = NSError(domain: result.message, code: statusCode)
+                        single(.success(.failure(error)))
+                       
                     }
                     
                 case .failure(let error):
-                    value.onError(error)
+                    single(.success(.failure(error)))
                     
                 }
             }
             return Disposables.create()
         }
         
-        
     }
+        
+    
+    
+   
+    
     
 }
