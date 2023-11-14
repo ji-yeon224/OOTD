@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CEC2FBCF2B0212AF002E3046 /* SeSACAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* SeSACAPI.swift */; };
+		CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */; };
 		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
-		CEC2FBD62B021796002E3046 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* APIManager.swift */; };
+		CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */; };
 		CEC2FBD92B021C51002E3046 /* LoginToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD82B021C51002E3046 /* LoginToken.swift */; };
 		CEC2FBDD2B026DD9002E3046 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = CEC2FBDC2B026DD9002E3046 /* Moya */; };
 		CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */; };
@@ -40,9 +40,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CEC2FBCE2B0212AF002E3046 /* SeSACAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACAPI.swift; sourceTree = "<group>"; };
+		CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		CEC2FBD52B021796002E3046 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIManager.swift; sourceTree = "<group>"; };
 		CEC2FBD82B021C51002E3046 /* LoginToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToken.swift; sourceTree = "<group>"; };
 		CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		CEC2FBE02B0270DC002E3046 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
@@ -85,6 +85,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE048CC02B038EF600FAC038 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */,
+				CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		CEC2FBD22B02174A002E3046 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,10 +178,9 @@
 		CEEA876D2B01EC9E00AC375F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CE048CC02B038EF600FAC038 /* Authentication */,
 				CEEA87722B01ED4700AC375F /* APIKey.swift */,
 				CEEA87742B01ED5000AC375F /* BaseURL.swift */,
-				CEC2FBCE2B0212AF002E3046 /* SeSACAPI.swift */,
-				CEC2FBD52B021796002E3046 /* APIManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -300,13 +308,13 @@
 				CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */,
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
-				CEC2FBCF2B0212AF002E3046 /* SeSACAPI.swift in Sources */,
+				CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */,
 				CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
-				CEC2FBD62B021796002E3046 /* APIManager.swift in Sources */,
+				CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */,
 				CEC2FBD92B021C51002E3046 /* LoginToken.swift in Sources */,
 				CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */,
 				CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */,

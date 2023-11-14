@@ -45,7 +45,7 @@ final class LoginViewModel {
         input.buttonTap
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .flatMap {
-                return APIManager.shared.request(api: .login(email: self.email.value, password: self.pass.value), successType: LoginToken.self)
+                return AuthenticationAPIManager.shared.request(api: .login(userInfo: Login(email: self.email.value, password: self.pass.value)), successType: LoginToken.self)
             }
             .subscribe(with: self, onNext: { owner, result in
                 switch result {

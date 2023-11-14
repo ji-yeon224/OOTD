@@ -1,5 +1,5 @@
 //
-//  APIManager.swift
+//  AuthenticationAPIManager.swift
 //  TimeLine
 //
 //  Created by 김지연 on 11/13/23.
@@ -10,15 +10,15 @@ import Moya
 import RxSwift
 import RxCocoa
 
-final class APIManager {
+final class AuthenticationAPIManager {
     
-    static let shared = APIManager()
+    static let shared = AuthenticationAPIManager()
     private init() { }
     
-    let provider = MoyaProvider<SeSACAPI>()
+    let provider = MoyaProvider<AuthenticationAPI>()
     
     
-    func request<T: Codable>(api: SeSACAPI, successType: T.Type) -> Single<Result<T, Error>> {
+    func request<T: Codable>(api: AuthenticationAPI, successType: T.Type) -> Single<Result<T, Error>> {
         
         return Single.create { single in
             self.provider.request(api) { response in

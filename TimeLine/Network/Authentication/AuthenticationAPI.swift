@@ -10,11 +10,12 @@ import Moya
 
 
 
-enum SeSACAPI {
-    case login(email: String, password: String)
+enum AuthenticationAPI {
+    case login(userInfo: Login)
+    
 }
 
-extension SeSACAPI: TargetType {
+extension AuthenticationAPI: TargetType {
     var baseURL: URL {
         return URL(string: BaseURL.baseURL)!
     }
@@ -35,8 +36,8 @@ extension SeSACAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .login(let email, let password):
-            let data = Login(email: email, password: password)
+        case .login(let userInfo):
+            let data = Login(email: userInfo.email, password: userInfo.password)
             return .requestJSONEncodable(data)
         }
     }
