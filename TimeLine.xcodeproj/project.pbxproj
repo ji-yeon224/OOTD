@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE048CC52B03913300FAC038 /* Join.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE048CC42B03913300FAC038 /* Join.swift */; };
 		CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */; };
 		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
 		CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE048CC42B03913300FAC038 /* Join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Join.swift; sourceTree = "<group>"; };
 		CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIManager.swift; sourceTree = "<group>"; };
@@ -94,10 +96,27 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		CE048CC12B0390FD00FAC038 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				CE048CC32B03912400FAC038 /* Join */,
+				CEC2FBD72B021C3D002E3046 /* Login */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		CE048CC32B03912400FAC038 /* Join */ = {
+			isa = PBXGroup;
+			children = (
+				CE048CC42B03913300FAC038 /* Join.swift */,
+			);
+			path = Join;
+			sourceTree = "<group>";
+		};
 		CEC2FBD22B02174A002E3046 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CEC2FBD72B021C3D002E3046 /* Login */,
+				CE048CC12B0390FD00FAC038 /* Authentication */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,6 +327,7 @@
 				CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */,
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
+				CE048CC52B03913300FAC038 /* Join.swift in Sources */,
 				CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */,
 				CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,

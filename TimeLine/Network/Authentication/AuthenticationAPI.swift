@@ -12,6 +12,8 @@ import Moya
 
 enum AuthenticationAPI {
     case login(userInfo: Login)
+    case join(joinInfo: Join)
+    case emailValidation(email: String)
     
 }
 
@@ -22,29 +24,34 @@ extension AuthenticationAPI: TargetType {
     
     var path: String {
         switch self {
-        case .login:
-            return "login"
+        case .login: return "login"
+        case .join: return "join"
+        case .emailValidation: return "validation/email"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .login:
+        case .login, .join, .emailValidation:
             return .post
+            
         }
     }
     
     var task: Moya.Task {
         switch self {
         case .login(let userInfo):
-            let data = Login(email: userInfo.email, password: userInfo.password)
-            return .requestJSONEncodable(data)
+            return .requestJSONEncodable(userInfo)
+        case .join(let joinInfo):
+            return .requestJSONEncodable(joinInfo)
+        case .emailValidation(let email):
+            return .requestJSONEncodable(["email": email])
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .login:
+        case .login, .join, .emailValidation:
             return ["Content-Type": "application/json", "SesacKey": APIKey.key]
         }
     }
