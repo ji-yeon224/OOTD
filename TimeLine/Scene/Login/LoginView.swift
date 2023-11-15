@@ -38,12 +38,6 @@ final class LoginView: BaseView {
     
     override func setConstraints() {
         
-        addSubview(emailTextField)
-        addSubview(emailUnderLineView)
-        addSubview(passwordTextField)
-        addSubview(passwordUnderLineView)
-        addSubview(loginButton)
-        addSubview(signUpButton)
         
         emailTextField.snp.makeConstraints { make in
             make.height.equalTo(50)

@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum LoginError: Int, Error {
+enum NetworkError: Int, Error {
     
-    case invalidInput = 400
-    case noExistUser = 401
-    case serverError = 500
+    case wrongKey = 420
+    case overCall = 429
+    case wrongAccess = 444
     
 }
 

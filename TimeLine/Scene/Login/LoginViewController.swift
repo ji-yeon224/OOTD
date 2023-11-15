@@ -56,6 +56,13 @@ final class LoginViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        mainView.signUpButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.navigationController?.pushViewController(JoinViewController(), animated: true)
+                    
+            }
+            .disposed(by: disposeBag)
+        
 
     }
     

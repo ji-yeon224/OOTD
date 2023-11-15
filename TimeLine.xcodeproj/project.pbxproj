@@ -8,13 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		CE048CC52B03913300FAC038 /* Join.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE048CC42B03913300FAC038 /* Join.swift */; };
+		CE290E862B049A3B007DFCAE /* JoinSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E852B049A3B007DFCAE /* JoinSuccess.swift */; };
+		CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E882B049ABD007DFCAE /* JoinViewController.swift */; };
+		CE290E8B2B049AC6007DFCAE /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E8A2B049AC6007DFCAE /* JoinViewModel.swift */; };
+		CE290E8D2B049ACF007DFCAE /* JoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E8C2B049ACF007DFCAE /* JoinView.swift */; };
 		CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */; };
 		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
 		CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */; };
 		CEC2FBD92B021C51002E3046 /* LoginToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD82B021C51002E3046 /* LoginToken.swift */; };
 		CEC2FBDD2B026DD9002E3046 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = CEC2FBDC2B026DD9002E3046 /* Moya */; };
 		CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */; };
-		CEC2FBE12B0270DC002E3046 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBE02B0270DC002E3046 /* LoginError.swift */; };
+		CEC2FBE12B0270DC002E3046 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBE02B0270DC002E3046 /* NetworkError.swift */; };
 		CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87542B01E30000AC375F /* AppDelegate.swift */; };
 		CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87562B01E30000AC375F /* SceneDelegate.swift */; };
 		CEEA87592B01E30000AC375F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87582B01E30000AC375F /* ViewController.swift */; };
@@ -42,12 +46,16 @@
 
 /* Begin PBXFileReference section */
 		CE048CC42B03913300FAC038 /* Join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Join.swift; sourceTree = "<group>"; };
+		CE290E852B049A3B007DFCAE /* JoinSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinSuccess.swift; sourceTree = "<group>"; };
+		CE290E882B049ABD007DFCAE /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		CE290E8A2B049AC6007DFCAE /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
+		CE290E8C2B049ACF007DFCAE /* JoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinView.swift; sourceTree = "<group>"; };
 		CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIManager.swift; sourceTree = "<group>"; };
 		CEC2FBD82B021C51002E3046 /* LoginToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToken.swift; sourceTree = "<group>"; };
 		CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
-		CEC2FBE02B0270DC002E3046 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
+		CEC2FBE02B0270DC002E3046 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		CEEA87512B01E30000AC375F /* TimeLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA87542B01E30000AC375F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEA87562B01E30000AC375F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +117,17 @@
 			isa = PBXGroup;
 			children = (
 				CE048CC42B03913300FAC038 /* Join.swift */,
+				CE290E852B049A3B007DFCAE /* JoinSuccess.swift */,
+			);
+			path = Join;
+			sourceTree = "<group>";
+		};
+		CE290E872B049AAF007DFCAE /* Join */ = {
+			isa = PBXGroup;
+			children = (
+				CE290E882B049ABD007DFCAE /* JoinViewController.swift */,
+				CE290E8A2B049AC6007DFCAE /* JoinViewModel.swift */,
+				CE290E8C2B049ACF007DFCAE /* JoinView.swift */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -134,7 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */,
-				CEC2FBE02B0270DC002E3046 /* LoginError.swift */,
+				CEC2FBE02B0270DC002E3046 /* NetworkError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -179,6 +198,7 @@
 		CEEA876B2B01EC7D00AC375F /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CE290E872B049AAF007DFCAE /* Join */,
 				CEEA87762B01EDBB00AC375F /* Login */,
 				CEEA876C2B01EC8400AC375F /* Base */,
 			);
@@ -321,15 +341,18 @@
 			files = (
 				CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */,
 				CEEA87592B01E30000AC375F /* ViewController.swift in Sources */,
-				CEC2FBE12B0270DC002E3046 /* LoginError.swift in Sources */,
+				CE290E8B2B049AC6007DFCAE /* JoinViewModel.swift in Sources */,
+				CEC2FBE12B0270DC002E3046 /* NetworkError.swift in Sources */,
 				CEEA87912B01F3D900AC375F /* LoginViewModel.swift in Sources */,
 				CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */,
 				CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */,
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
+				CE290E862B049A3B007DFCAE /* JoinSuccess.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
 				CE048CC52B03913300FAC038 /* Join.swift in Sources */,
 				CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */,
 				CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */,
+				CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
@@ -339,6 +362,7 @@
 				CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */,
 				CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */,
 				CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */,
+				CE290E8D2B049ACF007DFCAE /* JoinView.swift in Sources */,
 				CEC2FBD42B021750002E3046 /* Login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
