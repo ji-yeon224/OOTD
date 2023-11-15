@@ -29,9 +29,12 @@ final class LoginViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-        
-       
             
+    }
+    
+    private func testData() {
+        mainView.emailTextField.text = "a@a.com" //qq@q.com
+        mainView.passwordTextField.text = "1234"
     }
     
     private func bind() {

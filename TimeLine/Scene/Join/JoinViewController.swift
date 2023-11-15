@@ -28,7 +28,7 @@ final class JoinViewController: BaseViewController {
         bind()
     }
     
-    func testData() {
+    private func testData() {
         mainView.emailTextField.text = "qq@q.com"
         mainView.passwordTextField.text = "1234"
         mainView.nicknameTextField.text = "testnick"
@@ -63,6 +63,12 @@ final class JoinViewController: BaseViewController {
         output.errorMsg
             .bind(with: self) { owner, error in
                 print(error)
+            }
+            .disposed(by: disposeBag)
+        
+        output.emailValidation
+            .bind(with: self) { owner, value in
+                owner.mainView.emailValidationImage.tintColor = value ? Constants.Color.valid : Constants.Color.invalid
             }
             .disposed(by: disposeBag)
         

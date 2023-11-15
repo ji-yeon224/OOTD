@@ -34,6 +34,14 @@ final class JoinView: BaseView {
         return view
     }()
     
+    let emailValidationImage = {
+        let view = UIImageView()
+        view.image = Constants.Image.check
+        view.tintColor = Constants.Color.placeholder
+        view.backgroundColor = Constants.Color.background
+        return view
+    }()
+    
     let joinButton = MainButton(title: "회원가입")
     
     private let emailUnderLineView = TextFieldUnderline()
@@ -45,9 +53,7 @@ final class JoinView: BaseView {
         super.configure()
         
         
-        
-        
-        [emailTextField, emailUnderLineView, passwordTextField, passwordUnderLineView, nicknameTextField, nicknameUnderLineView, birthdayTextField, birthdayUnderLineView, joinButton].forEach {
+        [emailTextField, emailValidationImage, emailUnderLineView, passwordTextField, passwordUnderLineView, nicknameTextField, nicknameUnderLineView, birthdayTextField, birthdayUnderLineView, joinButton].forEach {
             addSubview($0)
         }
     }
@@ -59,6 +65,14 @@ final class JoinView: BaseView {
             make.height.equalTo(50)
             make.top.equalTo(safeAreaLayoutGuide).offset(80)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
+        }
+        
+        emailValidationImage.snp.makeConstraints { make in
+            
+            make.centerY.equalTo(emailTextField)
+            make.size.equalTo(28)
+//            make.top.equalTo(safeAreaLayoutGuide).offset(80)
+            make.trailing.equalTo(emailTextField.snp.trailing).offset(-10)
         }
         
         emailUnderLineView.snp.makeConstraints { make in
@@ -111,6 +125,7 @@ final class JoinView: BaseView {
             make.top.equalTo(birthdayTextField.snp.bottom).offset(30)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
         }
+        
         
        
     }

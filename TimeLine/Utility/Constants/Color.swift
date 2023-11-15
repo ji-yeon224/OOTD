@@ -15,7 +15,9 @@ extension Constants{
         static let subText = UIColor.lightGray
         static let tint = UIColor.white
         static let disableTint = UIColor.systemGray4
-        static let validText = UIColor.red
+        static let invalid = UIColor.red
+        static let valid = UIColor.green
+        static let placeholder = UIColor.lightGray
         
         static let mainColor = UIColor(named: "MainColor")
         

@@ -32,6 +32,7 @@ final class JoinViewModel {
         
         let joinCompleted: PublishSubject<JoinSuccess>
         let errorMsg: PublishSubject<String>
+        let emailValidation: PublishSubject<Bool>
         
     }
     
@@ -39,9 +40,28 @@ final class JoinViewModel {
         
         let joinCompleted: PublishSubject<JoinSuccess> = PublishSubject()
         let errorMsg: PublishSubject<String> = PublishSubject()
+        let validation = PublishSubject<Bool>()
         
         input.emailText
             .bind(to: email)
+            .disposed(by: disposeBag)
+        
+        input.emailText
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .debug()
+            .flatMap { email in
+                return AuthenticationAPIManager.shared.request(api: .emailValidation(email: email), successType: ResponseMessage.self)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(_):
+                    validation.onNext(true)
+                case .failure(let error):
+                    validation.onNext(false)
+                    errorMsg.onNext(error.localizedDescription)
+                }
+            }
             .disposed(by: disposeBag)
         
         input.passText
@@ -73,7 +93,7 @@ final class JoinViewModel {
             .disposed(by: disposeBag)
             
         
-        return Output(joinCompleted: joinCompleted, errorMsg: errorMsg)
+        return Output(joinCompleted: joinCompleted, errorMsg: errorMsg, emailValidation: validation)
         
         
     }
