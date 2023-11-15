@@ -1,14 +1,14 @@
 //
-//  Constants.swift
+//  Color.swift
 //  TimeLine
 //
-//  Created by 김지연 on 11/13/23.
+//  Created by 김지연 on 11/15/23.
 //
 
 import UIKit
 
-class Constants {
-
+extension Constants{
+    
     enum Color {
         static let background = UIColor.white
         static let basicText = UIColor.black
@@ -21,11 +21,4 @@ class Constants {
         
     }
     
-    enum Design {
-        static let buttonRadius: CGFloat = 10
-        static let defaultFontSize: CGFloat = 15
-    }
-    
 }
-
-
