@@ -29,7 +29,7 @@ final class JoinViewController: BaseViewController {
     }
     
     private func testData() {
-        mainView.emailTextField.text = "qq@q.com"
+//        mainView.emailTextField.text = "qq@q.com"
         mainView.passwordTextField.text = "1234"
         mainView.nicknameTextField.text = "testnick"
         mainView.birthdayTextField.text = "1999.02.24"

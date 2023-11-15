@@ -15,6 +15,7 @@ final class LoginViewModel {
     private let email = BehaviorRelay(value: "")
     private let pass = BehaviorRelay(value: "")
     
+    
     private let disposeBag = DisposeBag()
     
     struct Input {
@@ -25,15 +26,16 @@ final class LoginViewModel {
     
     struct Output {
         
-        let successToken: PublishSubject<LoginToken>
+//        let successToken: PublishSubject<LoginToken>
         let errorMsg: PublishSubject<String>
-        
+        let success: BehaviorRelay<Bool>
     }
     
     func transform(input: Input) -> Output {
         
-        let tokens: PublishSubject<LoginToken> = PublishSubject()
+        //let tokens: PublishSubject<LoginToken> = PublishSubject()
         let errorMsg: PublishSubject<String> = PublishSubject()
+        let successValue = BehaviorRelay(value: false)
         
         input.email
             .bind(to: email)
@@ -50,7 +52,10 @@ final class LoginViewModel {
             .subscribe(with: self, onNext: { owner, result in
                 switch result {
                 case .success(let result):
-                    tokens.onNext(result)
+                    //tokens.onNext(result)
+                    successValue.accept(true)
+                    UserDefaultsHelper.shared.token = result.token
+                    UserDefaultsHelper.shared.refreshToken = result.refreshToken
                 case .failure(let error):
                     errorMsg.onNext(error.localizedDescription)
                 }
@@ -61,7 +66,7 @@ final class LoginViewModel {
             
             
         
-        return Output(successToken: tokens, errorMsg: errorMsg)
+        return Output(errorMsg: errorMsg, success: successValue)
         
     }
     

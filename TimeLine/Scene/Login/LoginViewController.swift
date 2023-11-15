@@ -29,11 +29,11 @@ final class LoginViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-            
+        testData()
     }
     
     private func testData() {
-        mainView.emailTextField.text = "a@a.com" //qq@q.com
+        mainView.emailTextField.text = "qq@q.com" //qq@q.com , a@a.com
         mainView.passwordTextField.text = "1234"
     }
     
@@ -47,17 +47,28 @@ final class LoginViewController: BaseViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.successToken
-            .bind(with: self) { owner, value in
-                print(value)
-            }
-            .disposed(by: disposeBag)
+//        output.successToken
+//            .bind(with: self) { owner, value in
+//                print(value)
+//            }
+//            .disposed(by: disposeBag)
         
         output.errorMsg
             .bind(with: self) { owner, error in
                 print(error)
             }
             .disposed(by: disposeBag)
+        
+        output.success
+            .bind(with: self) { owner, value in
+                if value {
+                    print("Login Success")
+                    owner.view?.window?.rootViewController = HomeViewController()
+                    owner.view.window?.makeKeyAndVisible()
+                }
+            }
+            .disposed(by: disposeBag)
+        
         
         mainView.signUpButton.rx.tap
             .bind(with: self) { owner, _ in
