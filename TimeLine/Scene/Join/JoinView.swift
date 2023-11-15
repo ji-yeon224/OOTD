@@ -14,15 +14,22 @@ final class JoinView: BaseView {
     let emailTextField = CustomTextField(placeholder: "이메일을 입력하세요")
     let passwordTextField = CustomTextField(placeholder: "비밀번호를 입력하세요")
     let nicknameTextField = CustomTextField(placeholder: "닉네임을 입력하세요")
-    let birthdayTextField = CustomTextField(placeholder: "생일을 입력하세요")
+    lazy var birthdayTextField = {
+        let view = CustomTextField(placeholder: "생일을 입력하세요")
+        view.delegate = self
+        view.inputView = datePickerview
+        view.tintColor = .clear
+        return view
+    }()
     
     let datePickerview = {
         let view = UIDatePicker()
-        view.datePickerMode = .dateAndTime
+        view.datePickerMode = .date
         view.preferredDatePickerStyle = .inline
         view.backgroundColor = Constants.Color.background
         view.locale = Locale(identifier: "ko_KR")
         view.tintColor = Constants.Color.mainColor
+        view.maximumDate = Date()
         
         return view
     }()
@@ -37,7 +44,8 @@ final class JoinView: BaseView {
     override func configure() {
         super.configure()
         
-        birthdayTextField.inputView = datePickerview
+        
+        
         
         [emailTextField, emailUnderLineView, passwordTextField, passwordUnderLineView, nicknameTextField, nicknameUnderLineView, birthdayTextField, birthdayUnderLineView, joinButton].forEach {
             addSubview($0)
@@ -105,6 +113,14 @@ final class JoinView: BaseView {
         }
         
        
+    }
+    
+}
+
+extension JoinView: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
     }
     
 }
