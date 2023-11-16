@@ -18,6 +18,7 @@
 		CE290E972B04B2A2007DFCAE /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E962B04B2A2007DFCAE /* Design.swift */; };
 		CE290E992B04B7C6007DFCAE /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E982B04B7C6007DFCAE /* ResponseMessage.swift */; };
 		CE290E9C2B04BF51007DFCAE /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E9B2B04BF51007DFCAE /* LoginError.swift */; };
+		CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A15152B05B13E009B913F /* HomeViewModel.swift */; };
 		CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */; };
 		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
 		CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */; };
@@ -48,6 +49,9 @@
 		CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87962B01F87500AC375F /* CustomTextField.swift */; };
 		CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87982B01F9FF00AC375F /* MainButton.swift */; };
 		CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */; };
+		CEECBF172B0601D70031947E /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF162B0601D70031947E /* CommonError.swift */; };
+		CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF192B0665590031947E /* RefreshResult.swift */; };
+		CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */; };
 		CEED52A92B04EE49007E12FA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52A82B04EE49007E12FA /* HomeViewController.swift */; };
 		CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52AA2B04EE58007E12FA /* HomeView.swift */; };
 		CEED52AD2B04F0AC007E12FA /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */; };
@@ -56,6 +60,7 @@
 		CEED52B32B050354007E12FA /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B22B050354007E12FA /* JoinError.swift */; };
 		CEED52B52B05056E007E12FA /* EmailValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B42B05056E007E12FA /* EmailValidationError.swift */; };
 		CEED52B72B050652007E12FA /* WithdrawError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B62B050652007E12FA /* WithdrawError.swift */; };
+		CEED52B92B050893007E12FA /* RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B82B050893007E12FA /* RefreshToken.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +75,7 @@
 		CE290E962B04B2A2007DFCAE /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		CE290E982B04B7C6007DFCAE /* ResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMessage.swift; sourceTree = "<group>"; };
 		CE290E9B2B04BF51007DFCAE /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
+		CE3A15152B05B13E009B913F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIManager.swift; sourceTree = "<group>"; };
@@ -96,6 +102,9 @@
 		CEEA87962B01F87500AC375F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		CEEA87982B01F9FF00AC375F /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUnderline.swift; sourceTree = "<group>"; };
+		CEECBF162B0601D70031947E /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		CEECBF192B0665590031947E /* RefreshResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResult.swift; sourceTree = "<group>"; };
+		CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenManager.swift; sourceTree = "<group>"; };
 		CEED52A82B04EE49007E12FA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CEED52AA2B04EE58007E12FA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
@@ -104,6 +113,7 @@
 		CEED52B22B050354007E12FA /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
 		CEED52B42B05056E007E12FA /* EmailValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationError.swift; sourceTree = "<group>"; };
 		CEED52B62B050652007E12FA /* WithdrawError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawError.swift; sourceTree = "<group>"; };
+		CEED52B82B050893007E12FA /* RefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +138,7 @@
 			children = (
 				CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */,
 				CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */,
+				CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -135,6 +146,7 @@
 		CE048CC12B0390FD00FAC038 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				CEECBF182B0665440031947E /* Token */,
 				CE048CC32B03912400FAC038 /* Join */,
 				CEC2FBD72B021C3D002E3046 /* Login */,
 			);
@@ -216,6 +228,7 @@
 				CE290E9A2B04BF43007DFCAE /* Authentication */,
 				CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */,
 				CEC2FBE02B0270DC002E3046 /* NetworkError.swift */,
+				CEECBF162B0601D70031947E /* CommonError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -317,11 +330,21 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		CEECBF182B0665440031947E /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				CEED52B82B050893007E12FA /* RefreshToken.swift */,
+				CEECBF192B0665590031947E /* RefreshResult.swift */,
+			);
+			path = Token;
+			sourceTree = "<group>";
+		};
 		CEED52A72B04EE3F007E12FA /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				CEED52A82B04EE49007E12FA /* HomeViewController.swift */,
 				CEED52AA2B04EE58007E12FA /* HomeView.swift */,
+				CE3A15152B05B13E009B913F /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -414,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */,
+				CEECBF172B0601D70031947E /* CommonError.swift in Sources */,
 				CE290E932B04B285007DFCAE /* Image.swift in Sources */,
 				CEEA87592B01E30000AC375F /* ViewController.swift in Sources */,
 				CE290E8B2B049AC6007DFCAE /* JoinViewModel.swift in Sources */,
@@ -423,6 +447,7 @@
 				CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */,
 				CEED52AF2B04FB5F007E12FA /* ContentError.swift in Sources */,
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
+				CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,
 				CE290E862B049A3B007DFCAE /* JoinSuccess.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
@@ -434,11 +459,14 @@
 				CEED52B52B05056E007E12FA /* EmailValidationError.swift in Sources */,
 				CE290E972B04B2A2007DFCAE /* Design.swift in Sources */,
 				CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */,
+				CEED52B92B050893007E12FA /* RefreshToken.swift in Sources */,
+				CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
 				CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */,
+				CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */,
 				CEC2FBD92B021C51002E3046 /* LoginToken.swift in Sources */,
 				CE290E9C2B04BF51007DFCAE /* LoginError.swift in Sources */,
 				CE290E992B04B7C6007DFCAE /* ResponseMessage.swift in Sources */,

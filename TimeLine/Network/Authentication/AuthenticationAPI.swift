@@ -14,7 +14,8 @@ enum AuthenticationAPI {
     case login(userInfo: Login)
     case join(joinInfo: Join)
     case emailValidation(email: String)
-    
+    case refresh, content
+    case withdraw
 }
 
 extension AuthenticationAPI: TargetType {
@@ -27,13 +28,18 @@ extension AuthenticationAPI: TargetType {
         case .login: return "login"
         case .join: return "join"
         case .emailValidation: return "validation/email"
+        case .refresh: return "refresh"
+        case .content: return "content"
+        case .withdraw: return "withdraw"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .login, .join, .emailValidation:
+        case .login, .join, .emailValidation, .withdraw:
             return .post
+        case .refresh, .content:
+            return .get
             
         }
     }
@@ -46,6 +52,8 @@ extension AuthenticationAPI: TargetType {
             return .requestJSONEncodable(joinInfo)
         case .emailValidation(let email):
             return .requestJSONEncodable(["email": email])
+        case .refresh, .content: return .requestPlain
+        case .withdraw: return .requestPlain
         }
     }
     
@@ -53,6 +61,16 @@ extension AuthenticationAPI: TargetType {
         switch self {
         case .login, .join, .emailValidation:
             return ["Content-Type": "application/json", "SesacKey": APIKey.key]
+        case .refresh:
+            return [
+                "Authorization": UserDefaultsHelper.shared.token ?? "",
+                "Refresh": UserDefaultsHelper.shared.refreshToken ?? "",
+                "SesacKey": APIKey.key]
+        case .content, .withdraw:
+            return [
+                "Authorization": UserDefaultsHelper.shared.token ?? "",
+                "SesacKey": APIKey.key
+            ]
         }
     }
     

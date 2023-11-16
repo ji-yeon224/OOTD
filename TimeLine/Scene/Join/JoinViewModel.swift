@@ -46,6 +46,7 @@ final class JoinViewModel {
             .bind(to: email)
             .disposed(by: disposeBag)
         
+        // 이메일 유효성 검사 - 입력 하고 1초 후 체크
         input.emailText
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
@@ -59,7 +60,10 @@ final class JoinViewModel {
                     validation.onNext(true)
                 case .failure(let error):
                     validation.onNext(false)
-                    errorMsg.onNext(error.localizedDescription)
+                    let code = error.statusCode
+                    guard let errorType = LoginError(rawValue: code) else { return }
+                    debugPrint("[Debug]", error.statusCode, error.description)
+                    errorMsg.onNext(errorType.errorDescription ?? "")
                 }
             }
             .disposed(by: disposeBag)
@@ -87,7 +91,10 @@ final class JoinViewModel {
                 case .success(let value):
                     joinCompleted.onNext(value)
                 case .failure(let error):
-                    errorMsg.onNext(error.localizedDescription)
+                    let code = error.statusCode
+                    guard let errorType = JoinError(rawValue: code) else { return }
+                    debugPrint("[Debug]", error.statusCode, error.description)
+                    errorMsg.onNext(errorType.errorDescription ?? "")
                 }
             }
             .disposed(by: disposeBag)

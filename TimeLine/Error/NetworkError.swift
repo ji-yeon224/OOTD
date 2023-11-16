@@ -7,11 +7,10 @@
 
 import Foundation
 
-enum NetworkError: Int, Error {
+struct NetworkError: Error {
     
-    case wrongKey = 420
-    case overCall = 429
-    case wrongAccess = 444
+    let statusCode: Int
     
+    var description: String
 }
 

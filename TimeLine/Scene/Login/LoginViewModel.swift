@@ -49,15 +49,18 @@ final class LoginViewModel {
             .flatMap {
                 return AuthenticationAPIManager.shared.request(api: .login(userInfo: Login(email: self.email.value, password: self.pass.value)), successType: LoginToken.self)
             }
-            .subscribe(with: self, onNext: { owner, result in
-                switch result {
+            .subscribe(with: self, onNext: { owner, response in
+                switch response {
                 case .success(let result):
                     //tokens.onNext(result)
                     successValue.accept(true)
                     UserDefaultsHelper.shared.token = result.token
                     UserDefaultsHelper.shared.refreshToken = result.refreshToken
                 case .failure(let error):
-                    errorMsg.onNext(error.localizedDescription)
+                    let code = error.statusCode
+                    guard let errorType = LoginError(rawValue: code) else { return }
+                    debugPrint("[Debug]", error.statusCode, error.description)
+                    errorMsg.onNext(errorType.errorDescription ?? "")
                 }
             })
             .disposed(by: disposeBag)

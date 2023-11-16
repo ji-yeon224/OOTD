@@ -23,7 +23,7 @@ extension LoginError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .emptyValue:
-            return "이메일 또는 비밀번호를 확인해주세요."
+            return "이메일 또는 비밀번호가 일치하지 않습니다."
         case .noExistUser:
             return "가입되지 않은 회원입니다."
         case .wrongKey:
