@@ -43,11 +43,17 @@ final class JoinViewModel {
         let validation = PublishSubject<Bool>()
         
         input.emailText
+            .map {
+                return $0.trimmingCharacters(in: .whitespaces)
+            }
             .bind(to: email)
             .disposed(by: disposeBag)
         
         // 이메일 유효성 검사 - 입력 하고 1초 후 체크
         input.emailText
+            .map {
+                return $0.trimmingCharacters(in: .whitespaces)
+            }
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .debug()
@@ -75,10 +81,16 @@ final class JoinViewModel {
             .disposed(by: disposeBag)
         
         input.passText
+            .map {
+                return $0.trimmingCharacters(in: .whitespaces)
+            }
             .bind(to: password)
             .disposed(by: disposeBag)
         
         input.nickText
+            .map {
+                return $0.trimmingCharacters(in: .whitespaces)
+            }
             .bind(to: nickname)
             .disposed(by: disposeBag)
         

@@ -38,9 +38,15 @@ final class LoginViewModel {
         let successValue = BehaviorRelay(value: false)
         
         input.email
+            .map {
+                return $0.trimmingCharacters(in: .whitespaces)
+            }
             .bind(to: email)
             .disposed(by: disposeBag)
         input.password
+            .map {
+                return $0.trimmingCharacters(in: .whitespaces)
+            }
             .bind(to: pass)
             .disposed(by: disposeBag)
         

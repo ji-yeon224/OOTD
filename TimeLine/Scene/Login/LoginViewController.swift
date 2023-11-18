@@ -29,7 +29,7 @@ final class LoginViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-        testData()
+        //testData()
     }
     
     private func testData() {
