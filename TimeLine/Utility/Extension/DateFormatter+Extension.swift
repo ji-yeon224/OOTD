@@ -33,4 +33,7 @@ extension DateFormatter {
         return textFieldFormat.string(from: date)
     }
     
+    static func stringToDate(date: String) -> Date {
+        return textFieldFormat.date(from: date) ?? Date()
+    }
 }

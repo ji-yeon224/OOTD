@@ -15,6 +15,7 @@ final class ValidationLabel: UILabel {
         textColor = Constants.Color.invalid
         backgroundColor = Constants.Color.background
         font = .systemFont(ofSize: 15)
+        isHidden = true
     }
     
     required init?(coder: NSCoder) {

@@ -50,7 +50,7 @@ final class JoinViewModel {
             .disposed(by: disposeBag)
         
         // 이메일 유효성 검사 - 입력 하고 1초 후 체크
-        input.emailText
+        input.emailText.changed
             .map {
                 return $0.trimmingCharacters(in: .whitespaces)
             }
@@ -125,6 +125,13 @@ final class JoinViewModel {
         
         return Output(joinCompleted: joinCompleted, errorMsg: errorMsg, emailValidation: validation)
         
+        
+    }
+    
+    private func getAge(birthday: Date) -> Bool {
+            
+        let age = Calendar.current.dateComponents([.year], from: birthday, to: Date())
+        return Int(age.year!) >= 17
         
     }
     

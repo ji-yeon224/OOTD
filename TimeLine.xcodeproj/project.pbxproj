@@ -53,6 +53,7 @@
 		CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF192B0665590031947E /* RefreshResult.swift */; };
 		CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */; };
 		CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF262B08E7750031947E /* ValidationLabel.swift */; };
+		CEECBF292B08FC120031947E /* ValidStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF282B08FC120031947E /* ValidStackView.swift */; };
 		CEED52A92B04EE49007E12FA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52A82B04EE49007E12FA /* HomeViewController.swift */; };
 		CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52AA2B04EE58007E12FA /* HomeView.swift */; };
 		CEED52AD2B04F0AC007E12FA /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */; };
@@ -107,6 +108,7 @@
 		CEECBF192B0665590031947E /* RefreshResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResult.swift; sourceTree = "<group>"; };
 		CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenManager.swift; sourceTree = "<group>"; };
 		CEECBF262B08E7750031947E /* ValidationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationLabel.swift; sourceTree = "<group>"; };
+		CEECBF282B08FC120031947E /* ValidStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidStackView.swift; sourceTree = "<group>"; };
 		CEED52A82B04EE49007E12FA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CEED52AA2B04EE58007E12FA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				CEEA87982B01F9FF00AC375F /* MainButton.swift */,
 				CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */,
 				CEECBF262B08E7750031947E /* ValidationLabel.swift */,
+				CEECBF282B08FC120031947E /* ValidStackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				CE290E972B04B2A2007DFCAE /* Design.swift in Sources */,
 				CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */,
 				CEED52B92B050893007E12FA /* RefreshToken.swift in Sources */,
+				CEECBF292B08FC120031947E /* ValidStackView.swift in Sources */,
 				CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
