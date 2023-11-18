@@ -29,13 +29,22 @@ final class LoginViewModel {
 //        let successToken: PublishSubject<LoginToken>
         let errorMsg: PublishSubject<String>
         let success: BehaviorRelay<Bool>
+        let validation: Observable<Bool>
     }
     
     func transform(input: Input) -> Output {
         
-        //let tokens: PublishSubject<LoginToken> = PublishSubject()
         let errorMsg: PublishSubject<String> = PublishSubject()
         let successValue = BehaviorRelay(value: false)
+        let validation = Observable.combineLatest(input.email, input.password) { email, password in
+            return email.count > 0 && password.count > 0
+        }
+        
+        validation
+            .bind(with: self) { owner, value in
+                
+            }
+            .disposed(by: disposeBag)
         
         input.email
             .map {
@@ -58,7 +67,6 @@ final class LoginViewModel {
             .subscribe(with: self, onNext: { owner, response in
                 switch response {
                 case .success(let result):
-                    //tokens.onNext(result)
                     successValue.accept(true)
                     UserDefaultsHelper.shared.token = result.token
                     UserDefaultsHelper.shared.refreshToken = result.refreshToken
@@ -72,7 +80,7 @@ final class LoginViewModel {
                         return
                     }
                     debugPrint("[Debug]", error.statusCode, error.description)
-                    errorMsg.onNext(errorType.errorDescription ?? "")
+                    errorMsg.onNext(errorType.localizedDescription)
                 }
             })
             .disposed(by: disposeBag)
@@ -81,7 +89,7 @@ final class LoginViewModel {
             
             
         
-        return Output(errorMsg: errorMsg, success: successValue)
+        return Output(errorMsg: errorMsg, success: successValue, validation: validation)
         
     }
     

@@ -52,6 +52,7 @@
 		CEECBF172B0601D70031947E /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF162B0601D70031947E /* CommonError.swift */; };
 		CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF192B0665590031947E /* RefreshResult.swift */; };
 		CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */; };
+		CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF262B08E7750031947E /* ValidationLabel.swift */; };
 		CEED52A92B04EE49007E12FA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52A82B04EE49007E12FA /* HomeViewController.swift */; };
 		CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52AA2B04EE58007E12FA /* HomeView.swift */; };
 		CEED52AD2B04F0AC007E12FA /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */; };
@@ -105,6 +106,7 @@
 		CEECBF162B0601D70031947E /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		CEECBF192B0665590031947E /* RefreshResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResult.swift; sourceTree = "<group>"; };
 		CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenManager.swift; sourceTree = "<group>"; };
+		CEECBF262B08E7750031947E /* ValidationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationLabel.swift; sourceTree = "<group>"; };
 		CEED52A82B04EE49007E12FA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CEED52AA2B04EE58007E12FA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
@@ -315,7 +317,6 @@
 			children = (
 				CE290E912B04B273007DFCAE /* Constants */,
 				CE290E8E2B04A3A4007DFCAE /* Extension */,
-				CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -326,6 +327,7 @@
 				CEEA87962B01F87500AC375F /* CustomTextField.swift */,
 				CEEA87982B01F9FF00AC375F /* MainButton.swift */,
 				CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */,
+				CEECBF262B08E7750031947E /* ValidationLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -334,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				CEED52B82B050893007E12FA /* RefreshToken.swift */,
+				CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */,
 				CEECBF192B0665590031947E /* RefreshResult.swift */,
 			);
 			path = Token;
@@ -479,6 +482,7 @@
 				CEED52B72B050652007E12FA /* WithdrawError.swift in Sources */,
 				CE290E8D2B049ACF007DFCAE /* JoinView.swift in Sources */,
 				CEC2FBD42B021750002E3046 /* Login.swift in Sources */,
+				CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */,
 				CEED52B32B050354007E12FA /* JoinError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

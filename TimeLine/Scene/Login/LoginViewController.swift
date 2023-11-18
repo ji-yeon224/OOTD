@@ -29,12 +29,14 @@ final class LoginViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-        //testData()
+        
     }
     
-    private func testData() {
-        mainView.emailTextField.text = "qq@q.com" //qq@q.com , a@a.com
-        mainView.passwordTextField.text = "1234"
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainView.emailTextField.text = ""
+        mainView.passwordTextField.text = ""
+        mainView.errorLabel.isHidden = true
     }
     
     private func bind() {
@@ -47,15 +49,10 @@ final class LoginViewController: BaseViewController {
         
         let output = viewModel.transform(input: input)
         
-//        output.successToken
-//            .bind(with: self) { owner, value in
-//                print(value)
-//            }
-//            .disposed(by: disposeBag)
-        
         output.errorMsg
             .bind(with: self) { owner, error in
-                print(error)
+                owner.mainView.errorLabel.text = error
+                owner.mainView.errorLabel.isHidden = false
             }
             .disposed(by: disposeBag)
         
@@ -67,6 +64,12 @@ final class LoginViewController: BaseViewController {
                     owner.view?.window?.rootViewController = HomeViewController()
                     owner.view.window?.makeKeyAndVisible()
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        output.validation
+            .bind(with: self) { owner, value in
+                owner.mainView.loginButton.backgroundColor = value ? Constants.Color.mainColor : Constants.Color.disableTint
             }
             .disposed(by: disposeBag)
         

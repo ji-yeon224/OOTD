@@ -11,11 +11,22 @@ final class LoginView: BaseView {
     
     
     let emailTextField = CustomTextField(placeholder: "이메일을 입력하세요")
-    
     let passwordTextField = CustomTextField(placeholder: "비밀번호를 입력하세요")
     
     private let emailUnderLineView = TextFieldUnderline()
     private let passwordUnderLineView = TextFieldUnderline()
+    
+    private lazy var stackView = {
+        let view = UIStackView()
+        view.addArrangedSubview(errorLabel)
+        view.addArrangedSubview(loginButton)
+        view.distribution = .fill
+        view.axis = .vertical
+        view.spacing = 8
+        return view
+    }()
+    
+    let errorLabel = ValidationLabel()
     
     let loginButton = MainButton(title: "로그인")
     let signUpButton = {
@@ -29,11 +40,11 @@ final class LoginView: BaseView {
     override func configure() {
         super.configure()
         
-        [emailTextField, emailUnderLineView, passwordTextField, passwordUnderLineView, loginButton, signUpButton].forEach {
+        [emailTextField, emailUnderLineView, passwordTextField, passwordUnderLineView, stackView, signUpButton].forEach {
             addSubview($0)
         }
         
-        
+        errorLabel.isHidden = true
     }
     
     override func setConstraints() {
@@ -65,10 +76,18 @@ final class LoginView: BaseView {
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
         }
         
+        stackView.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(30)
+            
+        }
+        
+        errorLabel.snp.makeConstraints { make in
+            make.height.equalTo(30)
+        }
+        
         loginButton.snp.makeConstraints { make in
             make.height.equalTo(50)
-            make.top.equalTo(passwordTextField.snp.bottom).offset(30)
-            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
         }
         
         signUpButton.snp.makeConstraints { make in
