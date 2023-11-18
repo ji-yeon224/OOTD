@@ -76,7 +76,11 @@ final class LoginViewController: BaseViewController {
         
         mainView.signUpButton.rx.tap
             .bind(with: self) { owner, _ in
-                owner.navigationController?.pushViewController(JoinViewController(), animated: true)
+                let vc = JoinViewController()
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                nav.modalTransitionStyle = .crossDissolve
+                owner.present(nav, animated: true)
                     
             }
             .disposed(by: disposeBag)

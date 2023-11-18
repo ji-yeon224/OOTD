@@ -26,7 +26,6 @@ final class LoginViewModel {
     
     struct Output {
         
-//        let successToken: PublishSubject<LoginToken>
         let errorMsg: PublishSubject<String>
         let success: BehaviorRelay<Bool>
         let validation: Observable<Bool>
@@ -79,7 +78,7 @@ final class LoginViewModel {
                         }
                         return
                     }
-                    debugPrint("[Debug]", error.statusCode, error.description)
+//                    debugPrint("[Debug]", error.statusCode, error.description)
                     errorMsg.onNext(errorType.localizedDescription)
                 }
             })

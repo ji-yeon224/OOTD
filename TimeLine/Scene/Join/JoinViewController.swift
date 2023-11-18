@@ -24,23 +24,21 @@ final class JoinViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "회원가입"
-        testData()
         bind()
     }
     
-    private func testData() {
-//        mainView.emailTextField.text = "qq@q.com"
-        mainView.passwordTextField.text = "1234"
-        mainView.nicknameTextField.text = "testnick"
-        mainView.birthdayTextField.text = "1999.02.24"
-    }
+  
     
     override func configure() {
         super.configure()
         mainView.datePickerview.addTarget(self, action: #selector(dateChange), for: .valueChanged)
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.back, style: .plain, target: self, action: #selector(backButtonTap))
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.mainColor
     }
     
+    @objc private func backButtonTap() {
+        dismiss(animated: true)
+    }
     
     private func bind() {
         
@@ -58,7 +56,7 @@ final class JoinViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 print(value)
                 owner.showOKAlert(title: "회원 가입이 완료되었습니다.", message: "") {
-                    owner.navigationController?.popViewController(animated: true)
+                    owner.dismiss(animated: true)
                 }
             }
             .disposed(by: disposeBag)

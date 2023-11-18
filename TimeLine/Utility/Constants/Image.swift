@@ -12,7 +12,7 @@ extension Constants {
         
         static let checkFill = UIImage(systemName: "checkmark.circle.fill")
         static let check = UIImage(systemName: "checkmark.circle")
-        
+        static let back = UIImage(systemName: "chevron.backward")
         
     }
 }
