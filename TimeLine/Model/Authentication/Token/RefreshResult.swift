@@ -8,5 +8,5 @@
 import Foundation
 
 enum RefreshResult: String {
-    case success, login, retry
+    case success, login, error
 }

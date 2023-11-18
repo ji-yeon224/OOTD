@@ -20,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         let isLogin = UserDefaultsHelper.shared.isLogin
-       
+        print(isLogin)
+        
         
         let vc = isLogin ? HomeViewController() : LoginViewController()
         window?.rootViewController = UINavigationController(rootViewController: vc)

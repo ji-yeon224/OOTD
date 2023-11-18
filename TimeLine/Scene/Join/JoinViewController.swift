@@ -57,6 +57,9 @@ final class JoinViewController: BaseViewController {
         output.joinCompleted
             .bind(with: self) { owner, value in
                 print(value)
+                owner.showOKAlert(title: "회원 가입이 완료되었습니다.", message: "") {
+                    owner.navigationController?.popViewController(animated: true)
+                }
             }
             .disposed(by: disposeBag)
         

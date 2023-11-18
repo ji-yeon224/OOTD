@@ -58,7 +58,13 @@ final class LoginViewModel {
                     UserDefaultsHelper.shared.refreshToken = result.refreshToken
                 case .failure(let error):
                     let code = error.statusCode
-                    guard let errorType = LoginError(rawValue: code) else { return }
+                    
+                    guard let errorType = LoginError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            errorMsg.onNext(commonError.localizedDescription)
+                        }
+                        return
+                    }
                     debugPrint("[Debug]", error.statusCode, error.description)
                     errorMsg.onNext(errorType.errorDescription ?? "")
                 }

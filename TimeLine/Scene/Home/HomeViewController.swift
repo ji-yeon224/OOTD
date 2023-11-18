@@ -23,6 +23,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        print(String(describing: UserDefaultsHelper.shared.token))
     }
     
     private func bind() {
@@ -56,17 +57,32 @@ final class HomeViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 switch value {
                 case .login:
-                    UserDefaultsHelper.shared.isLogin = false
-                    owner.view?.window?.rootViewController = LoginViewController()
-                    owner.view.window?.makeKeyAndVisible()
-                case .retry:
-                    debugPrint("서버 에러 - 재시도 요청")
+                    owner.showOKAlert(title: "문제가 발생하였습니다. 재로그인 후 다시 요청해주세요.", message: "") {
+                        UserDefaultsHelper.shared.isLogin = false
+                        // 로그인 뷰로 present
+                        owner.view?.window?.rootViewController = LoginViewController()
+                        owner.view.window?.makeKeyAndVisible()
+                    }
+                case .error:
+                    owner.showOKAlert(title: "요청을 처리하지 못하였습니다. 다시 시도해주세요.", message: "") { }
                 case .success:
-                    debugPrint("토큰 재발급 완료")
+                    break
+                    
                 }
             }
             .disposed(by: disposeBag)
-        
+        output.withdraw
+            .bind(with: self) { owner, value in
+                if value {
+                    owner.showOKAlert(title: "탈퇴가 완료되었습니다.", message: "") {
+                        UserDefaultsHelper.shared.isLogin = false
+                        // 로그인 뷰로 present
+                        owner.view?.window?.rootViewController = LoginViewController()
+                        owner.view.window?.makeKeyAndVisible()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     

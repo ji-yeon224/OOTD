@@ -12,11 +12,7 @@ enum WithdrawError: Int, Error {
     case invalidToken = 401
     case forbidden = 403
     case expireToken = 419
-    
-    case wrongKey = 420
-    case overCall = 429
-    case invalidAccess = 444
-    case serverError = 500
+   
     
 }
 
@@ -30,14 +26,7 @@ extension WithdrawError: LocalizedError {
             return "금지된 접근입니다."
         case .expireToken:
             return "엑세스 토큰이 만료되었습니다."
-        case .wrongKey:
-            return "잘못된 키 값입니다."
-        case .overCall:
-            return "과호출입니다."
-        case .invalidAccess:
-            return "잘못된 접근입니다."
-        case .serverError:
-            return "서버에 문제가 발생하였습니다."
+       
         }
     }
     

@@ -36,9 +36,9 @@ extension AuthenticationAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .login, .join, .emailValidation, .withdraw:
+        case .login, .join, .emailValidation:
             return .post
-        case .refresh, .content:
+        case .refresh, .content, .withdraw:
             return .get
             
         }

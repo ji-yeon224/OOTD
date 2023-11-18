@@ -12,10 +12,10 @@ final class RefreshTokenManager {
     
     static let shared = RefreshTokenManager()
     private init() { }
-    
+    let disposeBag = DisposeBag()
     func tokenRequest() -> Observable<RefreshResult> {
         
-        let disposeBag = DisposeBag()
+        
         
         return Observable.create { value in
             AuthenticationAPIManager.shared.request(api: .refresh, successType: RefreshToken.self)
@@ -27,19 +27,24 @@ final class RefreshTokenManager {
                         value.onNext(RefreshResult.success)
                     case .failure(let error):
                         let code = error.statusCode
-                        guard let errorType = RefreshError(rawValue: code) else { return }
+                        
+                        guard let errorType = RefreshError(rawValue: code) else {
+                            if let error = CommonError(rawValue: code) {
+                                debugPrint("[DEBUG-REFRESH: \(code)] = \(error.errorDescription ?? "")")
+                                value.onNext(RefreshResult.error)
+                            }
+                            return
+                        }
                         debugPrint("[DEBUG-REFRESH] ", code, error.description)
                         switch errorType {
                         case .wrongAuth, .fobidden, .expireRefreshToken:
                             value.onNext(RefreshResult.login)
                         case .noExpire:
                             value.onNext(RefreshResult.success)
-                        case .serverError:
-                            value.onNext(RefreshResult.retry)
                         }
                     }
                 }
-                .disposed(by: disposeBag)
+                .disposed(by: self.disposeBag)
             return Disposables.create()
         }
         

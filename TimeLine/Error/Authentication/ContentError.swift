@@ -13,9 +13,6 @@ enum ContentError: Int, Error {
     case forbidden = 403
     case expireToken = 419
     
-//    case wrongKey = 420
-//    case overCall = 429
-//    case invalidAccess = 444
     
     
 }

@@ -30,7 +30,7 @@ final class JoinViewModel {
     
     struct Output {
         
-        let joinCompleted: PublishSubject<JoinSuccess>
+        let joinCompleted: PublishSubject<UserInfoResponse>
         let errorMsg: PublishSubject<String>
         let emailValidation: PublishSubject<Bool>
         
@@ -38,7 +38,7 @@ final class JoinViewModel {
     
     func transform(input: Input) -> Output {
         
-        let joinCompleted: PublishSubject<JoinSuccess> = PublishSubject()
+        let joinCompleted: PublishSubject<UserInfoResponse> = PublishSubject()
         let errorMsg: PublishSubject<String> = PublishSubject()
         let validation = PublishSubject<Bool>()
         
@@ -61,8 +61,14 @@ final class JoinViewModel {
                 case .failure(let error):
                     validation.onNext(false)
                     let code = error.statusCode
-                    guard let errorType = LoginError(rawValue: code) else { return }
                     debugPrint("[Debug]", error.statusCode, error.description)
+                    guard let errorType = LoginError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            errorMsg.onNext(commonError.localizedDescription)
+                        }
+                        return
+                    }
+                    
                     errorMsg.onNext(errorType.errorDescription ?? "")
                 }
             }
@@ -84,16 +90,21 @@ final class JoinViewModel {
         input.buttonTap
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .flatMap {
-                return AuthenticationAPIManager.shared.request(api: .join(joinInfo: Join(email: self.email.value, password: self.password.value, nick: self.nickname.value, birthDay: self.birthday.value)), successType: JoinSuccess.self)
+                return AuthenticationAPIManager.shared.request(api: .join(joinInfo: Join(email: self.email.value, password: self.password.value, nick: self.nickname.value, birthDay: self.birthday.value)), successType: UserInfoResponse.self)
             }
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let value):
                     joinCompleted.onNext(value)
                 case .failure(let error):
-                    let code = error.statusCode
-                    guard let errorType = JoinError(rawValue: code) else { return }
                     debugPrint("[Debug]", error.statusCode, error.description)
+                    let code = error.statusCode
+                    guard let errorType = JoinError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            errorMsg.onNext(commonError.localizedDescription)
+                        }
+                        return
+                    }
                     errorMsg.onNext(errorType.errorDescription ?? "")
                 }
             }

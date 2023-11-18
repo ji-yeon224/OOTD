@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JoinSuccess: Codable {
+struct UserInfoResponse: Codable {
     let _id: String
     let email: String
     let nick: String
