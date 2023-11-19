@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class BoardViewController: BaseViewController {
     
     private let mainView = BoardView()
+    private let disposeBag = DisposeBag()
     
     override func loadView() {
         self.view = mainView
@@ -18,7 +21,18 @@ final class BoardViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bind()
+    }
+    
+    private func bind() {
+        mainView.writeButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let vc = BoardWriteViewController()
+                vc.hidesBottomBarWhenPushed = true
+                owner.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            .disposed(by: disposeBag)
     }
     
 }

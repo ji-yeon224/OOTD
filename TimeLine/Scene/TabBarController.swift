@@ -21,11 +21,11 @@ final class TabBarController: UITabBarController {
     
     private func setTabBar() {
         
-        var boardVC = UINavigationController(rootViewController: BoardViewController())
+        let boardVC = BoardViewController()
         boardVC.tabBarItem.image = Constants.Image.board
         boardVC.tabBarItem.title = "Board"
         
-        var homeVC = UINavigationController(rootViewController: HomeViewController())
+        let homeVC = HomeViewController()
         homeVC.tabBarItem.image = Constants.Image.myPage
         homeVC.tabBarItem.title = "MY"
         
