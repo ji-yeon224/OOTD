@@ -32,15 +32,37 @@ final class JoinViewModel {
         
         let joinCompleted: PublishSubject<UserInfoResponse>
         let errorMsg: PublishSubject<String>
-        let emailValidation: PublishSubject<Bool>
+        let emailValidMsg: PublishRelay<String>
+        let joinValidation: BehaviorRelay<Bool>
         
+        let emailValid: PublishRelay<Bool>
+        let passValid: PublishRelay<Bool>
+        let nickValid: PublishRelay<Bool>
+        let birthValid: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output {
         
         let joinCompleted: PublishSubject<UserInfoResponse> = PublishSubject()
         let errorMsg: PublishSubject<String> = PublishSubject()
-        let validation = PublishSubject<Bool>()
+        
+        let joinValidation = BehaviorRelay(value: false)
+        let emailValidMsg = PublishRelay<String>()
+        
+        let emailValid = PublishRelay<Bool>()
+        let passValid = PublishRelay<Bool>()
+        let nickValid = PublishRelay<Bool>()
+        let birthValid = PublishRelay<Bool>()
+        
+        Observable.combineLatest(emailValid, passValid, nickValid, birthValid) { email, password, nickname, birthday in
+            return email && password && nickname && birthday
+        }
+        .bind(with: self) { owner, value in
+            joinValidation.accept(value)
+        }
+        .disposed(by: disposeBag)
+
+        
         
         input.emailText
             .map {
@@ -56,26 +78,24 @@ final class JoinViewModel {
             }
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .debug()
             .flatMap { email in
                 return AuthenticationAPIManager.shared.request(api: .emailValidation(email: email), successType: ResponseMessage.self)
             }
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(_):
-                    validation.onNext(true)
+                    emailValid.accept(true)
                 case .failure(let error):
-                    validation.onNext(false)
+                    emailValid.accept(false)
                     let code = error.statusCode
                     debugPrint("[Debug]", error.statusCode, error.description)
-                    guard let errorType = LoginError(rawValue: code) else {
+                    guard let errorType = EmailValidationError(rawValue: code) else {
                         if let commonError = CommonError(rawValue: code) {
                             errorMsg.onNext(commonError.localizedDescription)
                         }
                         return
                     }
-                    
-                    errorMsg.onNext(errorType.errorDescription ?? "")
+                    emailValidMsg.accept(errorType.localizedDescription)
                 }
             }
             .disposed(by: disposeBag)
@@ -84,22 +104,36 @@ final class JoinViewModel {
             .map {
                 return $0.trimmingCharacters(in: .whitespaces)
             }
-            .bind(to: password)
+            .bind(with: self, onNext: { owner, value in
+                owner.password.accept(value)
+                let valid = value.count >= 4 && value.count <= 8
+                passValid.accept(valid)
+            })
             .disposed(by: disposeBag)
         
         input.nickText
             .map {
                 return $0.trimmingCharacters(in: .whitespaces)
             }
-            .bind(to: nickname)
+            .bind(with: self, onNext: { owner, value in
+                owner.nickname.accept(value)
+                let valid = value.count >= 2 && value.count <= 8
+                nickValid.accept(valid)
+            })
             .disposed(by: disposeBag)
         
         input.birthText
-            .bind(to: birthday)
+            .bind(with: self, onNext: { owner, value in
+                owner.birthday.accept(value)
+                let date = DateFormatter.stringToDate(date: owner.birthday.value)
+                let valid = owner.getAge(birthday: date)
+                birthValid.accept(valid)
+            })
             .disposed(by: disposeBag)
         
         
         input.buttonTap
+            .debug()
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .flatMap {
                 return AuthenticationAPIManager.shared.request(api: .join(joinInfo: Join(email: self.email.value, password: self.password.value, nick: self.nickname.value, birthDay: self.birthday.value)), successType: UserInfoResponse.self)
@@ -123,7 +157,16 @@ final class JoinViewModel {
             .disposed(by: disposeBag)
             
         
-        return Output(joinCompleted: joinCompleted, errorMsg: errorMsg, emailValidation: validation)
+        return Output(
+            joinCompleted: joinCompleted,
+            errorMsg: errorMsg,
+            emailValidMsg: emailValidMsg,
+            joinValidation: joinValidation,
+            emailValid: emailValid,
+            passValid: passValid,
+            nickValid: nickValid,
+            birthValid: birthValid
+        )
         
         
     }
@@ -131,7 +174,7 @@ final class JoinViewModel {
     private func getAge(birthday: Date) -> Bool {
             
         let age = Calendar.current.dateComponents([.year], from: birthday, to: Date())
-        return Int(age.year!) >= 17
+        return Int(age.year!) >= 14
         
     }
     

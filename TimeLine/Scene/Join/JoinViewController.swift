@@ -42,6 +42,7 @@ final class JoinViewController: BaseViewController {
     
     private func bind() {
         
+        
         let input = JoinViewModel.Input(
             emailText: mainView.emailTextField.rx.text.orEmpty,
             passText: mainView.passwordTextField.rx.text.orEmpty,
@@ -63,16 +64,53 @@ final class JoinViewController: BaseViewController {
         
         output.errorMsg
             .bind(with: self) { owner, error in
-                print(error)
+                owner.mainView.joinErrorLable.text = error
+                owner.mainView.joinErrorLable.isHidden = false
             }
             .disposed(by: disposeBag)
         
-        output.emailValidation
+        output.emailValid
             .bind(with: self) { owner, value in
-                owner.mainView.emailValidationImage.tintColor = value ? Constants.Color.valid : Constants.Color.invalid
+                let color = value ? Constants.Color.valid : Constants.Color.invalid
+                owner.mainView.emailValidationImage.tintColor = color
+                owner.mainView.emailValidLabel.isHidden = value
+                
             }
             .disposed(by: disposeBag)
         
+        output.emailValidMsg
+            .bind(to: mainView.emailValidLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        
+        output.joinValidation
+            .bind(with: self) { owner, value in
+                
+                owner.mainView.joinButton.backgroundColor = value ? Constants.Color.mainColor : Constants.Color.disableTint
+            }
+            .disposed(by: disposeBag)
+        
+        output.passValid
+            .bind(with: self) { owner, value in
+                owner.mainView.passValidLabel.isHidden = value
+                owner.mainView.passValidLabel.text = "비밀번호는 4글자 이상 8글자 이상으로 작성해주세요."
+            }
+            .disposed(by: disposeBag)
+        
+        output.nickValid
+            .bind(with: self) { owner, value in
+                owner.mainView.nickValidLabel.isHidden = value
+                owner.mainView.nickValidLabel.text = "닉네입은 2글자 이상 8글자 이상으로 작성해주세요."
+            }
+            .disposed(by: disposeBag)
+        
+        output.birthValid
+            .bind(with: self) { owner, value in
+                print(value)
+                owner.mainView.birthValidLabel.isHidden = value
+                owner.mainView.birthValidLabel.text = "만 14세 이상 부터 가입 가능합니다."
+            }
+            .disposed(by: disposeBag)
         
     }
     

@@ -23,6 +23,7 @@ final class JoinView: BaseView {
     let emailValidLabel = ValidationLabel()
     let passValidLabel = ValidationLabel()
     let nickValidLabel = ValidationLabel()
+    let birthValidLabel = ValidationLabel()
     
     let emailTextField = CustomTextField(placeholder: "이메일을 입력하세요")
     let passwordTextField = CustomTextField(placeholder: "비밀번호를 입력하세요")
@@ -41,7 +42,7 @@ final class JoinView: BaseView {
     let datePickerview = {
         let view = UIDatePicker()
         view.datePickerMode = .date
-        view.preferredDatePickerStyle = .inline
+        view.preferredDatePickerStyle = .wheels
         view.backgroundColor = Constants.Color.background
         view.locale = Locale(identifier: "ko_KR")
         view.tintColor = Constants.Color.mainColor
@@ -80,8 +81,7 @@ final class JoinView: BaseView {
         
         setStackViewConstraints()
         
-        
-        [emailStack, passStack, nickStack, birthdayTextField, birthdayUnderLineView, joinStack].forEach {
+        [emailStack, passStack, nickStack, birthStack, joinStack].forEach {
             addSubview($0)
         }
     }
@@ -97,6 +97,9 @@ final class JoinView: BaseView {
         nickView.addSubview(nicknameTextField)
         nickView.addSubview(nicknameUnderLineView)
         
+        birthView.addSubview(birthdayTextField)
+        birthView.addSubview(birthdayUnderLineView)
+        
         emailStack.addArrangedSubview(emailView)
         emailStack.addArrangedSubview(emailValidLabel)
         
@@ -106,10 +109,13 @@ final class JoinView: BaseView {
         nickStack.addArrangedSubview(nickView)
         nickStack.addArrangedSubview(nickValidLabel)
         
-        
+        birthStack.addArrangedSubview(birthView)
+        birthStack.addArrangedSubview(birthValidLabel)
     }
     
     override func setConstraints() {
+        
+        
         
         emailStack.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(80)
@@ -196,22 +202,31 @@ final class JoinView: BaseView {
             make.height.equalTo(20)
         }
         
-        birthdayTextField.snp.makeConstraints { make in
-            make.height.equalTo(50)
+        birthStack.snp.makeConstraints { make in
             make.top.equalTo(nickStack.snp.bottom).offset(25)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
         }
-        birthdayUnderLineView.snp.makeConstraints { make in
-            make.height.equalTo(2)
-            make.top.equalTo(birthdayTextField.snp.bottom)
-            make.width.equalTo(birthdayTextField.snp.width)
-            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
+        
+        birthView.snp.makeConstraints { make in
+            make.height.equalTo(50)
         }
         
-        
+        birthdayTextField.snp.makeConstraints { make in
+            make.bottom.equalTo(birthdayUnderLineView.snp.top)
+            make.top.equalTo(birthView.snp.top)
+            make.horizontalEdges.equalTo(birthView)
+        }
+        birthdayUnderLineView.snp.makeConstraints { make in
+            make.height.equalTo(2)
+            make.bottom.equalTo(birthView.snp.bottom)
+            make.horizontalEdges.equalTo(birthView)
+        }
+        birthValidLabel.snp.makeConstraints { make in
+            make.height.equalTo(20)
+        }
         
         joinStack.snp.makeConstraints { make in
-            make.top.equalTo(birthdayTextField.snp.bottom).offset(50)
+            make.top.equalTo(birthStack.snp.bottom).offset(50)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
         }
         

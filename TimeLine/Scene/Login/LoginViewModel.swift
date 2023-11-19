@@ -36,14 +36,9 @@ final class LoginViewModel {
         let errorMsg: PublishSubject<String> = PublishSubject()
         let successValue = BehaviorRelay(value: false)
         let validation = Observable.combineLatest(input.email, input.password) { email, password in
-            return email.count > 0 && password.count > 0
+            return email.count > 0 && password.count >= 4
         }
         
-        validation
-            .bind(with: self) { owner, value in
-                
-            }
-            .disposed(by: disposeBag)
         
         input.email
             .map {

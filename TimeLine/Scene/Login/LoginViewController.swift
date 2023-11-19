@@ -70,6 +70,7 @@ final class LoginViewController: BaseViewController {
         output.validation
             .bind(with: self) { owner, value in
                 owner.mainView.loginButton.backgroundColor = value ? Constants.Color.mainColor : Constants.Color.disableTint
+                owner.mainView.loginButton.isEnabled = value
             }
             .disposed(by: disposeBag)
         

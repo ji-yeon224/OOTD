@@ -8,7 +8,7 @@
 import Foundation
 
 enum EmailValidationError: Int, Error {
-    
+    case success = 200
     case emptyValue = 400
     case alreadyExist = 409
     
@@ -17,6 +17,7 @@ enum EmailValidationError: Int, Error {
 extension EmailValidationError: LocalizedError {
     var errorDescription: String? {
         switch self {
+        case .success: return "success"
         case .emptyValue:
             return "이메일을 입력해주세요!"
         case .alreadyExist:
