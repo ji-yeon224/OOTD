@@ -54,6 +54,9 @@
 		CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */; };
 		CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF262B08E7750031947E /* ValidationLabel.swift */; };
 		CEECBF292B08FC120031947E /* ValidStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF282B08FC120031947E /* ValidStackView.swift */; };
+		CEECBF8D2B0A3EA20031947E /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF8C2B0A3EA20031947E /* BoardView.swift */; };
+		CEECBF8F2B0A3EA80031947E /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF8E2B0A3EA80031947E /* BoardViewController.swift */; };
+		CEECBF912B0A40520031947E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF902B0A40520031947E /* TabBarController.swift */; };
 		CEED52A92B04EE49007E12FA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52A82B04EE49007E12FA /* HomeViewController.swift */; };
 		CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52AA2B04EE58007E12FA /* HomeView.swift */; };
 		CEED52AD2B04F0AC007E12FA /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */; };
@@ -109,6 +112,9 @@
 		CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenManager.swift; sourceTree = "<group>"; };
 		CEECBF262B08E7750031947E /* ValidationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationLabel.swift; sourceTree = "<group>"; };
 		CEECBF282B08FC120031947E /* ValidStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidStackView.swift; sourceTree = "<group>"; };
+		CEECBF8C2B0A3EA20031947E /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		CEECBF8E2B0A3EA80031947E /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		CEECBF902B0A40520031947E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CEED52A82B04EE49007E12FA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CEED52AA2B04EE58007E12FA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CEED52AC2B04F0AC007E12FA /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
@@ -277,10 +283,12 @@
 		CEEA876B2B01EC7D00AC375F /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CEECBF8B2B0A3E9B0031947E /* Board */,
 				CEED52A72B04EE3F007E12FA /* Home */,
 				CE290E872B049AAF007DFCAE /* Join */,
 				CEEA87762B01EDBB00AC375F /* Login */,
 				CEEA876C2B01EC8400AC375F /* Base */,
+				CEECBF902B0A40520031947E /* TabBarController.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -343,6 +351,15 @@
 				CEECBF192B0665590031947E /* RefreshResult.swift */,
 			);
 			path = Token;
+			sourceTree = "<group>";
+		};
+		CEECBF8B2B0A3E9B0031947E /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				CEECBF8C2B0A3EA20031947E /* BoardView.swift */,
+				CEECBF8E2B0A3EA80031947E /* BoardViewController.swift */,
+			);
+			path = Board;
 			sourceTree = "<group>";
 		};
 		CEED52A72B04EE3F007E12FA /* Home */ = {
@@ -453,12 +470,14 @@
 				CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */,
 				CEED52AF2B04FB5F007E12FA /* ContentError.swift in Sources */,
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
+				CEECBF8F2B0A3EA80031947E /* BoardViewController.swift in Sources */,
 				CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,
 				CE290E862B049A3B007DFCAE /* UserInfoResponse.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
 				CEED52AD2B04F0AC007E12FA /* UserDefaultsHelper.swift in Sources */,
 				CE048CC52B03913300FAC038 /* Join.swift in Sources */,
+				CEECBF8D2B0A3EA20031947E /* BoardView.swift in Sources */,
 				CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */,
 				CE290E902B04A3B1007DFCAE /* DateFormatter+Extension.swift in Sources */,
 				CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */,
@@ -479,6 +498,7 @@
 				CE290E992B04B7C6007DFCAE /* ResponseMessage.swift in Sources */,
 				CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */,
 				CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */,
+				CEECBF912B0A40520031947E /* TabBarController.swift in Sources */,
 				CEED52B12B04FB6F007E12FA /* RefreshError.swift in Sources */,
 				CEED52A92B04EE49007E12FA /* HomeViewController.swift in Sources */,
 				CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */,

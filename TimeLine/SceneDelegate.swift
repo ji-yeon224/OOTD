@@ -20,10 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         let isLogin = UserDefaultsHelper.shared.isLogin
-        print(isLogin)
         
         
-        let vc = isLogin ? HomeViewController() : LoginViewController()
+        let vc = isLogin ? TabBarController() : LoginViewController()
         window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
     }
