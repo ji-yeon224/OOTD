@@ -46,7 +46,7 @@ extension AuthenticationAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .login(let userInfo):
+        case .login(let userInfo): 
             return .requestJSONEncodable(userInfo)
         case .join(let joinInfo):
             return .requestJSONEncodable(joinInfo)

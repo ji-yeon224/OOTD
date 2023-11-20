@@ -15,7 +15,7 @@ final class AuthenticationAPIManager {
     static let shared = AuthenticationAPIManager()
     private init() { }
     
-    let provider = MoyaProvider<AuthenticationAPI>()
+    private let provider = MoyaProvider<AuthenticationAPI>()
     
     
     func request<T: Codable>(api: AuthenticationAPI, successType: T.Type) -> Single<Result<T, NetworkError>> {

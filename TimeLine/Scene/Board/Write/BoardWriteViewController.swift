@@ -20,6 +20,11 @@ final class BoardWriteViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "title"
+        
+        let image1 = UIImage(named: "img1")
+        let image2 = UIImage(named: "img2")
+        
+        PostAPIManager.shared.request(api: .write(data: PostWrite(title: "test3", content: "tttt", product_id: "OOTDBoard")))
     }
     
     override func configure() {
