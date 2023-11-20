@@ -69,20 +69,22 @@ extension PostAPI {
     
     private func convertToMultipart(data: PostWrite) -> [MultipartFormData] {
         
+        var multipart: [MultipartFormData] = []
         
-        let title = data.title.data(using: .utf8) ?? Data()
-        let titleform = MultipartFormData(provider: .data(title), name: "title")
+        let params = data.convertToMap()
+        for param in params {
+            if type(of: param) == Data.self {
+                multipart.append(MultipartFormData(provider: .data(param.value), name: param.key))
+            }
+            else {
+                
+                multipart.append(MultipartFormData(provider: .data(param.value), name: param.key))
+            }
+        }
         
-        let content = data.content.data(using: .utf8) ?? Data()
-        let contentForm = MultipartFormData(provider: .data(content), name: "content")
-        let productid = data.product_id.data(using: .utf8) ?? Data()
-        let productidForm = MultipartFormData(provider: .data(productid), name: "product_id")
-//        let img = data.file ?? Data()
-//        let imgForm = MultipartFormData(provider: .data(img), name: "img", fileName: "img.png")
         
         
-        
-        return [titleform, contentForm, productidForm]
+        return multipart
     }
     
     
