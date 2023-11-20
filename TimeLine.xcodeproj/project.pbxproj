@@ -23,6 +23,8 @@
 		CEBDFBF42B0B31B900D43BF9 /* PostAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBF32B0B31B900D43BF9 /* PostAPIManager.swift */; };
 		CEBDFBF62B0B31CA00D43BF9 /* PostWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBF52B0B31CA00D43BF9 /* PostWrite.swift */; };
 		CEBDFBF82B0B4AE200D43BF9 /* WriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBF72B0B4AE200D43BF9 /* WriteResponse.swift */; };
+		CEBDFBFC2B0B97EA00D43BF9 /* PostWriteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBFB2B0B97EA00D43BF9 /* PostWriteError.swift */; };
+		CEBDFBFE2B0B9EB700D43BF9 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBFD2B0B9EB700D43BF9 /* UIScrollView+Extension.swift */; };
 		CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */; };
 		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
 		CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */; };
@@ -91,6 +93,8 @@
 		CEBDFBF32B0B31B900D43BF9 /* PostAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPIManager.swift; sourceTree = "<group>"; };
 		CEBDFBF52B0B31CA00D43BF9 /* PostWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWrite.swift; sourceTree = "<group>"; };
 		CEBDFBF72B0B4AE200D43BF9 /* WriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteResponse.swift; sourceTree = "<group>"; };
+		CEBDFBFB2B0B97EA00D43BF9 /* PostWriteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWriteError.swift; sourceTree = "<group>"; };
+		CEBDFBFD2B0B9EB700D43BF9 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIManager.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				CE290E8F2B04A3B1007DFCAE /* DateFormatter+Extension.swift */,
+				CEBDFBFD2B0B9EB700D43BF9 /* UIScrollView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -238,8 +243,8 @@
 		CEBDFBF12B0B319C00D43BF9 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				CEBDFBF52B0B31CA00D43BF9 /* PostWrite.swift */,
-				CEBDFBF72B0B4AE200D43BF9 /* WriteResponse.swift */,
+				CEBDFBFA2B0B959100D43BF9 /* Read */,
+				CEBDFBF92B0B958800D43BF9 /* Write */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -247,8 +252,25 @@
 		CEBDFBF22B0B31A100D43BF9 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				CEBDFBFB2B0B97EA00D43BF9 /* PostWriteError.swift */,
 			);
 			path = Post;
+			sourceTree = "<group>";
+		};
+		CEBDFBF92B0B958800D43BF9 /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				CEBDFBF52B0B31CA00D43BF9 /* PostWrite.swift */,
+				CEBDFBF72B0B4AE200D43BF9 /* WriteResponse.swift */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
+		CEBDFBFA2B0B959100D43BF9 /* Read */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Read;
 			sourceTree = "<group>";
 		};
 		CEC2FBD22B02174A002E3046 /* Model */ = {
@@ -551,6 +573,7 @@
 				CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */,
 				CEC2FBD92B021C51002E3046 /* LoginToken.swift in Sources */,
 				CE290E9C2B04BF51007DFCAE /* LoginError.swift in Sources */,
+				CEBDFBFC2B0B97EA00D43BF9 /* PostWriteError.swift in Sources */,
 				CE290E992B04B7C6007DFCAE /* ResponseMessage.swift in Sources */,
 				CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */,
 				CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */,
@@ -560,6 +583,7 @@
 				CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */,
 				CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */,
 				CEED52B72B050652007E12FA /* WithdrawError.swift in Sources */,
+				CEBDFBFE2B0B9EB700D43BF9 /* UIScrollView+Extension.swift in Sources */,
 				CE290E8D2B049ACF007DFCAE /* JoinView.swift in Sources */,
 				CEC2FBD42B021750002E3046 /* Login.swift in Sources */,
 				CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */,
