@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let isLogin = UserDefaultsHelper.shared.isLogin
+        let isLogin = UserDefaultsHelper.isLogin
         
         
         let vc = isLogin ? TabBarController() : LoginViewController()

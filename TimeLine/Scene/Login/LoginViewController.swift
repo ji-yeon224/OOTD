@@ -60,7 +60,7 @@ final class LoginViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 if value {
                     print("Login Success")
-                    UserDefaultsHelper.shared.isLogin = true
+                    UserDefaultsHelper.isLogin = true
                     owner.view?.window?.rootViewController = TabBarController()
                     owner.view.window?.makeKeyAndVisible()
                 }

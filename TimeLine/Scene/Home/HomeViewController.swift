@@ -23,7 +23,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        print(String(describing: UserDefaultsHelper.shared.token))
+        print(String(describing: UserDefaultsHelper.token))
     }
     
     private func bind() {
@@ -35,7 +35,7 @@ final class HomeViewController: BaseViewController {
         
         mainView.logoutButton.rx.tap
             .bind(with: self) { owner, _ in
-                UserDefaultsHelper.shared.isLogin = false
+                UserDefaultsHelper.isLogin = false
                 owner.view?.window?.rootViewController = LoginViewController()
                 owner.view.window?.makeKeyAndVisible()
             }
@@ -58,7 +58,7 @@ final class HomeViewController: BaseViewController {
                 switch value {
                 case .login:
                     owner.showOKAlert(title: "문제가 발생하였습니다. 재로그인 후 다시 요청해주세요.", message: "") {
-                        UserDefaultsHelper.shared.isLogin = false
+                        UserDefaultsHelper.isLogin = false
                         // 로그인 뷰로 present
                         owner.view?.window?.rootViewController = LoginViewController()
                         owner.view.window?.makeKeyAndVisible()
@@ -75,7 +75,7 @@ final class HomeViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 if value {
                     owner.showOKAlert(title: "탈퇴가 완료되었습니다.", message: "") {
-                        UserDefaultsHelper.shared.isLogin = false
+                        UserDefaultsHelper.isLogin = false
                         // 로그인 뷰로 present
                         owner.view?.window?.rootViewController = LoginViewController()
                         owner.view.window?.makeKeyAndVisible()

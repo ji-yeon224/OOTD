@@ -7,44 +7,36 @@
 
 import Foundation
 
+@propertyWrapper
+struct Defaults<T> {
+    let key: String
+    let defaultValue: T
+    
+    var wrappedValue: T {
+        get {
+            UserDefaults.standard.object(forKey: key) as? T ?? defaultValue
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: key)
+        }
+    }
+}
+
 final class UserDefaultsHelper {
     
-    static let shared = UserDefaultsHelper()
+//    static let shared = UserDefaultsHelper()
     private init() { }
     
-    private let userDefalts = UserDefaults.standard
+//    private let userDefalts = UserDefaults.standard
     
     enum Key: String {
         case token
         case refreshToken
         case isLogin
     }
-    
-    var token: String? {
-        get {
-            return userDefalts.string(forKey: Key.token.rawValue)
-        }
-        set {
-            userDefalts.set(newValue, forKey: Key.token.rawValue)
-        }
-    }
-    
-    var refreshToken: String? {
-        get {
-            return userDefalts.string(forKey: Key.refreshToken.rawValue)
-        }
-        set {
-            userDefalts.set(newValue, forKey: Key.refreshToken.rawValue)
-        }
-    }
-    
-    var isLogin: Bool {
-        get {
-            return userDefalts.bool(forKey: Key.isLogin.rawValue)
-        }
-        set {
-            userDefalts.set(newValue, forKey: Key.isLogin.rawValue)
-        }
-    }
+    @Defaults(key: Key.token.rawValue, defaultValue: "") static var token
+    @Defaults(key: Key.refreshToken.rawValue, defaultValue: "") static var refreshToken
+    @Defaults(key: Key.isLogin.rawValue, defaultValue: false) static var isLogin
+
     
 }

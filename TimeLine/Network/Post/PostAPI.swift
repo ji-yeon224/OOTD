@@ -51,10 +51,10 @@ extension PostAPI: TargetType {
             return [
                 "Content-Type": "multipart/form-data",
                 "SesacKey": APIKey.key,
-                "Authorization": UserDefaultsHelper.shared.token ?? ""
+                "Authorization": UserDefaultsHelper.token
             ]
         case .read:
-            return ["Authorization": UserDefaultsHelper.shared.token ?? "",
+            return ["Authorization": UserDefaultsHelper.token,
                     "SesacKey": APIKey.key]
         }
     }
