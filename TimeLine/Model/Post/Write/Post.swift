@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WriteResponse: Codable {
+struct Post: Codable {
     let likes, image, hashTags, comments: [String]
     let id: String
     let creator: Creator

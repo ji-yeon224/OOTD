@@ -10,7 +10,7 @@ import Moya
 
 enum PostAPI {
     case write(data: PostWrite)
-    case read
+    case read(productId: String, limit: Int)
 }
 
 extension PostAPI: TargetType {
@@ -40,8 +40,8 @@ extension PostAPI: TargetType {
         switch self {
         case .write(let data):
             return .uploadMultipart(convertToMultipart(data: data))
-        case .read:
-            return .requestPlain
+        case .read(let id, let limit):
+            return .requestParameters(parameters: ["product_id" : id, "limit": limit], encoding: URLEncoding.queryString)
         }
     }
     
@@ -80,7 +80,8 @@ extension PostAPI {
         let files = data.file
         files.forEach {
             guard let img = $0 else { return }
-            multipart.append(MultipartFormData(provider: .data(img), name: "file", fileName: "image.jpeg", mimeType: "image/jpeg"))
+            print(img)
+            multipart.append(MultipartFormData(provider: .data(img), name: "file", fileName: "image.jpeg", mimeType: "image/jpg"))
         }
         
         

@@ -15,7 +15,7 @@ final class PostAPIManager {
     private init() { }
     private let provider = MoyaProvider<PostAPI>()
     
-    func request(api: PostAPI) -> Single<Result<WriteResponse, NetworkError>>{
+    func request<T: Codable>(api: PostAPI, type: T.Type) -> Single<Result<T, NetworkError>>{
         return Single.create { single in
         
             self.provider.request(api) { result in
@@ -24,13 +24,13 @@ final class PostAPIManager {
                 case .success(let response):
                     let statusCode = response.statusCode
                     if statusCode == 200 {
-                        print(response.statusCode)
+                       
                         do {
-                            let result = try JSONDecoder().decode(WriteResponse.self, from: response.data)
-                            debugPrint("[SUCCESS WRITE]", result)
+                            let result = try JSONDecoder().decode(T.self, from: response.data)
+                            debugPrint("[SUCCESS POST REQUEST]")
                             single(.success(.success(result)))
                         } catch {
-                            print("DECODING ERROR")
+                            print("[SUCCESS] DECODING ERROR", error.localizedDescription)
                         }
                         
                     } else {
@@ -39,7 +39,7 @@ final class PostAPIManager {
                             let error = NetworkError(statusCode: statusCode, description: result.message)
                             single(.success(.failure(error)))
                         } catch {
-                            print("DECODING ERROR")
+                            print("DECODING ERROR", error.localizedDescription)
                         }
                         
                     }
