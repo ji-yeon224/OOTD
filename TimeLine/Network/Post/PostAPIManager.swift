@@ -25,13 +25,23 @@ final class PostAPIManager {
                     let statusCode = response.statusCode
                     if statusCode == 200 {
                         print(response.statusCode)
-                        let result = try! JSONDecoder().decode(WriteResponse.self, from: response.data)
-                        debugPrint("[SUCCESS WRITE]", result)
-                        single(.success(.success(result)))
+                        do {
+                            let result = try JSONDecoder().decode(WriteResponse.self, from: response.data)
+                            debugPrint("[SUCCESS WRITE]", result)
+                            single(.success(.success(result)))
+                        } catch {
+                            print("DECODING ERROR")
+                        }
+                        
                     } else {
-                        let result = try! JSONDecoder().decode(ErrorModel.self, from: response.data)
-                        let error = NetworkError(statusCode: statusCode, description: result.message)
-                        single(.success(.failure(error)))
+                        do {
+                            let result = try JSONDecoder().decode(ErrorModel.self, from: response.data)
+                            let error = NetworkError(statusCode: statusCode, description: result.message)
+                            single(.success(.failure(error)))
+                        } catch {
+                            print("DECODING ERROR")
+                        }
+                        
                     }
                 case .failure(let error):
                     let error = NetworkError(statusCode: error.errorCode, description: error.localizedDescription)

@@ -28,6 +28,7 @@ final class BoardWriteViewController: BaseViewController {
         super.viewDidLoad()
         title = "글쓰기"
         bind()
+        print("BoardWirte")
 //        let image1 = UIImage(named: "img1")
 //        let image2 = UIImage(named: "img2")
 //        
