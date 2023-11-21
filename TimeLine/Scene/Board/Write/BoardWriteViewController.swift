@@ -29,10 +29,15 @@ final class BoardWriteViewController: BaseViewController {
         title = "글쓰기"
         bind()
         print("BoardWirte")
-//        let image1 = UIImage(named: "img1")
-//        let image2 = UIImage(named: "img2")
-//        
-//        PostAPIManager.shared.request(api: .write(data: PostWrite(title: "test3", content: "tttt", product_id: "OOTDBoard")))
+
+
+    }
+    
+    func testData() {
+        let image1 = UIImage(named: "img1")
+        let image2 = UIImage(named: "img2")
+        
+       
     }
     
     override func configure() {

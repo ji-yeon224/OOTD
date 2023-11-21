@@ -72,16 +72,16 @@ extension PostAPI {
         var multipart: [MultipartFormData] = []
         
         let params = data.convertToMap()
-        for param in params {
-            if type(of: param) == Data.self {
-                multipart.append(MultipartFormData(provider: .data(param.value), name: param.key))
-            }
-            else {
-                
-                multipart.append(MultipartFormData(provider: .data(param.value), name: param.key))
-            }
-        }
         
+        for param in params {
+            multipart.append(MultipartFormData(provider: .data(param.value), name: param.key))
+
+        }
+        let files = data.file
+        files.forEach {
+            guard let img = $0 else { return }
+            multipart.append(MultipartFormData(provider: .data(img), name: "file", fileName: "image.jpeg", mimeType: "image/jpeg"))
+        }
         
         
         return multipart

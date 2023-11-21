@@ -28,6 +28,7 @@ final class AuthenticationAPIManager {
                     if statusCode == 200 {
                         do {
                             let result = try JSONDecoder().decode(T.self, from: data.data)
+                            single(.success(.success(result)))
                         } catch {
                             print("DECODING ERROR")
                         }
