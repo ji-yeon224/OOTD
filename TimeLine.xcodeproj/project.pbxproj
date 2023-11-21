@@ -25,6 +25,8 @@
 		CEBDFBF82B0B4AE200D43BF9 /* WriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBF72B0B4AE200D43BF9 /* WriteResponse.swift */; };
 		CEBDFBFC2B0B97EA00D43BF9 /* PostWriteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBFB2B0B97EA00D43BF9 /* PostWriteError.swift */; };
 		CEBDFBFE2B0B9EB700D43BF9 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBFD2B0B9EB700D43BF9 /* UIScrollView+Extension.swift */; };
+		CEBDFC002B0BAA3500D43BF9 /* BoardWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBFF2B0BAA3500D43BF9 /* BoardWriteViewModel.swift */; };
+		CEBDFC022B0BB52100D43BF9 /* ProductId.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFC012B0BB52100D43BF9 /* ProductId.swift */; };
 		CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */; };
 		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
 		CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */; };
@@ -95,6 +97,8 @@
 		CEBDFBF72B0B4AE200D43BF9 /* WriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteResponse.swift; sourceTree = "<group>"; };
 		CEBDFBFB2B0B97EA00D43BF9 /* PostWriteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWriteError.swift; sourceTree = "<group>"; };
 		CEBDFBFD2B0B9EB700D43BF9 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
+		CEBDFBFF2B0BAA3500D43BF9 /* BoardWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardWriteViewModel.swift; sourceTree = "<group>"; };
+		CEBDFC012B0BB52100D43BF9 /* ProductId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductId.swift; sourceTree = "<group>"; };
 		CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIManager.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 				CE290E962B04B2A2007DFCAE /* Design.swift */,
 				CE290E922B04B285007DFCAE /* Image.swift */,
 				CE290E942B04B29A007DFCAE /* Color.swift */,
+				CEBDFC012B0BB52100D43BF9 /* ProductId.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 			children = (
 				CEECBF932B0A42E00031947E /* BoardWriteView.swift */,
 				CEECBF952B0A42EA0031947E /* BoardWriteViewController.swift */,
+				CEBDFBFF2B0BAA3500D43BF9 /* BoardWriteViewModel.swift */,
 			);
 			path = Write;
 			sourceTree = "<group>";
@@ -545,6 +551,7 @@
 				CEED52AF2B04FB5F007E12FA /* ContentError.swift in Sources */,
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
 				CEECBF8F2B0A3EA80031947E /* BoardViewController.swift in Sources */,
+				CEBDFC022B0BB52100D43BF9 /* ProductId.swift in Sources */,
 				CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,
 				CE290E862B049A3B007DFCAE /* UserInfoResponse.swift in Sources */,
@@ -552,6 +559,7 @@
 				CEED52AD2B04F0AC007E12FA /* UserDefaultsHelper.swift in Sources */,
 				CE048CC52B03913300FAC038 /* Join.swift in Sources */,
 				CEECBF8D2B0A3EA20031947E /* BoardView.swift in Sources */,
+				CEBDFC002B0BAA3500D43BF9 /* BoardWriteViewModel.swift in Sources */,
 				CEECBF942B0A42E00031947E /* BoardWriteView.swift in Sources */,
 				CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */,
 				CE290E902B04A3B1007DFCAE /* DateFormatter+Extension.swift in Sources */,

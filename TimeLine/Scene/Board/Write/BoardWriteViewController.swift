@@ -13,7 +13,11 @@ import RxCocoa
 final class BoardWriteViewController: BaseViewController {
     
     private let mainView = BoardWriteView()
+    private let viewModel = BoardWriteViewModel()
+    
     private let disposeBag = DisposeBag()
+    
+    private let postButtonClicked = PublishRelay<Bool>()
     
     override func loadView() {
         self.view = mainView
@@ -36,6 +40,24 @@ final class BoardWriteViewController: BaseViewController {
     }
     
     private func bind() {
+        
+        let input = BoardWriteViewModel.Input(
+            postButton: postButtonClicked,
+            titleText: mainView.titleTextField.rx.text.orEmpty,
+            contentText: mainView.contentTextView.rx.text.orEmpty
+        )
+        
+        let output = viewModel.trasform(input: input)
+        
+        output.postButtonEnabled
+            .bind(with: self) { owner, value in
+                owner.navigationItem.rightBarButtonItem?.isEnabled = value
+            }
+            .disposed(by: disposeBag)
+        
+        
+        
+        
         mainView.contentTextView.rx.text.orEmpty
             .bind(with: self) { owner, value in
                 if value.count == 0 {
@@ -56,7 +78,7 @@ final class BoardWriteViewController: BaseViewController {
     }
     
     @objc private func completeButtonTapped() {
-        print("complete")
+        postButtonClicked.accept(true)
     }
 }
 

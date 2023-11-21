@@ -100,6 +100,7 @@ final class HomeViewModel {
                         }
                         return
                     }
+                    
                     switch errorType {
                     case .invalidToken, .expireToken:
                         let result = RefreshTokenManager.shared.tokenRequest()

@@ -26,6 +26,7 @@ final class BoardViewController: BaseViewController {
     
     private func bind() {
         mainView.writeButton.rx.tap
+            .debug()
             .bind(with: self) { owner, _ in
                 let vc = BoardWriteViewController()
                 vc.hidesBottomBarWhenPushed = true
