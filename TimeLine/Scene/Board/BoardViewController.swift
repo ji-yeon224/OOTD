@@ -51,6 +51,17 @@ final class BoardViewController: BaseViewController {
                     
                     owner.mainView.imageView.kf.setImage(with: url, options: [.requestModifier(ImageLoadManager.shared.getModifier())])
                     
+                    if let imageURL = URL(string: imgURL) {
+                        KingfisherManager.shared.retrieveImage(with: imageURL, options: [.requestModifier(ImageLoadManager.shared.getModifier())]) { result in
+                            switch result {
+                            case .success(let data):
+                                owner.mainView.imageView.image = data.image
+                            case .failure(_):
+                                owner.mainView.imageView.image = UIImage(systemName: "person")
+                            }
+                        }
+                    }
+                    
 
                     
                 case .failure(let error):
@@ -60,6 +71,9 @@ final class BoardViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
     }
+    
+    
+    
     
     
     

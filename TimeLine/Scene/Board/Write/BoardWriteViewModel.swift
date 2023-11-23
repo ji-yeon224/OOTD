@@ -61,10 +61,13 @@ final class BoardWriteViewModel {
                     print("[SUCCESS] ",data)
                 case .failure(let error):
                     let code = error.statusCode
-                    if let commonError = CommonError(rawValue: code) {
-                        print(commonError.localizedDescription)
+                    
+                    guard let errorType = ContentError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            print(commonError.localizedDescription)
+                        }
+                        return
                     }
-                    guard let errorType = ContentError(rawValue: code) else { return }
                     switch errorType {
                     case .invalidToken, .expireToken:
                         let result = RefreshTokenManager.shared.tokenRequest()

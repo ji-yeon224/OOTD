@@ -19,7 +19,7 @@ final class BoardView: BaseView {
     
     var imageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         view.backgroundColor = .black
         view.image = Constants.Image.check
         return view
