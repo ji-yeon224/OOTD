@@ -12,7 +12,7 @@ final class ImageLoadManager {
     
     static let shared = ImageLoadManager()
     private init() { }
- 
+    
     func getModifier() -> AnyModifier {
         return AnyModifier { request in
             var r = request
@@ -22,3 +22,4 @@ final class ImageLoadManager {
         }
     }
 }
+

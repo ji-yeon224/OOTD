@@ -20,7 +20,6 @@ struct PostWrite: Encodable {
         
         param["title"] = self.title.data(using: .utf8) ?? Data()
         param["content"] = self.content.data(using: .utf8) ?? Data()
-        //param["file"] = self.file
         param["product_id"] = self.product_id.data(using: .utf8) ?? Data()
         
         return param

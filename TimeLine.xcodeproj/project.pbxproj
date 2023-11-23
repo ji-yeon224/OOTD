@@ -37,6 +37,10 @@
 		CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9614F2B0CEE8C0067C424 /* ReadResponse.swift */; };
 		CED961582B0CF73B0067C424 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CED961572B0CF73B0067C424 /* Kingfisher */; };
 		CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC337D2B0F47D300A5788E /* ImageLoadManager.swift */; };
+		CEDC33802B0F917C00A5788E /* BoardReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC337F2B0F917C00A5788E /* BoardReadViewController.swift */; };
+		CEDC33822B0F918700A5788E /* BoardReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33812B0F918700A5788E /* BoardReadView.swift */; };
+		CEDC33842B0F919000A5788E /* BoardReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */; };
+		CEDC33862B0FA7AF00A5788E /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33852B0FA7AF00A5788E /* UIImageView+Extension.swift */; };
 		CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87542B01E30000AC375F /* AppDelegate.swift */; };
 		CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87562B01E30000AC375F /* SceneDelegate.swift */; };
 		CEEA87592B01E30000AC375F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87582B01E30000AC375F /* ViewController.swift */; };
@@ -110,6 +114,10 @@
 		CEC2FBE02B0270DC002E3046 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		CED9614F2B0CEE8C0067C424 /* ReadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadResponse.swift; sourceTree = "<group>"; };
 		CEDC337D2B0F47D300A5788E /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
+		CEDC337F2B0F917C00A5788E /* BoardReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadViewController.swift; sourceTree = "<group>"; };
+		CEDC33812B0F918700A5788E /* BoardReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadView.swift; sourceTree = "<group>"; };
+		CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadViewModel.swift; sourceTree = "<group>"; };
+		CEDC33852B0FA7AF00A5788E /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		CEEA87512B01E30000AC375F /* TimeLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA87542B01E30000AC375F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEA87562B01E30000AC375F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -213,6 +221,7 @@
 			children = (
 				CE290E8F2B04A3B1007DFCAE /* DateFormatter+Extension.swift */,
 				CEBDFBFD2B0B9EB700D43BF9 /* UIScrollView+Extension.swift */,
+				CEDC33852B0FA7AF00A5788E /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -319,6 +328,9 @@
 		CED961512B0CEF820067C424 /* Read */ = {
 			isa = PBXGroup;
 			children = (
+				CEDC337F2B0F917C00A5788E /* BoardReadViewController.swift */,
+				CEDC33812B0F918700A5788E /* BoardReadView.swift */,
+				CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -556,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEBDFBF02B0B2CA800D43BF9 /* PostAPI.swift in Sources */,
+				CEDC33802B0F917C00A5788E /* BoardReadViewController.swift in Sources */,
 				CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */,
 				CEECBF172B0601D70031947E /* CommonError.swift in Sources */,
 				CEECBF962B0A42EA0031947E /* BoardWriteViewController.swift in Sources */,
@@ -569,6 +582,7 @@
 				CEED52AF2B04FB5F007E12FA /* ContentError.swift in Sources */,
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
 				CEECBF8F2B0A3EA80031947E /* BoardViewController.swift in Sources */,
+				CEDC33862B0FA7AF00A5788E /* UIImageView+Extension.swift in Sources */,
 				CEBDFC022B0BB52100D43BF9 /* ProductId.swift in Sources */,
 				CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,
@@ -586,8 +600,10 @@
 				CE290E972B04B2A2007DFCAE /* Design.swift in Sources */,
 				CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */,
 				CEED52B92B050893007E12FA /* RefreshToken.swift in Sources */,
+				CEDC33822B0F918700A5788E /* BoardReadView.swift in Sources */,
 				CEECBF292B08FC120031947E /* ValidStackView.swift in Sources */,
 				CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */,
+				CEDC33842B0F919000A5788E /* BoardReadViewModel.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
