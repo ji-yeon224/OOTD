@@ -80,7 +80,6 @@ extension PostAPI {
         let files = data.file
         files.forEach {
             guard let img = $0 else { return }
-            print(img)
             multipart.append(MultipartFormData(provider: .data(img), name: "file", fileName: "image.jpeg", mimeType: "image/jpg"))
         }
         
