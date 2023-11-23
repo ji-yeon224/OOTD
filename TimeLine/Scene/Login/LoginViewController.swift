@@ -61,7 +61,7 @@ final class LoginViewController: BaseViewController {
                 if value {
                     print("Login Success")
                     UserDefaultsHelper.isLogin = true
-                    owner.view?.window?.rootViewController = TabBarController()
+                    owner.view?.window?.rootViewController = UINavigationController(rootViewController: TabBarController())
                     owner.view.window?.makeKeyAndVisible()
                 }
             }

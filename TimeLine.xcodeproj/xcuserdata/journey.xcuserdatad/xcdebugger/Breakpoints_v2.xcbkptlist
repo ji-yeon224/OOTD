@@ -3,4 +3,69 @@
    uuid = "8F94397F-FE83-4E5C-85FA-E50389EDC6AF"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "42A2C9BC-FD54-4126-ACB5-387856577145"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeLine/Scene/Board/BoardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "bind()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "42A2C9BC-FD54-4126-ACB5-387856577145 - 83d105d54f8eb239"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TimeLine.BoardViewController, ()) -&gt; () in TimeLine.BoardViewController.bind() -&gt; ()"
+                  moduleName = "TimeLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/journey/workspace/dev/SeSAC/TimeLine/TimeLine/Scene/Board/BoardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "42A2C9BC-FD54-4126-ACB5-387856577145 - 83d105d54f8eb239"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TimeLine.BoardViewController, ()) -&gt; () in TimeLine.BoardViewController.bind() -&gt; ()"
+                  moduleName = "TimeLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/journey/workspace/dev/SeSAC/TimeLine/TimeLine/Scene/Board/BoardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "42A2C9BC-FD54-4126-ACB5-387856577145 - 83d105d54f8eb239"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TimeLine.BoardViewController, ()) -&gt; () in TimeLine.BoardViewController.bind() -&gt; ()"
+                  moduleName = "TimeLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/journey/workspace/dev/SeSAC/TimeLine/TimeLine/Scene/Board/BoardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
