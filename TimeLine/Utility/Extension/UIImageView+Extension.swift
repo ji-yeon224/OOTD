@@ -16,11 +16,9 @@ extension UIImageView {
             case .success(let value):
                 if let image = value.image {
                     //캐시가 존재하는 경우
-                    print("cache")
                     self.image = image
                 } else {
                     //캐시가 존재하지 않는 경우
-                    print("no cache")
                     guard let url = URL(string: urlString) else { return }
                     let resource = ImageResource(downloadURL: url, cacheKey: urlString)
                     self.kf.setImage(
@@ -39,7 +37,7 @@ extension UIImageView {
                         }
                 }
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

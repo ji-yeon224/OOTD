@@ -19,7 +19,7 @@ final class BoardViewController: BaseViewController {
     
     
     
-    let refreshList = BehaviorSubject(value: true)
+    let refreshList = PublishSubject<Bool>()
     
     override func loadView() {
         self.view = mainView
@@ -31,7 +31,10 @@ final class BoardViewController: BaseViewController {
         bind()
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshList.onNext(true)
+    }
     private func bind() {
         
         let input = BoardViewModel.Input(refresh: refreshList)
@@ -50,6 +53,27 @@ final class BoardViewController: BaseViewController {
             .bind(to: mainView.tableView.rx.items(dataSource: mainView.dataSource))
             .disposed(by: disposeBag)
         
+        output.tokenRequest
+            .bind(with: self) { owner, value in
+                switch value {
+                case .login:
+                    owner.showOKAlert(title: "문제가 발생하였습니다.", message: "로그인 후 다시 시도해주세요.") {
+                        UserDefaultsHelper.isLogin = false
+                        // 로그인 뷰로 present
+                        let vc = LoginViewController()
+                        vc.transition = .presnt
+                        vc.modalPresentationStyle = .fullScreen
+                        vc.modalTransitionStyle = .crossDissolve
+                        owner.present(vc, animated: true)
+                    }
+                case .error:
+                    owner.showOKAlert(title: "요청을 처리하지 못하였습니다. 다시 시도해주세요.", message: "") { }
+                case .success:
+                    break
+                    
+                }
+            }
+            .disposed(by: disposeBag)
         
         
         

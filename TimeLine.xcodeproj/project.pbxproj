@@ -45,6 +45,8 @@
 		CEDC338F2B103DE700A5788E /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC338E2B103DE700A5788E /* BoardTableViewCell.swift */; };
 		CEDC33932B106F1400A5788E /* PlainLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33922B106F1400A5788E /* PlainLabel.swift */; };
 		CEDC33972B1077C000A5788E /* PostListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33962B1077C000A5788E /* PostListModel.swift */; };
+		CEDC33992B10C6AD00A5788E /* PostReadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33982B10C6AD00A5788E /* PostReadError.swift */; };
+		CEDC339B2B10C9B200A5788E /* TransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC339A2B10C9B200A5788E /* TransitionType.swift */; };
 		CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87542B01E30000AC375F /* AppDelegate.swift */; };
 		CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87562B01E30000AC375F /* SceneDelegate.swift */; };
 		CEEA87592B01E30000AC375F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87582B01E30000AC375F /* ViewController.swift */; };
@@ -126,6 +128,8 @@
 		CEDC338E2B103DE700A5788E /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
 		CEDC33922B106F1400A5788E /* PlainLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainLabel.swift; sourceTree = "<group>"; };
 		CEDC33962B1077C000A5788E /* PostListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListModel.swift; sourceTree = "<group>"; };
+		CEDC33982B10C6AD00A5788E /* PostReadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReadError.swift; sourceTree = "<group>"; };
+		CEDC339A2B10C9B200A5788E /* TransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionType.swift; sourceTree = "<group>"; };
 		CEEA87512B01E30000AC375F /* TimeLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA87542B01E30000AC375F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEA87562B01E30000AC375F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				CEBDFBFB2B0B97EA00D43BF9 /* PostWriteError.swift */,
+				CEDC33982B10C6AD00A5788E /* PostReadError.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 				CE290E912B04B273007DFCAE /* Constants */,
 				CE290E8E2B04A3A4007DFCAE /* Extension */,
 				CEDC337D2B0F47D300A5788E /* ImageLoadManager.swift */,
+				CEDC339A2B10C9B200A5788E /* TransitionType.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -605,6 +611,7 @@
 				CEDC33862B0FA7AF00A5788E /* UIImageView+Extension.swift in Sources */,
 				CEBDFC022B0BB52100D43BF9 /* ProductId.swift in Sources */,
 				CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */,
+				CEDC33992B10C6AD00A5788E /* PostReadError.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,
 				CE290E862B049A3B007DFCAE /* UserInfoResponse.swift in Sources */,
 				CEDC33972B1077C000A5788E /* PostListModel.swift in Sources */,
@@ -648,6 +655,7 @@
 				CEED52A92B04EE49007E12FA /* HomeViewController.swift in Sources */,
 				CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */,
 				CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */,
+				CEDC339B2B10C9B200A5788E /* TransitionType.swift in Sources */,
 				CEED52B72B050652007E12FA /* WithdrawError.swift in Sources */,
 				CEBDFBFE2B0B9EB700D43BF9 /* UIScrollView+Extension.swift in Sources */,
 				CE290E8D2B049ACF007DFCAE /* JoinView.swift in Sources */,

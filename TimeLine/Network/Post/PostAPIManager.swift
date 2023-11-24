@@ -19,7 +19,6 @@ final class PostAPIManager {
         return Single.create { single in
         
             self.provider.request(api) { result in
-                print(result)
                 switch result {
                 case .success(let response):
                     let statusCode = response.statusCode
@@ -30,7 +29,7 @@ final class PostAPIManager {
                             debugPrint("[SUCCESS POST REQUEST]")
                             single(.success(.success(result)))
                         } catch {
-                            print("[SUCCESS] DECODING ERROR", error.localizedDescription)
+                            debugPrint("[SUCCESS] DECODING ERROR", error.localizedDescription)
                         }
                         
                     } else {
@@ -39,7 +38,7 @@ final class PostAPIManager {
                             let error = NetworkError(statusCode: statusCode, description: result.message)
                             single(.success(.failure(error)))
                         } catch {
-                            print("DECODING ERROR", error.localizedDescription)
+                            debugPrint("DECODING ERROR", error.localizedDescription)
                         }
                         
                     }
