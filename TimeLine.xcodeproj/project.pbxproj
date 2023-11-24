@@ -41,6 +41,10 @@
 		CEDC33822B0F918700A5788E /* BoardReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33812B0F918700A5788E /* BoardReadView.swift */; };
 		CEDC33842B0F919000A5788E /* BoardReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */; };
 		CEDC33862B0FA7AF00A5788E /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33852B0FA7AF00A5788E /* UIImageView+Extension.swift */; };
+		CEDC338C2B103C4600A5788E /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC338B2B103C4600A5788E /* BoardViewModel.swift */; };
+		CEDC338F2B103DE700A5788E /* BoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC338E2B103DE700A5788E /* BoardTableViewCell.swift */; };
+		CEDC33932B106F1400A5788E /* PlainLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33922B106F1400A5788E /* PlainLabel.swift */; };
+		CEDC33972B1077C000A5788E /* PostListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33962B1077C000A5788E /* PostListModel.swift */; };
 		CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87542B01E30000AC375F /* AppDelegate.swift */; };
 		CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87562B01E30000AC375F /* SceneDelegate.swift */; };
 		CEEA87592B01E30000AC375F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87582B01E30000AC375F /* ViewController.swift */; };
@@ -118,6 +122,10 @@
 		CEDC33812B0F918700A5788E /* BoardReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadView.swift; sourceTree = "<group>"; };
 		CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadViewModel.swift; sourceTree = "<group>"; };
 		CEDC33852B0FA7AF00A5788E /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		CEDC338B2B103C4600A5788E /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
+		CEDC338E2B103DE700A5788E /* BoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableViewCell.swift; sourceTree = "<group>"; };
+		CEDC33922B106F1400A5788E /* PlainLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainLabel.swift; sourceTree = "<group>"; };
+		CEDC33962B1077C000A5788E /* PostListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListModel.swift; sourceTree = "<group>"; };
 		CEEA87512B01E30000AC375F /* TimeLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA87542B01E30000AC375F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEA87562B01E30000AC375F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -290,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				CED9614F2B0CEE8C0067C424 /* ReadResponse.swift */,
+				CEDC33962B1077C000A5788E /* PostListModel.swift */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -333,6 +342,17 @@
 				CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */,
 			);
 			path = Read;
+			sourceTree = "<group>";
+		};
+		CEDC338D2B103DB800A5788E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CEECBF8C2B0A3EA20031947E /* BoardView.swift */,
+				CEECBF8E2B0A3EA80031947E /* BoardViewController.swift */,
+				CEDC338B2B103C4600A5788E /* BoardViewModel.swift */,
+				CEDC338E2B103DE700A5788E /* BoardTableViewCell.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		CEEA87482B01E30000AC375F = {
@@ -433,6 +453,7 @@
 				CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */,
 				CEECBF262B08E7750031947E /* ValidationLabel.swift */,
 				CEECBF282B08FC120031947E /* ValidStackView.swift */,
+				CEDC33922B106F1400A5788E /* PlainLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -450,10 +471,9 @@
 		CEECBF8B2B0A3E9B0031947E /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				CEDC338D2B103DB800A5788E /* Main */,
 				CED961512B0CEF820067C424 /* Read */,
 				CEECBF922B0A42A70031947E /* Write */,
-				CEECBF8C2B0A3EA20031947E /* BoardView.swift */,
-				CEECBF8E2B0A3EA80031947E /* BoardViewController.swift */,
 			);
 			path = Board;
 			sourceTree = "<group>";
@@ -587,6 +607,7 @@
 				CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,
 				CE290E862B049A3B007DFCAE /* UserInfoResponse.swift in Sources */,
+				CEDC33972B1077C000A5788E /* PostListModel.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
 				CEED52AD2B04F0AC007E12FA /* UserDefaultsHelper.swift in Sources */,
 				CE048CC52B03913300FAC038 /* Join.swift in Sources */,
@@ -608,6 +629,7 @@
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */,
+				CEDC338C2B103C4600A5788E /* BoardViewModel.swift in Sources */,
 				CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */,
 				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
 				CEBDFBF42B0B31B900D43BF9 /* PostAPIManager.swift in Sources */,
@@ -629,9 +651,11 @@
 				CEED52B72B050652007E12FA /* WithdrawError.swift in Sources */,
 				CEBDFBFE2B0B9EB700D43BF9 /* UIScrollView+Extension.swift in Sources */,
 				CE290E8D2B049ACF007DFCAE /* JoinView.swift in Sources */,
+				CEDC33932B106F1400A5788E /* PlainLabel.swift in Sources */,
 				CEC2FBD42B021750002E3046 /* Login.swift in Sources */,
 				CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */,
 				CEED52B32B050354007E12FA /* JoinError.swift in Sources */,
+				CEDC338F2B103DE700A5788E /* BoardTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

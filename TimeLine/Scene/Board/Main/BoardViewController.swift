@@ -13,7 +13,13 @@ import Kingfisher
 final class BoardViewController: BaseViewController {
     
     private let mainView = BoardView()
+    private let viewModel = BoardViewModel()
+    
     private let disposeBag = DisposeBag()
+    
+    
+    
+    let refreshList = BehaviorSubject(value: true)
     
     override func loadView() {
         self.view = mainView
@@ -27,6 +33,10 @@ final class BoardViewController: BaseViewController {
     }
     
     private func bind() {
+        
+        let input = BoardViewModel.Input(refresh: refreshList)
+        let output = viewModel.transform(input: input)
+        
         mainView.writeButton.rx.tap
             .bind(with: self) { owner, _ in
                 let vc = BoardWriteViewController()
@@ -35,28 +45,14 @@ final class BoardViewController: BaseViewController {
                 
             }
             .disposed(by: disposeBag)
-        
-        
-        
-        PostAPIManager.shared.request(api: .read(productId: ProductId.OOTDBoard.rawValue, limit: 5), type: ReadResponse.self)
-            .subscribe(with: self) { owner, response in
-                switch response {
-                case .success(let result):
-                    
-                    let data = result.data[0]
-                    owner.mainView.titleLabel.text = data.title
-                    
-                    let imgURL = BaseURL.baseURL+"/"+data.image[0]
-                    let url = URL(string:imgURL)
-                    
-                    owner.mainView.imageView.setImage(with: imgURL)
-                    
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    
-                }
-            }
+       
+        output.items
+            .bind(to: mainView.tableView.rx.items(dataSource: mainView.dataSource))
             .disposed(by: disposeBag)
+        
+        
+        
+        
     }
     
     
