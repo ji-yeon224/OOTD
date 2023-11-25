@@ -21,6 +21,8 @@ final class LoginViewController: BaseViewController {
     
     var transition: TransitionType = .root
     
+    var completionHandler: (() -> Void)?
+    
     override func loadView() {
         self.view = mainView
         
@@ -69,7 +71,9 @@ final class LoginViewController: BaseViewController {
                         owner.view.window?.makeKeyAndVisible()
                     case .push:
                         owner.navigationController?.popViewController(animated: true)
+                        
                     case .presnt:
+                        owner.completionHandler?()
                         owner.dismiss(animated: true)
                     }
                     

@@ -18,7 +18,7 @@ final class BoardViewModel {
     let disposeBag = DisposeBag()
     
     struct Input {
-        let refresh: PublishSubject<Bool>
+        let refresh: BehaviorSubject<Bool>
         let page: ControlEvent<[IndexPath]>
     }
     
@@ -42,7 +42,6 @@ final class BoardViewModel {
             .subscribe(with: self) { owner, response in
                 switch response {
                 case .success(let result):
-                    //owner.data.removeAll()
                     print(result.nextCursor)
                     owner.nextCursor = result.nextCursor
                     owner.data.append(contentsOf: result.data)
@@ -82,8 +81,9 @@ final class BoardViewModel {
             .compactMap(\.last?.row)
             .withUnretained(self)
             .bind(with: self) { owner, row in
-                print(row)
+                //print(row)
                 if row.1 == owner.data.count - 1 && owner.nextCursor != "0" {
+                    print(row)
                     input.refresh.onNext(true)
                 }
             }

@@ -19,7 +19,7 @@ final class BoardViewController: BaseViewController {
     
     
     
-    let refreshList = PublishSubject<Bool>()
+    let refreshList = BehaviorSubject(value: true)
     
     override func loadView() {
         self.view = mainView
@@ -33,7 +33,8 @@ final class BoardViewController: BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshList.onNext(true)
+//        refreshList.onNext(true)
+//        viewModel.data.removeAll()
     }
     private func bind() {
         
@@ -69,6 +70,10 @@ final class BoardViewController: BaseViewController {
                         vc.transition = .presnt
                         vc.modalPresentationStyle = .fullScreen
                         vc.modalTransitionStyle = .crossDissolve
+                        vc.completionHandler = {
+                            owner.refreshList.onNext(true)
+                            owner.viewModel.data.removeAll()
+                        }
                         owner.present(vc, animated: true)
                     }
                 case .error:
