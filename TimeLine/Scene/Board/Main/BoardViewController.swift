@@ -37,8 +37,13 @@ final class BoardViewController: BaseViewController {
     }
     private func bind() {
         
-        let input = BoardViewModel.Input(refresh: refreshList)
+        let input = BoardViewModel.Input(
+            refresh: refreshList,
+            page: mainView.tableView.rx.prefetchRows
+        )
         let output = viewModel.transform(input: input)
+        
+        
         
         mainView.writeButton.rx.tap
             .bind(with: self) { owner, _ in

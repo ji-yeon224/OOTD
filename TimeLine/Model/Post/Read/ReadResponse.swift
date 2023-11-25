@@ -8,35 +8,24 @@
 import Foundation
 struct ReadResponse: Codable {
     let data: [Post]
-    let nextCursor: String
+    @NextCursorType var nextCursor: String
 
     enum CodingKeys: String, CodingKey {
         case data
         case nextCursor = "next_cursor"
     }
+    
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        self.data = try container.decode([Post].self, forKey: .data)
+//        if let nextCursor = try? container.decode(String.self, forKey: .nextCursor) {
+//            self.nextCursor = nextCursor
+//        } else {
+//            self.nextCursor = "0"
+//        }
+//        
+//        
+//    }
+    
 }
 
-// MARK: - Datum
-//struct Posts: Codable {
-//    let likes, image, hashTags, comments: [String]
-//    let id: String
-//    let creator: Creator
-//    let time, title, content, productID: String
-//
-//    enum CodingKeys: String, CodingKey {
-//        case likes, image, hashTags, comments
-//        case id = "_id"
-//        case creator, time, title, content
-//        case productID = "product_id"
-//    }
-//}
-//
-//// MARK: - Creator
-//struct Creator: Codable {
-//    let id, nick: String
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id = "_id"
-//        case nick
-//    }
-//}

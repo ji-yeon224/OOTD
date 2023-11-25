@@ -12,14 +12,14 @@ import RxCocoa
 final class BoardViewModel {
     
     var data: [Post] = []
-    
+    private var nextCursor: String? = nil
    
     
     let disposeBag = DisposeBag()
     
     struct Input {
         let refresh: PublishSubject<Bool>
-        
+        let page: ControlEvent<[IndexPath]>
     }
     
     struct Output {
@@ -37,12 +37,14 @@ final class BoardViewModel {
         
         input.refresh
             .flatMap {_ in
-                return PostAPIManager.shared.request(api: .read(productId: ProductId.OOTDBoard.rawValue, limit: 5), type: ReadResponse.self)
+                return PostAPIManager.shared.request(api: .read(productId: ProductId.OOTDBoard.rawValue, limit: 10, next: self.nextCursor), type: ReadResponse.self)
             }
             .subscribe(with: self) { owner, response in
                 switch response {
                 case .success(let result):
-                    owner.data.removeAll()
+                    //owner.data.removeAll()
+                    print(result.nextCursor)
+                    owner.nextCursor = result.nextCursor
                     owner.data.append(contentsOf: result.data)
                     items.accept([PostListModel(section: "", items: owner.data)])
                     
@@ -75,6 +77,19 @@ final class BoardViewModel {
                 }
             }
             .disposed(by: disposeBag)
+        
+        input.page
+            .compactMap(\.last?.row)
+            .withUnretained(self)
+            .bind(with: self) { owner, row in
+                print(row)
+                if row.1 == owner.data.count - 1 && owner.nextCursor != "0" {
+                    input.refresh.onNext(true)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        
         return Output(items: items, errorMsg: errorMsg, tokenRequest: tokenRequest)
     }
     

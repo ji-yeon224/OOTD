@@ -23,13 +23,15 @@ final class PostAPIManager {
                 case .success(let response):
                     let statusCode = response.statusCode
                     if statusCode == 200 {
-                       
+                        
                         do {
+                            
                             let result = try JSONDecoder().decode(T.self, from: response.data)
                             debugPrint("[SUCCESS POST REQUEST]")
                             single(.success(.success(result)))
                         } catch {
-                            debugPrint("[SUCCESS] DECODING ERROR", error.localizedDescription)
+                            debugPrint("[POST(request success)] DECODING ERROR", error)
+                            
                         }
                         
                     } else {
@@ -38,7 +40,7 @@ final class PostAPIManager {
                             let error = NetworkError(statusCode: statusCode, description: result.message)
                             single(.success(.failure(error)))
                         } catch {
-                            debugPrint("DECODING ERROR", error.localizedDescription)
+                            debugPrint("[POST] DECODING ERROR", error.localizedDescription)
                         }
                         
                     }

@@ -10,7 +10,7 @@ import Moya
 
 enum PostAPI {
     case write(data: PostWrite)
-    case read(productId: String, limit: Int)
+    case read(productId: String, limit: Int, next: String?)
 }
 
 extension PostAPI: TargetType {
@@ -40,8 +40,12 @@ extension PostAPI: TargetType {
         switch self {
         case .write(let data):
             return .uploadMultipart(convertToMultipart(data: data))
-        case .read(let id, let limit):
-            return .requestParameters(parameters: ["product_id" : id, "limit": limit], encoding: URLEncoding.queryString)
+        case .read(let id, let limit, let next):
+            var parameters: [String:Any] = ["product_id" : id, "limit": limit]
+            if let next = next {
+                parameters["next"] = next
+            }
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }
     
