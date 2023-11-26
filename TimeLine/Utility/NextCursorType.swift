@@ -12,7 +12,6 @@ struct NextCursorType {
     
     var wrappedValue: String
     
-    
 }
 
 extension NextCursorType: Codable {

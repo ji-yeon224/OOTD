@@ -15,17 +15,7 @@ struct ReadResponse: Codable {
         case nextCursor = "next_cursor"
     }
     
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.data = try container.decode([Post].self, forKey: .data)
-//        if let nextCursor = try? container.decode(String.self, forKey: .nextCursor) {
-//            self.nextCursor = nextCursor
-//        } else {
-//            self.nextCursor = "0"
-//        }
-//        
-//        
-//    }
+
     
 }
 
