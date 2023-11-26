@@ -8,14 +8,17 @@
 import UIKit
 import RxDataSources
 import RxSwift
+import IQKeyboardManagerSwift
 
 final class BoardWriteView: BaseView {
     
-    let scrollView = {
+    private let scrollView = {
         let view = UIScrollView()
         view.updateContentView()
         return view
     }()
+    
+    private let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 100))
     
     private let stackView = {
         let view = UIStackView()
@@ -51,6 +54,8 @@ final class BoardWriteView: BaseView {
         return view
     }()
     
+    
+    
     lazy var imagePickCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
         view.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
@@ -69,9 +74,14 @@ final class BoardWriteView: BaseView {
         stackView.addArrangedSubview(imagePickCollectionView)
         contentTextView.addSubview(placeHolderLabel)
         
+        addSubview(toolbar)
+        
+    
         titleTextField.becomeFirstResponder()
         configureDataSource()
+        configToolBar()
     }
+    
     
     override func setConstraints() {
         scrollView.snp.makeConstraints { make in
@@ -102,6 +112,31 @@ final class BoardWriteView: BaseView {
             make.height.equalTo(30)
         }
         
+        toolbar.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(keyboardLayoutGuide.snp.top)
+        }
+        
+    }
+    
+    private func configToolBar() {
+        let photobutton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: #selector(selectPhotoButton))
+        let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(image: Constants.Image.keyboardDown, style: .plain, target: self, action: #selector(doneButtonTapped))
+        
+        photobutton.tintColor = Constants.Color.basicText
+        doneButton.tintColor = Constants.Color.basicText
+        
+        toolbar.setItems([photobutton, flexibleSpaceButton, doneButton], animated: true)
+    }
+    
+    @objc private func selectPhotoButton() {
+        print("button")
+    }
+    
+    @objc private func doneButtonTapped() {
+        print("done")
+        endEditing(true)
     }
     
     func configureCollectionLayout() -> UICollectionViewLayout{
@@ -135,6 +170,6 @@ final class BoardWriteView: BaseView {
             return cell
         })
             
-        }
+    }
     
 }

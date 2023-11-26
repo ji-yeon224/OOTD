@@ -95,4 +95,6 @@ final class BoardWriteViewModel {
         return Output(postButtonEnabled: validation, tokenRequest: tokenRequest)
     }
     
+    
+    
 }

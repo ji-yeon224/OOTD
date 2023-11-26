@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
+import IQKeyboardManagerSwift
 
 final class BoardWriteViewController: BaseViewController {
     
@@ -29,8 +29,6 @@ final class BoardWriteViewController: BaseViewController {
         title = "글쓰기"
         bind()
         testData()
-
-
     }
     
     func testData() {
@@ -47,6 +45,7 @@ final class BoardWriteViewController: BaseViewController {
     override func configure() {
         super.configure()
         configNavBar()
+        
     }
     
     private func updateSnapShot() {
@@ -97,6 +96,9 @@ final class BoardWriteViewController: BaseViewController {
     @objc private func completeButtonTapped() {
         postButtonClicked.accept(true)
     }
+    
+    
+    
 }
 
 

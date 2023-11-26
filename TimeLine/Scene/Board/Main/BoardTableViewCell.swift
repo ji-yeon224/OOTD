@@ -19,7 +19,7 @@ final class BoardTableViewCell: UITableViewCell {
     
     let thumbnailImage = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         return view
     }()
     
