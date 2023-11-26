@@ -28,16 +28,20 @@ final class BoardWriteViewController: BaseViewController {
         super.viewDidLoad()
         title = "글쓰기"
         bind()
-        print("BoardWirte")
+        testData()
 
 
     }
     
     func testData() {
-        let image1 = UIImage(named: "img1")
-        let image2 = UIImage(named: "img2")
+        let image1 = UIImage(named: "img1")!
+        let image2 = UIImage(named: "img2")!
+        let image3 = UIImage(named: "img3")!
+        let image4 = UIImage(named: "img4")!
+        let image5 = UIImage(named: "img5")!
         
-       
+        viewModel.selectedImage.append(contentsOf: [image1, image2, image3, image4, image5])
+        updateSnapShot()
     }
     
     override func configure() {
@@ -45,6 +49,13 @@ final class BoardWriteViewController: BaseViewController {
         configNavBar()
     }
     
+    private func updateSnapShot() {
+        var snapShot = NSDiffableDataSourceSnapshot<Int, UIImage>()
+        snapShot.appendSections([0])
+        snapShot.appendItems(viewModel.selectedImage)
+        mainView.dataSource.apply(snapShot)
+    }
+
     private func bind() {
         
         let input = BoardWriteViewModel.Input(

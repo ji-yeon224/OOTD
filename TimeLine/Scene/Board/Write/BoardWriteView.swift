@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxDataSources
+import RxSwift
 
 final class BoardWriteView: BaseView {
     
@@ -18,7 +20,7 @@ final class BoardWriteView: BaseView {
     private let stackView = {
         let view = UIStackView()
         view.axis = .vertical
-        view.distribution = .fill
+        view.distribution = .fillProportionally
         view.alignment = .fill
         view.spacing = 10
         view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: .zero, right: 20)
@@ -49,6 +51,14 @@ final class BoardWriteView: BaseView {
         return view
     }()
     
+    lazy var imagePickCollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
+        view.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
+        return view
+    }()
+    
+    var dataSource: UICollectionViewDiffableDataSource<Int, UIImage>!
+    
     override func configure() {
         super.configure()
         
@@ -56,9 +66,11 @@ final class BoardWriteView: BaseView {
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(titleTextField)
         stackView.addArrangedSubview(contentTextView)
+        stackView.addArrangedSubview(imagePickCollectionView)
         contentTextView.addSubview(placeHolderLabel)
         
         titleTextField.becomeFirstResponder()
+        configureDataSource()
     }
     
     override func setConstraints() {
@@ -75,16 +87,54 @@ final class BoardWriteView: BaseView {
         }
         contentTextView.snp.makeConstraints { make in
             make.width.equalTo(scrollView.snp.width)
+        }
+        
+        imagePickCollectionView.snp.makeConstraints { make in
+            make.width.equalTo(scrollView.snp.width)
             make.bottom.equalTo(scrollView.snp.bottom)
+            make.height.equalTo(130)
         }
         
         placeHolderLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(contentTextView)
+            make.top.equalTo(contentTextView).offset(10)
             make.leading.equalTo(contentTextView).offset(21)
             make.width.equalTo(contentTextView)
             make.height.equalTo(30)
         }
         
     }
+    
+    func configureCollectionLayout() -> UICollectionViewLayout{
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1.0))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 3)
+        group.interItemSpacing = .fixed(10) // 아이템 옆 간격
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        section.orthogonalScrollingBehavior = .continuous
+        //section.interGroupSpacing = 10 // 줄 간격
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+        
+    }
+    
+    private func configureDataSource() {
+            
+        let cellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, UIImage> { cell, indexPath, itemIdentifier in
+            cell.imageView.image = itemIdentifier
+            
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource(collectionView: imagePickCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+            return cell
+        })
+            
+        }
     
 }

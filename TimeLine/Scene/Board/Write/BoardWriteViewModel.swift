@@ -13,6 +13,7 @@ import UIKit
 final class BoardWriteViewModel {
     
     private let disposeBag = DisposeBag()
+    var selectedImage: [UIImage] = []
     
     struct Input {
         let postButton: PublishRelay<Bool>

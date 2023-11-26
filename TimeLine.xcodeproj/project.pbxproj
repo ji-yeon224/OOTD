@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE048CC52B03913300FAC038 /* Join.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE048CC42B03913300FAC038 /* Join.swift */; };
+		CE28C85B2B130D0A00820F1A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE28C85A2B130D0A00820F1A /* ImageCollectionViewCell.swift */; };
 		CE290E862B049A3B007DFCAE /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E852B049A3B007DFCAE /* UserInfoResponse.swift */; };
 		CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E882B049ABD007DFCAE /* JoinViewController.swift */; };
 		CE290E8B2B049AC6007DFCAE /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E8A2B049AC6007DFCAE /* JoinViewModel.swift */; };
@@ -94,6 +95,7 @@
 
 /* Begin PBXFileReference section */
 		CE048CC42B03913300FAC038 /* Join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Join.swift; sourceTree = "<group>"; };
+		CE28C85A2B130D0A00820F1A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE290E852B049A3B007DFCAE /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		CE290E882B049ABD007DFCAE /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		CE290E8A2B049AC6007DFCAE /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				CEECBF932B0A42E00031947E /* BoardWriteView.swift */,
 				CEECBF952B0A42EA0031947E /* BoardWriteViewController.swift */,
 				CEBDFBFF2B0BAA3500D43BF9 /* BoardWriteViewModel.swift */,
+				CE28C85A2B130D0A00820F1A /* ImageCollectionViewCell.swift */,
 			);
 			path = Write;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEBDFBF02B0B2CA800D43BF9 /* PostAPI.swift in Sources */,
+				CE28C85B2B130D0A00820F1A /* ImageCollectionViewCell.swift in Sources */,
 				CEDC33802B0F917C00A5788E /* BoardReadViewController.swift in Sources */,
 				CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */,
 				CEECBF172B0601D70031947E /* CommonError.swift in Sources */,

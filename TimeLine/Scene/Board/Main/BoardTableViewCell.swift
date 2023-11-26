@@ -46,6 +46,14 @@ final class BoardTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = nil
+        contentLabel.text = nil
+        createrLabel.text = nil
+        thumbnailImage.image = nil
+    }
+    
     private func configure() {
         contentView.addSubview(textStackView)
         contentView.addSubview(thumbnailImage)

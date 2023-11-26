@@ -44,6 +44,13 @@ final class BoardViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
+        Observable.zip(mainView.tableView.rx.itemSelected, mainView.tableView.rx.modelSelected(Post.self)) { IndexPath, model in
+            return model
+        }
+        .bind(with: self) { owner, value in
+            print(value)
+        }
+        .disposed(by: disposeBag)
         
         
         mainView.writeButton.rx.tap
