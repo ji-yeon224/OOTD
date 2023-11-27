@@ -12,7 +12,8 @@ import RxCocoa
 final class BoardWriteViewModel {
     
     private let disposeBag = DisposeBag()
-    let imageList = PublishRelay<[SelectedImage]>()
+    var imageList = PublishRelay<[SelectedImage]>()
+    var selectImage: [SelectedImage] = []
     
     struct Input {
         let postButton: PublishRelay<Bool>
@@ -52,8 +53,11 @@ final class BoardWriteViewModel {
        
         
         postEvent
-            .flatMap { _ in
-                PostAPIManager.shared.request(api: .write(data: PostWrite(title: titleStr, content: contentStr, file: [], product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
+            .map { _ in
+                self.imageToData()
+            }
+            .flatMap { value in
+                PostAPIManager.shared.request(api: .write(data: PostWrite(title: titleStr, content: contentStr, file: value, product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
             }
             .bind(with: self, onNext: { owner, response in
                 switch response {
@@ -94,10 +98,24 @@ final class BoardWriteViewModel {
         imageList
             .bind(with: self) { owner, images in
                 imgItems.accept([SelectImageModel(section: "", items: images)])
+                owner.selectImage = images
             }
             .disposed(by: disposeBag)
         
         return Output(postButtonEnabled: validation, tokenRequest: tokenRequest, items: imgItems)
+    }
+    
+    private func imageToData() -> [Data] {
+        var imgData: [Data] = []
+       
+        selectImage.forEach {
+            guard let data = $0.image.jpegData(compressionQuality: 0.5) else { return }
+            imgData.append(data)
+        }
+        
+        return imgData
+        
+        
     }
     
     
