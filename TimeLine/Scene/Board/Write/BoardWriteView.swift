@@ -62,11 +62,8 @@ final class BoardWriteView: BaseView {
     lazy var picker: PHPickerViewController = PHPickerViewController(configuration: configPhPicker())
     var selectedAssetIdentifiers = [String]()
     
-    var dataSource: UICollectionViewDiffableDataSource<Int, UIImage>!
     var delegate: PhPickerProtocol?
     
-    var selectedImg: [UIImage] = []
-    var selections = [String : PHPickerResult]()
     
     override func configure() {
         super.configure()
@@ -82,9 +79,7 @@ final class BoardWriteView: BaseView {
         
     
         titleTextField.becomeFirstResponder()
-        configureDataSource()
         picker.delegate = self
-        //configPhPicker()
     }
     
     
@@ -155,20 +150,6 @@ final class BoardWriteView: BaseView {
         
         return layout
         
-    }
-    
-    private func configureDataSource() {
-            
-        let cellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, UIImage> { cell, indexPath, itemIdentifier in
-            cell.imageView.image = itemIdentifier
-            self.imagePickCollectionView.layoutIfNeeded()
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource(collectionView: imagePickCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-            return cell
-        })
-            
     }
     
 }

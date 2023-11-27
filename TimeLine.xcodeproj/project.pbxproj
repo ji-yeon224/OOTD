@@ -21,6 +21,8 @@
 		CE290E992B04B7C6007DFCAE /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E982B04B7C6007DFCAE /* ResponseMessage.swift */; };
 		CE290E9C2B04BF51007DFCAE /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E9B2B04BF51007DFCAE /* LoginError.swift */; };
 		CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A15152B05B13E009B913F /* HomeViewModel.swift */; };
+		CEA903042B146F9B00F09FB8 /* SelectImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA903032B146F9B00F09FB8 /* SelectImageModel.swift */; };
+		CEA903062B146FE800F09FB8 /* SelectedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA903052B146FE800F09FB8 /* SelectedImage.swift */; };
 		CEBDFBF02B0B2CA800D43BF9 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBEF2B0B2CA800D43BF9 /* PostAPI.swift */; };
 		CEBDFBF42B0B31B900D43BF9 /* PostAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBF32B0B31B900D43BF9 /* PostAPIManager.swift */; };
 		CEBDFBF62B0B31CA00D43BF9 /* PostWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBF52B0B31CA00D43BF9 /* PostWrite.swift */; };
@@ -109,6 +111,8 @@
 		CE290E982B04B7C6007DFCAE /* ResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMessage.swift; sourceTree = "<group>"; };
 		CE290E9B2B04BF51007DFCAE /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		CE3A15152B05B13E009B913F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CEA903032B146F9B00F09FB8 /* SelectImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageModel.swift; sourceTree = "<group>"; };
+		CEA903052B146FE800F09FB8 /* SelectedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedImage.swift; sourceTree = "<group>"; };
 		CEBDFBEF2B0B2CA800D43BF9 /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
 		CEBDFBF32B0B31B900D43BF9 /* PostAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPIManager.swift; sourceTree = "<group>"; };
 		CEBDFBF52B0B31CA00D43BF9 /* PostWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostWrite.swift; sourceTree = "<group>"; };
@@ -269,6 +273,15 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		CEA903022B146F8200F09FB8 /* RxDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				CEA903032B146F9B00F09FB8 /* SelectImageModel.swift */,
+				CEA903052B146FE800F09FB8 /* SelectedImage.swift */,
+			);
+			path = RxDataSource;
+			sourceTree = "<group>";
+		};
 		CEBDFBEE2B0B2CA000D43BF9 /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,6 +330,7 @@
 		CEC2FBD22B02174A002E3046 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEA903022B146F8200F09FB8 /* RxDataSource */,
 				CEBDFBF12B0B319C00D43BF9 /* Post */,
 				CE048CC12B0390FD00FAC038 /* Authentication */,
 				CE290E982B04B7C6007DFCAE /* ResponseMessage.swift */,
@@ -615,6 +629,7 @@
 				CEEA87912B01F3D900AC375F /* LoginViewModel.swift in Sources */,
 				CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */,
 				CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */,
+				CEA903062B146FE800F09FB8 /* SelectedImage.swift in Sources */,
 				CEED52AF2B04FB5F007E12FA /* ContentError.swift in Sources */,
 				CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */,
 				CEDC339D2B11BC3400A5788E /* NextCursorType.swift in Sources */,
@@ -645,6 +660,7 @@
 				CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */,
 				CEDC33842B0F919000A5788E /* BoardReadViewModel.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
+				CEA903042B146F9B00F09FB8 /* SelectImageModel.swift in Sources */,
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */,

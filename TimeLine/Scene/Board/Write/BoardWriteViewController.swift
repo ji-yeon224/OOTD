@@ -8,8 +8,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import IQKeyboardManagerSwift
 import PhotosUI
+import RxDataSources
 
 final class BoardWriteViewController: BaseViewController {
     
@@ -19,11 +19,9 @@ final class BoardWriteViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     private let postButtonClicked = PublishRelay<Bool>()
-    private let selectedImage = PublishRelay<[UIImage]>()
+    private let selectedImage = PublishRelay<[SelectImageModel]>()
     
-    private var pickedImageDict: [String: PHPickerResult] = [:]
-    private var identififer: [String] = []
-    //var selectedAssetIdentifiers = [String]()
+   
     
     
     override func loadView() {
@@ -35,19 +33,10 @@ final class BoardWriteViewController: BaseViewController {
         super.viewDidLoad()
         title = "글쓰기"
         bind()
-//        testData()
+        
     }
     
-//    func testData() {
-//        let image1 = UIImage(named: "img1")!
-//        let image2 = UIImage(named: "img2")!
-//        let image3 = UIImage(named: "img3")!
-//        let image4 = UIImage(named: "img4")!
-//        let image5 = UIImage(named: "img5")!
-//        
-//        //viewModel.selectedImage.append(contentsOf: [image1, image2, image3, image4, image5])
-//        
-//    }
+
     
     override func configure() {
         super.configure()
@@ -55,15 +44,17 @@ final class BoardWriteViewController: BaseViewController {
         configToolBar()
         mainView.delegate = self
     }
-    
-    private func updateSnapShot(_ imgList: [UIImage]) {
-        var snapShot = NSDiffableDataSourceSnapshot<Int, UIImage>()
-        snapShot.appendSections([0])
-        snapShot.appendItems(imgList)
-        mainView.dataSource.apply(snapShot)
-    }
+
 
     private func bind() {
+        
+        let rxDataSource = RxCollectionViewSectionedReloadDataSource<SelectImageModel> { dataSource, collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
+            
+            cell.imageView.image = item.image
+            
+            return cell
+        }
         
         let input = BoardWriteViewModel.Input(
             postButton: postButtonClicked,
@@ -80,7 +71,9 @@ final class BoardWriteViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        
+        selectedImage
+            .bind(to: mainView.imagePickCollectionView.rx.items(dataSource: rxDataSource))
+            .disposed(by: disposeBag)
         
         
         mainView.contentTextView.rx.text.orEmpty
@@ -95,12 +88,6 @@ final class BoardWriteViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         
-        selectedImage
-            .debug()
-            .bind(with: self) { owner, images in
-                owner.updateSnapShot(images)
-            }
-            .disposed(by: disposeBag)
     }
     
     
@@ -149,7 +136,7 @@ extension BoardWriteViewController: PhPickerProtocol {
         }
         
         let dispatchGroup = DispatchGroup()
-        var imageList: [UIImage] = []
+        var imageList: [SelectedImage] = []
         results.forEach {
             dispatchGroup.enter()
             let item = $0.itemProvider
@@ -159,7 +146,7 @@ extension BoardWriteViewController: PhPickerProtocol {
                 item.loadObject(ofClass: UIImage.self) { (image, error) in
                     DispatchQueue.main.async {
                         guard let img = image as? UIImage else { return }
-                        imageList.append(img)
+                        imageList.append(SelectedImage(image: img))
                         dispatchGroup.leave()
                         
                     }
@@ -173,7 +160,8 @@ extension BoardWriteViewController: PhPickerProtocol {
         dispatchGroup.notify(queue: DispatchQueue.main) { [weak self] in
             guard let self = self else { return }
             
-            self.selectedImage.accept(imageList)
+            
+            self.selectedImage.accept([SelectImageModel(section: "", items: imageList)])
         }
         
     }
