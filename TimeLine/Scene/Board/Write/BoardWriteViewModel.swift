@@ -12,7 +12,7 @@ import RxCocoa
 final class BoardWriteViewModel {
     
     private let disposeBag = DisposeBag()
-    
+    let imageList = PublishRelay<[SelectedImage]>()
     
     struct Input {
         let postButton: PublishRelay<Bool>
@@ -23,6 +23,7 @@ final class BoardWriteViewModel {
     struct Output {
         let postButtonEnabled: Observable<Bool>
         let tokenRequest: PublishSubject<RefreshResult>
+        let items: PublishRelay<[SelectImageModel]>
     }
     
     
@@ -34,6 +35,7 @@ final class BoardWriteViewModel {
         
         let postEvent = PublishRelay<Bool>()
         let tokenRequest = PublishSubject<RefreshResult>()
+        let imgItems = PublishRelay<[SelectImageModel]>()
         
         let validation = Observable.combineLatest(input.titleText, input.contentText) { title, content in
             titleStr = title.trimmingCharacters(in: .whitespaces)
@@ -89,7 +91,13 @@ final class BoardWriteViewModel {
             })
             .disposed(by: disposeBag)
         
-        return Output(postButtonEnabled: validation, tokenRequest: tokenRequest)
+        imageList
+            .bind(with: self) { owner, images in
+                imgItems.accept([SelectImageModel(section: "", items: images)])
+            }
+            .disposed(by: disposeBag)
+        
+        return Output(postButtonEnabled: validation, tokenRequest: tokenRequest, items: imgItems)
     }
     
     

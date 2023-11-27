@@ -19,10 +19,9 @@ final class BoardWriteViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     private let postButtonClicked = PublishRelay<Bool>()
-    private let selectedImage = PublishRelay<[SelectImageModel]>()
     
-   
-    
+//    private var pickedImageDict = [String: PHPickerResult]()
+//    private var imgIdentifier = [String]()
     
     override func loadView() {
         self.view = mainView
@@ -53,6 +52,7 @@ final class BoardWriteViewController: BaseViewController {
             
             cell.imageView.image = item.image
             
+            
             return cell
         }
         
@@ -71,7 +71,7 @@ final class BoardWriteViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        selectedImage
+        output.items
             .bind(to: mainView.imagePickCollectionView.rx.items(dataSource: rxDataSource))
             .disposed(by: disposeBag)
         
@@ -112,14 +112,14 @@ final class BoardWriteViewController: BaseViewController {
         mainView.toolbar.setItems([photobutton, flexibleSpaceButton, doneButton], animated: true)
     }
     @objc private func selectPhotoButton() {
-        print("button")
+       
         view.endEditing(true)
         
         present(mainView.picker, animated: true)
     }
     
     @objc private func doneButtonTapped() {
-        print("done")
+       
         view.endEditing(true)
     }
     
@@ -161,7 +161,7 @@ extension BoardWriteViewController: PhPickerProtocol {
             guard let self = self else { return }
             
             
-            self.selectedImage.accept([SelectImageModel(section: "", items: imageList)])
+            self.viewModel.imageList.accept(imageList)
         }
         
     }
