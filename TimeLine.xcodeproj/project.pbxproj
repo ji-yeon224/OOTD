@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE048CC52B03913300FAC038 /* Join.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE048CC42B03913300FAC038 /* Join.swift */; };
 		CE28C85B2B130D0A00820F1A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE28C85A2B130D0A00820F1A /* ImageCollectionViewCell.swift */; };
+		CE28C85D2B1381CD00820F1A /* PhPickerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE28C85C2B1381CD00820F1A /* PhPickerProtocol.swift */; };
 		CE290E862B049A3B007DFCAE /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E852B049A3B007DFCAE /* UserInfoResponse.swift */; };
 		CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E882B049ABD007DFCAE /* JoinViewController.swift */; };
 		CE290E8B2B049AC6007DFCAE /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E8A2B049AC6007DFCAE /* JoinViewModel.swift */; };
@@ -96,6 +97,7 @@
 /* Begin PBXFileReference section */
 		CE048CC42B03913300FAC038 /* Join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Join.swift; sourceTree = "<group>"; };
 		CE28C85A2B130D0A00820F1A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE28C85C2B1381CD00820F1A /* PhPickerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhPickerProtocol.swift; sourceTree = "<group>"; };
 		CE290E852B049A3B007DFCAE /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
 		CE290E882B049ABD007DFCAE /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		CE290E8A2B049AC6007DFCAE /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				CEDC337D2B0F47D300A5788E /* ImageLoadManager.swift */,
 				CEDC339A2B10C9B200A5788E /* TransitionType.swift */,
 				CEDC339C2B11BC3400A5788E /* NextCursorType.swift */,
+				CE28C85C2B1381CD00820F1A /* PhPickerProtocol.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				CEDC33992B10C6AD00A5788E /* PostReadError.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,
 				CE290E862B049A3B007DFCAE /* UserInfoResponse.swift in Sources */,
+				CE28C85D2B1381CD00820F1A /* PhPickerProtocol.swift in Sources */,
 				CEDC33972B1077C000A5788E /* PostListModel.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
 				CEED52AD2B04F0AC007E12FA /* UserDefaultsHelper.swift in Sources */,

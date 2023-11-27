@@ -8,12 +8,11 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import UIKit
 
 final class BoardWriteViewModel {
     
     private let disposeBag = DisposeBag()
-    var selectedImage: [UIImage] = []
+    
     
     struct Input {
         let postButton: PublishRelay<Bool>
@@ -32,8 +31,6 @@ final class BoardWriteViewModel {
         var titleStr = ""
         var contentStr = ""
         
-        let img1 = UIImage(named: "img1")?.jpegData(compressionQuality: 0.5)
-        let img2 = UIImage(named: "img2")?.jpegData(compressionQuality: 1)
         
         let postEvent = PublishRelay<Bool>()
         let tokenRequest = PublishSubject<RefreshResult>()
@@ -54,7 +51,7 @@ final class BoardWriteViewModel {
         
         postEvent
             .flatMap { _ in
-                PostAPIManager.shared.request(api: .write(data: PostWrite(title: titleStr, content: contentStr, file: [img1, img2], product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
+                PostAPIManager.shared.request(api: .write(data: PostWrite(title: titleStr, content: contentStr, file: [], product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
             }
             .bind(with: self, onNext: { owner, response in
                 switch response {

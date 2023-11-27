@@ -7,18 +7,17 @@
 
 import UIKit
 import RxDataSources
-import RxSwift
-import IQKeyboardManagerSwift
+import PhotosUI
 
 final class BoardWriteView: BaseView {
     
-    private let scrollView = {
+    let scrollView = {
         let view = UIScrollView()
         view.updateContentView()
         return view
     }()
     
-    private let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 100))
+    let toolbar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 100))
     
     private let stackView = {
         let view = UIStackView()
@@ -54,15 +53,20 @@ final class BoardWriteView: BaseView {
         return view
     }()
     
-    
-    
     lazy var imagePickCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
         view.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
         return view
     }()
     
+    lazy var picker: PHPickerViewController = PHPickerViewController(configuration: configPhPicker())
+    var selectedAssetIdentifiers = [String]()
+    
     var dataSource: UICollectionViewDiffableDataSource<Int, UIImage>!
+    var delegate: PhPickerProtocol?
+    
+    var selectedImg: [UIImage] = []
+    var selections = [String : PHPickerResult]()
     
     override func configure() {
         super.configure()
@@ -79,7 +83,8 @@ final class BoardWriteView: BaseView {
     
         titleTextField.becomeFirstResponder()
         configureDataSource()
-        configToolBar()
+        picker.delegate = self
+        //configPhPicker()
     }
     
     
@@ -119,25 +124,19 @@ final class BoardWriteView: BaseView {
         
     }
     
-    private func configToolBar() {
-        let photobutton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: #selector(selectPhotoButton))
-        let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(image: Constants.Image.keyboardDown, style: .plain, target: self, action: #selector(doneButtonTapped))
+    func configPhPicker() -> PHPickerConfiguration {
+        var photoConfiguration = PHPickerConfiguration()
+        photoConfiguration.selectionLimit = 5
+        photoConfiguration.filter = .images
+        photoConfiguration.selection = .ordered
+        photoConfiguration.preselectedAssetIdentifiers = selectedAssetIdentifiers
         
-        photobutton.tintColor = Constants.Color.basicText
-        doneButton.tintColor = Constants.Color.basicText
+        return photoConfiguration
         
-        toolbar.setItems([photobutton, flexibleSpaceButton, doneButton], animated: true)
     }
     
-    @objc private func selectPhotoButton() {
-        print("button")
-    }
     
-    @objc private func doneButtonTapped() {
-        print("done")
-        endEditing(true)
-    }
+
     
     func configureCollectionLayout() -> UICollectionViewLayout{
         
@@ -162,7 +161,7 @@ final class BoardWriteView: BaseView {
             
         let cellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, UIImage> { cell, indexPath, itemIdentifier in
             cell.imageView.image = itemIdentifier
-            
+            self.imagePickCollectionView.layoutIfNeeded()
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: imagePickCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -170,6 +169,15 @@ final class BoardWriteView: BaseView {
             return cell
         })
             
+    }
+    
+}
+
+extension BoardWriteView: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        delegate?.didFinishPicking(picker: picker, results: results)
+
     }
     
 }
