@@ -38,9 +38,11 @@ final class BoardView: BaseView {
         cell.createrLabel.text = item.creator.nick
         if item.image.isEmpty {
             cell.thumbnailImage.isHidden = true
+            
         } else {
             let imgURL = BaseURL.baseURL+"/"+item.image[0]
             cell.thumbnailImage.setImage(with: imgURL)
+            
         }
         
         return cell

@@ -42,7 +42,7 @@ final class BoardViewModel {
             .subscribe(with: self) { owner, response in
                 switch response {
                 case .success(let result):
-                    print(result.nextCursor)
+                    
                     owner.nextCursor = result.nextCursor
                     owner.data.append(contentsOf: result.data)
                     items.accept([PostListModel(section: "", items: owner.data)])
@@ -83,7 +83,7 @@ final class BoardViewModel {
             .bind(with: self) { owner, row in
                 //print(row)
                 if row.1 == owner.data.count - 1 && owner.nextCursor != "0" {
-                    print(row)
+                    
                     input.refresh.onNext(true)
                 }
             }

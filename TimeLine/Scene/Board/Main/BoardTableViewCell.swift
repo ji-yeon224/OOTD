@@ -51,6 +51,7 @@ final class BoardTableViewCell: UITableViewCell {
         titleLabel.text = nil
         contentLabel.text = nil
         createrLabel.text = nil
+        thumbnailImage.isHidden = false
         thumbnailImage.image = nil
     }
     
