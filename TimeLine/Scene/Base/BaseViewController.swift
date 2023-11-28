@@ -27,13 +27,15 @@ class BaseViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    func showCenterToast(message: String) {
+    func showToastMessage(message: String, position: ToastPosition) {
             
         var style = ToastStyle()
         style.messageFont = .systemFont(ofSize: 13)
         DispatchQueue.main.async {
-            self.view.makeToast(message, duration: 2.0, position: .center, style: style)
+            self.view.makeToast(message, duration: 2.0, position: position, style: style)
         }
     }
+    
+    
     
 }

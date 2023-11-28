@@ -64,6 +64,7 @@ final class BoardViewController: BaseViewController {
         
         output.errorMsg
             .bind(with: self) { owner, value in
+                owner.showToastMessage(message: value, position: .top)
                 print("BOARD ERROR - ", value)
             }
             .disposed(by: disposeBag)

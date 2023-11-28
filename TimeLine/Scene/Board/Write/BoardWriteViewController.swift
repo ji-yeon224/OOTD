@@ -89,6 +89,7 @@ final class BoardWriteViewController: BaseViewController {
         
         output.errorMsg
             .bind(with: self) { owner, value in
+                owner.showToastMessage(message: value, position: .top)
                 print("[BOARD WRITE] ", value)
             }
             .disposed(by: disposeBag)
@@ -117,7 +118,7 @@ final class BoardWriteViewController: BaseViewController {
                     owner.view.endEditing(true)
                     owner.present(owner.mainView.configPHPicker(limit: owner.viewModel.selectCount), animated: true)
                 } else {
-                    owner.showCenterToast(message: "이미지는 최대 3장까지 선택할 수 있습니다.")
+                    owner.showToastMessage(message: "이미지는 최대 3장까지 선택할 수 있습니다.", position: .center)
                 }
             }
             .disposed(by: disposeBag)
