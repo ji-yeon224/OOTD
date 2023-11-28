@@ -7,11 +7,13 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 final class ImageCollectionViewCell: UICollectionViewCell {
     static let identifier = "ImageCollectionViewCell"
     
     private let uiview = UIView()
+    var disposeBag = DisposeBag()
     
     let imageView = {
         let view = UIImageView()
@@ -37,6 +39,13 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        
+        disposeBag = DisposeBag()
     }
     
     private func configure() {

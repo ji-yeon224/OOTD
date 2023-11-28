@@ -12,13 +12,14 @@ import RxCocoa
 final class BoardWriteViewModel {
     
     private let disposeBag = DisposeBag()
-    var imageList = PublishRelay<[SelectedImage]>()
-    var selectImage: [SelectedImage] = []
+    private var imageModel = SelectImageModel(section: "", items: [])
+    private lazy var imageSectionModel: PublishRelay<[SelectImageModel]> = PublishRelay()
     
     struct Input {
         let postButton: PublishRelay<Bool>
         let titleText: ControlProperty<String>
         let contentText: ControlProperty<String>
+        let imageDelete: PublishRelay<Int>
     }
     
     struct Output {
@@ -36,7 +37,7 @@ final class BoardWriteViewModel {
         
         let postEvent = PublishRelay<Bool>()
         let tokenRequest = PublishSubject<RefreshResult>()
-        let imgItems = PublishRelay<[SelectImageModel]>()
+        
         
         let validation = Observable.combineLatest(input.titleText, input.contentText) { title, content in
             titleStr = title.trimmingCharacters(in: .whitespaces)
@@ -94,21 +95,22 @@ final class BoardWriteViewModel {
                 }
             })
             .disposed(by: disposeBag)
-        
-        imageList
-            .bind(with: self) { owner, images in
-                imgItems.accept([SelectImageModel(section: "", items: images)])
-                owner.selectImage = images
+       
+        input.imageDelete
+            .bind(with: self) { owner, index in
+                owner.imageModel.items.remove(at: index)
+                owner.imageSectionModel.accept([owner.imageModel])
+                
             }
             .disposed(by: disposeBag)
         
-        return Output(postButtonEnabled: validation, tokenRequest: tokenRequest, items: imgItems)
+        return Output(postButtonEnabled: validation, tokenRequest: tokenRequest, items: imageSectionModel)
     }
     
     private func imageToData() -> [Data] {
         var imgData: [Data] = []
-       
-        selectImage.forEach {
+        
+        imageModel.items.forEach {
             guard let data = $0.image.jpegData(compressionQuality: 0.5) else { return }
             imgData.append(data)
         }
@@ -116,6 +118,11 @@ final class BoardWriteViewModel {
         return imgData
         
         
+    }
+    
+    func setImageItems(_ items: [SelectedImage]) {
+        imageModel.items.append(contentsOf: items)
+        imageSectionModel.accept([imageModel])
     }
     
     

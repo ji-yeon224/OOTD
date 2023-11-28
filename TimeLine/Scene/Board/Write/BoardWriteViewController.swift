@@ -19,7 +19,7 @@ final class BoardWriteViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     private let postButtonClicked = PublishRelay<Bool>()
-    private var imageList: [SelectedImage] = []
+
     private let maxImageCount = 3
     
     private var pickedImageDict = [String: PHPickerResult]()
@@ -49,11 +49,17 @@ final class BoardWriteViewController: BaseViewController {
 
     private func bind() {
         
+        let imageDelete = PublishRelay<Int>()
+        
         let rxDataSource = RxCollectionViewSectionedReloadDataSource<SelectImageModel> { dataSource, collectionView, indexPath, item in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
             
             cell.imageView.image = item.image
-            
+            cell.cancelButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    imageDelete.accept(indexPath.item)
+                }
+                .disposed(by: cell.disposeBag)
             
             return cell
         }
@@ -61,8 +67,8 @@ final class BoardWriteViewController: BaseViewController {
         let input = BoardWriteViewModel.Input(
             postButton: postButtonClicked,
             titleText: mainView.titleTextField.rx.text.orEmpty,
-            contentText: mainView.contentTextView.rx.text.orEmpty
-            
+            contentText: mainView.contentTextView.rx.text.orEmpty,
+            imageDelete: imageDelete
         )
         
         let output = viewModel.trasform(input: input)
@@ -138,7 +144,7 @@ extension BoardWriteViewController: PhPickerProtocol {
         if results.isEmpty {
             return
         }
-        
+        var imageList: [SelectedImage] = []
         let dispatchGroup = DispatchGroup()
         
         results.forEach {
@@ -150,7 +156,7 @@ extension BoardWriteViewController: PhPickerProtocol {
                 item.loadObject(ofClass: UIImage.self) { (image, error) in
                     DispatchQueue.main.async {
                         guard let img = image as? UIImage else { return }
-                        self.imageList.append(SelectedImage(image: img))
+                        imageList.append(SelectedImage(image: img))
                         dispatchGroup.leave()
                         
                     }
@@ -163,9 +169,7 @@ extension BoardWriteViewController: PhPickerProtocol {
         }
         dispatchGroup.notify(queue: DispatchQueue.main) { [weak self] in
             guard let self = self else { return }
-            
-            
-            self.viewModel.imageList.accept(imageList)
+            self.viewModel.setImageItems(imageList)
         }
         
     }
