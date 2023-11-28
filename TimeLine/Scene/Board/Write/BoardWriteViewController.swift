@@ -20,10 +20,14 @@ final class BoardWriteViewController: BaseViewController {
     
     private let postButtonClicked = PublishRelay<Bool>()
 
-    private let maxImageCount = 3
+    private var ableSelectImage = 3
     
     private var pickedImageDict = [String: PHPickerResult]()
     private var imgIdentifier = [String]()
+    
+    private lazy var photoButton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: nil)
+    
+    private lazy var doneButton = UIBarButtonItem(image: Constants.Image.keyboardDown, style: .plain, target: self, action: nil)
     
     override func loadView() {
         self.view = mainView
@@ -89,6 +93,13 @@ final class BoardWriteViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.enableAddImage
+            .bind(with: self) { owner, value in
+//                owner.photoButton.isEnabled = value
+                owner.photoButton.tintColor = value ? Constants.Color.basicText : Constants.Color.disableTint
+            }
+            .disposed(by: disposeBag)
+        
         mainView.contentTextView.rx.text.orEmpty
             .bind(with: self) { owner, value in
                 if value.count == 0 {
@@ -100,8 +111,25 @@ final class BoardWriteViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        photoButton.rx.tap
+            .bind(with: self) { owner, _ in
+                if output.enableAddImage.value {
+                    owner.view.endEditing(true)
+                    owner.present(owner.mainView.configPHPicker(limit: owner.viewModel.selectCount), animated: true)
+                } else {
+                    owner.showCenterToast(message: "이미지는 최대 3장까지 선택할 수 있습니다.")
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        doneButton.rx.tap
+            .bind(with: self, onNext: { owner, _ in
+                owner.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
         
     }
+    
     
     
     private func configNavBar() {
@@ -115,27 +143,15 @@ final class BoardWriteViewController: BaseViewController {
     }
     
     private func configToolBar() {
-        let photobutton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: #selector(selectPhotoButton))
-        let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(image: Constants.Image.keyboardDown, style: .plain, target: self, action: #selector(doneButtonTapped))
         
-        photobutton.tintColor = Constants.Color.basicText
+        let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        photoButton.tintColor = Constants.Color.basicText
         doneButton.tintColor = Constants.Color.basicText
         
-        mainView.toolbar.setItems([photobutton, flexibleSpaceButton, doneButton], animated: true)
+        mainView.toolbar.setItems([photoButton, flexibleSpaceButton, doneButton], animated: true)
     }
     
-    @objc private func selectPhotoButton() {
-       
-        view.endEditing(true)
-        
-        present(mainView.configPHPicker(), animated: true)
-    }
-    
-    @objc private func doneButtonTapped() {
-        
-        view.endEditing(true)
-    }
     
 }
 

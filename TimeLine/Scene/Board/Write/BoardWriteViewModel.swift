@@ -14,6 +14,8 @@ final class BoardWriteViewModel {
     private let disposeBag = DisposeBag()
     private var imageModel = SelectImageModel(section: "", items: [])
     private lazy var imageSectionModel: PublishRelay<[SelectImageModel]> = PublishRelay()
+    private let maxSelectCount = 3
+    var selectCount = 3
     
     struct Input {
         let postButton: PublishRelay<Bool>
@@ -27,6 +29,7 @@ final class BoardWriteViewModel {
         let postButtonEnabled: Observable<Bool>
         let tokenRequest: PublishSubject<RefreshResult>
         let items: PublishRelay<[SelectImageModel]>
+        let enableAddImage: BehaviorRelay<Bool>
     }
     
     
@@ -38,7 +41,7 @@ final class BoardWriteViewModel {
         let errorMsg: PublishSubject<String> = PublishSubject()
         let postEvent = PublishRelay<Bool>()
         let tokenRequest = PublishSubject<RefreshResult>()
-        
+        let enableAddImage = BehaviorRelay(value: true)
         
         let validation = Observable.combineLatest(input.titleText, input.contentText) { title, content in
             titleStr = title.trimmingCharacters(in: .whitespaces)
@@ -108,7 +111,14 @@ final class BoardWriteViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(errorMsg: errorMsg, postButtonEnabled: validation, tokenRequest: tokenRequest, items: imageSectionModel)
+        imageSectionModel
+            .bind(with: self) { owner, value in
+                owner.selectCount = owner.maxSelectCount - value[0].items.count
+                enableAddImage.accept(owner.selectCount > 0)
+            }
+            .disposed(by: disposeBag)
+        
+        return Output(errorMsg: errorMsg, postButtonEnabled: validation, tokenRequest: tokenRequest, items: imageSectionModel, enableAddImage: enableAddImage)
     }
     
     private func imageToData() -> [Data] {
@@ -118,9 +128,9 @@ final class BoardWriteViewModel {
         imageModel.items.forEach {
             
             var image = $0.image
-//            if image.size.width > 700 || image.size.height > 700 {
-//                image = image.resize(size: 700)
-//            }
+            if image.size.width > 700 || image.size.height > 700 {
+                image = image.resize(size: 700)
+            }
             
             for value in compression {
                 guard let data = image.jpegData(compressionQuality: value.rawValue) else { return }
@@ -141,12 +151,13 @@ final class BoardWriteViewModel {
     func setImageItems(_ items: [SelectedImage]) {
         imageModel.items.append(contentsOf: items)
         imageSectionModel.accept([imageModel])
+        
     }
     
     
 }
 
-enum Compression: CGFloat, CaseIterable {
+private enum Compression: CGFloat, CaseIterable {
     case lowest  = 0
     case low     = 0.25
     case medium  = 0.5

@@ -59,7 +59,7 @@ final class BoardWriteView: BaseView {
         return view
     }()
     
-
+    
     
     var delegate: PhPickerProtocol?
     
@@ -148,6 +148,8 @@ final class BoardWriteView: BaseView {
         return layout
         
     }
+    
+    
     
 }
 

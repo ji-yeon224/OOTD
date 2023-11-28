@@ -22,6 +22,7 @@
 		CE290E9C2B04BF51007DFCAE /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E9B2B04BF51007DFCAE /* LoginError.swift */; };
 		CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A15152B05B13E009B913F /* HomeViewModel.swift */; };
 		CE75C3DC2B1605DE00A08615 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75C3DB2B1605DE00A08615 /* UIImage+Extension.swift */; };
+		CE75C3DF2B16239A00A08615 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CE75C3DE2B16239A00A08615 /* Toast */; };
 		CEA903042B146F9B00F09FB8 /* SelectImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA903032B146F9B00F09FB8 /* SelectImageModel.swift */; };
 		CEA903062B146FE800F09FB8 /* SelectedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA903052B146FE800F09FB8 /* SelectedImage.swift */; };
 		CEBDFBF02B0B2CA800D43BF9 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBEF2B0B2CA800D43BF9 /* PostAPI.swift */; };
@@ -188,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE75C3DF2B16239A00A08615 /* Toast in Frameworks */,
 				CEEA877F2B01EECB00AC375F /* RxSwift in Frameworks */,
 				CEEA87822B01EEDB00AC375F /* RxDataSources in Frameworks */,
 				CED961582B0CF73B0067C424 /* Kingfisher in Frameworks */,
@@ -554,6 +556,7 @@
 				CEEA87932B01F82000AC375F /* IQKeyboardManagerSwift */,
 				CEC2FBDC2B026DD9002E3046 /* Moya */,
 				CED961572B0CF73B0067C424 /* Kingfisher */,
+				CE75C3DE2B16239A00A08615 /* Toast */,
 			);
 			productName = TimeLine;
 			productReference = CEEA87512B01E30000AC375F /* TimeLine.app */;
@@ -590,6 +593,7 @@
 				CEEA87922B01F82000AC375F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				CEC2FBDB2B026DD9002E3046 /* XCRemoteSwiftPackageReference "Moya" */,
 				CED961562B0CF73B0067C424 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				CE75C3DD2B16239900A08615 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = CEEA87522B01E30000AC375F /* Products */;
 			projectDirPath = "";
@@ -920,6 +924,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE75C3DD2B16239900A08615 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		CEC2FBDB2B026DD9002E3046 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -971,6 +983,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CE75C3DE2B16239A00A08615 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE75C3DD2B16239900A08615 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		CEC2FBDC2B026DD9002E3046 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CEC2FBDB2B026DD9002E3046 /* XCRemoteSwiftPackageReference "Moya" */;
