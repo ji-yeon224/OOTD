@@ -20,6 +20,10 @@ final class BoardTableViewCell: UITableViewCell {
     let thumbnailImage = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
+        view.layer.cornerRadius = 5
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = Constants.Color.imageBorder.cgColor
+        view.clipsToBounds = true
         return view
     }()
     

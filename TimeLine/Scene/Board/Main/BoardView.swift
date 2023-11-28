@@ -41,7 +41,7 @@ final class BoardView: BaseView {
             
         } else {
             let imgURL = BaseURL.baseURL+"/"+item.image[0]
-            cell.thumbnailImage.setImage(with: imgURL)
+            cell.thumbnailImage.setImage(with: imgURL, resize: 70)
             
         }
         

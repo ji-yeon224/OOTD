@@ -33,7 +33,7 @@ final class BoardViewController: BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        refreshList.onNext(true)
+        
 //        viewModel.data.removeAll()
     }
     private func bind() {
@@ -59,6 +59,12 @@ final class BoardViewController: BaseViewController {
                 vc.hidesBottomBarWhenPushed = true
                 owner.navigationController?.pushViewController(vc, animated: true)
                 
+            }
+            .disposed(by: disposeBag)
+        
+        output.errorMsg
+            .bind(with: self) { owner, value in
+                print("BOARD ERROR - ", value)
             }
             .disposed(by: disposeBag)
        

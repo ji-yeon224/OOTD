@@ -18,6 +18,7 @@ extension Constants{
         static let invalid = UIColor.red
         static let valid = UIColor.green
         static let placeholder = UIColor.lightGray
+        static let imageBorder = UIColor.systemGray5
         
         static let mainColor = UIColor(named: "MainColor")
         

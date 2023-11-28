@@ -83,6 +83,11 @@ final class BoardWriteViewController: BaseViewController {
             .bind(to: mainView.imagePickCollectionView.rx.items(dataSource: rxDataSource))
             .disposed(by: disposeBag)
         
+        output.errorMsg
+            .bind(with: self) { owner, value in
+                print("[BOARD WRITE] ", value)
+            }
+            .disposed(by: disposeBag)
         
         mainView.contentTextView.rx.text.orEmpty
             .bind(with: self) { owner, value in

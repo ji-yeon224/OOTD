@@ -23,6 +23,7 @@ final class BoardWriteViewModel {
     }
     
     struct Output {
+        let errorMsg: PublishSubject<String>
         let postButtonEnabled: Observable<Bool>
         let tokenRequest: PublishSubject<RefreshResult>
         let items: PublishRelay<[SelectImageModel]>
@@ -34,7 +35,7 @@ final class BoardWriteViewModel {
         var titleStr = ""
         var contentStr = ""
         
-        
+        let errorMsg: PublishSubject<String> = PublishSubject()
         let postEvent = PublishRelay<Bool>()
         let tokenRequest = PublishSubject<RefreshResult>()
         
@@ -67,14 +68,15 @@ final class BoardWriteViewModel {
                 case .failure(let error):
                     let code = error.statusCode
                     
-                    guard let errorType = ContentError(rawValue: code) else {
+                    guard let errorType = PostWriteError(rawValue: code) else {
                         if let commonError = CommonError(rawValue: code) {
-                            print(commonError.localizedDescription)
+//                            print(commonError.localizedDescription)
+                            errorMsg.onNext(commonError.localizedDescription)
                         }
                         return
                     }
                     switch errorType {
-                    case .invalidToken, .expireToken:
+                    case .wrongAuth, .expireToken:
                         let result = RefreshTokenManager.shared.tokenRequest()
                         result
                             .bind(with: self, onNext: { owner, result in
@@ -89,7 +91,9 @@ final class BoardWriteViewModel {
                             .disposed(by: owner.disposeBag)
                     case .forbidden:
                         tokenRequest.onNext(RefreshResult.login)
-                   
+                    case .invalidRequest, .saveError:
+                        errorMsg.onNext(errorType.localizedDescription)
+                    
                     }
                     
                 }
@@ -104,15 +108,29 @@ final class BoardWriteViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(postButtonEnabled: validation, tokenRequest: tokenRequest, items: imageSectionModel)
+        return Output(errorMsg: errorMsg, postButtonEnabled: validation, tokenRequest: tokenRequest, items: imageSectionModel)
     }
     
     private func imageToData() -> [Data] {
         var imgData: [Data] = []
-        
+        let destSize = 10 * 1000 * 1000
+        let compression = Compression.allCases.sorted(by: { $0.rawValue > $1.rawValue })
         imageModel.items.forEach {
-            guard let data = $0.image.jpegData(compressionQuality: 0.5) else { return }
-            imgData.append(data)
+            
+            var image = $0.image
+//            if image.size.width > 700 || image.size.height > 700 {
+//                image = image.resize(size: 700)
+//            }
+            
+            for value in compression {
+                guard let data = image.jpegData(compressionQuality: value.rawValue) else { return }
+                print(data.count, value.rawValue)
+                if data.count < destSize {
+                    print(data.count, value.rawValue)
+                    imgData.append(data)
+                    break
+                }
+            }
         }
         
         return imgData
@@ -126,5 +144,12 @@ final class BoardWriteViewModel {
     }
     
     
-    
+}
+
+enum Compression: CGFloat, CaseIterable {
+    case lowest  = 0
+    case low     = 0.25
+    case medium  = 0.5
+    case high    = 0.75
+    case highest = 1
 }

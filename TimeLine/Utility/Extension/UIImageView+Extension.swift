@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 extension UIImageView {
-    func setImage(with urlString: String) {
+    func setImage(with urlString: String, resize width: CGFloat) {
         self.kf.indicatorType = .activity
         ImageCache.default.retrieveImage(forKey: urlString, options: nil) { result in
             switch result {
@@ -27,18 +27,21 @@ extension UIImageView {
                             .requestModifier(ImageLoadManager.shared.getModifier()),
                             .transition(.fade(1.0))
                             
-                        ]) { result in
+                        ]) { [weak self] result in
+                            guard let self = self else { return }
                             switch result {
                             case .success(let data):
-                                self.image = data.image
+                                self.image = data.image.resize(size: width)
                             case .failure(_):
                                 self.image = UIImage(systemName: "person")
                             }
                         }
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                print("[IMAGE ERROR]", error)
             }
         }
     }
+    
+    
 }
