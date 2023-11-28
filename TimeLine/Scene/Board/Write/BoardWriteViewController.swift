@@ -19,9 +19,11 @@ final class BoardWriteViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     private let postButtonClicked = PublishRelay<Bool>()
+    private var imageList: [SelectedImage] = []
+    private let maxImageCount = 3
     
-//    private var pickedImageDict = [String: PHPickerResult]()
-//    private var imgIdentifier = [String]()
+    private var pickedImageDict = [String: PHPickerResult]()
+    private var imgIdentifier = [String]()
     
     override func loadView() {
         self.view = mainView
@@ -111,22 +113,24 @@ final class BoardWriteViewController: BaseViewController {
         
         mainView.toolbar.setItems([photobutton, flexibleSpaceButton, doneButton], animated: true)
     }
+    
     @objc private func selectPhotoButton() {
        
         view.endEditing(true)
         
-        present(mainView.picker, animated: true)
+        present(mainView.configPHPicker(), animated: true)
     }
     
     @objc private func doneButtonTapped() {
-       
+        
         view.endEditing(true)
     }
-    
     
 }
 
 extension BoardWriteViewController: PhPickerProtocol {
+  
+
     func didFinishPicking(picker: PHPickerViewController, results: [PHPickerResult]) {
 
         picker.dismiss(animated: true)
@@ -136,7 +140,7 @@ extension BoardWriteViewController: PhPickerProtocol {
         }
         
         let dispatchGroup = DispatchGroup()
-        var imageList: [SelectedImage] = []
+        
         results.forEach {
             dispatchGroup.enter()
             let item = $0.itemProvider
@@ -146,7 +150,7 @@ extension BoardWriteViewController: PhPickerProtocol {
                 item.loadObject(ofClass: UIImage.self) { (image, error) in
                     DispatchQueue.main.async {
                         guard let img = image as? UIImage else { return }
-                        imageList.append(SelectedImage(image: img))
+                        self.imageList.append(SelectedImage(image: img))
                         dispatchGroup.leave()
                         
                     }

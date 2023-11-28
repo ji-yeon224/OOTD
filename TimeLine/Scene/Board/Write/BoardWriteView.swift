@@ -59,8 +59,7 @@ final class BoardWriteView: BaseView {
         return view
     }()
     
-    lazy var picker: PHPickerViewController = PHPickerViewController(configuration: configPhPicker())
-    var selectedAssetIdentifiers = [String]()
+
     
     var delegate: PhPickerProtocol?
     
@@ -79,7 +78,6 @@ final class BoardWriteView: BaseView {
         
     
         titleTextField.becomeFirstResponder()
-        picker.delegate = self
     }
     
     
@@ -119,17 +117,16 @@ final class BoardWriteView: BaseView {
         
     }
     
-    func configPhPicker() -> PHPickerConfiguration {
-        var photoConfiguration = PHPickerConfiguration()
-        photoConfiguration.selectionLimit = 5
-        photoConfiguration.filter = .images
-        photoConfiguration.selection = .ordered
-        photoConfiguration.preselectedAssetIdentifiers = selectedAssetIdentifiers
-        
-        return photoConfiguration
-        
-    }
     
+    func configPHPicker(limit: Int = 3) -> PHPickerViewController {
+        
+        var photoConfiguration = PHPickerConfiguration()
+        photoConfiguration.selectionLimit = limit
+        photoConfiguration.filter = .images
+        let picker = PHPickerViewController(configuration: photoConfiguration)
+        picker.delegate = self
+        return picker
+    }
     
 
     
