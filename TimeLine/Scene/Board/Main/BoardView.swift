@@ -19,12 +19,13 @@ final class BoardView: BaseView {
         return view
     }()
     
-    let writeButton = {
+    lazy var writeButton = {
         let view = UIButton()
         view.setImage(Constants.Image.plus, for: .normal)
         view.backgroundColor = Constants.Color.mainColor
         view.tintColor = Constants.Color.background
-        view.layer.cornerRadius = view.bounds.width/2
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = false
         return view
     }()
     
@@ -53,6 +54,7 @@ final class BoardView: BaseView {
         
         addSubview(tableView)
         addSubview(writeButton)
+        
         
     }
     

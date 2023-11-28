@@ -18,8 +18,7 @@ final class BoardViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     
-    
-    let refreshList = BehaviorSubject(value: true)
+    let refreshList = PublishRelay<Bool>()
     
     override func loadView() {
         self.view = mainView
@@ -29,18 +28,25 @@ final class BoardViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        refreshList.accept(true)
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+//        refreshList.accept(true)
 //        viewModel.data.removeAll()
     }
+    
+    override func configure() {
+        mainView.tableView.refreshControl = UIRefreshControl()
+        mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+    }
+    
     private func bind() {
         
         let input = BoardViewModel.Input(
-            refresh: refreshList,
-            page: mainView.tableView.rx.prefetchRows
+            page: mainView.tableView.rx.prefetchRows,
+            callFirst: refreshList
         )
         let output = viewModel.transform(input: input)
         
@@ -85,7 +91,7 @@ final class BoardViewController: BaseViewController {
                         vc.modalPresentationStyle = .fullScreen
                         vc.modalTransitionStyle = .crossDissolve
                         vc.completionHandler = {
-                            owner.refreshList.onNext(true)
+                            owner.refreshList.accept(true)
                             owner.viewModel.data.removeAll()
                         }
                         owner.present(vc, animated: true)
@@ -102,8 +108,15 @@ final class BoardViewController: BaseViewController {
         
         
     }
-    
-    
+    @objc private func refreshData() {
+        print("refresh")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+            guard let self = self else { return }
+            self.refreshList.accept(true)
+            self.mainView.tableView.refreshControl?.endRefreshing()
+        }
+        
+    }
     
     
     

@@ -18,8 +18,9 @@ final class BoardViewModel {
     let disposeBag = DisposeBag()
     
     struct Input {
-        let refresh: BehaviorSubject<Bool>
+//        let refresh: PublishRelay<Bool>
         let page: ControlEvent<[IndexPath]>
+        let callFirst: PublishRelay<Bool>
     }
     
     struct Output {
@@ -33,9 +34,20 @@ final class BoardViewModel {
         let items: BehaviorRelay<[PostListModel]> = BehaviorRelay(value: [])
         let errorMsg: PublishSubject<String> = PublishSubject()
         let tokenRequest = PublishSubject<RefreshResult>()
+        let refresh = PublishRelay<Bool>()
         
+        input.callFirst
+            .bind(with: self) { owner, value in
+                if value {
+                    print("refreshss")
+                    owner.data.removeAll()
+                    owner.nextCursor = nil
+                }
+                refresh.accept(true)
+            }
+            .disposed(by: disposeBag)
         
-        input.refresh
+        refresh
             .flatMap {_ in
                 return PostAPIManager.shared.request(api: .read(productId: ProductId.OOTDBoard.rawValue, limit: 10, next: self.nextCursor), type: ReadResponse.self)
             }
@@ -65,7 +77,7 @@ final class BoardViewModel {
                         result
                             .bind(with: self) { owner, result in
                                 if result == .success {
-                                    input.refresh.onNext(true)
+                                    input.callFirst.accept(true)
                                 } else {
                                     tokenRequest.onNext(result)
                                 }
@@ -83,8 +95,7 @@ final class BoardViewModel {
             .bind(with: self) { owner, row in
                 //print(row)
                 if row.1 == owner.data.count - 1 && owner.nextCursor != "0" {
-                    
-                    input.refresh.onNext(true)
+                    input.callFirst.accept(false)
                 }
             }
             .disposed(by: disposeBag)
