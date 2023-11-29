@@ -15,6 +15,7 @@ extension Constants {
         static let back = UIImage(systemName: "chevron.backward")
         static let plus = UIImage(systemName: "plus")
         static let xmark = UIImage(systemName: "xmark")
+        static let xmarkCircle = UIImage(systemName: "x.circle.fill")
         static let photo = UIImage(systemName: "photo.on.rectangle")
         static let keyboardDown = UIImage(systemName: "keyboard.chevron.compact.down")
         

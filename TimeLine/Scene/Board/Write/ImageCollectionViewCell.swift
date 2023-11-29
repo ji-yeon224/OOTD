@@ -24,10 +24,12 @@ final class ImageCollectionViewCell: BaseCollectionViewCell {
     
     let cancelButton = {
         let view = UIButton()
-        view.setImage(Constants.Image.xmark, for: .normal)
-        view.tintColor = Constants.Color.background
-        view.backgroundColor = Constants.Color.basicText
+        view.setImage(Constants.Image.xmarkCircle, for: .normal)
+        view.tintColor = Constants.Color.basicText
+        view.backgroundColor = Constants.Color.background
+        view.layer.opacity = 0.8
         view.layer.cornerRadius = view.frame.width / 2
+        view.layer.masksToBounds = false
         return view
     }()
     
