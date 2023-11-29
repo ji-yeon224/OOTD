@@ -19,6 +19,10 @@ final class LoginViewController: BaseViewController {
     let emailText = BehaviorRelay(value: "")
     let passText = BehaviorRelay(value: "")
     
+    var transition: TransitionType = .root
+    
+    var completionHandler: (() -> Void)?
+    
     override func loadView() {
         self.view = mainView
         
@@ -60,9 +64,19 @@ final class LoginViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 if value {
                     print("Login Success")
-                    UserDefaultsHelper.shared.isLogin = true
-                    owner.view?.window?.rootViewController = HomeViewController()
-                    owner.view.window?.makeKeyAndVisible()
+                    UserDefaultsHelper.isLogin = true
+                    switch owner.transition {
+                    case .root:
+                        owner.view?.window?.rootViewController = UINavigationController(rootViewController: TabBarController())
+                        owner.view.window?.makeKeyAndVisible()
+                    case .push:
+                        owner.navigationController?.popViewController(animated: true)
+                        
+                    case .presnt:
+                        owner.completionHandler?()
+                        owner.dismiss(animated: true)
+                    }
+                    
                 }
             }
             .disposed(by: disposeBag)

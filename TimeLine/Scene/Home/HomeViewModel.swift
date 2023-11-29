@@ -47,7 +47,7 @@ final class HomeViewModel {
                 AuthenticationAPIManager.shared.request(api: .content, successType: ResponseMessage.self)
             }
             .subscribe(with: self) { owner, response in
-                print(UserDefaultsHelper.shared.token)
+                print(UserDefaultsHelper.token)
                 switch response {
                 case .success(let result):
                     successMsg.onNext(result.message)
@@ -100,12 +100,13 @@ final class HomeViewModel {
                         }
                         return
                     }
+                    
                     switch errorType {
                     case .invalidToken, .expireToken:
                         let result = RefreshTokenManager.shared.tokenRequest()
                         result
                             .bind(with: self, onNext: { owner, result in
-                                debugPrint("[TOKEN 재발급]", String(describing: UserDefaultsHelper.shared.token))
+                                debugPrint("[TOKEN 재발급]", String(describing: UserDefaultsHelper.token))
                                 switch result {
                                 case .success:
                                     owner.withdrawRequest.onNext(true)

@@ -23,7 +23,7 @@ final class RefreshTokenManager {
                     switch response {
                     case .success(let token):
                         debugPrint("[ACCESS TOKEN REFRESH]")
-                        UserDefaultsHelper.shared.token = token.token
+                        UserDefaultsHelper.token = token.token
                         value.onNext(RefreshResult.success)
                     case .failure(let error):
                         let code = error.statusCode

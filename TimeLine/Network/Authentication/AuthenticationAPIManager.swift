@@ -15,7 +15,7 @@ final class AuthenticationAPIManager {
     static let shared = AuthenticationAPIManager()
     private init() { }
     
-    let provider = MoyaProvider<AuthenticationAPI>()
+    private let provider = MoyaProvider<AuthenticationAPI>()
     
     
     func request<T: Codable>(api: AuthenticationAPI, successType: T.Type) -> Single<Result<T, NetworkError>> {
@@ -26,14 +26,22 @@ final class AuthenticationAPIManager {
                 case .success(let data):
                     let statusCode = data.statusCode
                     if statusCode == 200 {
-                        let result = try! JSONDecoder().decode(T.self, from: data.data)
-                        single(.success(.success(result)))
+                        do {
+                            let result = try JSONDecoder().decode(T.self, from: data.data)
+                            single(.success(.success(result)))
+                        } catch {
+                            print("DECODING ERROR")
+                        }
                     } else {
-                        let result = try! JSONDecoder().decode(ErrorModel.self, from: data.data)
-                        debugPrint("[DEBUG - API REQUEST", result.message)
-                        let error = NetworkError(statusCode: statusCode, description: result.message)
+                        do {
+                            let result = try JSONDecoder().decode(ErrorModel.self, from: data.data)
+                            debugPrint("[DEBUG - API REQUEST", result.message)
+                            let error = NetworkError(statusCode: statusCode, description: result.message)
+                            single(.success(.failure(error)))
+                        } catch {
+                            print("DECODING ERROR")
+                        }
                         
-                        single(.success(.failure(error)))
                        
                     }
                     

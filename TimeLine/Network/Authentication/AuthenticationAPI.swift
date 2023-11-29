@@ -46,7 +46,7 @@ extension AuthenticationAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .login(let userInfo):
+        case .login(let userInfo): 
             return .requestJSONEncodable(userInfo)
         case .join(let joinInfo):
             return .requestJSONEncodable(joinInfo)
@@ -63,12 +63,12 @@ extension AuthenticationAPI: TargetType {
             return ["Content-Type": "application/json", "SesacKey": APIKey.key]
         case .refresh:
             return [
-                "Authorization": UserDefaultsHelper.shared.token ?? "",
-                "Refresh": UserDefaultsHelper.shared.refreshToken ?? "",
+                "Authorization": UserDefaultsHelper.token,
+                "Refresh": UserDefaultsHelper.refreshToken,
                 "SesacKey": APIKey.key]
         case .content, .withdraw:
             return [
-                "Authorization": UserDefaultsHelper.shared.token ?? "",
+                "Authorization": UserDefaultsHelper.token,
                 "SesacKey": APIKey.key
             ]
         }
