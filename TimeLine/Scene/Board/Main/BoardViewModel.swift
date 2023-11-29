@@ -39,7 +39,6 @@ final class BoardViewModel {
         input.callFirst
             .bind(with: self) { owner, value in
                 if value {
-                    print("refreshss")
                     owner.data.removeAll()
                     owner.nextCursor = nil
                 }

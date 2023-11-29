@@ -112,6 +112,21 @@ final class BoardWriteViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.successPost
+            .bind(with: self) { owner, value in
+                if value.0 {
+                    owner.showOKAlert(title: "", message: "게시글 작성이 완료되었습니다!!") {
+                        NotificationCenter.default.post(name: .refresh, object: nil)
+                        owner.navigationController?.popViewController(animated: true)
+                    }
+                    
+                }
+                else {
+                    owner.showOKAlert(title: "문제가 발생하였습니다", message: value.1, handler: nil)
+                }
+            }
+            .disposed(by: disposeBag)
+        
         photoButton.rx.tap
             .bind(with: self) { owner, _ in
                 if output.enableAddImage.value {

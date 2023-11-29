@@ -29,7 +29,6 @@ final class BoardViewController: BaseViewController {
         super.viewDidLoad()
         bind()
         refreshList.accept(true)
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -105,11 +104,17 @@ final class BoardViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        NotificationCenter.default.rx.notification(.refresh)
+            .bind(with: self) { owner, noti in
+                owner.refreshList.accept(true)
+            }
+            .disposed(by: disposeBag)
+        
         
         
     }
     @objc private func refreshData() {
-        print("refresh")
+        debugPrint("pull refresh")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
             guard let self = self else { return }
             self.refreshList.accept(true)

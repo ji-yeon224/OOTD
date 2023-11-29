@@ -23,6 +23,9 @@
 		CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A15152B05B13E009B913F /* HomeViewModel.swift */; };
 		CE75C3DC2B1605DE00A08615 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75C3DB2B1605DE00A08615 /* UIImage+Extension.swift */; };
 		CE75C3DF2B16239A00A08615 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CE75C3DE2B16239A00A08615 /* Toast */; };
+		CE76E0102B17256A00A38041 /* BoardImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E00F2B17256A00A38041 /* BoardImageCell.swift */; };
+		CE76E0122B1725BB00A38041 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0112B1725BB00A38041 /* BaseCollectionViewCell.swift */; };
+		CE76E0142B17295E00A38041 /* NSNotification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0132B17295E00A38041 /* NSNotification.Name+Extension.swift */; };
 		CEA903042B146F9B00F09FB8 /* SelectImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA903032B146F9B00F09FB8 /* SelectImageModel.swift */; };
 		CEA903062B146FE800F09FB8 /* SelectedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA903052B146FE800F09FB8 /* SelectedImage.swift */; };
 		CEBDFBF02B0B2CA800D43BF9 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFBEF2B0B2CA800D43BF9 /* PostAPI.swift */; };
@@ -114,6 +117,9 @@
 		CE290E9B2B04BF51007DFCAE /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		CE3A15152B05B13E009B913F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CE75C3DB2B1605DE00A08615 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		CE76E00F2B17256A00A38041 /* BoardImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardImageCell.swift; sourceTree = "<group>"; };
+		CE76E0112B1725BB00A38041 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE76E0132B17295E00A38041 /* NSNotification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification.Name+Extension.swift"; sourceTree = "<group>"; };
 		CEA903032B146F9B00F09FB8 /* SelectImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageModel.swift; sourceTree = "<group>"; };
 		CEA903052B146FE800F09FB8 /* SelectedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedImage.swift; sourceTree = "<group>"; };
 		CEBDFBEF2B0B2CA800D43BF9 /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
@@ -249,6 +255,7 @@
 				CEBDFBFD2B0B9EB700D43BF9 /* UIScrollView+Extension.swift */,
 				CEDC33852B0FA7AF00A5788E /* UIImageView+Extension.swift */,
 				CE75C3DB2B1605DE00A08615 /* UIImage+Extension.swift */,
+				CE76E0132B17295E00A38041 /* NSNotification.Name+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -370,6 +377,7 @@
 				CEDC337F2B0F917C00A5788E /* BoardReadViewController.swift */,
 				CEDC33812B0F918700A5788E /* BoardReadView.swift */,
 				CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */,
+				CE76E00F2B17256A00A38041 /* BoardImageCell.swift */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -440,6 +448,7 @@
 			children = (
 				CEEA87862B01F0A000AC375F /* BaseView.swift */,
 				CEEA878A2B01F1A400AC375F /* BaseViewController.swift */,
+				CE76E0112B1725BB00A38041 /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -650,6 +659,7 @@
 				CE28C85D2B1381CD00820F1A /* PhPickerProtocol.swift in Sources */,
 				CEDC33972B1077C000A5788E /* PostListModel.swift in Sources */,
 				CEEA87892B01F10900AC375F /* Constants.swift in Sources */,
+				CE76E0122B1725BB00A38041 /* BaseCollectionViewCell.swift in Sources */,
 				CEED52AD2B04F0AC007E12FA /* UserDefaultsHelper.swift in Sources */,
 				CE048CC52B03913300FAC038 /* Join.swift in Sources */,
 				CEECBF8D2B0A3EA20031947E /* BoardView.swift in Sources */,
@@ -659,6 +669,7 @@
 				CE290E902B04A3B1007DFCAE /* DateFormatter+Extension.swift in Sources */,
 				CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */,
 				CEED52B52B05056E007E12FA /* EmailValidationError.swift in Sources */,
+				CE76E0142B17295E00A38041 /* NSNotification.Name+Extension.swift in Sources */,
 				CE290E972B04B2A2007DFCAE /* Design.swift in Sources */,
 				CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */,
 				CEED52B92B050893007E12FA /* RefreshToken.swift in Sources */,
@@ -677,6 +688,7 @@
 				CEBDFBF42B0B31B900D43BF9 /* PostAPIManager.swift in Sources */,
 				CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */,
 				CEBDFBF62B0B31CA00D43BF9 /* PostWrite.swift in Sources */,
+				CE76E0102B17256A00A38041 /* BoardImageCell.swift in Sources */,
 				CEBDFBF82B0B4AE200D43BF9 /* Post.swift in Sources */,
 				CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */,
 				CEC2FBD92B021C51002E3046 /* LoginToken.swift in Sources */,
