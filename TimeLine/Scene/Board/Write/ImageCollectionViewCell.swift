@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-final class ImageCollectionViewCell: UICollectionViewCell {
+final class ImageCollectionViewCell: BaseCollectionViewCell {
     static let identifier = "ImageCollectionViewCell"
     
     private let uiview = UIView()
@@ -31,15 +31,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
-        setConstraints()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -48,13 +40,13 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         disposeBag = DisposeBag()
     }
     
-    private func configure() {
+    override func configure() {
         contentView.addSubview(uiview)
         contentView.addSubview(imageView)
         contentView.addSubview(cancelButton)
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         
         uiview.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
