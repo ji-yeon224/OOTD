@@ -10,7 +10,6 @@ import SnapKit
 import RxSwift
 
 final class ImageCollectionViewCell: BaseCollectionViewCell {
-    static let identifier = "ImageCollectionViewCell"
     
     private let uiview = UIView()
     var disposeBag = DisposeBag()

@@ -83,7 +83,8 @@ final class BoardWriteView: BaseView {
     
     override func setConstraints() {
         scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.horizontalEdges.top.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-50)
         }
         stackView.snp.makeConstraints { make in
             make.top.equalTo(scrollView.snp.top)

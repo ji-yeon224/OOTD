@@ -1,33 +1,25 @@
 //
-//  BaseCollectionViewCell.swift
+//  PlainIamgeView.swift
 //  TimeLine
 //
 //  Created by 김지연 on 11/29/23.
 //
 
 import UIKit
-import SnapKit
 
-class BaseCollectionViewCell: UICollectionViewCell {
+final class PlainImageView: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
-        setConstraints()
-        
+        contentMode = .scaleAspectFit
+        layer.cornerRadius = 5
+        clipsToBounds = true
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configure() { }
-    
-    func setConstraints() {
-        
-    }
-    
     
     
 }

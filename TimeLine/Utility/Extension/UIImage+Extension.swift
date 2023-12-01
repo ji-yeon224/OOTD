@@ -21,7 +21,7 @@ extension UIImage {
             scale = size / self.size.width
             newHeight = self.size.height * scale
         }
-        print(newWidth, newHeight)
+        //print(newWidth, newHeight)
 
         let size = CGSize(width: newWidth, height: newHeight)
         let render = UIGraphicsImageRenderer(size: size)
@@ -32,10 +32,23 @@ extension UIImage {
         return renderImage
     }
     func resize(multiplier: CGFloat) -> UIImage {
-        let newWidth = self.size.width * multiplier
-        let newHeight = self.size.height * multiplier
+        let newWidth = self.size.width * multiplier/100
+        let newHeight = self.size.height * multiplier/100
 
         let size = CGSize(width: newWidth, height: newHeight)
+        let render = UIGraphicsImageRenderer(size: size)
+        let renderImage = render.image { context in
+            self.draw(in: CGRect(origin: .zero, size: size))
+        }
+        
+        return renderImage
+    }
+    
+    func resize(width: CGFloat) -> UIImage {
+        let scale = width / self.size.width
+        let height = self.size.height * scale
+//        print(width, height)
+        let size = CGSize(width: width, height: height)
         let render = UIGraphicsImageRenderer(size: size)
         let renderImage = render.image { context in
             self.draw(in: CGRect(origin: .zero, size: size))
