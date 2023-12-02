@@ -30,7 +30,7 @@ final class BoardCollectionView: BaseView {
     
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
     }
     
@@ -78,13 +78,13 @@ final class BoardCollectionView: BaseView {
             guard let self = self, let post = self.postData else { return }
             supplementaryView.titleLabel.text = post.title
             supplementaryView.contentLabel.text = post.content
-            
+            supplementaryView.nickname.text = post.creator.nick
             
             
             DispatchQueue.main.async {
                 self.dispatchGroup.enter()
                 for i in 0..<self.imageURL.count {
-                    supplementaryView.imgList[i].setImage(with: self.imageURL[i], resize: self.deviceWidth-20)
+                    supplementaryView.imgList[i].setImage(with: self.imageURL[i], resize: self.deviceWidth-30)
                     
                 }
 //                print("img")

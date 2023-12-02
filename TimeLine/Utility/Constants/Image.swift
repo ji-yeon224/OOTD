@@ -22,5 +22,6 @@ extension Constants {
         static let board = UIImage(systemName: "doc.text.image")
         static let myPage = UIImage(systemName: "person")
         static let heart = UIImage(systemName: "heart")
+        static let person = UIImage(systemName: "person.fill")
     }
 }
