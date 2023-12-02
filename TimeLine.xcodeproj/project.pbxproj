@@ -62,6 +62,8 @@
 		CEE80AD42B1879080041AC36 /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AD32B1879080041AC36 /* BoardCollectionView.swift */; };
 		CEE80AF92B19A6BD0041AC36 /* BoardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AF82B19A6BD0041AC36 /* BoardHeaderView.swift */; };
 		CEE80AFC2B19A92F0041AC36 /* BoardCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */; };
+		CEE80AFE2B1AC9120041AC36 /* PostDeleteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AFD2B1AC9120041AC36 /* PostDeleteError.swift */; };
+		CEE80B002B1ACB6B0041AC36 /* DeleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AFF2B1ACB6B0041AC36 /* DeleteResponse.swift */; };
 		CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87542B01E30000AC375F /* AppDelegate.swift */; };
 		CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87562B01E30000AC375F /* SceneDelegate.swift */; };
 		CEEA87592B01E30000AC375F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87582B01E30000AC375F /* ViewController.swift */; };
@@ -159,6 +161,8 @@
 		CEE80AD32B1879080041AC36 /* BoardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
 		CEE80AF82B19A6BD0041AC36 /* BoardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardHeaderView.swift; sourceTree = "<group>"; };
 		CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentCell.swift; sourceTree = "<group>"; };
+		CEE80AFD2B1AC9120041AC36 /* PostDeleteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDeleteError.swift; sourceTree = "<group>"; };
+		CEE80AFF2B1ACB6B0041AC36 /* DeleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteResponse.swift; sourceTree = "<group>"; };
 		CEEA87512B01E30000AC375F /* TimeLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA87542B01E30000AC375F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEA87562B01E30000AC375F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -318,6 +322,7 @@
 			children = (
 				CEBDFBFA2B0B959100D43BF9 /* Read */,
 				CEBDFBF92B0B958800D43BF9 /* Write */,
+				CEE80AFF2B1ACB6B0041AC36 /* DeleteResponse.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 			children = (
 				CEBDFBFB2B0B97EA00D43BF9 /* PostWriteError.swift */,
 				CEDC33982B10C6AD00A5788E /* PostReadError.swift */,
+				CEE80AFD2B1AC9120041AC36 /* PostDeleteError.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -674,6 +680,7 @@
 				CEDC339D2B11BC3400A5788E /* NextCursorType.swift in Sources */,
 				CEECBF8F2B0A3EA80031947E /* BoardViewController.swift in Sources */,
 				CEDC33862B0FA7AF00A5788E /* UIImageView+Extension.swift in Sources */,
+				CEE80AFE2B1AC9120041AC36 /* PostDeleteError.swift in Sources */,
 				CEBDFC022B0BB52100D43BF9 /* ProductId.swift in Sources */,
 				CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */,
 				CEDC33992B10C6AD00A5788E /* PostReadError.swift in Sources */,
@@ -707,6 +714,7 @@
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */,
+				CEE80B002B1ACB6B0041AC36 /* DeleteResponse.swift in Sources */,
 				CEE80AF92B19A6BD0041AC36 /* BoardHeaderView.swift in Sources */,
 				CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */,
 				CEDC338C2B103C4600A5788E /* BoardViewModel.swift in Sources */,

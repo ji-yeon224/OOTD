@@ -11,6 +11,7 @@ import Moya
 enum PostAPI {
     case write(data: PostWrite)
     case read(productId: String, limit: Int, next: String?)
+    case delete(id: String)
 }
 
 extension PostAPI: TargetType {
@@ -22,6 +23,8 @@ extension PostAPI: TargetType {
         switch self {
         case .write, .read:
             return "post"
+        case .delete(let id):
+            return "post/\(id)"
         
         }
     }
@@ -32,6 +35,8 @@ extension PostAPI: TargetType {
             return .post
         case .read:
             return .get
+        case .delete:
+            return .delete
         }
     }
     
@@ -46,6 +51,7 @@ extension PostAPI: TargetType {
                 parameters["next"] = next
             }
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        case .delete: return .requestPlain
         }
     }
     
@@ -57,9 +63,10 @@ extension PostAPI: TargetType {
                 "SesacKey": APIKey.key,
                 "Authorization": UserDefaultsHelper.token
             ]
-        case .read:
+        case .read, .delete:
             return ["Authorization": UserDefaultsHelper.token,
                     "SesacKey": APIKey.key]
+       
         }
     }
     
