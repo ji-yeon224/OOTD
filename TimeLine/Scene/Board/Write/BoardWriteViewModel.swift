@@ -30,7 +30,7 @@ final class BoardWriteViewModel {
         let tokenRequest: PublishSubject<RefreshResult>
         let items: PublishRelay<[SelectImageModel]>
         let enableAddImage: BehaviorRelay<Bool>
-        let successPost: PublishRelay<(Bool, String)>
+        let successPost: PublishRelay<(Bool, String, Post?)>
     }
     
     
@@ -43,7 +43,8 @@ final class BoardWriteViewModel {
         let postEvent = PublishRelay<Bool>()
         let tokenRequest = PublishSubject<RefreshResult>()
         let enableAddImage = BehaviorRelay(value: true)
-        let successPost = PublishRelay<(Bool, String)>()
+        let successPost = PublishRelay<(Bool, String, Post?)>()
+        
         
         let validation = Observable.combineLatest(input.titleText, input.contentText) { title, content in
             titleStr = title.trimmingCharacters(in: .whitespaces)
@@ -70,7 +71,7 @@ final class BoardWriteViewModel {
                 switch response {
                 case .success(let data):
                     print("[SUCCESS] ",data)
-                    successPost.accept((true, "success"))
+                    successPost.accept((true, "success", data))
                 case .failure(let error):
                     let code = error.statusCode
                     
@@ -100,7 +101,7 @@ final class BoardWriteViewModel {
                         tokenRequest.onNext(RefreshResult.login)
                     case .invalidRequest, .saveError:
                         errorMsg.onNext(errorType.localizedDescription)
-                        successPost.accept((false, errorType.localizedDescription))
+                        successPost.accept((false, errorType.localizedDescription, nil))
                     }
                     
                 }

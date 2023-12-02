@@ -17,7 +17,6 @@ final class BoardViewController: BaseViewController {
     
     private let disposeBag = DisposeBag()
     
-    
     let refreshList = PublishRelay<Bool>()
     
     override func loadView() {
@@ -64,8 +63,14 @@ final class BoardViewController: BaseViewController {
         
         mainView.writeButton.rx.tap
             .bind(with: self) { owner, _ in
+                
                 let vc = BoardWriteViewController()
                 vc.hidesBottomBarWhenPushed = true
+                vc.postHandler = {
+                    let readvc = BoardReadViewController()
+                    readvc.postData = $0
+                    owner.navigationController?.pushViewController(readvc, animated: false)
+                }
                 owner.navigationController?.pushViewController(vc, animated: true)
                 
             }

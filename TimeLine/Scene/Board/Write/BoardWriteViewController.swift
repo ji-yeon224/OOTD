@@ -22,8 +22,7 @@ final class BoardWriteViewController: BaseViewController {
 
     private var ableSelectImage = 3
     
-    private var pickedImageDict = [String: PHPickerResult]()
-    private var imgIdentifier = [String]()
+    var postHandler: ((Post) -> Void)?
     
     private lazy var photoButton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: nil)
     
@@ -114,10 +113,12 @@ final class BoardWriteViewController: BaseViewController {
         
         output.successPost
             .bind(with: self) { owner, value in
-                if value.0 {
+                if value.0, let data = value.2 {
                     owner.showOKAlert(title: "", message: "게시글 작성이 완료되었습니다!!") {
                         NotificationCenter.default.post(name: .refresh, object: nil)
-                        owner.navigationController?.popViewController(animated: true)
+                        
+                        owner.navigationController?.popViewController(animated: false)
+                        owner.postHandler?(data)
                     }
                     
                 }
