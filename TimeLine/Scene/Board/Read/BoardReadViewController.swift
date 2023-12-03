@@ -69,7 +69,11 @@ final class BoardReadViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         
-        
+        output?.errorMsg
+            .bind(with: self, onNext: { owner, value in
+                owner.showToastMessage(message: value, position: .top)
+            })
+            .disposed(by: disposeBag)
         
         output?.successDelete
             .bind(with: self, onNext: { owner, value in
@@ -117,8 +121,16 @@ final class BoardReadViewController: BaseViewController {
     private func configNavBar() {
         var menuItems: [UIAction] = []
         
-        let editAction = UIAction(title: "Edit") { action in
+        let editAction = UIAction(title: "Edit") { [weak self] action in
+            guard let self = self else { return }
+            guard let data = postData else {
+                self.showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { }
+                return
+            }
             
+            let vc = BoardWriteViewController()
+            vc.boardMode = .edit(data: data)
+            self.navigationController?.pushViewController(vc, animated: false)
         }
         let deleteAction = UIAction(title: "Delete") { [weak self] action in
             guard let self = self else { return }

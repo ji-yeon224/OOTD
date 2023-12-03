@@ -24,6 +24,9 @@ final class BoardWriteViewController: BaseViewController {
     
     var postHandler: ((Post) -> Void)?
     
+    var editData: Post?
+    var boardMode: BoardMode = .add
+    
     private lazy var photoButton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: nil)
     
     private lazy var doneButton = UIBarButtonItem(image: Constants.Image.keyboardDown, style: .plain, target: self, action: nil)
@@ -37,6 +40,14 @@ final class BoardWriteViewController: BaseViewController {
         super.viewDidLoad()
         title = "글쓰기"
         bind()
+        
+        switch boardMode {
+        case .edit(let data):
+            editData = data
+            mainView.configData(data: data)
+        case .add:
+            break
+        }
         
     }
     
