@@ -44,13 +44,26 @@ final class BoardWriteViewController: BaseViewController {
         switch boardMode {
         case .edit(let data):
             editData = data
-            mainView.configData(data: data)
+            configEditData(data)
         case .add:
             break
         }
         
     }
     
+    private func configEditData(_ data: Post) {
+        mainView.titleTextField.text = data.title
+        mainView.contentTextView.text = data.content
+        var imgList: [SelectedImage] = []
+        data.image.forEach { url in
+            if let img = ImageManager.shared.downloadImage(with: url) {
+                imgList.append(SelectedImage(image: img))
+            }
+            
+        }
+        
+        viewModel.setImageItems(imgList)
+    }
 
     
     override func configure() {

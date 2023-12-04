@@ -50,7 +50,7 @@ final class BoardReadViewController: BaseViewController {
         
         var urls: [String] = []
         post.image.forEach {
-            urls.append(BaseURL.baseURL + "/" + $0)
+            urls.append($0)
         }
         mainView.imageURL = urls
         updateSnapShot()

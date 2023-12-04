@@ -119,11 +119,6 @@ final class BoardWriteView: BaseView {
         
     }
     
-    func configData(data: Post) {
-        titleTextField.text = data.title
-        contentTextView.text = data.content
-        
-    }
     
     func configPHPicker(limit: Int = 3) -> PHPickerViewController {
         

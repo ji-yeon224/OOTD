@@ -11,7 +11,7 @@ import Kingfisher
 extension UIImageView {
     func setImage(with urlString: String, resize width: CGFloat) {
         self.kf.indicatorType = .activity
-        ImageCache.default.retrieveImage(forKey: urlString, options: nil) { result in
+        ImageCache.default.retrieveImage(forKey: getPhotoURL(urlString), options: nil) { result in
             switch result {
             case .success(let value):
                 if let image = value.image {
@@ -45,5 +45,9 @@ extension UIImageView {
         }
     }
     
+    // 서버에서 받을 이미지 full url
+    private func getPhotoURL(_ url: String) -> String {
+        return BaseURL.baseURL + "/" + url
+    }
     
 }
