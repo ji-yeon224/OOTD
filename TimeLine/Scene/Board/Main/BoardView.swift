@@ -41,8 +41,9 @@ final class BoardView: BaseView {
             cell.thumbnailImage.isHidden = true
             
         } else {
-//            let imgURL = BaseURL.baseURL+"/"+
-            cell.thumbnailImage.setImage(with: item.image[0], resize: 70)
+            cell.thumbnailImage.setImage(with: item.image[0], resize: 70) {
+                
+            }
             
         }
         

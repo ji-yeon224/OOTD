@@ -28,13 +28,12 @@ final class BoardReadViewModel {
         
         guard let post = postData else { print("nil")
             return nil }
-        print(post)
+//        print(post)
         let errorMsg = PublishRelay<String>()
         let tokenRequest = PublishRelay<RefreshResult>()
         let successDelete = PublishRelay<Bool>()
         
         input.delete
-            .debug()
             .flatMap { _ in
                 return PostAPIManager.shared.request(api: .delete(id: post.id), type:  DeleteResponse.self)
             }

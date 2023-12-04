@@ -46,6 +46,7 @@
 		CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */; };
 		CEC2FBE12B0270DC002E3046 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBE02B0270DC002E3046 /* NetworkError.swift */; };
 		CEC7DF862B1D9478003D02D3 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7DF852B1D9478003D02D3 /* ImageManager.swift */; };
+		CEC7DF882B1D9D7D003D02D3 /* PostUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7DF872B1D9D7D003D02D3 /* PostUpdateError.swift */; };
 		CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9614F2B0CEE8C0067C424 /* ReadResponse.swift */; };
 		CED961582B0CF73B0067C424 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CED961572B0CF73B0067C424 /* Kingfisher */; };
 		CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC337D2B0F47D300A5788E /* ImageLoadManager.swift */; };
@@ -148,6 +149,7 @@
 		CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		CEC2FBE02B0270DC002E3046 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		CEC7DF852B1D9478003D02D3 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		CEC7DF872B1D9D7D003D02D3 /* PostUpdateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUpdateError.swift; sourceTree = "<group>"; };
 		CED9614F2B0CEE8C0067C424 /* ReadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadResponse.swift; sourceTree = "<group>"; };
 		CEDC337D2B0F47D300A5788E /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
 		CEDC337F2B0F917C00A5788E /* BoardReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				CEBDFBFB2B0B97EA00D43BF9 /* PostWriteError.swift */,
 				CEDC33982B10C6AD00A5788E /* PostReadError.swift */,
 				CEE80AFD2B1AC9120041AC36 /* PostDeleteError.swift */,
+				CEC7DF872B1D9D7D003D02D3 /* PostUpdateError.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				CEEA87592B01E30000AC375F /* ViewController.swift in Sources */,
 				CE290E8B2B049AC6007DFCAE /* JoinViewModel.swift in Sources */,
 				CEC2FBE12B0270DC002E3046 /* NetworkError.swift in Sources */,
+				CEC7DF882B1D9D7D003D02D3 /* PostUpdateError.swift in Sources */,
 				CEEA87912B01F3D900AC375F /* LoginViewModel.swift in Sources */,
 				CEEA87552B01E30000AC375F /* AppDelegate.swift in Sources */,
 				CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */,

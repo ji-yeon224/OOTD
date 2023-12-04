@@ -56,14 +56,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A10DABF5-B877-43AB-9E69-B9D9FA12BACF"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeLine/Scene/Board/Read/BoardReadViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "transform(input:)"
             landmarkType = "7">
             <Locations>
@@ -97,7 +97,53 @@
                   endingLineNumber = "37"
                   offsetFromSymbolStart = "56">
                </Location>
+               <Location
+                  uuid = "A10DABF5-B877-43AB-9E69-B9D9FA12BACF - ce44b76dcdc46e1d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TimeLine.BoardReadViewModel.transform(input: TimeLine.BoardReadViewModel.Input) -&gt; Swift.Optional&lt;TimeLine.BoardReadViewModel.Output&gt;"
+                  moduleName = "TimeLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/journey/workspace/dev/SeSAC/TimeLine/TimeLine/Scene/Board/Read/BoardReadViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "1448">
+               </Location>
+               <Location
+                  uuid = "A10DABF5-B877-43AB-9E69-B9D9FA12BACF - 3e1c7b21fc4213cc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; RxSwift.PrimitiveSequence&lt;RxSwift.SingleTrait, Swift.Result&lt;TimeLine.DeleteResponse, TimeLine.NetworkError&gt;&gt; in TimeLine.BoardReadViewModel.transform(input: TimeLine.BoardReadViewModel.Input) -&gt; Swift.Optional&lt;TimeLine.BoardReadViewModel.Output&gt;"
+                  moduleName = "TimeLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/journey/workspace/dev/SeSAC/TimeLine/TimeLine/Scene/Board/Read/BoardReadViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "56">
+               </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4F57BD29-6B39-4F79-B148-829C378AA68C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeLine/Scene/Board/Read/BoardCollectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "configureDataSource()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

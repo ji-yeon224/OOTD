@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 
 final class BoardCollectionView: BaseView {
     
@@ -80,20 +80,17 @@ final class BoardCollectionView: BaseView {
             supplementaryView.contentLabel.text = post.content
             supplementaryView.nickname.text = post.creator.nick
             
-            
-            DispatchQueue.main.async {
+            for i in 0..<self.imageURL.count {
+                
                 self.dispatchGroup.enter()
-                for i in 0..<self.imageURL.count {
-                    supplementaryView.imgList[i].setImage(with: self.imageURL[i], resize: self.deviceWidth-30)
-                    
+                
+                supplementaryView.imgList[i].setImage(with: self.imageURL[i], resize: self.deviceWidth-30) {
+                    self.dispatchGroup.leave()
                 }
-//                print("img")
-//                supplementaryView.layoutIfNeeded()
-                self.dispatchGroup.leave()
-//                NotificationCenter.default.post(name: .reloadHeader, object: nil)
+                
             }
+            
             dispatchGroup.notify(queue: DispatchQueue.main) {
-
                 NotificationCenter.default.post(name: .reloadHeader, object: nil)
             }
             

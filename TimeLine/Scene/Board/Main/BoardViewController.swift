@@ -56,7 +56,7 @@ final class BoardViewController: BaseViewController {
             return model
         }
         .bind(with: self) { owner, value in
-            print(value)
+//            print(value)
         }
         .disposed(by: disposeBag)
         
