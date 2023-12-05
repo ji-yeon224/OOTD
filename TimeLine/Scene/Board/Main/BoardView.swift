@@ -41,9 +41,7 @@ final class BoardView: BaseView {
             cell.thumbnailImage.isHidden = true
             
         } else {
-            cell.thumbnailImage.setImage(with: item.image[0], resize: 70) {
-                
-            }
+            cell.thumbnailImage.setImage(with: item.image[0], resize: 70) 
             
         }
         

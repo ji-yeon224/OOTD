@@ -38,47 +38,15 @@ final class BoardReadViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        guard let post = postData else {
-//            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") {
-//                self.navigationController?.popViewController(animated: true)
-//            }
-//            
-//            return
-//        }
         bind()
-        NotificationCenter.default.addObserver(self, selector: #selector(refeshHeader), name: .reloadHeader, object: nil)
-        
-//        mainView.postData = post
-//        
-//        var urls: [String] = []
-//        post.image.forEach {
-//            urls.append($0)
-//        }
-//        mainView.imageURL = urls
         updateSnapShot()
         configNavBar()
-        configData()
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        print(#function)
-        guard let post = postData else {
-            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") {
-                self.navigationController?.popViewController(animated: true)
-            }
-            
-            return
-        }
-        mainView.postData = post
-        
-        var urls: [String] = []
-        post.image.forEach {
-            urls.append($0)
-        }
-        //mainView.imageURL = urls
-        //updateSnapShot()
-        
+        configData()
     }
     
     private func configData() {
@@ -97,13 +65,10 @@ final class BoardReadViewController: BaseViewController {
         
         for i in 0..<post.image.count {
             
-            self.dispatchGroup.enter()
-            
-            mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-35) {
-                self.dispatchGroup.leave()
-            }
+            mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-35)
             
         }
+        
         
     }
     

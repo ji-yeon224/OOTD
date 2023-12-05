@@ -10,7 +10,7 @@ import UIKit
 final class BoardReadView: BaseView {
     
     var postData: Post?
-    
+    var imageURL: [String] = []
     let scrollView = UIScrollView()
     
     private let stackView = {

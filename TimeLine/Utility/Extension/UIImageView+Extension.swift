@@ -10,7 +10,7 @@ import Kingfisher
 
 extension UIImageView {
     
-    func setImage(with urlString: String, resize width: CGFloat, completion: @escaping () -> Void) {
+    func setImage(with urlString: String, resize width: CGFloat) {
         
         self.kf.indicatorType = .activity
         guard let url = URL(string: getPhotoURL(urlString)) else { return }
@@ -21,10 +21,10 @@ extension UIImageView {
             switch result {
             case .success(let result):
                 self.image = result.image.resize(size: width)
-                completion()
+                
             case .failure(_):
                 self.image = Constants.Image.photo?.withTintColor(Constants.Color.placeholder)
-                completion()
+                
                 
             }
             

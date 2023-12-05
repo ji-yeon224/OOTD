@@ -64,7 +64,6 @@
 		CEDC339D2B11BC3400A5788E /* NextCursorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC339C2B11BC3400A5788E /* NextCursorType.swift */; };
 		CEE80ACE2B186E8D0041AC36 /* BoardContentSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80ACD2B186E8D0041AC36 /* BoardContentSection.swift */; };
 		CEE80AD02B1873680041AC36 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80ACF2B1873680041AC36 /* SectionType.swift */; };
-		CEE80AD42B1879080041AC36 /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AD32B1879080041AC36 /* BoardCollectionView.swift */; };
 		CEE80AF92B19A6BD0041AC36 /* BoardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AF82B19A6BD0041AC36 /* BoardHeaderView.swift */; };
 		CEE80AFC2B19A92F0041AC36 /* BoardCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */; };
 		CEE80AFE2B1AC9120041AC36 /* PostDeleteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AFD2B1AC9120041AC36 /* PostDeleteError.swift */; };
@@ -168,7 +167,6 @@
 		CEDC339C2B11BC3400A5788E /* NextCursorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCursorType.swift; sourceTree = "<group>"; };
 		CEE80ACD2B186E8D0041AC36 /* BoardContentSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardContentSection.swift; sourceTree = "<group>"; };
 		CEE80ACF2B1873680041AC36 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
-		CEE80AD32B1879080041AC36 /* BoardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
 		CEE80AF82B19A6BD0041AC36 /* BoardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardHeaderView.swift; sourceTree = "<group>"; };
 		CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentCell.swift; sourceTree = "<group>"; };
 		CEE80AFD2B1AC9120041AC36 /* PostDeleteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDeleteError.swift; sourceTree = "<group>"; };
@@ -404,7 +402,6 @@
 			children = (
 				CEE80AF82B19A6BD0041AC36 /* BoardHeaderView.swift */,
 				CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */,
-				CEE80AD32B1879080041AC36 /* BoardCollectionView.swift */,
 				CEDC337F2B0F917C00A5788E /* BoardReadViewController.swift */,
 				CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */,
 				CEC7DF8C2B1EAC0C003D02D3 /* BoardReadView.swift */,
@@ -740,7 +737,6 @@
 				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
 				CEBDFBF42B0B31B900D43BF9 /* PostAPIManager.swift in Sources */,
 				CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */,
-				CEE80AD42B1879080041AC36 /* BoardCollectionView.swift in Sources */,
 				CEBDFBF62B0B31CA00D43BF9 /* PostWrite.swift in Sources */,
 				CEBDFBF82B0B4AE200D43BF9 /* Post.swift in Sources */,
 				CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */,
