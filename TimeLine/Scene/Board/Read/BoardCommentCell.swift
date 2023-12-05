@@ -24,7 +24,6 @@ final class BoardCommentCell: BaseCollectionViewCell {
     }
     
     
-    
 }
 
 struct CommentModel: Hashable {
@@ -34,7 +33,12 @@ struct CommentModel: Hashable {
 
 
 var dummyComment = [
-    CommentModel(comment: "111"),
-    CommentModel(comment: "222"),
-    CommentModel(comment: "333")
+    CommentModel(comment: "댓글 111"),
+    CommentModel(comment: "댓글 222"),
+    CommentModel(comment: "댓글 333"),
+    CommentModel(comment: "댓글 333"),
+    CommentModel(comment: "댓글 333"),
+    CommentModel(comment: "댓글 333"),
+    CommentModel(comment: "댓글 333"),
+    CommentModel(comment: "댓글 333")
 ]

@@ -11,7 +11,7 @@ import RxCocoa
 
 final class BoardReadViewController: BaseViewController {
     
-    private let mainView = BoardCollectionView()
+    private let mainView = BoardReadView()//BoardCollectionView()
     private let viewModel = BoardReadViewModel()
     private let disposeBag = DisposeBag()
     
@@ -19,7 +19,9 @@ final class BoardReadViewController: BaseViewController {
     var imageList: [UIImage] = []
     
     private var deletePost = PublishRelay<Bool>()
+    private let dispatchGroup = DispatchGroup()
     
+    private let deviceWidth = UIScreen.main.bounds.size.width
     
     override func loadView() {
         self.view = mainView
@@ -36,6 +38,31 @@ final class BoardReadViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        guard let post = postData else {
+//            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") {
+//                self.navigationController?.popViewController(animated: true)
+//            }
+//            
+//            return
+//        }
+        bind()
+        NotificationCenter.default.addObserver(self, selector: #selector(refeshHeader), name: .reloadHeader, object: nil)
+        
+//        mainView.postData = post
+//        
+//        var urls: [String] = []
+//        post.image.forEach {
+//            urls.append($0)
+//        }
+//        mainView.imageURL = urls
+        updateSnapShot()
+        configNavBar()
+        configData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        print(#function)
         guard let post = postData else {
             showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") {
                 self.navigationController?.popViewController(animated: true)
@@ -43,22 +70,45 @@ final class BoardReadViewController: BaseViewController {
             
             return
         }
-        bind()
-        NotificationCenter.default.addObserver(self, selector: #selector(refeshHeader), name: .reloadHeader, object: nil)
-        
         mainView.postData = post
         
         var urls: [String] = []
         post.image.forEach {
             urls.append($0)
         }
-        mainView.imageURL = urls
-        updateSnapShot()
-        configNavBar()
+        //mainView.imageURL = urls
+        //updateSnapShot()
+        
+    }
+    
+    private func configData() {
+        
+        guard let post = postData else {
+            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") {
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+            return
+        }
+        
+        mainView.nickname.text = post.creator.nick
+        mainView.titleLabel.text = post.title
+        mainView.contentLabel.text = post.content
+        
+        for i in 0..<post.image.count {
+            
+            self.dispatchGroup.enter()
+            
+            mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-35) {
+                self.dispatchGroup.leave()
+            }
+            
+        }
         
     }
     
     @objc private func refeshHeader() {
+        print(#function)
         updateSnapShot()
     }
     
@@ -110,13 +160,15 @@ final class BoardReadViewController: BaseViewController {
         
     }
     
+    
     private func updateSnapShot() {
-//        print("update")
         var snapShot = NSDiffableDataSourceSnapshot<Int, CommentModel>()
         snapShot.appendSections([0])
         snapShot.appendItems(dummyComment)
         mainView.dataSource.apply(snapShot, animatingDifferences: false)
     }
+    
+    
     
     private func configNavBar() {
         var menuItems: [UIAction] = []
@@ -130,6 +182,13 @@ final class BoardReadViewController: BaseViewController {
             
             let vc = BoardWriteViewController()
             vc.boardMode = .edit(data: data)
+            vc.modalPresentationStyle = .fullScreen
+            vc.postHandler = { value in
+                self.postData = value
+                print(value)
+                self.updateSnapShot()
+                
+            }
             self.navigationController?.pushViewController(vc, animated: false)
         }
         let deleteAction = UIAction(title: "Delete") { [weak self] action in

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post: Codable {
+struct Post: Codable, Hashable {
     let likes, image, hashTags, comments: [String]
     let id: String
     let creator: Creator
@@ -22,7 +22,7 @@ struct Post: Codable {
 }
 
 // MARK: - Creator
-struct Creator: Codable {
+struct Creator: Codable, Hashable {
     let id, nick: String
 
     enum CodingKeys: String, CodingKey {
