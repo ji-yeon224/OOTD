@@ -35,7 +35,20 @@ class BaseViewController: UIViewController {
             self.view.makeToast(message, duration: 2.0, position: position, style: style)
         }
     }
-    
+    func showAlertWithCancel(title: String, message: String, okHandler: (() -> Void)?, cancelHandler: (() -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default) { _ in
+            okHandler?()
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive) { _ in
+            cancelHandler?()
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        
+        
+        present(alert, animated: true)
+    }
     
     
 }

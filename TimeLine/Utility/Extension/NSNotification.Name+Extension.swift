@@ -9,4 +9,5 @@ import Foundation
 
 extension NSNotification.Name {
     static let refresh = NSNotification.Name("refresh")
+    static let reloadHeader = NSNotification.Name("reloadHeader")
 }

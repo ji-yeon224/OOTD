@@ -11,6 +11,8 @@ import Moya
 enum PostAPI {
     case write(data: PostWrite)
     case read(productId: String, limit: Int, next: String?)
+    case delete(id: String)
+    case update(id: String, data: PostWrite)
 }
 
 extension PostAPI: TargetType {
@@ -22,7 +24,10 @@ extension PostAPI: TargetType {
         switch self {
         case .write, .read:
             return "post"
-        
+        case .delete(let id):
+            return "post/\(id)"
+        case .update(let id, _):
+            return "post/\(id)"
         }
     }
     
@@ -32,13 +37,17 @@ extension PostAPI: TargetType {
             return .post
         case .read:
             return .get
+        case .delete:
+            return .delete
+        case .update:
+            return .put
         }
     }
     
     
     var task: Moya.Task {
         switch self {
-        case .write(let data):
+        case .write(let data), .update(_, let data):
             return .uploadMultipart(convertToMultipart(data: data))
         case .read(let id, let limit, let next):
             var parameters: [String:Any] = ["product_id" : id, "limit": limit]
@@ -46,20 +55,22 @@ extension PostAPI: TargetType {
                 parameters["next"] = next
             }
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        case .delete: return .requestPlain
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .write:
+        case .write, .update:
             return [
                 "Content-Type": "multipart/form-data",
                 "SesacKey": APIKey.key,
                 "Authorization": UserDefaultsHelper.token
             ]
-        case .read:
+        case .read, .delete:
             return ["Authorization": UserDefaultsHelper.token,
                     "SesacKey": APIKey.key]
+       
         }
     }
     

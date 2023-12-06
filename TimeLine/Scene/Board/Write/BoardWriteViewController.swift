@@ -18,12 +18,15 @@ final class BoardWriteViewController: BaseViewController {
     
     private let disposeBag = DisposeBag()
     
-    private let postButtonClicked = PublishRelay<Bool>()
+    private let postButtonClicked = PublishRelay<BoardMode>()
+    private let updateButtonClicked = PublishRelay<Bool>()
 
     private var ableSelectImage = 3
     
-    private var pickedImageDict = [String: PHPickerResult]()
-    private var imgIdentifier = [String]()
+    var postHandler: ((Post) -> Void)?
+    
+    var editData: Post?
+    var boardMode: BoardMode = .add
     
     private lazy var photoButton = UIBarButtonItem(image: Constants.Image.photo, style: .plain, target: self, action: nil)
     
@@ -39,8 +42,30 @@ final class BoardWriteViewController: BaseViewController {
         title = "글쓰기"
         bind()
         
+        switch boardMode {
+        case .edit(let data):
+            editData = data
+            viewModel.postID = data.id
+            configEditData(data)
+        case .add:
+            break
+        }
+        
     }
     
+    private func configEditData(_ data: Post) {
+        mainView.titleTextField.text = data.title
+        mainView.contentTextView.text = data.content
+        var imgList: [SelectedImage] = []
+        data.image.forEach { url in
+            if let img = ImageManager.shared.downloadImage(with: url) {
+                imgList.append(SelectedImage(image: img))
+            }
+            
+        }
+        
+        viewModel.setImageItems(imgList)
+    }
 
     
     override func configure() {
@@ -70,6 +95,7 @@ final class BoardWriteViewController: BaseViewController {
         
         let input = BoardWriteViewModel.Input(
             postButton: postButtonClicked,
+            updateButton: updateButtonClicked,
             titleText: mainView.titleTextField.rx.text.orEmpty,
             contentText: mainView.contentTextView.rx.text.orEmpty,
             imageDelete: imageDelete
@@ -114,10 +140,21 @@ final class BoardWriteViewController: BaseViewController {
         
         output.successPost
             .bind(with: self) { owner, value in
-                if value.0 {
-                    owner.showOKAlert(title: "", message: "게시글 작성이 완료되었습니다!!") {
+                if value.0, let data = value.2 {
+                    var msg: String
+                    switch owner.boardMode {
+                    case .edit:
+                        msg = "게시글 수정이 완료되었습니다!"
+                        NotificationCenter.default.post(name: .reloadHeader, object: nil)
+                    case .add:
+                        msg = "게시글 작성이 완료되었습니다!"
+                    }
+                    owner.showOKAlert(title: "", message: msg) {
+                        
                         NotificationCenter.default.post(name: .refresh, object: nil)
-                        owner.navigationController?.popViewController(animated: true)
+                        
+                        owner.navigationController?.popViewController(animated: false)
+                        owner.postHandler?(data)
                     }
                     
                 }
@@ -155,7 +192,9 @@ final class BoardWriteViewController: BaseViewController {
     }
     
     @objc private func completeButtonTapped() {
-        postButtonClicked.accept(true)
+        postButtonClicked.accept(boardMode)
+        
+        
     }
     
     private func configToolBar() {

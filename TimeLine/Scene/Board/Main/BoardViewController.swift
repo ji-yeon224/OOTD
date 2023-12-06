@@ -17,7 +17,6 @@ final class BoardViewController: BaseViewController {
     
     private let disposeBag = DisposeBag()
     
-    
     let refreshList = PublishRelay<Bool>()
     
     override func loadView() {
@@ -50,18 +49,28 @@ final class BoardViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         Observable.zip(mainView.tableView.rx.itemSelected, mainView.tableView.rx.modelSelected(Post.self)) { IndexPath, model in
+            let vc = BoardReadViewController()
+            vc.postData = model
+            vc.modalPresentationStyle = .overFullScreen
+            self.navigationController?.pushViewController(vc, animated: true)
             return model
         }
         .bind(with: self) { owner, value in
-            print(value)
+//            print(value)
         }
         .disposed(by: disposeBag)
         
         
         mainView.writeButton.rx.tap
             .bind(with: self) { owner, _ in
+                
                 let vc = BoardWriteViewController()
                 vc.hidesBottomBarWhenPushed = true
+                vc.postHandler = {
+                    let readvc = BoardReadViewController()
+                    readvc.postData = $0
+                    owner.navigationController?.pushViewController(readvc, animated: false)
+                }
                 owner.navigationController?.pushViewController(vc, animated: true)
                 
             }

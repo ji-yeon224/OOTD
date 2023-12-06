@@ -10,7 +10,6 @@ import SnapKit
 
 final class BoardTableViewCell: UITableViewCell {
     
-    static let identifier = "BoardTableViewCell"
     
     let titleLabel = PlainLabel(size: 20, color: Constants.Color.basicText, line: 2)
     let contentLabel = PlainLabel(size: 15, color: Constants.Color.subText)
