@@ -60,12 +60,13 @@ final class BoardReadViewController: BaseViewController {
         }
         
         mainView.nickname.text = post.creator.nick
+        mainView.date.text = String.convertDateFormat(date: post.time)
         mainView.titleLabel.text = post.title
         mainView.contentLabel.text = post.content
         
         for i in 0..<post.image.count {
             
-            mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-35)
+            mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-30)
             
         }
         

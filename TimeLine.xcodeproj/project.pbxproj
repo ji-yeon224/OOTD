@@ -49,6 +49,7 @@
 		CEC7DF882B1D9D7D003D02D3 /* PostUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7DF872B1D9D7D003D02D3 /* PostUpdateError.swift */; };
 		CEC7DF8D2B1EAC0C003D02D3 /* BoardReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7DF8C2B1EAC0C003D02D3 /* BoardReadView.swift */; };
 		CEC7DF912B1F063A003D02D3 /* BoardReadCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7DF902B1F063A003D02D3 /* BoardReadCollectionView.swift */; };
+		CEC9A6DE2B20464C004207F9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9A6DD2B20464C004207F9 /* String+Extension.swift */; };
 		CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9614F2B0CEE8C0067C424 /* ReadResponse.swift */; };
 		CED961582B0CF73B0067C424 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CED961572B0CF73B0067C424 /* Kingfisher */; };
 		CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC337D2B0F47D300A5788E /* ImageLoadManager.swift */; };
@@ -64,7 +65,6 @@
 		CEDC339D2B11BC3400A5788E /* NextCursorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC339C2B11BC3400A5788E /* NextCursorType.swift */; };
 		CEE80ACE2B186E8D0041AC36 /* BoardContentSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80ACD2B186E8D0041AC36 /* BoardContentSection.swift */; };
 		CEE80AD02B1873680041AC36 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80ACF2B1873680041AC36 /* SectionType.swift */; };
-		CEE80AF92B19A6BD0041AC36 /* BoardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AF82B19A6BD0041AC36 /* BoardHeaderView.swift */; };
 		CEE80AFC2B19A92F0041AC36 /* BoardCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */; };
 		CEE80AFE2B1AC9120041AC36 /* PostDeleteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AFD2B1AC9120041AC36 /* PostDeleteError.swift */; };
 		CEE80B002B1ACB6B0041AC36 /* DeleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AFF2B1ACB6B0041AC36 /* DeleteResponse.swift */; };
@@ -153,6 +153,7 @@
 		CEC7DF872B1D9D7D003D02D3 /* PostUpdateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUpdateError.swift; sourceTree = "<group>"; };
 		CEC7DF8C2B1EAC0C003D02D3 /* BoardReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadView.swift; sourceTree = "<group>"; };
 		CEC7DF902B1F063A003D02D3 /* BoardReadCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadCollectionView.swift; sourceTree = "<group>"; };
+		CEC9A6DD2B20464C004207F9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CED9614F2B0CEE8C0067C424 /* ReadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadResponse.swift; sourceTree = "<group>"; };
 		CEDC337D2B0F47D300A5788E /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
 		CEDC337F2B0F917C00A5788E /* BoardReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadViewController.swift; sourceTree = "<group>"; };
@@ -167,7 +168,6 @@
 		CEDC339C2B11BC3400A5788E /* NextCursorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCursorType.swift; sourceTree = "<group>"; };
 		CEE80ACD2B186E8D0041AC36 /* BoardContentSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardContentSection.swift; sourceTree = "<group>"; };
 		CEE80ACF2B1873680041AC36 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
-		CEE80AF82B19A6BD0041AC36 /* BoardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardHeaderView.swift; sourceTree = "<group>"; };
 		CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentCell.swift; sourceTree = "<group>"; };
 		CEE80AFD2B1AC9120041AC36 /* PostDeleteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDeleteError.swift; sourceTree = "<group>"; };
 		CEE80AFF2B1ACB6B0041AC36 /* DeleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteResponse.swift; sourceTree = "<group>"; };
@@ -278,6 +278,7 @@
 				CEDC33852B0FA7AF00A5788E /* UIImageView+Extension.swift */,
 				CE75C3DB2B1605DE00A08615 /* UIImage+Extension.swift */,
 				CE76E0132B17295E00A38041 /* NSNotification.Name+Extension.swift */,
+				CEC9A6DD2B20464C004207F9 /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -400,7 +401,6 @@
 		CED961512B0CEF820067C424 /* Read */ = {
 			isa = PBXGroup;
 			children = (
-				CEE80AF82B19A6BD0041AC36 /* BoardHeaderView.swift */,
 				CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */,
 				CEDC337F2B0F917C00A5788E /* BoardReadViewController.swift */,
 				CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */,
@@ -730,7 +730,6 @@
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */,
 				CEE80B002B1ACB6B0041AC36 /* DeleteResponse.swift in Sources */,
-				CEE80AF92B19A6BD0041AC36 /* BoardHeaderView.swift in Sources */,
 				CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */,
 				CEDC338C2B103C4600A5788E /* BoardViewModel.swift in Sources */,
 				CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */,
@@ -745,6 +744,7 @@
 				CEBDFBFC2B0B97EA00D43BF9 /* PostWriteError.swift in Sources */,
 				CE290E992B04B7C6007DFCAE /* ResponseMessage.swift in Sources */,
 				CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */,
+				CEC9A6DE2B20464C004207F9 /* String+Extension.swift in Sources */,
 				CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */,
 				CEECBF912B0A40520031947E /* TabBarController.swift in Sources */,
 				CEED52B12B04FB6F007E12FA /* RefreshError.swift in Sources */,

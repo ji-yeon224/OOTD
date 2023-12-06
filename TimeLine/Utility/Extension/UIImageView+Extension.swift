@@ -11,16 +11,17 @@ import Kingfisher
 extension UIImageView {
     
     func setImage(with urlString: String, resize width: CGFloat) {
-        
+        let cornerImageProcessor = RoundCornerImageProcessor(cornerRadius: 15)
         self.kf.indicatorType = .activity
         guard let url = URL(string: getPhotoURL(urlString)) else { return }
         self.kf.setImage(with: url, options: [
             .requestModifier(ImageLoadManager.shared.getModifier()),
-            .transition(.fade(1.0))
+            .transition(.fade(1.0)),
+            .processor(cornerImageProcessor)
         ]) { result in
             switch result {
             case .success(let result):
-                self.image = result.image.resize(size: width)
+                self.image = result.image.resize(width: width)
                 
             case .failure(_):
                 self.image = Constants.Image.photo?.withTintColor(Constants.Color.placeholder)

@@ -9,8 +9,7 @@ import UIKit
 
 final class BoardReadView: BaseView {
     
-    var postData: Post?
-    var imageURL: [String] = []
+    
     let scrollView = UIScrollView()
     
     private let stackView = {
@@ -33,6 +32,7 @@ final class BoardReadView: BaseView {
     }()
     
     let nickname = PlainLabel(size: 14, color: Constants.Color.basicText, line: 1)
+    let date = PlainLabel(size: 14, color: Constants.Color.placeholder, line: 1)
     
     private let titleView = UIView()
     private let contentView = UIView()
@@ -51,6 +51,10 @@ final class BoardReadView: BaseView {
         view.tintColor = .red
         return view
     }()
+    
+    private let imageBackView1 = UIView()
+    private let imageBackView2 = UIView()
+    private let imageBackView3 = UIView()
     
     lazy var img1 = PlainImageView(frame: .zero)
     lazy var img2 = PlainImageView(frame: .zero)
@@ -76,9 +80,9 @@ final class BoardReadView: BaseView {
         stackView.addArrangedSubview(contentView)
         
         stackView.addArrangedSubview(emptyView)
-        stackView.addArrangedSubview(img1)
-        stackView.addArrangedSubview(img2)
-        stackView.addArrangedSubview(img3)
+        stackView.addArrangedSubview(imageBackView1)
+        stackView.addArrangedSubview(imageBackView2)
+        stackView.addArrangedSubview(imageBackView3)
         
         stackView.addArrangedSubview(bottomView)
         
@@ -91,10 +95,16 @@ final class BoardReadView: BaseView {
     private func stackViewSubViews() {
         infoView.addSubview(profileImage)
         infoView.addSubview(nickname)
+        infoView.addSubview(date)
         
         titleView.addSubview(titleLabel)
         contentView.addSubview(contentLabel)
         bottomView.addSubview(likeButton)
+        
+        imageBackView1.addSubview(img1)
+        imageBackView2.addSubview(img2)
+        imageBackView3.addSubview(img3)
+        
     }
     
     override func setConstraints() {
@@ -121,8 +131,15 @@ final class BoardReadView: BaseView {
         
         nickname.snp.makeConstraints { make in
             make.leading.equalTo(profileImage.snp.trailing).offset(10)
-            make.centerY.equalTo(infoView)
-            make.height.equalTo(20)
+//            make.centerY.equalTo(infoView)
+            make.top.equalTo(infoView).inset(4)
+            make.height.equalTo(infoView.snp.height).multipliedBy(0.5)
+        }
+        date.snp.makeConstraints { make in
+            make.leading.equalTo(profileImage.snp.trailing).offset(10)
+            make.height.equalTo(infoView.snp.height).multipliedBy(0.5)
+            make.bottom.equalTo(infoView).inset(4)
+            
         }
         
         titleView.snp.makeConstraints { make in
@@ -130,17 +147,16 @@ final class BoardReadView: BaseView {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.verticalEdges.equalTo(titleView)
-            make.leading.equalTo(titleView).offset(10)
+            make.edges.equalTo(titleView).inset(15)
         }
+        
         
         contentView.snp.makeConstraints { make in
             make.width.equalTo(scrollView)
         }
         
         contentLabel.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).offset(10)
-            make.verticalEdges.equalTo(contentView)
+            make.edges.equalTo(contentView).inset(15)
             
         }
         
@@ -149,14 +165,23 @@ final class BoardReadView: BaseView {
             make.height.equalTo(30)
         }
         
+        imageBackView1.snp.makeConstraints { make in
+            make.width.equalTo(scrollView)
+        }
         img1.snp.makeConstraints { make in
+            make.edges.equalTo(imageBackView1).inset(5)
+        }
+        imageBackView2.snp.makeConstraints { make in
             make.width.equalTo(scrollView)
         }
         img2.snp.makeConstraints { make in
+            make.edges.equalTo(imageBackView2).inset(5)
+        }
+        imageBackView3.snp.makeConstraints { make in
             make.width.equalTo(scrollView)
         }
         img3.snp.makeConstraints { make in
-            make.width.equalTo(scrollView)
+            make.edges.equalTo(imageBackView3).inset(5)
         }
         
         bottomView.snp.makeConstraints { make in
@@ -164,7 +189,7 @@ final class BoardReadView: BaseView {
             make.height.equalTo(30)
         }
         likeButton.snp.makeConstraints { make in
-            make.trailing.equalTo(bottomView).offset(-10)
+            make.trailing.equalTo(bottomView).offset(-15)
             make.centerY.equalTo(bottomView)
             make.size.equalTo(20)
         }

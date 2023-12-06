@@ -25,6 +25,15 @@ extension DateFormatter {
         return format
     }()
     
+    static func convertToString(format: String, date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(identifier: TimeZone.current.identifier)
+        formatter.dateFormat = format
+        return formatter.string(from: date)
+    }
+    
+    
     static func convertDate(date: Date) -> String {
         return format.string(from: date)
     }
