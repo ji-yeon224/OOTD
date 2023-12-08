@@ -70,6 +70,8 @@ final class BoardReadView: BaseView {
     private let commentView = UIView()
     let commentLabel = PlainLabel(size: 17, color: Constants.Color.subText)
     
+    let commentWriteView = CommentWriteView()
+    
     
     lazy var tableView = {
         let view = BoardTableView()
@@ -103,10 +105,16 @@ final class BoardReadView: BaseView {
         stackView.addArrangedSubview(lineView)
         stackView.addArrangedSubview(commentView)
         stackView.addArrangedSubview(tableView)
+        addSubview(commentWriteView)
         
         stackViewSubViews()
         configureDataSource()
+        
+        scrollView.keyboardDismissMode = .onDrag
+                
+        
     }
+    
     
     private func stackViewSubViews() {
         infoView.addSubview(profileImage)
@@ -226,6 +234,12 @@ final class BoardReadView: BaseView {
         tableView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(scrollView)
             
+        }
+        
+        commentWriteView.snp.makeConstraints { make in
+            
+            make.bottom.equalToSuperview()
+            make.width.equalToSuperview()
         }
         
     }

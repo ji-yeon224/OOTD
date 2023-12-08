@@ -132,7 +132,18 @@ final class BoardReadViewController: BaseViewController {
                 }
             })
             .disposed(by: disposeBag)
-        
+        mainView.commentWriteView.textView.rx.didChange
+            .bind(with: self) { owner, _ in
+                let commentWriteView = owner.mainView.commentWriteView
+                let size = CGSize(width: commentWriteView.frame.width, height: .infinity)
+                let estimatedSize = commentWriteView.textView.sizeThatFits(size)
+                let isMaxHeight = estimatedSize.height >= 100
+                
+                if isMaxHeight {
+                    commentWriteView.textView.isScrollEnabled = true
+                } else { commentWriteView.textView.isScrollEnabled = false }
+            }
+            .disposed(by: disposeBag)
     }
     
     

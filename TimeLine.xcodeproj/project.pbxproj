@@ -34,6 +34,7 @@
 		CE7A0C6C2B1B6162003F247B /* BoardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A0C6B2B1B6162003F247B /* BoardMode.swift */; };
 		CEA10AD52B22E6EF00969A8B /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */; };
 		CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD62B22E76B00969A8B /* BoardTableView.swift */; };
+		CEA10ADA2B22F09B00969A8B /* CommentWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */; };
 		CEA75CF92B214B050029E12E /* CommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA75CF82B214B050029E12E /* CommentAPI.swift */; };
 		CEA75CFB2B214B120029E12E /* CommentAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA75CFA2B214B120029E12E /* CommentAPIManager.swift */; };
 		CEA75CFF2B215DCB0029E12E /* TokenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA75CFE2B215DCB0029E12E /* TokenError.swift */; };
@@ -58,7 +59,6 @@
 		CEC7DF862B1D9478003D02D3 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7DF852B1D9478003D02D3 /* ImageManager.swift */; };
 		CEC7DF882B1D9D7D003D02D3 /* PostUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7DF872B1D9D7D003D02D3 /* PostUpdateError.swift */; };
 		CEC7DF8D2B1EAC0C003D02D3 /* BoardReadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7DF8C2B1EAC0C003D02D3 /* BoardReadView.swift */; };
-		CEC7DF912B1F063A003D02D3 /* BoardReadCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7DF902B1F063A003D02D3 /* BoardReadCollectionView.swift */; };
 		CEC9A6DE2B20464C004207F9 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9A6DD2B20464C004207F9 /* String+Extension.swift */; };
 		CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9614F2B0CEE8C0067C424 /* ReadResponse.swift */; };
 		CED961582B0CF73B0067C424 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CED961572B0CF73B0067C424 /* Kingfisher */; };
@@ -149,6 +149,7 @@
 		CE7A0C6B2B1B6162003F247B /* BoardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMode.swift; sourceTree = "<group>"; };
 		CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		CEA10AD62B22E76B00969A8B /* BoardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableView.swift; sourceTree = "<group>"; };
+		CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWriteView.swift; sourceTree = "<group>"; };
 		CEA75CF82B214B050029E12E /* CommentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAPI.swift; sourceTree = "<group>"; };
 		CEA75CFA2B214B120029E12E /* CommentAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAPIManager.swift; sourceTree = "<group>"; };
 		CEA75CFE2B215DCB0029E12E /* TokenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenError.swift; sourceTree = "<group>"; };
@@ -172,7 +173,6 @@
 		CEC7DF852B1D9478003D02D3 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		CEC7DF872B1D9D7D003D02D3 /* PostUpdateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUpdateError.swift; sourceTree = "<group>"; };
 		CEC7DF8C2B1EAC0C003D02D3 /* BoardReadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadView.swift; sourceTree = "<group>"; };
-		CEC7DF902B1F063A003D02D3 /* BoardReadCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReadCollectionView.swift; sourceTree = "<group>"; };
 		CEC9A6DD2B20464C004207F9 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CED9614F2B0CEE8C0067C424 /* ReadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadResponse.swift; sourceTree = "<group>"; };
 		CEDC337D2B0F47D300A5788E /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
@@ -338,6 +338,16 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		CEA10AD82B22F07800969A8B /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				CEA10AD62B22E76B00969A8B /* BoardTableView.swift */,
+				CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */,
+				CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		CEA75CF72B214AF10029E12E /* Comment */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,12 +471,10 @@
 		CED961512B0CEF820067C424 /* Read */ = {
 			isa = PBXGroup;
 			children = (
-				CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */,
+				CEA10AD82B22F07800969A8B /* Comment */,
 				CEDC337F2B0F917C00A5788E /* BoardReadViewController.swift */,
 				CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */,
 				CEC7DF8C2B1EAC0C003D02D3 /* BoardReadView.swift */,
-				CEC7DF902B1F063A003D02D3 /* BoardReadCollectionView.swift */,
-				CEA10AD62B22E76B00969A8B /* BoardTableView.swift */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -775,7 +783,6 @@
 				CE048CC52B03913300FAC038 /* Join.swift in Sources */,
 				CEECBF8D2B0A3EA20031947E /* BoardView.swift in Sources */,
 				CEBDFC002B0BAA3500D43BF9 /* BoardWriteViewModel.swift in Sources */,
-				CEC7DF912B1F063A003D02D3 /* BoardReadCollectionView.swift in Sources */,
 				CEECBF942B0A42E00031947E /* BoardWriteView.swift in Sources */,
 				CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */,
 				CE290E902B04A3B1007DFCAE /* DateFormatter+Extension.swift in Sources */,
@@ -806,6 +813,7 @@
 				CEBDFBF42B0B31B900D43BF9 /* PostAPIManager.swift in Sources */,
 				CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */,
 				CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */,
+				CEA10ADA2B22F09B00969A8B /* CommentWriteView.swift in Sources */,
 				CEBDFBF62B0B31CA00D43BF9 /* PostWrite.swift in Sources */,
 				CEBDFBF82B0B4AE200D43BF9 /* Post.swift in Sources */,
 				CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */,
