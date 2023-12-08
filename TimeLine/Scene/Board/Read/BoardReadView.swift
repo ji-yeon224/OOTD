@@ -61,12 +61,22 @@ final class BoardReadView: BaseView {
     lazy var img3 = PlainImageView(frame: .zero)
     lazy var imgList = [img1, img2, img3]
     
+    private let lineView = {
+        let view = UIView()
+        view.backgroundColor = Constants.Color.lightBorder
+        return view
+    }()
+    
+    private let commentView = UIView()
+    let commentLabel = PlainLabel(size: 17, color: Constants.Color.subText)
     
     lazy var collectionView = {
         let view = BoardReadCollectionView(frame: .zero, collectionViewLayout: self.collectionViewLayout())
         view.isScrollEnabled = false
         return view
     }()
+    
+    
     
     var dataSource: UICollectionViewDiffableDataSource<Int, CommentModel>!
     
@@ -85,7 +95,8 @@ final class BoardReadView: BaseView {
         stackView.addArrangedSubview(imageBackView3)
         
         stackView.addArrangedSubview(bottomView)
-        
+        stackView.addArrangedSubview(lineView)
+        stackView.addArrangedSubview(commentView)
         stackView.addArrangedSubview(collectionView)
         
         stackViewSubViews()
@@ -105,6 +116,7 @@ final class BoardReadView: BaseView {
         imageBackView2.addSubview(img2)
         imageBackView3.addSubview(img3)
         
+        commentView.addSubview(commentLabel)
     }
     
     override func setConstraints() {
@@ -193,7 +205,19 @@ final class BoardReadView: BaseView {
             make.centerY.equalTo(bottomView)
             make.size.equalTo(20)
         }
-        
+        lineView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(5)
+        }
+        commentView.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(scrollView)
+            make.height.equalTo(30)
+        }
+        commentLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(commentView).inset(20)
+            make.centerY.equalTo(commentView)
+        }
+        commentLabel.text = "댓글"
         collectionView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(scrollView)
             
@@ -227,7 +251,6 @@ final class BoardReadView: BaseView {
             
         })
         
-
         
         
         

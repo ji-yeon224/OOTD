@@ -41,7 +41,7 @@ final class BoardReadViewController: BaseViewController {
         bind()
         updateSnapShot()
         configNavBar()
-        commentTest()
+        //commentTest()
     }
     
     func commentTest() {
