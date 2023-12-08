@@ -84,8 +84,7 @@ final class BoardReadView: BaseView {
     }()
     
     
-    var dataSource: UICollectionViewDiffableDataSource<Int, CommentModel>!
-    var tabledataSource: UITableViewDiffableDataSource<Int, CommentModel>!
+    var dataSource: UITableViewDiffableDataSource<Int, Comment>!
     
     
     override func configure() {
@@ -135,7 +134,8 @@ final class BoardReadView: BaseView {
     override func setConstraints() {
         
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.horizontalEdges.top.equalToSuperview()
+            
         }
         stackView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView)
@@ -237,7 +237,7 @@ final class BoardReadView: BaseView {
         }
         
         commentWriteView.snp.makeConstraints { make in
-            
+            make.top.equalTo(scrollView.snp.bottom)
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
         }
@@ -258,11 +258,11 @@ final class BoardReadView: BaseView {
     
     func configureDataSource() {
         
-        tabledataSource = UITableViewDiffableDataSource<Int, CommentModel>(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+        dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
-            cell.nicknameLabel.text = "nickname test"
-            cell.dateLabel.text = "2023.12.08 오후 02:33"
-            cell.contentLabel.text = itemIdentifier.comment
+            cell.nicknameLabel.text = itemIdentifier.creator.nick
+            cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
+            cell.contentLabel.text = itemIdentifier.content
             return cell
         })
         

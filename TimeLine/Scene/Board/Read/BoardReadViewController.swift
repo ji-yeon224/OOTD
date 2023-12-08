@@ -17,6 +17,7 @@ final class BoardReadViewController: BaseViewController {
     
     var postData: Post?
     var imageList: [UIImage] = []
+    private var comments: [Comment] = []
     
     private var deletePost = PublishRelay<Bool>()
     private let commentWrite = PublishRelay<CommentRequest>()
@@ -40,23 +41,14 @@ final class BoardReadViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-        updateSnapShot()
         configNavBar()
-        //commentTest()
-    }
-    
-    func commentTest() {
-        CommentAPIManager.shared.request(api: .write(id: postData!.id, data: CommentRequest(content: "댓글 테스트")), type: Comment.self)
-            .subscribe(with: self) { owner, result in
-                print(result)
-            }
-            .disposed(by: disposeBag)
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         configData()
+        updateSnapShot()
     }
     
     private func configData() {
@@ -73,7 +65,7 @@ final class BoardReadViewController: BaseViewController {
         mainView.date.text = String.convertDateFormat(date: post.time)
         mainView.titleLabel.text = post.title
         mainView.contentLabel.text = post.content
-        
+        comments = post.comments.reversed()
         for i in 0..<post.image.count {
             
             mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-30)
@@ -83,10 +75,6 @@ final class BoardReadViewController: BaseViewController {
         
     }
     
-    @objc private func refeshHeader() {
-        print(#function)
-        updateSnapShot()
-    }
     
     private func bind() {
         
@@ -162,10 +150,10 @@ final class BoardReadViewController: BaseViewController {
     
     
     private func updateSnapShot() {
-        var snapShot = NSDiffableDataSourceSnapshot<Int, CommentModel>()
+        var snapShot = NSDiffableDataSourceSnapshot<Int, Comment>()
         snapShot.appendSections([0])
-        snapShot.appendItems(dummyComment)
-        mainView.tabledataSource.apply(snapShot, animatingDifferences: false)
+        snapShot.appendItems(comments)
+        mainView.dataSource.apply(snapShot, animatingDifferences: false)
     }
     
     
