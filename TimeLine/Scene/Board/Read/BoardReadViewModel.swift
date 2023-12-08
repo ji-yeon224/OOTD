@@ -16,6 +16,7 @@ final class BoardReadViewModel {
     
     struct Input {
         let delete: PublishRelay<Bool>
+        let commentWrite: PublishRelay<CommentRequest>
     }
     
     struct Output {
@@ -71,6 +72,22 @@ final class BoardReadViewModel {
                         errorMsg.accept(errorType.localizedDescription)
                     }
                     
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        
+        input.commentWrite
+            .flatMap {
+                CommentAPIManager.shared.request(api: .write(id: post.id, data: $0), type: Comment.self)
+            }
+            .subscribe(with: self) { owner, response in
+                switch response {
+                case .success(let result):
+                    print(result)
+                    
+                case .failure(let error):
+                    print(error)
                 }
             }
             .disposed(by: disposeBag)

@@ -19,6 +19,7 @@ final class BoardReadViewController: BaseViewController {
     var imageList: [UIImage] = []
     
     private var deletePost = PublishRelay<Bool>()
+    private let commentWrite = PublishRelay<CommentRequest>()
     private let dispatchGroup = DispatchGroup()
     
     private let deviceWidth = UIScreen.main.bounds.size.width
@@ -89,9 +90,13 @@ final class BoardReadViewController: BaseViewController {
     
     private func bind() {
         
-        let input = BoardReadViewModel.Input(delete: deletePost)
+        let input = BoardReadViewModel.Input(
+            delete: deletePost,
+            commentWrite: commentWrite
+        )
         
         let output = viewModel.transform(input: input)
+        
         
         
         output?.errorMsg
@@ -142,6 +147,15 @@ final class BoardReadViewController: BaseViewController {
                 if isMaxHeight {
                     commentWriteView.textView.isScrollEnabled = true
                 } else { commentWriteView.textView.isScrollEnabled = false }
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.commentWriteView.postButton.rx.tap
+            .withLatestFrom(mainView.commentWriteView.textView.rx.text.orEmpty) { _, text in
+                return CommentRequest(content: text)
+            }
+            .bind(with: self) { owner, value in
+                owner.commentWrite.accept(value)
             }
             .disposed(by: disposeBag)
     }
