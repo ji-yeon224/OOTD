@@ -32,6 +32,8 @@
 		CE76E0162B1747F900A38041 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0152B1747F900A38041 /* ReusableProtocol.swift */; };
 		CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0172B17719600A38041 /* PlainImageView.swift */; };
 		CE7A0C6C2B1B6162003F247B /* BoardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A0C6B2B1B6162003F247B /* BoardMode.swift */; };
+		CEA10AD52B22E6EF00969A8B /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */; };
+		CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD62B22E76B00969A8B /* BoardTableView.swift */; };
 		CEA75CF92B214B050029E12E /* CommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA75CF82B214B050029E12E /* CommentAPI.swift */; };
 		CEA75CFB2B214B120029E12E /* CommentAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA75CFA2B214B120029E12E /* CommentAPIManager.swift */; };
 		CEA75CFF2B215DCB0029E12E /* TokenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA75CFE2B215DCB0029E12E /* TokenError.swift */; };
@@ -145,6 +147,8 @@
 		CE76E0152B1747F900A38041 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
 		CE76E0172B17719600A38041 /* PlainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainImageView.swift; sourceTree = "<group>"; };
 		CE7A0C6B2B1B6162003F247B /* BoardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMode.swift; sourceTree = "<group>"; };
+		CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		CEA10AD62B22E76B00969A8B /* BoardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableView.swift; sourceTree = "<group>"; };
 		CEA75CF82B214B050029E12E /* CommentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAPI.swift; sourceTree = "<group>"; };
 		CEA75CFA2B214B120029E12E /* CommentAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAPIManager.swift; sourceTree = "<group>"; };
 		CEA75CFE2B215DCB0029E12E /* TokenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenError.swift; sourceTree = "<group>"; };
@@ -462,6 +466,7 @@
 				CEDC33832B0F919000A5788E /* BoardReadViewModel.swift */,
 				CEC7DF8C2B1EAC0C003D02D3 /* BoardReadView.swift */,
 				CEC7DF902B1F063A003D02D3 /* BoardReadCollectionView.swift */,
+				CEA10AD62B22E76B00969A8B /* BoardTableView.swift */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -541,6 +546,7 @@
 				CEEA87862B01F0A000AC375F /* BaseView.swift */,
 				CEEA878A2B01F1A400AC375F /* BaseViewController.swift */,
 				CE76E0112B1725BB00A38041 /* BaseCollectionViewCell.swift */,
+				CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -757,6 +763,7 @@
 				CEBDFC022B0BB52100D43BF9 /* ProductId.swift in Sources */,
 				CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */,
 				CEDC33992B10C6AD00A5788E /* PostReadError.swift in Sources */,
+				CEA10AD52B22E6EF00969A8B /* BaseTableViewCell.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,
 				CE290E862B049A3B007DFCAE /* UserInfoResponse.swift in Sources */,
 				CE28C85D2B1381CD00820F1A /* PhPickerProtocol.swift in Sources */,
@@ -797,6 +804,7 @@
 				CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */,
 				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
 				CEBDFBF42B0B31B900D43BF9 /* PostAPIManager.swift in Sources */,
+				CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */,
 				CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */,
 				CEBDFBF62B0B31CA00D43BF9 /* PostWrite.swift in Sources */,
 				CEBDFBF82B0B4AE200D43BF9 /* Post.swift in Sources */,

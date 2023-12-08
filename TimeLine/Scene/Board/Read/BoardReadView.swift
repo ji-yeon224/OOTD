@@ -70,15 +70,20 @@ final class BoardReadView: BaseView {
     private let commentView = UIView()
     let commentLabel = PlainLabel(size: 17, color: Constants.Color.subText)
     
-    lazy var collectionView = {
-        let view = BoardReadCollectionView(frame: .zero, collectionViewLayout: self.collectionViewLayout())
+    
+    lazy var tableView = {
+        let view = BoardTableView()
         view.isScrollEnabled = false
+        view.rowHeight = UITableView.automaticDimension
+        view.register(BoardCommentCell.self, forCellReuseIdentifier: BoardCommentCell.identifier)
+        view.separatorStyle = .none
         return view
+        
     }()
     
     
-    
     var dataSource: UICollectionViewDiffableDataSource<Int, CommentModel>!
+    var tabledataSource: UITableViewDiffableDataSource<Int, CommentModel>!
     
     
     override func configure() {
@@ -97,7 +102,7 @@ final class BoardReadView: BaseView {
         stackView.addArrangedSubview(bottomView)
         stackView.addArrangedSubview(lineView)
         stackView.addArrangedSubview(commentView)
-        stackView.addArrangedSubview(collectionView)
+        stackView.addArrangedSubview(tableView)
         
         stackViewSubViews()
         configureDataSource()
@@ -218,7 +223,7 @@ final class BoardReadView: BaseView {
             make.centerY.equalTo(commentView)
         }
         commentLabel.text = "댓글"
-        collectionView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(scrollView)
             
         }
@@ -231,26 +236,21 @@ final class BoardReadView: BaseView {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
-        let size = UIScreen.main.bounds.width - 40 //self.frame.width - 40
+        let size = UIScreen.main.bounds.width - 10 //self.frame.width - 40
         layout.itemSize = CGSize(width: size, height: size / 4)
         return layout
     }
     
     
     func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<BoardCommentCell, CommentModel> { cell, indexPath, itemIdentifier in
-            
-            cell.label.text = itemIdentifier.comment
-            
-        }
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-            
-            
-            return cell
-            
-        })
         
+        tabledataSource = UITableViewDiffableDataSource<Int, CommentModel>(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
+            cell.nicknameLabel.text = "nickname test"
+            cell.dateLabel.text = "2023.12.08 오후 02:33"
+            cell.contentLabel.text = itemIdentifier.comment
+            return cell
+        })
         
         
         

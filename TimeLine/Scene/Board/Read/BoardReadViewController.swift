@@ -140,7 +140,7 @@ final class BoardReadViewController: BaseViewController {
         var snapShot = NSDiffableDataSourceSnapshot<Int, CommentModel>()
         snapShot.appendSections([0])
         snapShot.appendItems(dummyComment)
-        mainView.dataSource.apply(snapShot, animatingDifferences: false)
+        mainView.tabledataSource.apply(snapShot, animatingDifferences: false)
     }
     
     
