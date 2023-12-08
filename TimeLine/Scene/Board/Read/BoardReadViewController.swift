@@ -155,6 +155,13 @@ final class BoardReadViewController: BaseViewController {
                 if isMaxHeight {
                     commentWriteView.textView.isScrollEnabled = true
                 } else { commentWriteView.textView.isScrollEnabled = false }
+                
+                if commentWriteView.textView.text.count > 0 {
+                    commentWriteView.placeholderLabel.isHidden = true
+                } else {
+                    commentWriteView.placeholderLabel.isHidden = false
+                }
+                
             }
             .disposed(by: disposeBag)
         

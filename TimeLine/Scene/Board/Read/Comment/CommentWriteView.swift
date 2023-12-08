@@ -24,10 +24,17 @@ final class CommentWriteView: BaseView {
         return view
     }()
     
+    let placeholderLabel = {
+        let view = PlainLabel(size: 14, color: Constants.Color.placeholder)
+        view.text = "댓글을 입력해주세요."
+        return view
+    }()
+    
     override func configure() {
         backgroundColor = Constants.Color.background
         addSubview(textView)
         addSubview(postButton)
+        textView.addSubview(placeholderLabel)
         layer.borderWidth = 0.8
         layer.borderColor = Constants.Color.lightBorder.cgColor
     }
@@ -39,6 +46,9 @@ final class CommentWriteView: BaseView {
             make.height.greaterThanOrEqualTo(30)
             make.width.equalTo(self).multipliedBy(0.8)
             
+        }
+        placeholderLabel.snp.makeConstraints { make in
+            make.top.leading.equalTo(textView).inset(8)
         }
         postButton.snp.makeConstraints { make in
             make.bottom.trailing.equalTo(self).inset(10)
