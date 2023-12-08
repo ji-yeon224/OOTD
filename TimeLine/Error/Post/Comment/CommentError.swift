@@ -18,7 +18,7 @@ extension CommentError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .emptyData:
-            return "필수 값이 누락되었습니다."
+            return "내용을 입력해주세요."
         case .noExistData:
             return "해당 댓글을 찾을 수 없습니다."
         case .noAuthorization:

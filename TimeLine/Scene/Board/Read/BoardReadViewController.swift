@@ -65,6 +65,7 @@ final class BoardReadViewController: BaseViewController {
         mainView.date.text = String.convertDateFormat(date: post.time)
         mainView.titleLabel.text = post.title
         mainView.contentLabel.text = post.content
+        mainView.commentLabel.text = "댓글 \(post.comments.count)개"
         comments = post.comments.reversed()
         for i in 0..<post.image.count {
             
@@ -80,7 +81,8 @@ final class BoardReadViewController: BaseViewController {
         
         let input = BoardReadViewModel.Input(
             delete: deletePost,
-            commentWrite: commentWrite
+            commentWrite: commentWrite,
+            commentContent: mainView.commentWriteView.textView.rx.text.orEmpty
         )
         
         let output = viewModel.transform(input: input)
@@ -125,6 +127,24 @@ final class BoardReadViewController: BaseViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        output?.commentWrite
+            .bind(with: self, onNext: { owner, value in
+                owner.comments.append(value)
+                owner.updateSnapShot()
+                owner.mainView.commentWriteView.textView.text = ""
+                owner.showOKAlert(title: "", message: "댓글 작성이 완료되었습니다!") {
+                    owner.mainView.scrollView.scrollToBottom()
+                }
+                
+                
+            })
+            .disposed(by: disposeBag)
+        
+        output?.commentIsEnable
+            .bind(to: mainView.commentWriteView.postButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
         mainView.commentWriteView.textView.rx.didChange
             .bind(with: self) { owner, _ in
                 let commentWriteView = owner.mainView.commentWriteView
@@ -153,7 +173,7 @@ final class BoardReadViewController: BaseViewController {
         var snapShot = NSDiffableDataSourceSnapshot<Int, Comment>()
         snapShot.appendSections([0])
         snapShot.appendItems(comments)
-        mainView.dataSource.apply(snapShot, animatingDifferences: false)
+        mainView.dataSource.apply(snapShot)
     }
     
     

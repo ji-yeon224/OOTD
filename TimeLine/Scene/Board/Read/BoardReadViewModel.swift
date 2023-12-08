@@ -17,12 +17,15 @@ final class BoardReadViewModel {
     struct Input {
         let delete: PublishRelay<Bool>
         let commentWrite: PublishRelay<CommentRequest>
+        let commentContent: ControlProperty<String>
     }
     
     struct Output {
         let errorMsg: PublishRelay<String>
         let tokenRequest: PublishRelay<RefreshResult>
         let successDelete: PublishRelay<Bool>
+        let commentWrite: PublishRelay<Comment>
+        let commentIsEnable: BehaviorRelay<Bool>
     }
     
     func transform(input: Input) -> Output? {
@@ -33,6 +36,8 @@ final class BoardReadViewModel {
         let errorMsg = PublishRelay<String>()
         let tokenRequest = PublishRelay<RefreshResult>()
         let successDelete = PublishRelay<Bool>()
+        let commentWrite = PublishRelay<Comment>()
+        let commentIsEnable = BehaviorRelay(value: false)
         
         input.delete
             .flatMap { _ in
@@ -85,14 +90,48 @@ final class BoardReadViewModel {
                 switch response {
                 case .success(let result):
                     print(result)
-                    
+                    commentWrite.accept(result)
                 case .failure(let error):
-                    print(error)
+                    let code = error.statusCode
+                    if let tokenError = TokenError(rawValue: code) {
+                        let result = RefreshTokenManager.shared.tokenRequest()
+                        result
+                            .bind(with: self) { owner, result in
+                                if result == .success {
+                                    
+                                    //input.delete.accept(true)
+                                } else {
+                                    tokenRequest.accept(result)
+                                }
+                            }
+                            .disposed(by: owner.disposeBag)
+                        return
+                    }
+                    guard let errorType = CommentError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            errorMsg.accept(commonError.localizedDescription)
+                        }
+                        return
+                    }
+                    debugPrint("[DEBUG-POST] ", error.statusCode, error.description)
+                    
+                    errorMsg.accept(errorType.localizedDescription)
+//                    errorMsg.accept(errorType.localizedDescription)
                 }
             }
             .disposed(by: disposeBag)
         
-        return Output(errorMsg: errorMsg, tokenRequest: tokenRequest, successDelete: successDelete)
+        input.commentContent
+            .bind(with: self) { owner, value in
+                if value.trimmingCharacters(in: .whitespaces).count > 0 {
+                    commentIsEnable.accept(true)
+                } else {
+                    commentIsEnable.accept(false)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        return Output(errorMsg: errorMsg, tokenRequest: tokenRequest, successDelete: successDelete, commentWrite: commentWrite, commentIsEnable: commentIsEnable)
         
     }
     

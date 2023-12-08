@@ -230,7 +230,7 @@ final class BoardReadView: BaseView {
             make.horizontalEdges.equalTo(commentView).inset(20)
             make.centerY.equalTo(commentView)
         }
-        commentLabel.text = "댓글"
+        
         tableView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(scrollView)
             
