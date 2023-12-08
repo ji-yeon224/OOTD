@@ -11,6 +11,7 @@
 		CE25D0A42B220E6C004DFB66 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A32B220E6C004DFB66 /* Comment.swift */; };
 		CE25D0A62B220EE6004DFB66 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A52B220EE6004DFB66 /* Creator.swift */; };
 		CE25D0A82B22109F004DFB66 /* CommentDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A72B22109F004DFB66 /* CommentDelete.swift */; };
+		CE25D0AA2B229B84004DFB66 /* CommentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A92B229B84004DFB66 /* CommentRequest.swift */; };
 		CE28C85B2B130D0A00820F1A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE28C85A2B130D0A00820F1A /* ImageCollectionViewCell.swift */; };
 		CE28C85D2B1381CD00820F1A /* PhPickerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE28C85C2B1381CD00820F1A /* PhPickerProtocol.swift */; };
 		CE290E862B049A3B007DFCAE /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E852B049A3B007DFCAE /* UserInfoResponse.swift */; };
@@ -124,6 +125,7 @@
 		CE25D0A32B220E6C004DFB66 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		CE25D0A52B220EE6004DFB66 /* Creator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		CE25D0A72B22109F004DFB66 /* CommentDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDelete.swift; sourceTree = "<group>"; };
+		CE25D0A92B229B84004DFB66 /* CommentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRequest.swift; sourceTree = "<group>"; };
 		CE28C85A2B130D0A00820F1A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE28C85C2B1381CD00820F1A /* PhPickerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhPickerProtocol.swift; sourceTree = "<group>"; };
 		CE290E852B049A3B007DFCAE /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			children = (
 				CE25D0A32B220E6C004DFB66 /* Comment.swift */,
 				CE25D0A72B22109F004DFB66 /* CommentDelete.swift */,
+				CE25D0A92B229B84004DFB66 /* CommentRequest.swift */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE25D0AA2B229B84004DFB66 /* CommentRequest.swift in Sources */,
 				CEBDFBF02B0B2CA800D43BF9 /* PostAPI.swift in Sources */,
 				CE28C85B2B130D0A00820F1A /* ImageCollectionViewCell.swift in Sources */,
 				CEDC33802B0F917C00A5788E /* BoardReadViewController.swift in Sources */,

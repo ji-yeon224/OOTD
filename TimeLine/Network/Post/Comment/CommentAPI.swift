@@ -9,8 +9,8 @@ import Foundation
 import Moya
 
 enum CommentAPI {
-    case write(id: String, data: String)
-    case update(id: String, commentID: String, data: String)
+    case write(id: String, data: CommentRequest)
+    case update(id: String, commentID: String, data: CommentRequest)
     case delete(id: String, commentID: String)
 }
 
@@ -22,11 +22,11 @@ extension CommentAPI: TargetType {
     var path: String {
         switch self {
         case .write(let id, _):
-            return "comment/\(id)/comment"
+            return "post/\(id)/comment"
         case .update(let id, let commentID, _):
-            return "comment/\(id)/comment/\(commentID)"
+            return "post/\(id)/comment/\(commentID)"
         case .delete(let id, let commentID):
-            return "comment/\(id)/comment/\(commentID)"
+            return "post/\(id)/comment/\(commentID)"
         }
     }
     

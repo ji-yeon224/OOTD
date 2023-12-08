@@ -20,9 +20,28 @@ final class CommentAPIManager {
             self.provider.request(api) { result in
                 switch result {
                 case .success(let response):
-                    break
+                    let statusCode = response.statusCode
+                    if statusCode == 200 {
+                        do {
+                            let result = try JSONDecoder().decode(T.self, from: response.data)
+                            debugPrint("[SUCCESS COMMENT REQUEST]", result)
+                            single(.success(.success(result)))
+                        } catch {
+                            debugPrint("[COMMENT DECODING ERROR] ", error)
+                        }
+                    } else {
+                        do {
+                            let result = try JSONDecoder().decode(ErrorModel.self, from: response.data)
+                            let error = NetworkError(statusCode: statusCode, description: result.message)
+                            single(.success(.failure(error)))
+                        } catch {
+                            debugPrint("[COMMENT DECODING ERROR ]", error.localizedDescription)
+                        }
+                    }
+                    
                 case .failure(let error):
-                    break
+                    let error = NetworkError(statusCode: error.errorCode, description: error.localizedDescription)
+                    single(.success(.failure(error)))
                 }
             }
             return Disposables.create()

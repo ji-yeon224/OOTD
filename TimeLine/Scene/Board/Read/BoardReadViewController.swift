@@ -41,8 +41,17 @@ final class BoardReadViewController: BaseViewController {
         bind()
         updateSnapShot()
         configNavBar()
-       
+        commentTest()
     }
+    
+    func commentTest() {
+        CommentAPIManager.shared.request(api: .write(id: postData!.id, data: CommentRequest(content: "댓글 테스트")), type: Comment.self)
+            .subscribe(with: self) { owner, result in
+                print(result)
+            }
+            .disposed(by: disposeBag)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
