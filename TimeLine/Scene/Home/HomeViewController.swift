@@ -83,6 +83,19 @@ final class HomeViewController: BaseViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        output.loginRequest
+            .bind(with: self) { owner, value in
+                if value {
+                    owner.showOKAlert(title: "문제가 발생하였습니다. 재로그인 후 다시 요청해주세요.", message: "") {
+                        UserDefaultsHelper.isLogin = false
+                        // 로그인 뷰로 present
+                        owner.view?.window?.rootViewController = LoginViewController()
+                        owner.view.window?.makeKeyAndVisible()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     

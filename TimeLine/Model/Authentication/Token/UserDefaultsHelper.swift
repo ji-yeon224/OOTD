@@ -39,4 +39,9 @@ final class UserDefaultsHelper {
     @Defaults(key: Key.isLogin.rawValue, defaultValue: false) static var isLogin
 
     
+//    static func initToken() {
+//        UserDefaultsHelper.token = ""
+//        UserDefaultsHelper.refreshToken = ""
+//        UserDefaultsHelper.isLogin = false
+//    }
 }

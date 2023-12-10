@@ -20,7 +20,7 @@ enum AuthenticationAPI {
 
 extension AuthenticationAPI: TargetType {
     var baseURL: URL {
-        return URL(string: BaseURL.baseURL)!
+        return URL(string: BaseURL.testURL)!
     }
     
     var path: String {
@@ -77,4 +77,10 @@ extension AuthenticationAPI: TargetType {
     
     
     
+}
+
+extension AuthenticationAPI {
+    var validationType: ValidationType {
+        return .successCodes
+    }
 }

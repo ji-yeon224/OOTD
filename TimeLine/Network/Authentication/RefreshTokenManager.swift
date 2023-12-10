@@ -50,5 +50,37 @@ final class RefreshTokenManager {
         
     }
     
+    func newTokenRequest() -> Observable<Result<Bool, NetworkError>> {
+        
+        
+        
+        return Observable.create { value in
+            AuthenticationAPIManager.shared.request(api: .refresh, successType: RefreshToken.self)
+                .subscribe(with: self) { owner, response in
+                    switch response {
+                    case .success(let token):
+                        debugPrint("[ACCESS TOKEN REFRESH]")
+                        UserDefaultsHelper.token = token.token
+                        value.onNext(.success(true))
+                    case .failure(let error):
+                        let code = error.statusCode
+                        
+                        guard let errorType = RefreshError(rawValue: code) else {
+                            if let error = CommonError(rawValue: code) {
+                                debugPrint("[DEBUG-REFRESH: \(code)] = \(error.errorDescription ?? "")")
+                                value.onNext(.failure(NetworkError(statusCode: code, description: error.localizedDescription)))
+                            }
+                            return
+                        }
+                        debugPrint("[DEBUG-REFRESH] ", code, error.description)
+                        value.onNext(.failure(NetworkError(statusCode: code, description: errorType.localizedDescription)))
+                    }
+                }
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
+        }
+        
+    }
+    
     
 }

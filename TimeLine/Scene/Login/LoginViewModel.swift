@@ -58,6 +58,7 @@ final class LoginViewModel {
             .flatMap {
                 return AuthenticationAPIManager.shared.request(api: .login(userInfo: Login(email: self.email.value, password: self.pass.value)), successType: LoginToken.self)
             }
+            .debug()
             .subscribe(with: self, onNext: { owner, response in
                 switch response {
                 case .success(let result):
@@ -66,14 +67,14 @@ final class LoginViewModel {
                     UserDefaultsHelper.refreshToken = result.refreshToken
                 case .failure(let error):
                     let code = error.statusCode
-                    
+                    print(error)
                     guard let errorType = LoginError(rawValue: code) else {
                         if let commonError = CommonError(rawValue: code) {
                             errorMsg.onNext(commonError.localizedDescription)
                         }
                         return
                     }
-//                    debugPrint("[Debug]", error.statusCode, error.description)
+                    debugPrint("[Debug]", error.statusCode, error.description)
                     errorMsg.onNext(errorType.localizedDescription)
                 }
             })

@@ -36,6 +36,7 @@
 		CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD62B22E76B00969A8B /* BoardTableView.swift */; };
 		CEA10ADA2B22F09B00969A8B /* CommentWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */; };
 		CEA10ADF2B232EA700969A8B /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10ADE2B232EA700969A8B /* TokenManager.swift */; };
+		CEA10AE32B23536400969A8B /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AE22B23536400969A8B /* AuthInterceptor.swift */; };
 		CEA75CF92B214B050029E12E /* CommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA75CF82B214B050029E12E /* CommentAPI.swift */; };
 		CEA75CFB2B214B120029E12E /* CommentAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA75CFA2B214B120029E12E /* CommentAPIManager.swift */; };
 		CEA75CFF2B215DCB0029E12E /* TokenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA75CFE2B215DCB0029E12E /* TokenError.swift */; };
@@ -152,6 +153,7 @@
 		CEA10AD62B22E76B00969A8B /* BoardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableView.swift; sourceTree = "<group>"; };
 		CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWriteView.swift; sourceTree = "<group>"; };
 		CEA10ADE2B232EA700969A8B /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		CEA10AE22B23536400969A8B /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEA75CF82B214B050029E12E /* CommentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAPI.swift; sourceTree = "<group>"; };
 		CEA75CFA2B214B120029E12E /* CommentAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAPIManager.swift; sourceTree = "<group>"; };
 		CEA75CFE2B215DCB0029E12E /* TokenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenError.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				CEA10ADE2B232EA700969A8B /* TokenManager.swift */,
+				CEA10AE22B23536400969A8B /* AuthInterceptor.swift */,
 			);
 			path = Token;
 			sourceTree = "<group>";
@@ -816,6 +819,7 @@
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */,
 				CEA75D012B215E640029E12E /* CommentError.swift in Sources */,
+				CEA10AE32B23536400969A8B /* AuthInterceptor.swift in Sources */,
 				CE25D0A62B220EE6004DFB66 /* Creator.swift in Sources */,
 				CEE80B002B1ACB6B0041AC36 /* DeleteResponse.swift in Sources */,
 				CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */,

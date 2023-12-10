@@ -13,7 +13,7 @@ final class PostAPIManager {
     
     static let shared = PostAPIManager()
     private init() { }
-    private let provider = MoyaProvider<PostAPI>()
+    private let provider = MoyaProvider<PostAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func request<T: Codable>(api: PostAPI, type: T.Type) -> Single<Result<T, NetworkError>>{
         return Single.create { single in
