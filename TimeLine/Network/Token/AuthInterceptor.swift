@@ -31,13 +31,14 @@ final class AuthInterceptor: RequestInterceptor {
         guard let response = request.task?.response as? HTTPURLResponse
         else {
             print("error&&&& ", error)
-            
             completion(.doNotRetry)
             return
         }
         
         guard let tokenError = TokenError(rawValue: response.statusCode) else {
-            completion(.doNotRetry)
+            let error = NetworkError(statusCode: response.statusCode, description: error.localizedDescription)
+            print("AuthIntercepter retry ", error)
+            completion(.doNotRetryWithError(error))
             return
         }
         
