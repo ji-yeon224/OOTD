@@ -16,7 +16,7 @@ final class PostAPIManager {
     private let provider = MoyaProvider<PostAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
    
-    func postrequest<T: Codable>(api: PostAPI, type: T.Type) -> Single<Result<T, NetworkError>> {
+    func postrequest<T: Decodable>(api: PostAPI, type: T.Type) -> Single<Result<T, NetworkError>> {
         
         return Single.create { single in
             self.provider.request(api) { result in

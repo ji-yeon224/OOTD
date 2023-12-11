@@ -13,6 +13,7 @@ enum PostAPI {
     case read(productId: String, limit: Int, next: String?)
     case delete(id: String)
     case update(id: String, data: PostWrite)
+    case like(id: String)
 }
 
 extension PostAPI: TargetType {
@@ -28,12 +29,14 @@ extension PostAPI: TargetType {
             return "post/\(id)"
         case .update(let id, _):
             return "post/\(id)"
+        case .like(let id):
+            return "post/like/\(id)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .write:
+        case .write, .like:
             return .post
         case .read:
             return .get
@@ -55,7 +58,7 @@ extension PostAPI: TargetType {
                 parameters["next"] = next
             }
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .delete: return .requestPlain
+        case .delete, .like: return .requestPlain
         }
     }
     
@@ -67,7 +70,7 @@ extension PostAPI: TargetType {
                 "SesacKey": APIKey.key,
                 "Authorization": UserDefaultsHelper.token
             ]
-        case .read, .delete:
+        case .read, .delete, .like:
             return ["Authorization": UserDefaultsHelper.token,
                     "SesacKey": APIKey.key]
        

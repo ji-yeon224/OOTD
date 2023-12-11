@@ -12,6 +12,8 @@ import RxCocoa
 final class BoardReadViewModel {
     
     var postData: Post?
+    var like: Bool = false
+    
     private let disposeBag = DisposeBag()
     
     struct Input {
@@ -19,6 +21,7 @@ final class BoardReadViewModel {
         let commentWrite: PublishRelay<CommentRequest>
         let commentContent: ControlProperty<String>
         let commentDelete: PublishRelay<(String, Int)>
+        let likeButtonTap: ControlEvent<Void>
     }
     
     struct Output {
@@ -28,6 +31,7 @@ final class BoardReadViewModel {
         let commentIsEnable: BehaviorRelay<Bool>
         let loginRequest: PublishRelay<Bool>
         let successCommentDelete: PublishRelay<Int>
+        let likeValue: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output? {
@@ -41,6 +45,7 @@ final class BoardReadViewModel {
         let commentIsEnable = BehaviorRelay(value: false)
         let loginRequest = PublishRelay<Bool>()
         let successCommentDelete = PublishRelay<Int>()
+        var likeValue = PublishRelay<Bool>()
         
         var deleteCommentIdx: Int?
         
@@ -136,9 +141,32 @@ final class BoardReadViewModel {
                 }
             }
             .disposed(by: disposeBag)
+        
+        input.likeButtonTap
+            .flatMap {
+                PostAPIManager.shared.postrequest(api: .like(id: post.id), type: LikeResponse.self)
+            }
+            .subscribe(with: self, onNext: { owner, result in
+                switch result {
+                case .success(_):
+                    owner.like.toggle()
+                    likeValue.accept(owner.like)
+                case .failure(let error):
+                    let code = error.statusCode
+                    
+                    guard let errorType = LikeError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            errorMsg.accept(commonError.localizedDescription)
+                        }
+                        loginRequest.accept(true)
+                        return
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
             
         
-        return Output(errorMsg: errorMsg, successDelete: successDelete, commentWrite: commentWrite, commentIsEnable: commentIsEnable, loginRequest: loginRequest, successCommentDelete: successCommentDelete)
+        return Output(errorMsg: errorMsg, successDelete: successDelete, commentWrite: commentWrite, commentIsEnable: commentIsEnable, loginRequest: loginRequest, successCommentDelete: successCommentDelete, likeValue: likeValue)
         
     }
     
