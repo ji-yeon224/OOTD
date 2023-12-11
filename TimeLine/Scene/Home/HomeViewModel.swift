@@ -100,50 +100,7 @@ final class HomeViewModel {
                 }
             }
             .disposed(by: disposeBag)
-        
-//        withdrawRequest
-//            .flatMap { _ in
-//                AuthenticationAPIManager.shared.request(api: .withdraw, successType: UserInfoResponse.self)
-//            }
-//            .subscribe(with: self) { owner, response in
-//                switch response {
-//                case .success(_):
-//                    withdraw.onNext(true)
-//                case .failure(let error):
-//                    let code = error.statusCode
-//                    guard let errorType = WithdrawError(rawValue: code) else {
-//                        if let commonError = CommonError(rawValue: code) {
-//                            errorMsg.onNext(commonError.localizedDescription)
-//                        }
-//                        return
-//                    }
-//                    
-//                    switch errorType {
-//                    case .invalidToken, .expireToken:
-//                        let result = RefreshTokenManager.shared.tokenRequest()
-//                        result
-//                            .bind(with: self, onNext: { owner, result in
-//                                debugPrint("[TOKEN 재발급]", String(describing: UserDefaultsHelper.token))
-//                                switch result {
-//                                case .success:
-//                                    owner.withdrawRequest.onNext(true)
-//                                case .login, .error:
-//                                    tokenRequest.onNext(result)
-//                                }
-//                                
-//                                
-//                                
-//                            })
-//                            .disposed(by: owner.disposeBag)
-//                    case .forbidden:
-//                        tokenRequest.onNext(RefreshResult.login)
-//                    
-//                    }
-//                    
-//                }
-//            }
-//            .disposed(by: disposeBag)
-        
+ 
         return Output(successMsg: successMsg, errorMsg: errorMsg, tokenRequest: tokenRequest, withdraw: withdraw, loginRequest: loginRequest)
         
     }

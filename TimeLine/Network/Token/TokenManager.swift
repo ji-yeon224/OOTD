@@ -4,7 +4,6 @@
 //
 //  Created by 김지연 on 12/8/23.
 //
-
 import Foundation
 import Moya
 import RxSwift
@@ -21,7 +20,7 @@ final class TokenManager {
         
         return Observable.create { value in
             self.provider.request(.refresh) { result in
-                print("---TokenManager Result----- ", result)
+                
                 switch result {
                 case .success(let data):
                     let statusCode = data.statusCode
@@ -35,33 +34,34 @@ final class TokenManager {
                             print("DECODING ERROR")
                             value.onNext(RefreshResult.error)
                         }
-                    } else {
-                        do {
-                            let result = try JSONDecoder().decode(ErrorModel.self, from: data.data)
-                            debugPrint("[DEBUG - API REQUEST", result.message)
-                            guard let errorType = RefreshError(rawValue: statusCode) else {
-                                if let error = CommonError(rawValue: statusCode) {
-                                    debugPrint("[DEBUG-REFRESH: \(statusCode)] = \(error.errorDescription ?? "")")
-                                    value.onNext(RefreshResult.error)
-                                }
-                                return
-                            }
-                            debugPrint("[DEBUG-REFRESH] ", statusCode, errorType.localizedDescription)
-                            switch errorType {
-                            case .wrongAuth, .fobidden, .expireRefreshToken:
-                                let error = NetworkError(statusCode: statusCode, description: errorType.localizedDescription)
-                                value.onNext(RefreshResult.login(error: error))
-//                                UserDefaultsHelper.initToken()
-                                
-                            case .noExpire:
-                                value.onNext(RefreshResult.success(token: UserDefaultsHelper.token))
-                            }
-                        } catch {
-                            print("DECODING ERROR")
-                        }
-                        
-                       
-                    }
+                    } 
+//                    else {
+//                        do {
+//                            let result = try JSONDecoder().decode(ErrorModel.self, from: data.data)
+//                            debugPrint("[DEBUG - API REQUEST", result.message)
+//                            guard let errorType = RefreshError(rawValue: statusCode) else {
+//                                if let error = CommonError(rawValue: statusCode) {
+//                                    debugPrint("[DEBUG-REFRESH: \(statusCode)] = \(error.errorDescription ?? "")")
+//                                    value.onNext(RefreshResult.error)
+//                                }
+//                                return
+//                            }
+//                            debugPrint("[DEBUG-REFRESH] ", statusCode, errorType.localizedDescription)
+//                            switch errorType {
+//                            case .wrongAuth, .fobidden, .expireRefreshToken:
+//                                let error = NetworkError(statusCode: statusCode, description: errorType.localizedDescription)
+//                                value.onNext(RefreshResult.login(error: error))
+////                                UserDefaultsHelper.initToken()
+//                                
+//                            case .noExpire:
+//                                value.onNext(RefreshResult.success(token: UserDefaultsHelper.token))
+//                            }
+//                        } catch {
+//                            print("DECODING ERROR")
+//                        }
+//                        
+//                       
+//                    }
                 case .failure(let error):
                     print("TokenManager Fail---- ", error.response!)
                     
