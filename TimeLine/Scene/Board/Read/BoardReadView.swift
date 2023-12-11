@@ -255,6 +255,11 @@ final class BoardReadView: BaseView {
         return layout
     }
     
+    func setLikeButton(like: Bool) {
+        let img = like ? Constants.Image.heartFill : Constants.Image.heart
+        likeButton.setImage(img, for: .normal)
+    }
+    
     
 //    func configureDataSource() {
 //        

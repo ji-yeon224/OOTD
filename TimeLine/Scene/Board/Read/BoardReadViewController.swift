@@ -26,6 +26,7 @@ final class BoardReadViewController: BaseViewController {
     private let deviceWidth = UIScreen.main.bounds.size.width
     private var isNeedRefresh = false
     
+    
     override func loadView() {
         self.view = mainView
         guard let post = postData else {
@@ -76,6 +77,7 @@ final class BoardReadViewController: BaseViewController {
         mainView.titleLabel.text = post.title
         mainView.contentLabel.text = post.content
         mainView.commentLabel.text = "댓글 \(post.comments.count)개"
+        
         comments = post.comments.reversed()
         for i in 0..<post.image.count {
             
@@ -85,6 +87,10 @@ final class BoardReadViewController: BaseViewController {
         
         if post.creator.id == UserDefaultsHelper.userID {
             configNavBar()
+        }
+        
+        if post.likes.contains(UserDefaultsHelper.userID) {
+            viewModel.like = true
         }
         configureDataSource()
         
@@ -97,7 +103,8 @@ final class BoardReadViewController: BaseViewController {
             delete: deletePost,
             commentWrite: commentWrite,
             commentContent: mainView.commentWriteView.textView.rx.text.orEmpty,
-            commentDelete: commentDelete
+            commentDelete: commentDelete,
+            likeButtonTap: mainView.likeButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -164,6 +171,12 @@ final class BoardReadViewController: BaseViewController {
                 owner.mainView.commentLabel.text = "댓글 \(owner.comments.count)개"
                 owner.updateSnapShot()
                 owner.isNeedRefresh = true
+            })
+            .disposed(by: disposeBag)
+        
+        output?.likeValue
+            .bind(with: self, onNext: { owner, value in
+                owner.mainView.setLikeButton(like: value)
             })
             .disposed(by: disposeBag)
         
