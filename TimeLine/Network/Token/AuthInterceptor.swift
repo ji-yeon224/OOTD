@@ -47,8 +47,8 @@ final class AuthInterceptor: RequestInterceptor {
             return
         }
 
+        
         debugPrint("[refresh request: \(response.statusCode)]")
-       
         
         TokenManager.shared.request()
             .subscribe(with: self) { owner, result in
