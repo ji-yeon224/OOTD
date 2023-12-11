@@ -34,6 +34,7 @@ final class BoardTableViewCell: UITableViewCell {
         
         view.addArrangedSubview(titleLabel)
         view.addArrangedSubview(contentLabel)
+        view.addArrangedSubview(createrLabel)
         return view
     }()
     
@@ -62,7 +63,6 @@ final class BoardTableViewCell: UITableViewCell {
         contentView.addSubview(textStackView)
         contentView.addSubview(thumbnailImage)
         
-        contentView.addSubview(createrLabel)
         
     }
     
@@ -75,13 +75,13 @@ final class BoardTableViewCell: UITableViewCell {
         }
         textStackView.snp.makeConstraints { make in
             make.leading.top.equalTo(contentView).inset(18)
-            make.trailing.equalTo(thumbnailImage.snp.leading).offset(-12)
-            make.bottom.equalTo(createrLabel.snp.top).offset(-12)
+            make.trailing.greaterThanOrEqualTo(thumbnailImage.snp.leading).offset(-12)
+            make.trailing.lessThanOrEqualTo(contentView).offset(-18)
+            make.bottom.equalTo(contentView).offset(-12)
         }
+        
         createrLabel.snp.makeConstraints { make in
-            make.bottom.leading.equalTo(contentView).inset(18)
             make.height.equalTo(15)
-            make.width.equalTo(contentView).multipliedBy(0.5)
         }
         
         titleLabel.snp.makeConstraints { make in
