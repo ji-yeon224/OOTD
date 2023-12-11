@@ -27,6 +27,7 @@ final class BoardViewModel {
         let items: BehaviorRelay<[PostListModel]>
         let errorMsg: PublishSubject<String>
         let tokenRequest: PublishSubject<RefreshResult>
+        let loginRequest: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -35,58 +36,91 @@ final class BoardViewModel {
         let errorMsg: PublishSubject<String> = PublishSubject()
         let tokenRequest = PublishSubject<RefreshResult>()
         let refresh = PublishRelay<Bool>()
-        
+        let loginRequest = PublishRelay<Bool>()
         input.callFirst
             .bind(with: self) { owner, value in
                 if value {
                     owner.data.removeAll()
                     owner.nextCursor = nil
                 }
+                print("board refresh")
                 refresh.accept(true)
             }
             .disposed(by: disposeBag)
         
         refresh
             .flatMap {_ in
-                return PostAPIManager.shared.request(api: .read(productId: ProductId.OOTDBoard.rawValue, limit: 10, next: self.nextCursor), type: ReadResponse.self)
+                return PostAPIManager.shared.postrequest(api: .read(productId: ProductId.OOTDBoard.rawValue, limit: 10, next: self.nextCursor), type: ReadResponse.self)
             }
             .subscribe(with: self) { owner, response in
                 switch response {
                 case .success(let result):
-                    
+                    print("BoardVM Success - ")
                     owner.nextCursor = result.nextCursor
                     owner.data.append(contentsOf: result.data)
                     items.accept([PostListModel(section: "", items: owner.data)])
-                    
                 case .failure(let error):
-                    let code = error.statusCode
-                    guard let errorType = PostReadError(rawValue: code) else {
-                        if let commonError = CommonError(rawValue: code) {
-                            errorMsg.onNext(commonError.localizedDescription)
-                        }
-                        return
-                    }
-                    debugPrint("[DEBUG-POST] ", error.statusCode, error.description)
-                    switch errorType {
-                    case .invalidRequest:
-                        errorMsg.onNext(errorType.localizedDescription)
-                    case .wrongAuth, .forbidden, .expireToken:
-                        let result = RefreshTokenManager.shared.tokenRequest()
-                        
-                        result
-                            .bind(with: self) { owner, result in
-                                if result == .success {
-                                    input.callFirst.accept(true)
-                                } else {
-                                    tokenRequest.onNext(result)
-                                }
-                            }
-                            .disposed(by: owner.disposeBag)
+                    print("BoardVM error - ", error)
+                    loginRequest.accept(true)
+//                    let code = error.statusCode
+//                    guard let errorType = PostReadError(rawValue: code) else {
+//                        if let commonError = CommonError(rawValue: code) {
+//                            errorMsg.onNext(commonError.localizedDescription)
+//                        }
+//                        return
+//                    }
                     
-                    }
+                    
                 }
+                    
             }
             .disposed(by: disposeBag)
+//            .subscribe(with: self) { owner, response in
+//                switch response {
+//                case .success(let result):
+//                    print("SUCCESS \(result.nextCursor)")
+//                    owner.nextCursor = result.nextCursor
+//                    owner.data.append(contentsOf: result.data)
+//                    items.accept([PostListModel(section: "", items: owner.data)])
+//                    
+//                case .failure(let error):
+//                    let code = error.statusCode
+//                    print("BoardViewModel Refresh Error ", error)
+//                    guard let errorType = PostReadError(rawValue: code) else {
+//                        if let commonError = CommonError(rawValue: code) {
+//                            errorMsg.onNext(commonError.localizedDescription)
+//                        }
+//                        return
+//                    }
+//                    
+//                    switch errorType {
+//                    case .invalidRequest:
+//                        errorMsg.onNext(errorType.localizedDescription)
+//                    }
+                    
+                    
+//                    errorMsg.onNext(errorType.localizedDescription)
+//                    debugPrint("[DEBUG-POST] ", error.statusCode, error.description)
+//                    switch errorType {
+//                    case .invalidRequest:
+//                        errorMsg.onNext(errorType.localizedDescription)
+//                    case .wrongAuth, .forbidden, .expireToken:
+//                        let result = RefreshTokenManager.shared.tokenRequest()
+//                        
+//                        result
+//                            .bind(with: self) { owner, result in
+//                                if result == .success {
+//                                    input.callFirst.accept(true)
+//                                } else {
+//                                    tokenRequest.onNext(result)
+//                                }
+//                            }
+//                            .disposed(by: owner.disposeBag)
+//                    
+//                    }
+//                }
+//            }
+//            .disposed(by: disposeBag)
         
         input.page
             .compactMap(\.last?.row)
@@ -100,7 +134,7 @@ final class BoardViewModel {
             .disposed(by: disposeBag)
         
         
-        return Output(items: items, errorMsg: errorMsg, tokenRequest: tokenRequest)
+        return Output(items: items, errorMsg: errorMsg, tokenRequest: tokenRequest, loginRequest: loginRequest)
     }
     
 }

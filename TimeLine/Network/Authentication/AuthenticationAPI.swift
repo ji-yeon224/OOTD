@@ -20,7 +20,7 @@ enum AuthenticationAPI {
 
 extension AuthenticationAPI: TargetType {
     var baseURL: URL {
-        return URL(string: BaseURL.testURL)!
+        return URL(string: BaseURL.baseURL)!
     }
     
     var path: String {

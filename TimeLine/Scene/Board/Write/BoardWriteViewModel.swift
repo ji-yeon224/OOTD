@@ -107,7 +107,8 @@ final class BoardWriteViewModel {
                             })
                             .disposed(by: owner.disposeBag)
                     case .forbidden:
-                        tokenRequest.onNext(RefreshResult.login)
+                        let error = NetworkError(statusCode: code, description: errorType.localizedDescription)
+                        tokenRequest.onNext(RefreshResult.login(error: error))
                     case .invalidRequest, .saveError:
                         errorMsg.onNext(errorType.localizedDescription)
                         successPost.accept((false, errorType.localizedDescription, nil))
@@ -152,7 +153,8 @@ final class BoardWriteViewModel {
                             })
                             .disposed(by: owner.disposeBag)
                     case .forbidden:
-                        tokenRequest.onNext(RefreshResult.login)
+                        let error = NetworkError(statusCode: code, description: errorType.localizedDescription)
+                        tokenRequest.onNext(RefreshResult.login(error: error))
                     case .invalidRequest, .noAuthorization, .alreadyDelete:
                         errorMsg.onNext(errorType.localizedDescription)
                         successPost.accept((false, errorType.localizedDescription, nil))

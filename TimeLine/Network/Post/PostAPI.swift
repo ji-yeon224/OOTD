@@ -105,3 +105,8 @@ extension PostAPI {
     
     
 }
+extension PostAPI {
+    var validationType: ValidationType {
+        return .successCodes
+    }
+}

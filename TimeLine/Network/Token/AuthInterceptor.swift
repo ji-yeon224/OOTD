@@ -14,48 +14,55 @@ final class AuthInterceptor: RequestInterceptor {
     private init() { }
     private let disposeBag = DisposeBag()
     let retryDelay: TimeInterval = 1
+    let retryLimit = 2
+    
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        guard urlRequest.url?.absoluteString.hasPrefix(BaseURL.testURL) == true
+        guard urlRequest.url?.absoluteString.hasPrefix(BaseURL.baseURL) == true
         else {
             completion(.success(urlRequest))
             return
         }
         var urlRequest = urlRequest
         urlRequest.setValue(UserDefaultsHelper.token, forHTTPHeaderField: "Authorization")
+        
         completion(.success(urlRequest))
         
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        print("retry 진입", error)
-        guard let response = request.task?.response as? HTTPURLResponse
+       
+        
+        
+        guard let response = request.task?.response as? HTTPURLResponse, request.retryCount < self.retryLimit
         else {
             print("error&&&& ", error)
             completion(.doNotRetry)
             return
         }
         
-        guard let tokenError = TokenError(rawValue: response.statusCode) else {
+        guard let _ = TokenError(rawValue: response.statusCode) else {
             let error = NetworkError(statusCode: response.statusCode, description: error.localizedDescription)
-            print("AuthIntercepter retry ", error)
+            debugPrint("AuthIntercepter retry ", error)
             completion(.doNotRetryWithError(error))
             return
         }
-        
-        print("refresh request")
+
+        debugPrint("[refresh request: \(response.statusCode)]")
+       
         
         TokenManager.shared.request()
-            .debug()
             .subscribe(with: self) { owner, result in
                 switch result {
-                case .success: 
-                    print("@@success refresh intercepter@@")
+                case .success(let token):
+                    debugPrint("[SUCCESS REFRESH TOKEN]")
+                    UserDefaultsHelper.token = token
                     completion(.retryWithDelay(self.retryDelay))
-                case .login:
-                    print("@@error refresh intercepter request login@@")
+                    
+                case .login(let error):
+                    debugPrint("[ERROR REFRESH TOKEN - REQUEST LOGIN]")
                     completion(.doNotRetryWithError(error))
                 case .error: 
-                    print("@@error refresh intercepter request login@@")
+                    debugPrint("[ERROR REFRESH TOKEN]")
                     completion(.doNotRetry)
                 }
             }
@@ -63,22 +70,7 @@ final class AuthInterceptor: RequestInterceptor {
         
 
     }
-    
-    func getNewToken(completion: @escaping (Bool) -> Void) {
-        TokenManager.shared.request()
-            .debug()
-            .subscribe(with: self) { owner, result in
-                switch result {
-                case .success:
-                    print("@@success refresh intercepter@@")
-                    completion(true)
-                case .login, .error:
-                    print("@@error refresh intercepter request login@@")
-                    completion(false)
-                }
-            }
-            .disposed(by: disposeBag)
-    }
+
     
     
     

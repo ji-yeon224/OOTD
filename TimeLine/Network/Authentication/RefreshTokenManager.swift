@@ -24,7 +24,7 @@ final class RefreshTokenManager {
                     case .success(let token):
                         debugPrint("[ACCESS TOKEN REFRESH]")
                         UserDefaultsHelper.token = token.token
-                        value.onNext(RefreshResult.success)
+                        value.onNext(RefreshResult.success(token: token.token))
                     case .failure(let error):
                         let code = error.statusCode
                         
@@ -38,9 +38,10 @@ final class RefreshTokenManager {
                         debugPrint("[DEBUG-REFRESH] ", code, error.description)
                         switch errorType {
                         case .wrongAuth, .fobidden, .expireRefreshToken:
-                            value.onNext(RefreshResult.login)
+                            let error = NetworkError(statusCode: code, description: errorType.localizedDescription)
+                            value.onNext(RefreshResult.login(error: error))
                         case .noExpire:
-                            value.onNext(RefreshResult.success)
+                            value.onNext(RefreshResult.success(token: UserDefaultsHelper.token))
                         }
                     }
                 }

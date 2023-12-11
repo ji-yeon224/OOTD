@@ -63,11 +63,13 @@ final class BoardReadViewModel {
                         let result = RefreshTokenManager.shared.tokenRequest()
                         result
                             .bind(with: self) { owner, result in
-                                if result == .success {
+                                switch result {
+                                case .success:
                                     input.delete.accept(true)
-                                } else {
+                                case .login, .error:
                                     tokenRequest.accept(result)
                                 }
+                                
                             }
                             .disposed(by: owner.disposeBag)
                     
@@ -97,12 +99,14 @@ final class BoardReadViewModel {
                         let result = RefreshTokenManager.shared.tokenRequest()
                         result
                             .bind(with: self) { owner, result in
-                                if result == .success {
-                                    
-                                    //input.delete.accept(true)
-                                } else {
+                                switch result {
+                                case .success:
+//                                    input.delete.accept(true)
+                                    break
+                                case .login, .error:
                                     tokenRequest.accept(result)
                                 }
+                                
                             }
                             .disposed(by: owner.disposeBag)
                         return

@@ -7,6 +7,8 @@
 
 import Foundation
 
-enum RefreshResult: String {
-    case success, login, error
+enum RefreshResult {
+    case success(token: String)
+    case login(error: NetworkError)
+    case error
 }

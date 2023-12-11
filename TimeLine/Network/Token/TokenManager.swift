@@ -29,8 +29,8 @@ final class TokenManager {
                         do {
                             let result = try JSONDecoder().decode(RefreshToken.self, from: data.data)
                             UserDefaultsHelper.token = result.token
-                            print(UserDefaultsHelper.token)
-                            value.onNext(RefreshResult.success)
+                            
+                            value.onNext(RefreshResult.success(token: result.token))
                         } catch {
                             print("DECODING ERROR")
                             value.onNext(RefreshResult.error)
@@ -49,11 +49,12 @@ final class TokenManager {
                             debugPrint("[DEBUG-REFRESH] ", statusCode, errorType.localizedDescription)
                             switch errorType {
                             case .wrongAuth, .fobidden, .expireRefreshToken:
-                                value.onNext(RefreshResult.login)
+                                let error = NetworkError(statusCode: statusCode, description: errorType.localizedDescription)
+                                value.onNext(RefreshResult.login(error: error))
 //                                UserDefaultsHelper.initToken()
                                 
                             case .noExpire:
-                                value.onNext(RefreshResult.success)
+                                value.onNext(RefreshResult.success(token: UserDefaultsHelper.token))
                             }
                         } catch {
                             print("DECODING ERROR")
@@ -62,22 +63,28 @@ final class TokenManager {
                        
                     }
                 case .failure(let error):
-                    print("TokenManager Fail ", error)
+                    print("TokenManager Fail---- ", error.response!)
+                    
                     if let code = error.response?.statusCode {
                         if let error = RefreshError(rawValue: code) {
                             switch error {
                             case .wrongAuth, .fobidden, .expireRefreshToken:
-                                value.onNext(RefreshResult.login)
-//                                UserDefaultsHelper.initToken()
+                                let error = NetworkError(statusCode: code, description: error.localizedDescription)
+                                UserDefaultsHelper.initToken()
+                                value.onNext(RefreshResult.login(error: error))
                                 
+                                print(UserDefaultsHelper.token)
                             case .noExpire:
-                                value.onNext(RefreshResult.success)
+                                print(UserDefaultsHelper.token)
+                                value.onNext(RefreshResult.success(token: UserDefaultsHelper.token))
                             }
                         }
+                    } else {
+                        value.onNext(RefreshResult.error)
                     }
 //                    let error = NetworkError(statusCode: error.errorCode, description: error.localizedDescription)
                     
-                    value.onNext(RefreshResult.error)
+                    
                 }
             }
             return Disposables.create()

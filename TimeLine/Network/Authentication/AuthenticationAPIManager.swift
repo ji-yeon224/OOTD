@@ -23,9 +23,9 @@ final class AuthenticationAPIManager {
         switch api {
         case .login, .join, .emailValidation:
             provider = self.provider
-        case .refresh, .content:
+        case .content:
             break
-        case .withdraw:
+        case .refresh, .withdraw:
             provider = self.authprovider
         }
         
