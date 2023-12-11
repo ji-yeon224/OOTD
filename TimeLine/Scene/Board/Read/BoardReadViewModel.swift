@@ -78,32 +78,17 @@ final class BoardReadViewModel {
                     commentWrite.accept(result)
                 case .failure(let error):
                     let code = error.statusCode
-                    if let tokenError = TokenError(rawValue: code) {
-                        let result = RefreshTokenManager.shared.tokenRequest()
-                        result
-                            .bind(with: self) { owner, result in
-                                switch result {
-                                case .success:
-//                                    input.delete.accept(true)
-                                    break
-                                case .login, .error:
-                                    tokenRequest.accept(result)
-                                }
-                                
-                            }
-                            .disposed(by: owner.disposeBag)
-                        return
-                    }
+                    
                     guard let errorType = CommentError(rawValue: code) else {
                         if let commonError = CommonError(rawValue: code) {
                             errorMsg.accept(commonError.localizedDescription)
                         }
+                        loginRequest.accept(true)
                         return
                     }
                     debugPrint("[DEBUG-POST] ", error.statusCode, error.description)
                     
                     errorMsg.accept(errorType.localizedDescription)
-//                    errorMsg.accept(errorType.localizedDescription)
                 }
             }
             .disposed(by: disposeBag)

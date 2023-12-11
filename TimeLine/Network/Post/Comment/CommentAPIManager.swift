@@ -13,7 +13,7 @@ final class CommentAPIManager {
     
     static let shared = CommentAPIManager()
     private init() { }
-    private let provider = MoyaProvider<CommentAPI>()
+    private let provider = MoyaProvider<CommentAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
     func request<T: Codable>(api: CommentAPI, type: T.Type) -> Single<Result<T, NetworkError>>{
         return Single.create { single in
@@ -40,8 +40,14 @@ final class CommentAPIManager {
                     }
                     
                 case .failure(let error):
-                    let error = NetworkError(statusCode: error.errorCode, description: error.localizedDescription)
+                    guard let response = error.response else {
+                        single(.success(.failure(NetworkError(statusCode: 500, description: "문제가 발생하였습니다."))))
+                        return
+                    }
+                    let error = NetworkError(statusCode: response.statusCode, description: response.description)
                     single(.success(.failure(error)))
+//                    let error = NetworkError(statusCode: error.errorCode, description: error.localizedDescription)
+//                    single(.success(.failure(error)))
                 }
             }
             return Disposables.create()
