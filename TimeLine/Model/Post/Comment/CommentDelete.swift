@@ -6,6 +6,6 @@
 //
 
 import Foundation
-struct CommentDelete: Decodable {
+struct CommentDelete: Codable {
     let postID, commentID: String
 }

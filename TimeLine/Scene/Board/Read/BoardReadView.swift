@@ -107,7 +107,7 @@ final class BoardReadView: BaseView {
         addSubview(commentWriteView)
         
         stackViewSubViews()
-        configureDataSource()
+//        configureDataSource()
         
         scrollView.keyboardDismissMode = .onDrag
                 
@@ -256,19 +256,23 @@ final class BoardReadView: BaseView {
     }
     
     
-    func configureDataSource() {
-        
-        dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
-            cell.nicknameLabel.text = itemIdentifier.creator.nick
-            cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
-            cell.contentLabel.text = itemIdentifier.content
-            return cell
-        })
-        
-        
-        
-    }
+//    func configureDataSource() {
+//        
+//        dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
+//            cell.nicknameLabel.text = itemIdentifier.creator.nick
+//            cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
+//            cell.contentLabel.text = itemIdentifier.content
+//            if itemIdentifier.creator.id == UserDefaultsHelper.userID {
+//                cell.deleteButton.isHidden = false
+//                
+//            }
+//            return cell
+//        })
+//        
+//        
+//        
+//    }
     
     
 }

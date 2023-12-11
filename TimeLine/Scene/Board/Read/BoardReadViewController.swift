@@ -20,6 +20,7 @@ final class BoardReadViewController: BaseViewController {
     
     private var deletePost = PublishRelay<Bool>()
     private let commentWrite = PublishRelay<CommentRequest>()
+    private let commentDelete = PublishRelay<(String, Int)>()
     private let dispatchGroup = DispatchGroup()
     
     private let deviceWidth = UIScreen.main.bounds.size.width
@@ -41,7 +42,7 @@ final class BoardReadViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-        configNavBar()
+        
     }
     
     
@@ -74,6 +75,10 @@ final class BoardReadViewController: BaseViewController {
             
         }
         
+        if post.creator.id == UserDefaultsHelper.userID {
+            configNavBar()
+        }
+        configureDataSource()
         
     }
     
@@ -83,7 +88,8 @@ final class BoardReadViewController: BaseViewController {
         let input = BoardReadViewModel.Input(
             delete: deletePost,
             commentWrite: commentWrite,
-            commentContent: mainView.commentWriteView.textView.rx.text.orEmpty
+            commentContent: mainView.commentWriteView.textView.rx.text.orEmpty,
+            commentDelete: commentDelete
         )
         
         let output = viewModel.transform(input: input)
@@ -139,6 +145,14 @@ final class BoardReadViewController: BaseViewController {
         
         output?.commentIsEnable
             .bind(to: mainView.commentWriteView.postButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output?.successCommentDelete
+            .bind(with: self, onNext: { owner, value in
+                owner.showToastMessage(message: "삭제가 완료되었습니다!", position: .center)
+                owner.comments.remove(at: value)
+                owner.updateSnapShot()
+            })
             .disposed(by: disposeBag)
         
         mainView.commentWriteView.textView.rx.didChange
@@ -222,6 +236,32 @@ final class BoardReadViewController: BaseViewController {
         navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
     }
     
+    func configureDataSource() {
+        
+        mainView.dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: mainView.tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
+            cell.nicknameLabel.text = itemIdentifier.creator.nick
+            cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
+            cell.contentLabel.text = itemIdentifier.content
+            if itemIdentifier.creator.id == UserDefaultsHelper.userID {
+                cell.deleteButton.isHidden = false
+                cell.deleteButton.rx.tap
+                    .bind(with: self) { owner, _ in
+                        owner.showAlertWithCancel(title: "", message: "해당 댓글을 삭제하시겠어요?") {
+                            owner.commentDelete.accept((itemIdentifier.id, indexPath.row))
+                        } cancelHandler: { }
+
+                        
+                    }
+                    .disposed(by: cell.disposeBag)
+                
+            }
+            return cell
+        })
+        
+        
+        
+    }
     
     
 }
