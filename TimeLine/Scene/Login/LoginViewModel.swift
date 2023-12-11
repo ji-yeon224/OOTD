@@ -62,9 +62,10 @@ final class LoginViewModel {
                 switch response {
                 case .success(let result):
                     successValue.accept(true)
-                    UserDefaultsHelper.token = result.token
-                    UserDefaultsHelper.refreshToken = result.refreshToken
-                    UserDefaultsHelper.isLogin = true
+//                    UserDefaultsHelper.token = result.token
+//                    UserDefaultsHelper.refreshToken = result.refreshToken
+//                    UserDefaultsHelper.isLogin = true
+                    UserDefaultsHelper.setNewInfo(login: result)
                 case .failure(let error):
                     let code = error.statusCode
                     print(error)

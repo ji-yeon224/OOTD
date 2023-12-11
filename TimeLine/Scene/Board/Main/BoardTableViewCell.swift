@@ -11,10 +11,10 @@ import SnapKit
 final class BoardTableViewCell: UITableViewCell {
     
     
-    let titleLabel = PlainLabel(size: 20, color: Constants.Color.basicText, line: 2)
-    let contentLabel = PlainLabel(size: 15, color: Constants.Color.subText)
+    let titleLabel = PlainLabel(size: 16, color: Constants.Color.basicText, line: 2)
+    let contentLabel = PlainLabel(size: 13, color: Constants.Color.subText)
     
-    let createrLabel = PlainLabel(size: 15, color: Constants.Color.subText)
+    let createrLabel = PlainLabel(size: 13, color: Constants.Color.subText)
     
     let thumbnailImage = {
         let view = UIImageView()

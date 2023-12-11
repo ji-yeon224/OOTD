@@ -33,16 +33,26 @@ final class UserDefaultsHelper {
         case token
         case refreshToken
         case isLogin
+        case userID
     }
     @Defaults(key: Key.token.rawValue, defaultValue: "") static var token
     @Defaults(key: Key.refreshToken.rawValue, defaultValue: "") static var refreshToken
     @Defaults(key: Key.isLogin.rawValue, defaultValue: false) static var isLogin
+    @Defaults(key: Key.userID.rawValue, defaultValue: "") static var userID
 
     
     static func initToken() {
         UserDefaultsHelper.token = ""
         UserDefaultsHelper.refreshToken = ""
         UserDefaultsHelper.isLogin = false
+        UserDefaultsHelper.userID = ""
+    }
+    
+    static func setNewInfo(login: LoginToken) {
+        UserDefaultsHelper.token = login.token
+        UserDefaultsHelper.refreshToken = login.refreshToken
+        UserDefaultsHelper.userID = login._id
+        UserDefaultsHelper.isLogin = true
     }
     
     
