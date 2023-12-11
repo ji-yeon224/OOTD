@@ -22,7 +22,6 @@ final class BoardReadViewModel {
     
     struct Output {
         let errorMsg: PublishRelay<String>
-        let tokenRequest: PublishRelay<RefreshResult>
         let successDelete: PublishRelay<Bool>
         let commentWrite: PublishRelay<Comment>
         let commentIsEnable: BehaviorRelay<Bool>
@@ -35,7 +34,6 @@ final class BoardReadViewModel {
             return nil }
 //        print(post)
         let errorMsg = PublishRelay<String>()
-        let tokenRequest = PublishRelay<RefreshResult>()
         let successDelete = PublishRelay<Bool>()
         let commentWrite = PublishRelay<Comment>()
         let commentIsEnable = BehaviorRelay(value: false)
@@ -48,7 +46,7 @@ final class BoardReadViewModel {
             .subscribe(with: self) { owner, response in
                 switch response {
                 case .success(_):
-                    debugPrint("[DELETE POST SUCCESS]")
+//                    debugPrint("[DELETE POST SUCCESS]")
                     successDelete.accept(true)
                 case .failure(let error):
                     let code = error.statusCode
@@ -103,7 +101,7 @@ final class BoardReadViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(errorMsg: errorMsg, tokenRequest: tokenRequest, successDelete: successDelete, commentWrite: commentWrite, commentIsEnable: commentIsEnable, loginRequest: loginRequest)
+        return Output(errorMsg: errorMsg, successDelete: successDelete, commentWrite: commentWrite, commentIsEnable: commentIsEnable, loginRequest: loginRequest)
         
     }
     

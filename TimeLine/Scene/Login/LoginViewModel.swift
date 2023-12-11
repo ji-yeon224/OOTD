@@ -62,7 +62,6 @@ final class LoginViewModel {
                 switch response {
                 case .success(let result):
                     successValue.accept(true)
-                    print("[LOGIN VM] LOGIN SUCCESS")
                     UserDefaultsHelper.token = result.token
                     UserDefaultsHelper.refreshToken = result.refreshToken
                     UserDefaultsHelper.isLogin = true

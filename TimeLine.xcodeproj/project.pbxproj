@@ -105,7 +105,6 @@
 		CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */; };
 		CEECBF172B0601D70031947E /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF162B0601D70031947E /* CommonError.swift */; };
 		CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF192B0665590031947E /* RefreshResult.swift */; };
-		CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */; };
 		CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF262B08E7750031947E /* ValidationLabel.swift */; };
 		CEECBF292B08FC120031947E /* ValidStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF282B08FC120031947E /* ValidStackView.swift */; };
 		CEECBF8D2B0A3EA20031947E /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEECBF8C2B0A3EA20031947E /* BoardView.swift */; };
@@ -217,7 +216,6 @@
 		CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUnderline.swift; sourceTree = "<group>"; };
 		CEECBF162B0601D70031947E /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		CEECBF192B0665590031947E /* RefreshResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResult.swift; sourceTree = "<group>"; };
-		CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenManager.swift; sourceTree = "<group>"; };
 		CEECBF262B08E7750031947E /* ValidationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationLabel.swift; sourceTree = "<group>"; };
 		CEECBF282B08FC120031947E /* ValidStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidStackView.swift; sourceTree = "<group>"; };
 		CEECBF8C2B0A3EA20031947E /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
@@ -260,7 +258,6 @@
 			children = (
 				CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */,
 				CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */,
-				CEECBF1B2B066C0F0031947E /* RefreshTokenManager.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -783,7 +780,6 @@
 				CEDC33862B0FA7AF00A5788E /* UIImageView+Extension.swift in Sources */,
 				CEE80AFE2B1AC9120041AC36 /* PostDeleteError.swift in Sources */,
 				CEBDFC022B0BB52100D43BF9 /* ProductId.swift in Sources */,
-				CEECBF1C2B066C0F0031947E /* RefreshTokenManager.swift in Sources */,
 				CEDC33992B10C6AD00A5788E /* PostReadError.swift in Sources */,
 				CEA10AD52B22E6EF00969A8B /* BaseTableViewCell.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,

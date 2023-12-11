@@ -26,7 +26,6 @@ final class BoardViewModel {
     struct Output {
         let items: BehaviorRelay<[PostListModel]>
         let errorMsg: PublishSubject<String>
-        let tokenRequest: PublishSubject<RefreshResult>
         let loginRequest: PublishRelay<Bool>
     }
     
@@ -34,7 +33,6 @@ final class BoardViewModel {
         
         let items: BehaviorRelay<[PostListModel]> = BehaviorRelay(value: [])
         let errorMsg: PublishSubject<String> = PublishSubject()
-        let tokenRequest = PublishSubject<RefreshResult>()
         let refresh = PublishRelay<Bool>()
         let loginRequest = PublishRelay<Bool>()
         input.callFirst
@@ -43,7 +41,7 @@ final class BoardViewModel {
                     owner.data.removeAll()
                     owner.nextCursor = nil
                 }
-                debugPrint("[Board First Page Request]")
+//                debugPrint("[Board First Page Request]")
                 refresh.accept(true)
             }
             .disposed(by: disposeBag)
@@ -55,7 +53,7 @@ final class BoardViewModel {
             .subscribe(with: self) { owner, response in
                 switch response {
                 case .success(let result):
-                    debugPrint("[BoardVM Success]")
+//                    debugPrint("[BoardVM Success]")
                     owner.nextCursor = result.nextCursor
                     owner.data.append(contentsOf: result.data)
                     items.accept([PostListModel(section: "", items: owner.data)])
@@ -90,7 +88,7 @@ final class BoardViewModel {
             .disposed(by: disposeBag)
         
         
-        return Output(items: items, errorMsg: errorMsg, tokenRequest: tokenRequest, loginRequest: loginRequest)
+        return Output(items: items, errorMsg: errorMsg, loginRequest: loginRequest)
     }
     
 }

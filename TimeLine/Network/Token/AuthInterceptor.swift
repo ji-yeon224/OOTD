@@ -13,8 +13,8 @@ final class AuthInterceptor: RequestInterceptor {
     static let shared = AuthInterceptor()
     private init() { }
     private let disposeBag = DisposeBag()
-    let retryDelay: TimeInterval = 1
-    let retryLimit = 2
+    private let retryDelay: TimeInterval = 1
+    private let retryLimit = 2
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         guard urlRequest.url?.absoluteString.hasPrefix(BaseURL.baseURL) == true
@@ -35,14 +35,14 @@ final class AuthInterceptor: RequestInterceptor {
         
         guard let response = request.task?.response as? HTTPURLResponse, request.retryCount < self.retryLimit
         else {
-            print("error&&&& ", error)
+            
             completion(.doNotRetry)
             return
         }
         
         guard let _ = TokenError(rawValue: response.statusCode) else {
             let error = NetworkError(statusCode: response.statusCode, description: error.localizedDescription)
-            debugPrint("AuthIntercepter retry ", error)
+            
             completion(.doNotRetryWithError(error))
             return
         }

@@ -29,7 +29,6 @@ final class BoardWriteViewModel {
     struct Output {
         let errorMsg: PublishSubject<String>
         let postButtonEnabled: Observable<Bool>
-        let tokenRequest: PublishSubject<RefreshResult>
         let items: PublishRelay<[SelectImageModel]>
         let enableAddImage: BehaviorRelay<Bool>
         let successPost: PublishRelay<(Bool, String, Post?)>
@@ -45,7 +44,6 @@ final class BoardWriteViewModel {
         let errorMsg: PublishSubject<String> = PublishSubject()
         let postEvent = PublishRelay<Bool>()
         let updateEvent = PublishRelay<Bool>()
-        let tokenRequest = PublishSubject<RefreshResult>()
         let enableAddImage = BehaviorRelay(value: true)
         let successPost = PublishRelay<(Bool, String, Post?)>()
         let loginRequest = PublishRelay<Bool>()
@@ -143,7 +141,7 @@ final class BoardWriteViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(errorMsg: errorMsg, postButtonEnabled: validation, tokenRequest: tokenRequest, items: imageSectionModel, enableAddImage: enableAddImage, successPost: successPost, loginRequest: loginRequest)
+        return Output(errorMsg: errorMsg, postButtonEnabled: validation, items: imageSectionModel, enableAddImage: enableAddImage, successPost: successPost, loginRequest: loginRequest)
     }
     
     private func imageToData() -> [Data] {
@@ -161,7 +159,7 @@ final class BoardWriteViewModel {
                 guard let data = image.jpegData(compressionQuality: value.rawValue) else { return }
 //                print(data.count, value.rawValue)
                 if data.count < destSize {
-                    print(data.count, value.rawValue)
+//                    print(data.count, value.rawValue)
                     imgData.append(data)
                     break
                 }

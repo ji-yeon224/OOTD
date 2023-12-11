@@ -24,7 +24,7 @@ final class CommentAPIManager {
                     if statusCode == 200 {
                         do {
                             let result = try JSONDecoder().decode(T.self, from: response.data)
-                            debugPrint("[SUCCESS COMMENT REQUEST]", result)
+//                            debugPrint("[SUCCESS COMMENT REQUEST]", result)
                             single(.success(.success(result)))
                         } catch {
                             debugPrint("[COMMENT DECODING ERROR] ", error)

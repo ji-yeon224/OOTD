@@ -31,14 +31,14 @@ final class AuthenticationAPIManager {
         
         return Single.create { single in
             provider.request(api) { response in
-                print("AuthAPIManager response", response)
+//                print("AuthAPIManager response", response)
                 switch response {
                 case .success(let data):
                     let statusCode = data.statusCode
                     if statusCode == 200 {
                         do {
                             let result = try JSONDecoder().decode(T.self, from: data.data)
-                            print("SUCCESS")
+//                            print("SUCCESS")
                             single(.success(.success(result)))
                         } catch {
                             print("DECODING ERROR")

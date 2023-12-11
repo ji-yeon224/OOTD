@@ -116,7 +116,7 @@ final class BoardWriteViewController: BaseViewController {
         output.errorMsg
             .bind(with: self) { owner, value in
                 owner.showToastMessage(message: value, position: .top)
-                print("[BOARD WRITE] ", value)
+//                print("[BOARD WRITE] ", value)
             }
             .disposed(by: disposeBag)
         

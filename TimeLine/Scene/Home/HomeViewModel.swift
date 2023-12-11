@@ -42,41 +42,6 @@ final class HomeViewModel {
         let loginRequest = PublishRelay<Bool>()
         
         
-        // 게시글
-        input.contentButtonTap
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .flatMap {
-                AuthenticationAPIManager.shared.request(api: .content, successType: ResponseMessage.self)
-            }
-            .subscribe(with: self) { owner, response in
-                print(UserDefaultsHelper.token)
-                switch response {
-                case .success(let result):
-                    successMsg.onNext(result.message)
-                    
-                case .failure(let error):
-                    let code = error.statusCode
-                    if let commonError = CommonError(rawValue: code) {
-                        errorMsg.onNext(commonError.localizedDescription)
-                    }
-                    guard let errorType = ContentError(rawValue: code) else { return }
-                    debugPrint("[DEBUG-CONTENT] ", error.statusCode, error.description)
-                    
-                    switch errorType {
-                    case .invalidToken, .expireToken: // 리프레시
-                        let result = RefreshTokenManager.shared.tokenRequest()
-                        result
-                            .bind(to: tokenRequest)
-                            .disposed(by: owner.disposeBag)
-                    case .forbidden: // 로그아웃
-                        errorMsg.onNext("forbidden")
-                    
-                    
-                    }
-                    
-                }
-            }
-            .disposed(by: disposeBag)
         
         input.withdrawButtonTap
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
