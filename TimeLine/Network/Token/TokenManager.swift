@@ -72,10 +72,8 @@ final class TokenManager {
                                 let error = NetworkError(statusCode: code, description: error.localizedDescription)
                                 UserDefaultsHelper.initToken()
                                 value.onNext(RefreshResult.login(error: error))
-                                
-                                print(UserDefaultsHelper.token)
                             case .noExpire:
-                                print(UserDefaultsHelper.token)
+                                
                                 value.onNext(RefreshResult.success(token: UserDefaultsHelper.token))
                             }
                         }

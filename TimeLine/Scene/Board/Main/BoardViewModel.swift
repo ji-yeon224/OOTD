@@ -61,15 +61,16 @@ final class BoardViewModel {
                     items.accept([PostListModel(section: "", items: owner.data)])
                 case .failure(let error):
                     debugPrint("[BoardVM error] ", error)
-                    loginRequest.accept(true)
+                    
                     let code = error.statusCode
                     guard let errorType = PostReadError(rawValue: code) else {
                         if let commonError = CommonError(rawValue: code) {
                             errorMsg.onNext(commonError.localizedDescription)
                         }
+                        loginRequest.accept(true)
                         return
                     }
-                    
+                    errorMsg.onNext(errorType.localizedDescription)
                     
                 }
                     
