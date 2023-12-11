@@ -24,6 +24,7 @@ final class BoardReadViewController: BaseViewController {
     private let dispatchGroup = DispatchGroup()
     
     private let deviceWidth = UIScreen.main.bounds.size.width
+    private var isNeedRefresh = false
     
     override func loadView() {
         self.view = mainView
@@ -50,6 +51,13 @@ final class BoardReadViewController: BaseViewController {
         super.viewWillAppear(true)
         configData()
         updateSnapShot()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isNeedRefresh {
+            NotificationCenter.default.post(name: .refresh, object: nil)
+        }
     }
     
     private func configData() {
@@ -137,6 +145,8 @@ final class BoardReadViewController: BaseViewController {
                 owner.mainView.commentWriteView.textView.text = ""
                 owner.showOKAlert(title: "", message: "댓글 작성이 완료되었습니다!") {
                     owner.mainView.scrollView.scrollToBottom()
+                    owner.isNeedRefresh = true
+                    owner.mainView.commentLabel.text = "댓글 \(owner.comments.count)개"
                 }
                 
                 
@@ -149,9 +159,11 @@ final class BoardReadViewController: BaseViewController {
         
         output?.successCommentDelete
             .bind(with: self, onNext: { owner, value in
-                owner.showToastMessage(message: "삭제가 완료되었습니다!", position: .center)
+                owner.showToastMessage(message: "댓글 삭제가 완료되었습니다!", position: .center)
                 owner.comments.remove(at: value)
+                owner.mainView.commentLabel.text = "댓글 \(owner.comments.count)개"
                 owner.updateSnapShot()
+                owner.isNeedRefresh = true
             })
             .disposed(by: disposeBag)
         
