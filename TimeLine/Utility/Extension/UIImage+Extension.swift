@@ -50,10 +50,12 @@ extension UIImage {
 //        print(width, height)
         let size = CGSize(width: width, height: height)
         let render = UIGraphicsImageRenderer(size: size)
-        let renderImage = render.image { context in
+        let renderImage = render.image { [weak self] context in
+            guard let self = self else { return }
             self.draw(in: CGRect(origin: .zero, size: size))
         }
         
         return renderImage
     }
+    
 }

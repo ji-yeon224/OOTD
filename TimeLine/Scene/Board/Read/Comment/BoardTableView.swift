@@ -1,13 +1,13 @@
 //
-//  BoardReadCollectionView.swift
+//  BoardTableViewCell.swift
 //  TimeLine
 //
-//  Created by 김지연 on 12/5/23.
+//  Created by 김지연 on 12/8/23.
 //
 
 import UIKit
 
-final class BoardReadCollectionView: UICollectionView {
+final class BoardTableView: UITableView {
     override var intrinsicContentSize: CGSize {
         return self.contentSize
     }

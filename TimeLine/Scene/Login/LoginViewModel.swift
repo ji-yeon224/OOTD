@@ -62,18 +62,20 @@ final class LoginViewModel {
                 switch response {
                 case .success(let result):
                     successValue.accept(true)
-                    UserDefaultsHelper.token = result.token
-                    UserDefaultsHelper.refreshToken = result.refreshToken
+//                    UserDefaultsHelper.token = result.token
+//                    UserDefaultsHelper.refreshToken = result.refreshToken
+//                    UserDefaultsHelper.isLogin = true
+                    UserDefaultsHelper.setNewInfo(login: result)
                 case .failure(let error):
                     let code = error.statusCode
-                    
+                    print(error)
                     guard let errorType = LoginError(rawValue: code) else {
                         if let commonError = CommonError(rawValue: code) {
                             errorMsg.onNext(commonError.localizedDescription)
                         }
                         return
                     }
-//                    debugPrint("[Debug]", error.statusCode, error.description)
+                    debugPrint("[Debug]", error.statusCode, error.description)
                     errorMsg.onNext(errorType.localizedDescription)
                 }
             })

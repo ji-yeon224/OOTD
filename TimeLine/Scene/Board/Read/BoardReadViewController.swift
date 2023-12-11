@@ -16,17 +16,21 @@ final class BoardReadViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     var postData: Post?
-    var imageList: [UIImage] = []
+    private var comments: [Comment] = []
     
     private var deletePost = PublishRelay<Bool>()
+    private let commentWrite = PublishRelay<CommentRequest>()
+    private let commentDelete = PublishRelay<(String, Int)>()
     private let dispatchGroup = DispatchGroup()
     
     private let deviceWidth = UIScreen.main.bounds.size.width
+    private var isNeedRefresh = false
     
     override func loadView() {
         self.view = mainView
         guard let post = postData else {
-            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") {
+            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { [weak self] in
+                guard let self = self else { return }
                 self.navigationController?.popViewController(animated: true)
             }
             
@@ -39,20 +43,28 @@ final class BoardReadViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-        updateSnapShot()
-        configNavBar()
-       
+        
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         configData()
+        updateSnapShot()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isNeedRefresh {
+            NotificationCenter.default.post(name: .refresh, object: nil)
+        }
     }
     
     private func configData() {
         
         guard let post = postData else {
-            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") {
+            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { [weak self] in
+                guard let self = self else { return }
                 self.navigationController?.popViewController(animated: true)
             }
             
@@ -63,26 +75,33 @@ final class BoardReadViewController: BaseViewController {
         mainView.date.text = String.convertDateFormat(date: post.time)
         mainView.titleLabel.text = post.title
         mainView.contentLabel.text = post.content
-        
+        mainView.commentLabel.text = "댓글 \(post.comments.count)개"
+        comments = post.comments.reversed()
         for i in 0..<post.image.count {
             
             mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-30)
             
         }
         
+        if post.creator.id == UserDefaultsHelper.userID {
+            configNavBar()
+        }
+        configureDataSource()
         
     }
     
-    @objc private func refeshHeader() {
-        print(#function)
-        updateSnapShot()
-    }
     
     private func bind() {
         
-        let input = BoardReadViewModel.Input(delete: deletePost)
+        let input = BoardReadViewModel.Input(
+            delete: deletePost,
+            commentWrite: commentWrite,
+            commentContent: mainView.commentWriteView.textView.rx.text.orEmpty,
+            commentDelete: commentDelete
+        )
         
         let output = viewModel.transform(input: input)
+        
         
         
         output?.errorMsg
@@ -100,38 +119,90 @@ final class BoardReadViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        output?.tokenRequest
-            .bind(with: self, onNext: { owner, value in
-                switch value {
-                case .success:
-                    break
-                case .login:
-                    owner.showOKAlert(title: "문제가 발생하였습니다.", message: "로그인 후 다시 시도해주세요.") {
-                        UserDefaultsHelper.isLogin = false
-                        // 로그인 뷰로 present
-                        let vc = LoginViewController()
-                        vc.transition = .presnt
-                        vc.modalPresentationStyle = .fullScreen
-                        vc.modalTransitionStyle = .crossDissolve
-                        vc.completionHandler = {
-                            owner.deletePost.accept(true)
-                        }
-                        owner.present(vc, animated: true)
+        output?.loginRequest
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "문제가 발생하였습니다.", message: "로그인 후 다시 시도해주세요.") {
+                    UserDefaultsHelper.initToken()
+                    // 로그인 뷰로 present
+                    let vc = LoginViewController()
+                    vc.transition = .presnt
+                    vc.modalPresentationStyle = .fullScreen
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.completionHandler = {
+                        owner.deletePost.accept(true)
                     }
-                case .error:
-                    owner.showOKAlert(title: "요청을 처리하지 못하였습니다. 다시 시도해주세요.", message: "") { }
+                    owner.present(vc, animated: true)
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        
+        
+        output?.commentWrite
+            .bind(with: self, onNext: { owner, value in
+                owner.comments.append(value)
+                owner.updateSnapShot()
+                owner.mainView.commentWriteView.textView.text = ""
+                owner.showOKAlert(title: "", message: "댓글 작성이 완료되었습니다!") {
+                    owner.mainView.scrollView.scrollToBottom()
+                    owner.isNeedRefresh = true
+                    owner.mainView.commentLabel.text = "댓글 \(owner.comments.count)개"
+                }
+                
+                
             })
             .disposed(by: disposeBag)
         
+        output?.commentIsEnable
+            .bind(to: mainView.commentWriteView.postButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output?.successCommentDelete
+            .bind(with: self, onNext: { owner, value in
+                owner.showToastMessage(message: "댓글 삭제가 완료되었습니다!", position: .center)
+                owner.comments.remove(at: value)
+                owner.mainView.commentLabel.text = "댓글 \(owner.comments.count)개"
+                owner.updateSnapShot()
+                owner.isNeedRefresh = true
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.commentWriteView.textView.rx.didChange
+            .bind(with: self) { owner, _ in
+                let commentWriteView = owner.mainView.commentWriteView
+                let size = CGSize(width: commentWriteView.frame.width, height: .infinity)
+                let estimatedSize = commentWriteView.textView.sizeThatFits(size)
+                let isMaxHeight = estimatedSize.height >= 100
+                
+                if isMaxHeight {
+                    commentWriteView.textView.isScrollEnabled = true
+                } else { commentWriteView.textView.isScrollEnabled = false }
+                
+                if commentWriteView.textView.text.count > 0 {
+                    commentWriteView.placeholderLabel.isHidden = true
+                } else {
+                    commentWriteView.placeholderLabel.isHidden = false
+                }
+                
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.commentWriteView.postButton.rx.tap
+            .withLatestFrom(mainView.commentWriteView.textView.rx.text.orEmpty) { _, text in
+                return CommentRequest(content: text)
+            }
+            .bind(with: self) { owner, value in
+                owner.commentWrite.accept(value)
+            }
+            .disposed(by: disposeBag)
     }
     
     
     private func updateSnapShot() {
-        var snapShot = NSDiffableDataSourceSnapshot<Int, CommentModel>()
+        var snapShot = NSDiffableDataSourceSnapshot<Int, Comment>()
         snapShot.appendSections([0])
-        snapShot.appendItems(dummyComment)
-        mainView.dataSource.apply(snapShot, animatingDifferences: false)
+        snapShot.appendItems(comments)
+        mainView.dataSource.apply(snapShot)
     }
     
     
@@ -151,7 +222,7 @@ final class BoardReadViewController: BaseViewController {
             vc.modalPresentationStyle = .fullScreen
             vc.postHandler = { value in
                 self.postData = value
-                print(value)
+//                print(value)
                 self.updateSnapShot()
                 
             }
@@ -177,6 +248,32 @@ final class BoardReadViewController: BaseViewController {
         navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
     }
     
+    func configureDataSource() {
+        
+        mainView.dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: mainView.tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
+            cell.nicknameLabel.text = itemIdentifier.creator.nick
+            cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
+            cell.contentLabel.text = itemIdentifier.content
+            if itemIdentifier.creator.id == UserDefaultsHelper.userID {
+                cell.deleteButton.isHidden = false
+                cell.deleteButton.rx.tap
+                    .bind(with: self) { owner, _ in
+                        owner.showAlertWithCancel(title: "", message: "해당 댓글을 삭제하시겠어요?") {
+                            owner.commentDelete.accept((itemIdentifier.id, indexPath.row))
+                        } cancelHandler: { }
+
+                        
+                    }
+                    .disposed(by: cell.disposeBag)
+                
+            }
+            return cell
+        })
+        
+        
+        
+    }
     
     
 }

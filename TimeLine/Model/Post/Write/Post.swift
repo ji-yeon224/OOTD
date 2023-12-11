@@ -8,7 +8,8 @@
 import Foundation
 
 struct Post: Codable, Hashable {
-    let likes, image, hashTags, comments: [String]
+    let likes, image, hashTags: [String]
+    let comments: [Comment]
     let id: String
     let creator: Creator
     let time, title, content, productID: String
@@ -21,15 +22,6 @@ struct Post: Codable, Hashable {
     }
 }
 
-// MARK: - Creator
-struct Creator: Codable, Hashable {
-    let id, nick: String
-
-    enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case nick
-    }
-}
 
 
 //struct WriteResponse: Codable {

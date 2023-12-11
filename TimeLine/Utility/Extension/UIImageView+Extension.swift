@@ -18,7 +18,8 @@ extension UIImageView {
             .requestModifier(ImageLoadManager.shared.getModifier()),
             .transition(.fade(1.0)),
             .processor(cornerImageProcessor)
-        ]) { result in
+        ]) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let result):
                 self.image = result.image.resize(width: width)
@@ -32,6 +33,26 @@ extension UIImageView {
         }
         
     }
+//
+//    func downSample1(scale: CGFloat) -> UIImage {
+//        let imageSourceOption = [kCGImageSourceShouldCache: false] as CFDictionary
+//        let data = self.pngData()! as CFData
+//        let imageSource = CGImageSourceCreateWithData(data, nil)!
+//        let maxPixel = max(self.size.width, self.size.height) * scale
+//        let downSampleOptions = [
+//            kCGImageSourceCreateThumbnailFromImageAlways: true,
+//            kCGImageSourceShouldCacheImmediately: true,
+//            kCGImageSourceCreateThumbnailWithTransform: true,
+//            kCGImageSourceThumbnailMaxPixelSize: maxPixel
+//        ] as CFDictionary
+//
+//        let downSampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downSampleOptions)!
+//
+//        let newImage = UIImage(cgImage: downSampledImage)
+//        printDataSize(newImage)
+//        return newImage
+//    }
+//    
     
 //    func setImage(with urlString: String, resize width: CGFloat) {
 //        self.kf.indicatorType = .activity

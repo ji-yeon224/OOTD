@@ -61,14 +61,30 @@ final class BoardReadView: BaseView {
     lazy var img3 = PlainImageView(frame: .zero)
     lazy var imgList = [img1, img2, img3]
     
-    
-    lazy var collectionView = {
-        let view = BoardReadCollectionView(frame: .zero, collectionViewLayout: self.collectionViewLayout())
-        view.isScrollEnabled = false
+    private let lineView = {
+        let view = UIView()
+        view.backgroundColor = Constants.Color.lightBorder
         return view
     }()
     
-    var dataSource: UICollectionViewDiffableDataSource<Int, CommentModel>!
+    private let commentView = UIView()
+    let commentLabel = PlainLabel(size: 17, color: Constants.Color.subText)
+    
+    let commentWriteView = CommentWriteView()
+    
+    
+    lazy var tableView = {
+        let view = BoardTableView()
+        view.isScrollEnabled = false
+        view.rowHeight = UITableView.automaticDimension
+        view.register(BoardCommentCell.self, forCellReuseIdentifier: BoardCommentCell.identifier)
+        view.separatorStyle = .none
+        return view
+        
+    }()
+    
+    
+    var dataSource: UITableViewDiffableDataSource<Int, Comment>!
     
     
     override func configure() {
@@ -85,12 +101,19 @@ final class BoardReadView: BaseView {
         stackView.addArrangedSubview(imageBackView3)
         
         stackView.addArrangedSubview(bottomView)
-        
-        stackView.addArrangedSubview(collectionView)
+        stackView.addArrangedSubview(lineView)
+        stackView.addArrangedSubview(commentView)
+        stackView.addArrangedSubview(tableView)
+        addSubview(commentWriteView)
         
         stackViewSubViews()
-        configureDataSource()
+//        configureDataSource()
+        
+        scrollView.keyboardDismissMode = .onDrag
+                
+        
     }
+    
     
     private func stackViewSubViews() {
         infoView.addSubview(profileImage)
@@ -105,12 +128,14 @@ final class BoardReadView: BaseView {
         imageBackView2.addSubview(img2)
         imageBackView3.addSubview(img3)
         
+        commentView.addSubview(commentLabel)
     }
     
     override func setConstraints() {
         
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.horizontalEdges.top.equalToSuperview()
+            
         }
         stackView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView)
@@ -193,10 +218,28 @@ final class BoardReadView: BaseView {
             make.centerY.equalTo(bottomView)
             make.size.equalTo(20)
         }
+        lineView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(5)
+        }
+        commentView.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(scrollView)
+            make.height.equalTo(30)
+        }
+        commentLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(commentView).inset(20)
+            make.centerY.equalTo(commentView)
+        }
         
-        collectionView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(scrollView)
             
+        }
+        
+        commentWriteView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.bottom)
+            make.bottom.equalToSuperview()
+            make.width.equalToSuperview()
         }
         
     }
@@ -207,31 +250,29 @@ final class BoardReadView: BaseView {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
-        let size = UIScreen.main.bounds.width - 40 //self.frame.width - 40
+        let size = UIScreen.main.bounds.width - 10 //self.frame.width - 40
         layout.itemSize = CGSize(width: size, height: size / 4)
         return layout
     }
     
     
-    func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<BoardCommentCell, CommentModel> { cell, indexPath, itemIdentifier in
-            
-            cell.label.text = itemIdentifier.comment
-            
-        }
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-            
-            
-            return cell
-            
-        })
-        
-
-        
-        
-        
-    }
+//    func configureDataSource() {
+//        
+//        dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
+//            cell.nicknameLabel.text = itemIdentifier.creator.nick
+//            cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
+//            cell.contentLabel.text = itemIdentifier.content
+//            if itemIdentifier.creator.id == UserDefaultsHelper.userID {
+//                cell.deleteButton.isHidden = false
+//                
+//            }
+//            return cell
+//        })
+//        
+//        
+//        
+//    }
     
     
 }

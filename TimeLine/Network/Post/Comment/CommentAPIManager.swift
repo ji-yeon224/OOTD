@@ -1,57 +1,57 @@
 //
-//  PostAPIManager.swift
+//  CommentAPIManager.swift
 //  TimeLine
 //
-//  Created by 김지연 on 11/20/23.
+//  Created by 김지연 on 12/7/23.
 //
 
 import Foundation
 import Moya
 import RxSwift
 
-final class PostAPIManager {
+final class CommentAPIManager {
     
-    static let shared = PostAPIManager()
+    static let shared = CommentAPIManager()
     private init() { }
-    private let provider = MoyaProvider<PostAPI>(session: Session(interceptor: AuthInterceptor.shared))
+    private let provider = MoyaProvider<CommentAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
-   
-    func postrequest<T: Codable>(api: PostAPI, type: T.Type) -> Single<Result<T, NetworkError>> {
-        
+    func request<T: Codable>(api: CommentAPI, type: T.Type) -> Single<Result<T, NetworkError>>{
         return Single.create { single in
             self.provider.request(api) { result in
-                print("PostAPIManager response ", result)
                 switch result {
                 case .success(let response):
                     let statusCode = response.statusCode
                     if statusCode == 200 {
-                        
                         do {
-                            
                             let result = try JSONDecoder().decode(T.self, from: response.data)
-                            debugPrint("[SUCCESS POST REQUEST]")
+//                            debugPrint("[SUCCESS COMMENT REQUEST]", result)
                             single(.success(.success(result)))
                         } catch {
-                            debugPrint("[POST(request success)] DECODING ERROR", error)
-                            
+                            debugPrint("[COMMENT DECODING ERROR] ", error)
                         }
-                        
+                    } else {
+                        do {
+                            let result = try JSONDecoder().decode(ErrorModel.self, from: response.data)
+                            let error = NetworkError(statusCode: statusCode, description: result.message)
+                            single(.success(.failure(error)))
+                        } catch {
+                            debugPrint("[COMMENT DECODING ERROR ]", error.localizedDescription)
+                        }
                     }
-//                    single(.success(.success(response)))
+                    
                 case .failure(let error):
-                    print("error")
                     guard let response = error.response else {
                         single(.success(.failure(NetworkError(statusCode: 500, description: "문제가 발생하였습니다."))))
                         return
                     }
                     let error = NetworkError(statusCode: response.statusCode, description: response.description)
-                    
                     single(.success(.failure(error)))
+//                    let error = NetworkError(statusCode: error.errorCode, description: error.localizedDescription)
+//                    single(.success(.failure(error)))
                 }
             }
             return Disposables.create()
         }
-        
     }
     
 }

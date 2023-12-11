@@ -15,19 +15,30 @@ final class AuthenticationAPIManager {
     static let shared = AuthenticationAPIManager()
     private init() { }
     
+    private let authprovider = MoyaProvider<AuthenticationAPI>(session: Session(interceptor: AuthInterceptor.shared))
     private let provider = MoyaProvider<AuthenticationAPI>()
     
-    
     func request<T: Codable>(api: AuthenticationAPI, successType: T.Type) -> Single<Result<T, NetworkError>> {
+        var provider = MoyaProvider<AuthenticationAPI>()
+        switch api {
+        case .login, .join, .emailValidation:
+            provider = self.provider
+        case .content:
+            break
+        case .refresh, .withdraw:
+            provider = self.authprovider
+        }
         
         return Single.create { single in
-            self.provider.request(api) { response in
+            provider.request(api) { response in
+//                print("AuthAPIManager response", response)
                 switch response {
                 case .success(let data):
                     let statusCode = data.statusCode
                     if statusCode == 200 {
                         do {
                             let result = try JSONDecoder().decode(T.self, from: data.data)
+//                            print("SUCCESS")
                             single(.success(.success(result)))
                         } catch {
                             print("DECODING ERROR")
@@ -46,7 +57,13 @@ final class AuthenticationAPIManager {
                     }
                     
                 case .failure(let error):
-                    let error = NetworkError(statusCode: error.errorCode, description: error.localizedDescription)
+                    print("AuthManager FAIL ", error)
+                    guard let response = error.response else {
+                        single(.success(.failure(NetworkError(statusCode: 500, description: "문제가 발생하였습니다."))))
+                        return
+                    }
+                    let error = NetworkError(statusCode: response.statusCode, description: response.description)
+                    
                     single(.success(.failure(error)))
                     
                 }
@@ -56,44 +73,6 @@ final class AuthenticationAPIManager {
         
     }
     
-//    func refreshRequest() -> Single<Result<RefreshToken, RefreshError>> {
-//        
-//        return Single.create { single in
-//            self.provider.request(.refresh) { result in
-//                switch result {
-//                case .success(let data):
-//                    let statusCode = data.statusCode
-//                    if statusCode == 200 {
-//                        let result = try! JSONDecoder().decode(RefreshToken.self, from: data.data)
-//                        single(.success(.success(result)))
-//                    } else {
-//                        let error = RefreshError(rawValue: statusCode ?? 500)
-//                        switch error {
-//                        case .wrongAuth, .fobidden, .expireRefreshToken:
-//                            <#code#>
-//                        case .noExpire:
-//                            <#code#>
-//                        case .serverError:
-//                            <#code#>
-//                        
-//                        }
-//                        
-//                    }
-//                    
-//                    
-//                case .failure(let error):
-//                }
-//            }
-//            
-//            
-//        }
-//        
-//        
-//    }
-        
-    
-    
-   
-    
+
     
 }

@@ -29,10 +29,10 @@ final class BoardWriteViewModel {
     struct Output {
         let errorMsg: PublishSubject<String>
         let postButtonEnabled: Observable<Bool>
-        let tokenRequest: PublishSubject<RefreshResult>
         let items: PublishRelay<[SelectImageModel]>
         let enableAddImage: BehaviorRelay<Bool>
         let successPost: PublishRelay<(Bool, String, Post?)>
+        let loginRequest: PublishRelay<Bool>
     }
     
     
@@ -44,10 +44,9 @@ final class BoardWriteViewModel {
         let errorMsg: PublishSubject<String> = PublishSubject()
         let postEvent = PublishRelay<Bool>()
         let updateEvent = PublishRelay<Bool>()
-        let tokenRequest = PublishSubject<RefreshResult>()
         let enableAddImage = BehaviorRelay(value: true)
         let successPost = PublishRelay<(Bool, String, Post?)>()
-        
+        let loginRequest = PublishRelay<Bool>()
         
         let validation = Observable.combineLatest(input.titleText, input.contentText) { title, content in
             titleStr = title.trimmingCharacters(in: .whitespaces)
@@ -74,7 +73,7 @@ final class BoardWriteViewModel {
                 self.imageToData()
             }
             .flatMap { value in
-                PostAPIManager.shared.request(api: .write(data: PostWrite(title: titleStr, content: contentStr, file: value, product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
+                PostAPIManager.shared.postrequest(api: .write(data: PostWrite(title: titleStr, content: contentStr, file: value, product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
             }
             .bind(with: self, onNext: { owner, response in
                 switch response {
@@ -89,29 +88,11 @@ final class BoardWriteViewModel {
 //                            print(commonError.localizedDescription)
                             errorMsg.onNext(commonError.localizedDescription)
                         }
+                        loginRequest.accept(true)
                         return
                     }
-                    switch errorType {
-                    case .wrongAuth, .expireToken:
-                        let result = RefreshTokenManager.shared.tokenRequest()
-                        result
-                            .bind(with: self, onNext: { owner, result in
-                                debugPrint("[TOKEN 재발급]", String(describing: UserDefaultsHelper.token))
-                                switch result {
-                                case .success:
-                                    postEvent.accept(true)
-                                case .login, .error:
-                                    tokenRequest.onNext(result)
-                                    
-                                }
-                            })
-                            .disposed(by: owner.disposeBag)
-                    case .forbidden:
-                        tokenRequest.onNext(RefreshResult.login)
-                    case .invalidRequest, .saveError:
-                        errorMsg.onNext(errorType.localizedDescription)
-                        successPost.accept((false, errorType.localizedDescription, nil))
-                    }
+                    errorMsg.onNext(errorType.localizedDescription)
+                    successPost.accept((false, errorType.localizedDescription, nil))
                     
                 }
             })
@@ -119,7 +100,7 @@ final class BoardWriteViewModel {
         
         updateEvent
             .flatMap { _ in
-                PostAPIManager.shared.request(api: .update(id: self.postID ?? "-1", data: PostWrite(title: titleStr, content: contentStr, file: self.imageToData(), product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
+                PostAPIManager.shared.postrequest(api: .update(id: self.postID ?? "-1", data: PostWrite(title: titleStr, content: contentStr, file: self.imageToData(), product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
             }
             .bind(with: self, onNext: { owner, response in
                 switch response {
@@ -134,29 +115,12 @@ final class BoardWriteViewModel {
 //                            print(commonError.localizedDescription)
                             errorMsg.onNext(commonError.localizedDescription)
                         }
+                        loginRequest.accept(true)
                         return
                     }
-                    switch errorType {
-                    case .wrongAuth, .expireToken:
-                        let result = RefreshTokenManager.shared.tokenRequest()
-                        result
-                            .bind(with: self, onNext: { owner, result in
-                                debugPrint("[TOKEN 재발급]", String(describing: UserDefaultsHelper.token))
-                                switch result {
-                                case .success:
-                                    postEvent.accept(true)
-                                case .login, .error:
-                                    tokenRequest.onNext(result)
-                                    
-                                }
-                            })
-                            .disposed(by: owner.disposeBag)
-                    case .forbidden:
-                        tokenRequest.onNext(RefreshResult.login)
-                    case .invalidRequest, .noAuthorization, .alreadyDelete:
-                        errorMsg.onNext(errorType.localizedDescription)
-                        successPost.accept((false, errorType.localizedDescription, nil))
-                    }
+                    
+                    errorMsg.onNext(errorType.localizedDescription)
+                    successPost.accept((false, errorType.localizedDescription, nil))
                     
                 }
             })
@@ -177,7 +141,7 @@ final class BoardWriteViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(errorMsg: errorMsg, postButtonEnabled: validation, tokenRequest: tokenRequest, items: imageSectionModel, enableAddImage: enableAddImage, successPost: successPost)
+        return Output(errorMsg: errorMsg, postButtonEnabled: validation, items: imageSectionModel, enableAddImage: enableAddImage, successPost: successPost, loginRequest: loginRequest)
     }
     
     private func imageToData() -> [Data] {
@@ -195,7 +159,7 @@ final class BoardWriteViewModel {
                 guard let data = image.jpegData(compressionQuality: value.rawValue) else { return }
 //                print(data.count, value.rawValue)
                 if data.count < destSize {
-                    print(data.count, value.rawValue)
+//                    print(data.count, value.rawValue)
                     imgData.append(data)
                     break
                 }

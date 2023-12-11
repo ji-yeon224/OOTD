@@ -78,3 +78,9 @@ extension AuthenticationAPI: TargetType {
     
     
 }
+
+extension AuthenticationAPI {
+    var validationType: ValidationType {
+        return .successCodes
+    }
+}
