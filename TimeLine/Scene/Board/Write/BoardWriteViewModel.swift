@@ -102,7 +102,7 @@ final class BoardWriteViewModel {
         
         updateEvent
             .flatMap { _ in
-                PostAPIManager.shared.request(api: .update(id: self.postID ?? "-1", data: PostWrite(title: titleStr, content: contentStr, file: self.imageToData(), product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
+                PostAPIManager.shared.postrequest(api: .update(id: self.postID ?? "-1", data: PostWrite(title: titleStr, content: contentStr, file: self.imageToData(), product_id: ProductId.OOTDBoard.rawValue)), type: Post.self)
             }
             .bind(with: self, onNext: { owner, response in
                 switch response {
@@ -117,30 +117,12 @@ final class BoardWriteViewModel {
 //                            print(commonError.localizedDescription)
                             errorMsg.onNext(commonError.localizedDescription)
                         }
+                        loginRequest.accept(true)
                         return
                     }
-                    switch errorType {
-                    case .wrongAuth, .expireToken:
-                        let result = RefreshTokenManager.shared.tokenRequest()
-                        result
-                            .bind(with: self, onNext: { owner, result in
-                                debugPrint("[TOKEN 재발급]", String(describing: UserDefaultsHelper.token))
-                                switch result {
-                                case .success:
-                                    postEvent.accept(true)
-                                case .login, .error:
-                                    tokenRequest.onNext(result)
-                                    
-                                }
-                            })
-                            .disposed(by: owner.disposeBag)
-                    case .forbidden:
-                        let error = NetworkError(statusCode: code, description: errorType.localizedDescription)
-                        tokenRequest.onNext(RefreshResult.login(error: error))
-                    case .invalidRequest, .noAuthorization, .alreadyDelete:
-                        errorMsg.onNext(errorType.localizedDescription)
-                        successPost.accept((false, errorType.localizedDescription, nil))
-                    }
+                    
+                    errorMsg.onNext(errorType.localizedDescription)
+                    successPost.accept((false, errorType.localizedDescription, nil))
                     
                 }
             })
