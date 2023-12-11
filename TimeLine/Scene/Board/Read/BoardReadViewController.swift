@@ -91,6 +91,7 @@ final class BoardReadViewController: BaseViewController {
         
         if post.likes.contains(UserDefaultsHelper.userID) {
             viewModel.like = true
+            mainView.setLikeButton(like: true)
         }
         configureDataSource()
         
@@ -152,6 +153,7 @@ final class BoardReadViewController: BaseViewController {
                 owner.mainView.commentWriteView.textView.text = ""
                 owner.showOKAlert(title: "", message: "댓글 작성이 완료되었습니다!") {
                     owner.mainView.scrollView.scrollToBottom()
+                    owner.view.endEditing(true)
                     owner.isNeedRefresh = true
                     owner.mainView.commentLabel.text = "댓글 \(owner.comments.count)개"
                 }
