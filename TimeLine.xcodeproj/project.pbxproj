@@ -256,8 +256,6 @@
 		CE048CC02B038EF600FAC038 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				CEC2FBD72B021C3D002E3046 /* LoginModel */,
-				CE048CC32B03912400FAC038 /* JoinModel */,
 				CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */,
 				CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */,
 			);
@@ -334,7 +332,6 @@
 		CEA10ADB2B232E5200969A8B /* Token */ = {
 			isa = PBXGroup;
 			children = (
-				CECD6A4B2B27493800B7732C /* TokenModel */,
 				CEA10ADE2B232EA700969A8B /* TokenManager.swift */,
 				CEA10AE22B23536400969A8B /* AuthInterceptor.swift */,
 			);
@@ -344,7 +341,6 @@
 		CEA75CF72B214AF10029E12E /* Comment */ = {
 			isa = PBXGroup;
 			children = (
-				CECD6A4C2B27495500B7732C /* CommentModel */,
 				CEA75CF82B214B050029E12E /* CommentAPI.swift */,
 				CEA75CFA2B214B120029E12E /* CommentAPIManager.swift */,
 			);
@@ -379,7 +375,6 @@
 		CEBDFBEE2B0B2CA000D43BF9 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				CECD6A4D2B27498000B7732C /* PostModel */,
 				CEA75CF72B214AF10029E12E /* Comment */,
 				CEBDFBEF2B0B2CA800D43BF9 /* PostAPI.swift */,
 				CEBDFBF32B0B31B900D43BF9 /* PostAPIManager.swift */,
@@ -421,6 +416,9 @@
 		CEC2FBD22B02174A002E3046 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CECD6A4F2B274C3600B7732C /* AuthModel */,
+				CECD6A4B2B27493800B7732C /* TokenModel */,
+				CECD6A4D2B27498000B7732C /* PostModel */,
 				CEE80ACC2B18511D0041AC36 /* BoardReadCollectionView */,
 				CEA903022B146F8200F09FB8 /* RxDataSource */,
 			);
@@ -472,11 +470,21 @@
 		CECD6A4D2B27498000B7732C /* PostModel */ = {
 			isa = PBXGroup;
 			children = (
+				CECD6A4C2B27495500B7732C /* CommentModel */,
 				CEE80AFF2B1ACB6B0041AC36 /* DeleteResponse.swift */,
 				CEBDFBF92B0B958800D43BF9 /* Write */,
 				CEBDFBFA2B0B959100D43BF9 /* Read */,
 			);
 			path = PostModel;
+			sourceTree = "<group>";
+		};
+		CECD6A4F2B274C3600B7732C /* AuthModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE048CC32B03912400FAC038 /* JoinModel */,
+				CEC2FBD72B021C3D002E3046 /* LoginModel */,
+			);
+			path = AuthModel;
 			sourceTree = "<group>";
 		};
 		CED961512B0CEF820067C424 /* Read */ = {
@@ -529,9 +537,9 @@
 			isa = PBXGroup;
 			children = (
 				CEC2FBDA2B021D35002E3046 /* Error */,
-				CEC2FBD22B02174A002E3046 /* Model */,
 				CEEA87952B01F85E00AC375F /* View */,
 				CEEA87772B01EE9200AC375F /* Utility */,
+				CEC2FBD22B02174A002E3046 /* Model */,
 				CEEA876D2B01EC9E00AC375F /* Network */,
 				CEEA876B2B01EC7D00AC375F /* Scene */,
 				CEEA87542B01E30000AC375F /* AppDelegate.swift */,
