@@ -16,7 +16,6 @@ final class BoardReadViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     var postData: Post?
-    var imageList: [UIImage] = []
     private var comments: [Comment] = []
     
     private var deletePost = PublishRelay<Bool>()
@@ -28,7 +27,8 @@ final class BoardReadViewController: BaseViewController {
     override func loadView() {
         self.view = mainView
         guard let post = postData else {
-            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") {
+            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { [weak self] in
+                guard let self = self else { return }
                 self.navigationController?.popViewController(animated: true)
             }
             
@@ -54,7 +54,8 @@ final class BoardReadViewController: BaseViewController {
     private func configData() {
         
         guard let post = postData else {
-            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") {
+            showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { [weak self] in
+                guard let self = self else { return }
                 self.navigationController?.popViewController(animated: true)
             }
             
@@ -104,29 +105,24 @@ final class BoardReadViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        output?.tokenRequest
-            .bind(with: self, onNext: { owner, value in
-                switch value {
-                case .success:
-                    break
-                case .login:
-                    owner.showOKAlert(title: "문제가 발생하였습니다.", message: "로그인 후 다시 시도해주세요.") {
-                        UserDefaultsHelper.isLogin = false
-                        // 로그인 뷰로 present
-                        let vc = LoginViewController()
-                        vc.transition = .presnt
-                        vc.modalPresentationStyle = .fullScreen
-                        vc.modalTransitionStyle = .crossDissolve
-                        vc.completionHandler = {
-                            owner.deletePost.accept(true)
-                        }
-                        owner.present(vc, animated: true)
+        output?.loginRequest
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "문제가 발생하였습니다.", message: "로그인 후 다시 시도해주세요.") {
+                    UserDefaultsHelper.initToken()
+                    // 로그인 뷰로 present
+                    let vc = LoginViewController()
+                    vc.transition = .presnt
+                    vc.modalPresentationStyle = .fullScreen
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.completionHandler = {
+                        owner.deletePost.accept(true)
                     }
-                case .error:
-                    owner.showOKAlert(title: "요청을 처리하지 못하였습니다. 다시 시도해주세요.", message: "") { }
+                    owner.present(vc, animated: true)
                 }
-            })
+            }
             .disposed(by: disposeBag)
+        
+        
         
         output?.commentWrite
             .bind(with: self, onNext: { owner, value in
@@ -200,7 +196,7 @@ final class BoardReadViewController: BaseViewController {
             vc.modalPresentationStyle = .fullScreen
             vc.postHandler = { value in
                 self.postData = value
-                print(value)
+//                print(value)
                 self.updateSnapShot()
                 
             }

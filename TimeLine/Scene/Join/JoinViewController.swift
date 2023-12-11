@@ -106,7 +106,6 @@ final class JoinViewController: BaseViewController {
         
         output.birthValid
             .bind(with: self) { owner, value in
-                print(value)
                 owner.mainView.birthValidLabel.isHidden = value
                 owner.mainView.birthValidLabel.text = "만 14세 이상 부터 가입 가능합니다."
             }

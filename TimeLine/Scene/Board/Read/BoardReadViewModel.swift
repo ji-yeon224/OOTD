@@ -22,10 +22,10 @@ final class BoardReadViewModel {
     
     struct Output {
         let errorMsg: PublishRelay<String>
-        let tokenRequest: PublishRelay<RefreshResult>
         let successDelete: PublishRelay<Bool>
         let commentWrite: PublishRelay<Comment>
         let commentIsEnable: BehaviorRelay<Bool>
+        let loginRequest: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output? {
@@ -34,19 +34,19 @@ final class BoardReadViewModel {
             return nil }
 //        print(post)
         let errorMsg = PublishRelay<String>()
-        let tokenRequest = PublishRelay<RefreshResult>()
         let successDelete = PublishRelay<Bool>()
         let commentWrite = PublishRelay<Comment>()
         let commentIsEnable = BehaviorRelay(value: false)
+        let loginRequest = PublishRelay<Bool>()
         
         input.delete
             .flatMap { _ in
-                return PostAPIManager.shared.request(api: .delete(id: post.id), type:  DeleteResponse.self)
+                return PostAPIManager.shared.postrequest(api: .delete(id: post.id), type:  DeleteResponse.self)
             }
             .subscribe(with: self) { owner, response in
                 switch response {
                 case .success(_):
-                    debugPrint("[DELETE POST SUCCESS]")
+//                    debugPrint("[DELETE POST SUCCESS]")
                     successDelete.accept(true)
                 case .failure(let error):
                     let code = error.statusCode
@@ -57,25 +57,8 @@ final class BoardReadViewModel {
                         return
                     }
                     debugPrint("[DEBUG-POST] ", error.statusCode, error.description)
+                    errorMsg.accept(errorType.localizedDescription)
                     
-                    switch errorType {
-                    case .wrongAuth, .forbidden, .expireToken:
-                        let result = RefreshTokenManager.shared.tokenRequest()
-                        result
-                            .bind(with: self) { owner, result in
-                                if result == .success {
-                                    input.delete.accept(true)
-                                } else {
-                                    tokenRequest.accept(result)
-                                }
-                            }
-                            .disposed(by: owner.disposeBag)
-                    
-                    case .alreadyDelete:
-                        errorMsg.accept(errorType.localizedDescription)
-                    case .noAuthorization:
-                        errorMsg.accept(errorType.localizedDescription)
-                    }
                     
                 }
             }
@@ -93,30 +76,17 @@ final class BoardReadViewModel {
                     commentWrite.accept(result)
                 case .failure(let error):
                     let code = error.statusCode
-                    if let tokenError = TokenError(rawValue: code) {
-                        let result = RefreshTokenManager.shared.tokenRequest()
-                        result
-                            .bind(with: self) { owner, result in
-                                if result == .success {
-                                    
-                                    //input.delete.accept(true)
-                                } else {
-                                    tokenRequest.accept(result)
-                                }
-                            }
-                            .disposed(by: owner.disposeBag)
-                        return
-                    }
+                    
                     guard let errorType = CommentError(rawValue: code) else {
                         if let commonError = CommonError(rawValue: code) {
                             errorMsg.accept(commonError.localizedDescription)
                         }
+                        loginRequest.accept(true)
                         return
                     }
                     debugPrint("[DEBUG-POST] ", error.statusCode, error.description)
                     
                     errorMsg.accept(errorType.localizedDescription)
-//                    errorMsg.accept(errorType.localizedDescription)
                 }
             }
             .disposed(by: disposeBag)
@@ -131,7 +101,7 @@ final class BoardReadViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(errorMsg: errorMsg, tokenRequest: tokenRequest, successDelete: successDelete, commentWrite: commentWrite, commentIsEnable: commentIsEnable)
+        return Output(errorMsg: errorMsg, successDelete: successDelete, commentWrite: commentWrite, commentIsEnable: commentIsEnable, loginRequest: loginRequest)
         
     }
     

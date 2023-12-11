@@ -93,7 +93,6 @@ extension PostAPI {
 
         }
         let files = data.file
-        print(files)
         files.forEach {
             guard let img = $0 else { return }
             multipart.append(MultipartFormData(provider: .data(img), name: "file", fileName: "image.jpeg", mimeType: "image/jpg"))
@@ -104,4 +103,9 @@ extension PostAPI {
     }
     
     
+}
+extension PostAPI {
+    var validationType: ValidationType {
+        return .successCodes
+    }
 }

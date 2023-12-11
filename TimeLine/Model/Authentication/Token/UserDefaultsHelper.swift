@@ -17,7 +17,7 @@ struct Defaults<T> {
             UserDefaults.standard.object(forKey: key) as? T ?? defaultValue
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: key)
+            UserDefaults.standard.set(newValue, forKey: key)
         }
     }
 }
@@ -38,5 +38,12 @@ final class UserDefaultsHelper {
     @Defaults(key: Key.refreshToken.rawValue, defaultValue: "") static var refreshToken
     @Defaults(key: Key.isLogin.rawValue, defaultValue: false) static var isLogin
 
+    
+    static func initToken() {
+        UserDefaultsHelper.token = ""
+        UserDefaultsHelper.refreshToken = ""
+        UserDefaultsHelper.isLogin = false
+    }
+    
     
 }
