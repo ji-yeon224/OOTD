@@ -69,8 +69,6 @@ final class ProfileView: BaseView {
         }
     }
     
-    func setProfileInfo() {
-        
-    }
+    
     
 }
