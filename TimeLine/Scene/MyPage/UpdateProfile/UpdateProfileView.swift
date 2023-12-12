@@ -27,6 +27,7 @@ final class UpdateProfileView: BaseView {
     let nickNameTextField = {
         let view = UITextField()
         view.placeholder = "닉네임을 입력해주세요!"
+        view.font = .systemFont(ofSize: 14)
         view.tintColor = Constants.Color.mainColor
         view.layer.cornerRadius = 5
         view.layer.borderColor = Constants.Color.placeholder.cgColor
@@ -36,6 +37,8 @@ final class UpdateProfileView: BaseView {
         return view
     }()
     
+    let nickNameValidLabel = PlainLabel(size: 14, color: Constants.Color.basicText)
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         editImage.layer.cornerRadius = editImage.frame.width/2
@@ -44,7 +47,7 @@ final class UpdateProfileView: BaseView {
     
     override func configure() {
         
-        [imageBackView, nicknameLabel, nickNameTextField].forEach {
+        [imageBackView, nicknameLabel, nickNameTextField, nickNameValidLabel].forEach {
             addSubview($0)
         }
         
@@ -54,6 +57,8 @@ final class UpdateProfileView: BaseView {
         
         nicknameLabel.text = "닉네임"
         
+        nickNameValidLabel.isHidden = true
+        nickNameValidLabel.text = "2글자 이상 8글자 이하로 작성해주세요!"
     }
     
     override func setConstraints() {
@@ -83,7 +88,11 @@ final class UpdateProfileView: BaseView {
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(18)
             make.height.equalTo(40)
         }
-        
+        nickNameValidLabel.snp.makeConstraints { make in
+            make.top.equalTo(nickNameTextField.snp.bottom).offset(8)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(20)
+            make.height.equalTo(25)
+        }
         
     }
     

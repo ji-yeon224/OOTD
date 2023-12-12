@@ -11,7 +11,7 @@
 		CE2021EF2B284E0E00603194 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021EE2B284E0E00603194 /* MyPageViewModel.swift */; };
 		CE2021F22B2870D300603194 /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F12B2870D300603194 /* UpdateProfileViewController.swift */; };
 		CE2021F42B2870E200603194 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F32B2870E200603194 /* UpdateProfileView.swift */; };
-		CE2021F62B2870EA00603194 /* UpdatProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F52B2870EA00603194 /* UpdatProfileViewModel.swift */; };
+		CE2021F62B2870EA00603194 /* UpdateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F52B2870EA00603194 /* UpdateProfileViewModel.swift */; };
 		CE2021F82B28718E00603194 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F72B28718E00603194 /* ProfileImageView.swift */; };
 		CE25D0A42B220E6C004DFB66 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A32B220E6C004DFB66 /* Comment.swift */; };
 		CE25D0A62B220EE6004DFB66 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A52B220EE6004DFB66 /* Creator.swift */; };
@@ -142,7 +142,7 @@
 		CE2021EE2B284E0E00603194 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		CE2021F12B2870D300603194 /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
 		CE2021F32B2870E200603194 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
-		CE2021F52B2870EA00603194 /* UpdatProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatProfileViewModel.swift; sourceTree = "<group>"; };
+		CE2021F52B2870EA00603194 /* UpdateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewModel.swift; sourceTree = "<group>"; };
 		CE2021F72B28718E00603194 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		CE25D0A32B220E6C004DFB66 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		CE25D0A52B220EE6004DFB66 /* Creator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 			children = (
 				CE2021F12B2870D300603194 /* UpdateProfileViewController.swift */,
 				CE2021F32B2870E200603194 /* UpdateProfileView.swift */,
-				CE2021F52B2870EA00603194 /* UpdatProfileViewModel.swift */,
+				CE2021F52B2870EA00603194 /* UpdateProfileViewModel.swift */,
 			);
 			path = UpdateProfile;
 			sourceTree = "<group>";
@@ -941,7 +941,7 @@
 				CEBDFBFE2B0B9EB700D43BF9 /* UIScrollView+Extension.swift in Sources */,
 				CE290E8D2B049ACF007DFCAE /* JoinView.swift in Sources */,
 				CEDC33932B106F1400A5788E /* PlainLabel.swift in Sources */,
-				CE2021F62B2870EA00603194 /* UpdatProfileViewModel.swift in Sources */,
+				CE2021F62B2870EA00603194 /* UpdateProfileViewModel.swift in Sources */,
 				CEC2FBD42B021750002E3046 /* Login.swift in Sources */,
 				CECD6A532B27595200B7732C /* LikeResponse.swift in Sources */,
 				CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */,

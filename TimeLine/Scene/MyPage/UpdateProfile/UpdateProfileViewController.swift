@@ -6,14 +6,25 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class UpdateProfileViewController: BaseViewController {
     
     private let mainView = UpdateProfileView()
+    private let viewModel = UpdateProfileViewModel()
+    private let disposeBag = DisposeBag()
+    
+    private let nicknameTextField = PublishRelay<String>()
+    
+    private var nickname: String?
+    private var profile: String?
     
     init(nick: String, image: String?) {
         super.init(nibName: nil, bundle: nil)
         mainView.nickNameTextField.text = nick
+        nickname = nick
+        profile = image
     }
     
     required init?(coder: NSCoder) {
@@ -27,15 +38,39 @@ final class UpdateProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     override func configure() {
         super.configure()
         
         configNavBar()
+        
+        
+        
     }
     
-    
+    private func bind() {
+        
+        
+        let input = UpdateProfileViewModel.Input(
+            nickNameText: mainView.nickNameTextField.rx.text.orEmpty
+            
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.nickNameValid
+            .bind(with: self) { owner, value in
+                owner.navigationItem.rightBarButtonItem?.isEnabled = (value.1 != owner.nickname) && value.0
+                owner.mainView.nickNameValidLabel.isHidden = value.0
+            }
+            .disposed(by: disposeBag)
+        
+        
+        
+    }
     
 }
 
