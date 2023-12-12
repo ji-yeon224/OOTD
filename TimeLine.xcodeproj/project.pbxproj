@@ -25,6 +25,8 @@
 		CE290E992B04B7C6007DFCAE /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E982B04B7C6007DFCAE /* ResponseMessage.swift */; };
 		CE290E9C2B04BF51007DFCAE /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E9B2B04BF51007DFCAE /* LoginError.swift */; };
 		CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A15152B05B13E009B913F /* HomeViewModel.swift */; };
+		CE5CA5402B27E6A700534A08 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */; };
+		CE5CA5422B27E6BC00534A08 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CA5412B27E6BC00534A08 /* MyPageView.swift */; };
 		CE75C3DC2B1605DE00A08615 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75C3DB2B1605DE00A08615 /* UIImage+Extension.swift */; };
 		CE75C3DF2B16239A00A08615 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = CE75C3DE2B16239A00A08615 /* Toast */; };
 		CE76E0122B1725BB00A38041 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0112B1725BB00A38041 /* BaseCollectionViewCell.swift */; };
@@ -123,6 +125,7 @@
 		CEED52B52B05056E007E12FA /* EmailValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B42B05056E007E12FA /* EmailValidationError.swift */; };
 		CEED52B72B050652007E12FA /* WithdrawError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B62B050652007E12FA /* WithdrawError.swift */; };
 		CEED52B92B050893007E12FA /* RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B82B050893007E12FA /* RefreshToken.swift */; };
+		CEFCAC982B28318400DA68EC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCAC972B28318400DA68EC /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +147,8 @@
 		CE290E982B04B7C6007DFCAE /* ResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMessage.swift; sourceTree = "<group>"; };
 		CE290E9B2B04BF51007DFCAE /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		CE3A15152B05B13E009B913F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		CE5CA5412B27E6BC00534A08 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		CE75C3DB2B1605DE00A08615 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		CE76E0112B1725BB00A38041 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE76E0132B17295E00A38041 /* NSNotification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification.Name+Extension.swift"; sourceTree = "<group>"; };
@@ -236,6 +241,7 @@
 		CEED52B42B05056E007E12FA /* EmailValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationError.swift; sourceTree = "<group>"; };
 		CEED52B62B050652007E12FA /* WithdrawError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawError.swift; sourceTree = "<group>"; };
 		CEED52B82B050893007E12FA /* RefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshToken.swift; sourceTree = "<group>"; };
+		CEFCAC972B28318400DA68EC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +327,15 @@
 				CEED52B62B050652007E12FA /* WithdrawError.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		CE5CA53E2B27E68400534A08 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */,
+				CE5CA5412B27E6BC00534A08 /* MyPageView.swift */,
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		CEA10AD82B22F07800969A8B /* Comment */ = {
@@ -563,6 +578,7 @@
 		CEEA876B2B01EC7D00AC375F /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CE5CA53E2B27E68400534A08 /* MyPage */,
 				CEECBF8B2B0A3E9B0031947E /* Board */,
 				CEED52A72B04EE3F007E12FA /* Home */,
 				CE290E872B049AAF007DFCAE /* Join */,
@@ -627,6 +643,7 @@
 		CEEA87952B01F85E00AC375F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CEFCAC962B28317800DA68EC /* CustomView */,
 				CEEA87962B01F87500AC375F /* CustomTextField.swift */,
 				CEEA87982B01F9FF00AC375F /* MainButton.swift */,
 				CEEA879C2B02028A00AC375F /* TextFieldUnderline.swift */,
@@ -667,6 +684,14 @@
 				CE3A15152B05B13E009B913F /* HomeViewModel.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		CEFCAC962B28317800DA68EC /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				CEFCAC972B28318400DA68EC /* ProfileView.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -799,6 +824,7 @@
 				CE048CC52B03913300FAC038 /* Join.swift in Sources */,
 				CEECBF8D2B0A3EA20031947E /* BoardView.swift in Sources */,
 				CEBDFC002B0BAA3500D43BF9 /* BoardWriteViewModel.swift in Sources */,
+				CE5CA5422B27E6BC00534A08 /* MyPageView.swift in Sources */,
 				CEECBF942B0A42E00031947E /* BoardWriteView.swift in Sources */,
 				CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */,
 				CE290E902B04A3B1007DFCAE /* DateFormatter+Extension.swift in Sources */,
@@ -843,6 +869,7 @@
 				CEA75CFB2B214B120029E12E /* CommentAPIManager.swift in Sources */,
 				CEC9A6DE2B20464C004207F9 /* String+Extension.swift in Sources */,
 				CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */,
+				CEFCAC982B28318400DA68EC /* ProfileView.swift in Sources */,
 				CEECBF912B0A40520031947E /* TabBarController.swift in Sources */,
 				CEED52B12B04FB6F007E12FA /* RefreshError.swift in Sources */,
 				CE75C3DC2B1605DE00A08615 /* UIImage+Extension.swift in Sources */,
@@ -860,6 +887,7 @@
 				CECD6A532B27595200B7732C /* LikeResponse.swift in Sources */,
 				CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */,
 				CEE80AFC2B19A92F0041AC36 /* BoardCommentCell.swift in Sources */,
+				CE5CA5402B27E6A700534A08 /* MyPageViewController.swift in Sources */,
 				CEED52B32B050354007E12FA /* JoinError.swift in Sources */,
 				CEC7DF8D2B1EAC0C003D02D3 /* BoardReadView.swift in Sources */,
 				CEDC338F2B103DE700A5788E /* BoardTableViewCell.swift in Sources */,

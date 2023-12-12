@@ -21,7 +21,7 @@ final class BoardTableViewCell: UITableViewCell {
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 5
         view.layer.borderWidth = 0.5
-        view.layer.borderColor = Constants.Color.lightBorder.cgColor
+        view.layer.borderColor = Constants.Color.lightGrayColor.cgColor
         view.clipsToBounds = true
         return view
     }()

@@ -28,6 +28,9 @@ final class BoardViewController: BaseViewController {
         super.viewDidLoad()
         bind()
         refreshList.accept(true)
+        
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -38,6 +41,7 @@ final class BoardViewController: BaseViewController {
     override func configure() {
         mainView.tableView.refreshControl = UIRefreshControl()
         mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
     }
     
     private func bind() {
@@ -123,7 +127,6 @@ final class BoardViewController: BaseViewController {
         }
         
     }
-    
     
     
     

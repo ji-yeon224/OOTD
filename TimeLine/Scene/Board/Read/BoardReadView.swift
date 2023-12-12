@@ -63,7 +63,7 @@ final class BoardReadView: BaseView {
     
     private let lineView = {
         let view = UIView()
-        view.backgroundColor = Constants.Color.lightBorder
+        view.backgroundColor = Constants.Color.lightGrayColor
         return view
     }()
     
