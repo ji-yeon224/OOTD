@@ -5,20 +5,33 @@
 //  Created by 김지연 on 12/12/23.
 //
 
-import Foundation
+import UIKit
 
 final class MyPageView: BaseView {
     
-    let profileView = ProfileView()
+    private let titleLabel = PlainLabel(size: 30, color: Constants.Color.basicText, weight: .bold)
+    
+    var profileView = ProfileView()
     
     override func configure() {
+        addSubview(titleLabel)
         addSubview(profileView)
+        titleLabel.text = "MyPage"
     }
     
     override func setConstraints() {
+        titleLabel.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(10)
+            make.height.equalTo(50)
+        }
+        
         profileView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(14)
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(14)
+            make.height.equalTo(150)
         }
     }
+    
+    
     
 }

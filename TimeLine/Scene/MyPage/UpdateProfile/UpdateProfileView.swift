@@ -9,21 +9,81 @@ import UIKit
 
 final class UpdateProfileView: BaseView {
     
-    let profileImageView = {
+    private let imageBackView = UIView()
+    
+    let profileImageView = ProfileImageView(frame: .zero)
+    
+    let editImage = {
         let view = UIImageView()
-        view.image = Constants.Image.person
-        view.tintColor = Constants.Color.placeholder
-        view.backgroundColor = Constants.Color.background
+        view.image = Constants.Image.pencil
+        view.backgroundColor = .clear
+        view.tintColor = Constants.Color.mainColor
         
-        view.contentMode = .scaleAspectFill
         return view
     }()
     
+    private let nicknameLabel = PlainLabel(size: 14, color: Constants.Color.basicText, weight: .semibold)
+    
+    let nickNameTextField = {
+        let view = UITextField()
+        view.placeholder = "닉네임을 입력해주세요!"
+        view.tintColor = Constants.Color.mainColor
+        view.layer.cornerRadius = 5
+        view.layer.borderColor = Constants.Color.placeholder.cgColor
+        view.layer.borderWidth = 1
+        view.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 13.0, height: 0.0))
+        view.leftViewMode = .always
+        return view
+    }()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        editImage.layer.cornerRadius = editImage.frame.width/2
+        
+    }
+    
     override func configure() {
+        
+        [imageBackView, nicknameLabel, nickNameTextField].forEach {
+            addSubview($0)
+        }
+        
+        [profileImageView, editImage].forEach {
+            imageBackView.addSubview($0)
+        }
+        
+        nicknameLabel.text = "닉네임"
         
     }
     
     override func setConstraints() {
+        
+        imageBackView.snp.makeConstraints { make in
+            make.centerX.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(safeAreaLayoutGuide).offset(10)
+            make.size.equalTo(100)
+        }
+        
+        profileImageView.snp.makeConstraints { make in
+            make.edges.equalTo(imageBackView)
+            
+        }
+        editImage.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(imageBackView)
+            make.size.equalTo(30)
+        }
+        
+        nicknameLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(18)
+            make.height.equalTo(20)
+            make.top.equalTo(imageBackView.snp.bottom).offset(30)
+        }
+        nickNameTextField.snp.makeConstraints { make in
+            make.top.equalTo(nicknameLabel.snp.bottom).offset(14)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(18)
+            make.height.equalTo(40)
+        }
+        
         
     }
     

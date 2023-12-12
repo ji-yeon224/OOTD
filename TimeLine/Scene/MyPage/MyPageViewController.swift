@@ -15,6 +15,7 @@ final class MyPageViewController: BaseViewController {
     private let viewModel = MyPageViewModel()
     private let disposeBag = DisposeBag()
     
+    
     private let requestProfile = BehaviorRelay(value: true)
     
     override func loadView() {
@@ -28,13 +29,23 @@ final class MyPageViewController: BaseViewController {
         
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    
+   
     
     override func configure() {
         super.configure()
-        configNavBar()
+        navigationController?.navigationBar.isHidden = true
     }
     
     private func bind() {
+        
+        var profile: MyProfileResponse?
+        
         let input = MyPageViewModel.Input(
             requestProfile: requestProfile
         )
@@ -49,18 +60,26 @@ final class MyPageViewController: BaseViewController {
         
         output.profile
             .bind(with: self) { owner, value in
+                profile = value
                 owner.mainView.profileView.nicknameLabel.text = value.nick
             }
             .disposed(by: disposeBag)
         
+        mainView.profileView.editButton.rx.tap
+            .bind(with: self) { owner, _ in
+                guard let profile = profile else {
+                    owner.showOKAlert(title: "", message: "문제가 발생하였습니다.") { }
+                    return
+                }
+                let vc = UpdateProfileViewController(nick: profile.nick, image: profile.profile )
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
         
+        
+    
     }
     
     
-    
-    private func configNavBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        title = "MyPage"
-    }
     
 }

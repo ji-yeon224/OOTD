@@ -14,7 +14,6 @@ final class ProfileImageView: UIImageView {
         image = Constants.Image.person
         tintColor = Constants.Color.placeholder
         backgroundColor = Constants.Color.background
-        contentMode = .scaleAspectFill
     }
     
     @available(*, unavailable)

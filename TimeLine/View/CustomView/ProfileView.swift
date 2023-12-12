@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxCocoa
 
 final class ProfileView: BaseView {
     
@@ -15,13 +16,12 @@ final class ProfileView: BaseView {
     let nicknameLabel = PlainLabel(size: 16, color: Constants.Color.basicText, line: 1)
     
     
-    let editButton = {
+    var editButton = {
         let view = UIButton()
         view.setTitle("수정", for: .normal)
         view.setTitleColor(Constants.Color.basicText, for: .normal)
         view.backgroundColor = Constants.Color.lightGrayColor
-//        view.layer.borderWidth = 1
-//        view.layer.borderColor = Constants.Color.lightGrayColor
+        
         view.layer.cornerRadius = 5
         return view
     }()
@@ -30,7 +30,7 @@ final class ProfileView: BaseView {
         [profileImageView, nicknameLabel, editButton].forEach {
             addSubview($0)
         }
-        nicknameLabel.text = "nickname"
+        nicknameLabel.text = ""
     }
     
     
