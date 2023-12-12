@@ -57,6 +57,7 @@ final class BoardViewController: BaseViewController {
             let vc = BoardReadViewController()
             vc.postData = value
             vc.modalPresentationStyle = .overFullScreen
+            vc.hidesBottomBarWhenPushed = true
             owner.navigationController?.pushViewController(vc, animated: true)
             
         }

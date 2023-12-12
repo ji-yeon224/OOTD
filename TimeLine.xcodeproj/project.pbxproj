@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		CE048CC52B03913300FAC038 /* Join.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE048CC42B03913300FAC038 /* Join.swift */; };
 		CE2021EF2B284E0E00603194 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021EE2B284E0E00603194 /* MyPageViewModel.swift */; };
+		CE2021F22B2870D300603194 /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F12B2870D300603194 /* UpdateProfileViewController.swift */; };
+		CE2021F42B2870E200603194 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F32B2870E200603194 /* UpdateProfileView.swift */; };
+		CE2021F62B2870EA00603194 /* UpdatProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F52B2870EA00603194 /* UpdatProfileViewModel.swift */; };
+		CE2021F82B28718E00603194 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F72B28718E00603194 /* ProfileImageView.swift */; };
 		CE25D0A42B220E6C004DFB66 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A32B220E6C004DFB66 /* Comment.swift */; };
 		CE25D0A62B220EE6004DFB66 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A52B220EE6004DFB66 /* Creator.swift */; };
 		CE25D0A82B22109F004DFB66 /* CommentDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A72B22109F004DFB66 /* CommentDelete.swift */; };
@@ -136,6 +140,10 @@
 /* Begin PBXFileReference section */
 		CE048CC42B03913300FAC038 /* Join.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Join.swift; sourceTree = "<group>"; };
 		CE2021EE2B284E0E00603194 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		CE2021F12B2870D300603194 /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
+		CE2021F32B2870E200603194 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
+		CE2021F52B2870EA00603194 /* UpdatProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatProfileViewModel.swift; sourceTree = "<group>"; };
+		CE2021F72B28718E00603194 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		CE25D0A32B220E6C004DFB66 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		CE25D0A52B220EE6004DFB66 /* Creator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		CE25D0A72B22109F004DFB66 /* CommentDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDelete.swift; sourceTree = "<group>"; };
@@ -291,6 +299,16 @@
 			path = JoinModel;
 			sourceTree = "<group>";
 		};
+		CE2021F02B2870BC00603194 /* UpdateProfile */ = {
+			isa = PBXGroup;
+			children = (
+				CE2021F12B2870D300603194 /* UpdateProfileViewController.swift */,
+				CE2021F32B2870E200603194 /* UpdateProfileView.swift */,
+				CE2021F52B2870EA00603194 /* UpdatProfileViewModel.swift */,
+			);
+			path = UpdateProfile;
+			sourceTree = "<group>";
+		};
 		CE290E872B049AAF007DFCAE /* Join */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +360,7 @@
 		CE5CA53E2B27E68400534A08 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				CE2021F02B2870BC00603194 /* UpdateProfile */,
 				CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */,
 				CE5CA5412B27E6BC00534A08 /* MyPageView.swift */,
 				CE2021EE2B284E0E00603194 /* MyPageViewModel.swift */,
@@ -665,6 +684,7 @@
 				CEECBF282B08FC120031947E /* ValidStackView.swift */,
 				CEDC33922B106F1400A5788E /* PlainLabel.swift */,
 				CE76E0172B17719600A38041 /* PlainImageView.swift */,
+				CE2021F72B28718E00603194 /* ProfileImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -860,6 +880,7 @@
 				CEBDFC002B0BAA3500D43BF9 /* BoardWriteViewModel.swift in Sources */,
 				CE5CA5422B27E6BC00534A08 /* MyPageView.swift in Sources */,
 				CEECBF942B0A42E00031947E /* BoardWriteView.swift in Sources */,
+				CE2021F82B28718E00603194 /* ProfileImageView.swift in Sources */,
 				CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */,
 				CE290E902B04A3B1007DFCAE /* DateFormatter+Extension.swift in Sources */,
 				CE76E0162B1747F900A38041 /* ReusableProtocol.swift in Sources */,
@@ -881,6 +902,7 @@
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */,
 				CEA75D012B215E640029E12E /* CommentError.swift in Sources */,
+				CE2021F42B2870E200603194 /* UpdateProfileView.swift in Sources */,
 				CEA10AE32B23536400969A8B /* AuthInterceptor.swift in Sources */,
 				CE25D0A62B220EE6004DFB66 /* Creator.swift in Sources */,
 				CEE80B002B1ACB6B0041AC36 /* DeleteResponse.swift in Sources */,
@@ -902,6 +924,7 @@
 				CE290E992B04B7C6007DFCAE /* ResponseMessage.swift in Sources */,
 				CEEA878F2B01F3D200AC375F /* LoginView.swift in Sources */,
 				CEA75CFB2B214B120029E12E /* CommentAPIManager.swift in Sources */,
+				CE2021F22B2870D300603194 /* UpdateProfileViewController.swift in Sources */,
 				CEC9A6DE2B20464C004207F9 /* String+Extension.swift in Sources */,
 				CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */,
 				CEFCAC982B28318400DA68EC /* ProfileView.swift in Sources */,
@@ -918,6 +941,7 @@
 				CEBDFBFE2B0B9EB700D43BF9 /* UIScrollView+Extension.swift in Sources */,
 				CE290E8D2B049ACF007DFCAE /* JoinView.swift in Sources */,
 				CEDC33932B106F1400A5788E /* PlainLabel.swift in Sources */,
+				CE2021F62B2870EA00603194 /* UpdatProfileViewModel.swift in Sources */,
 				CEC2FBD42B021750002E3046 /* Login.swift in Sources */,
 				CECD6A532B27595200B7732C /* LikeResponse.swift in Sources */,
 				CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */,

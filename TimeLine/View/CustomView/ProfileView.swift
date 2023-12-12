@@ -9,16 +9,8 @@ import UIKit
 
 final class ProfileView: BaseView {
     
-//    private let backView = UIView()
-    lazy var profileImageView = {
-        let view = UIImageView()
-        view.image = Constants.Image.person
-        view.tintColor = Constants.Color.placeholder
-        view.backgroundColor = Constants.Color.background
-        
-        view.contentMode = .scaleAspectFill
-        return view
-    }()
+    
+    var profileImageView = ProfileImageView(frame: .zero)
     
     let nicknameLabel = PlainLabel(size: 16, color: Constants.Color.basicText, line: 1)
     
@@ -41,13 +33,6 @@ final class ProfileView: BaseView {
         nicknameLabel.text = "nickname"
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
-        profileImageView.clipsToBounds = true
-        profileImageView.layer.borderWidth = 0.8
-        profileImageView.layer.borderColor = Constants.Color.lightGrayColor.cgColor
-    }
     
     override func setConstraints() {
         profileImageView.snp.makeConstraints { make in
