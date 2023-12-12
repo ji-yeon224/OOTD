@@ -126,6 +126,10 @@
 		CEED52B72B050652007E12FA /* WithdrawError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B62B050652007E12FA /* WithdrawError.swift */; };
 		CEED52B92B050893007E12FA /* RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B82B050893007E12FA /* RefreshToken.swift */; };
 		CEFCAC982B28318400DA68EC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCAC972B28318400DA68EC /* ProfileView.swift */; };
+		CEFCAC9B2B283B7D00DA68EC /* MyProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCAC9A2B283B7D00DA68EC /* MyProfileResponse.swift */; };
+		CEFCACA02B2844F000DA68EC /* ProfileAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCAC9F2B2844F000DA68EC /* ProfileAPI.swift */; };
+		CEFCACA22B28450100DA68EC /* ProfileAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCACA12B28450100DA68EC /* ProfileAPIManager.swift */; };
+		CEFCACA42B2845FE00DA68EC /* APIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCACA32B2845FE00DA68EC /* APIType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -242,6 +246,10 @@
 		CEED52B62B050652007E12FA /* WithdrawError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawError.swift; sourceTree = "<group>"; };
 		CEED52B82B050893007E12FA /* RefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshToken.swift; sourceTree = "<group>"; };
 		CEFCAC972B28318400DA68EC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		CEFCAC9A2B283B7D00DA68EC /* MyProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileResponse.swift; sourceTree = "<group>"; };
+		CEFCAC9F2B2844F000DA68EC /* ProfileAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPI.swift; sourceTree = "<group>"; };
+		CEFCACA12B28450100DA68EC /* ProfileAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIManager.swift; sourceTree = "<group>"; };
+		CEFCACA32B2845FE00DA68EC /* APIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,6 +444,7 @@
 		CEC2FBD22B02174A002E3046 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEFCAC992B283B7500DA68EC /* ProfileModel */,
 				CECD6A4F2B274C3600B7732C /* AuthModel */,
 				CECD6A4B2B27493800B7732C /* TokenModel */,
 				CECD6A4D2B27498000B7732C /* PostModel */,
@@ -603,6 +612,7 @@
 		CEEA876D2B01EC9E00AC375F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CEFCAC9E2B2844E100DA68EC /* Profile */,
 				CE290E982B04B7C6007DFCAE /* ResponseMessage.swift */,
 				CEA10ADB2B232E5200969A8B /* Token */,
 				CEBDFBEE2B0B2CA000D43BF9 /* Post */,
@@ -636,6 +646,7 @@
 				CEE80ACF2B1873680041AC36 /* SectionType.swift */,
 				CE7A0C6B2B1B6162003F247B /* BoardMode.swift */,
 				CEC7DF852B1D9478003D02D3 /* ImageManager.swift */,
+				CEFCACA32B2845FE00DA68EC /* APIType.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -692,6 +703,23 @@
 				CEFCAC972B28318400DA68EC /* ProfileView.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		CEFCAC992B283B7500DA68EC /* ProfileModel */ = {
+			isa = PBXGroup;
+			children = (
+				CEFCAC9A2B283B7D00DA68EC /* MyProfileResponse.swift */,
+			);
+			path = ProfileModel;
+			sourceTree = "<group>";
+		};
+		CEFCAC9E2B2844E100DA68EC /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CEFCAC9F2B2844F000DA68EC /* ProfileAPI.swift */,
+				CEFCACA12B28450100DA68EC /* ProfileAPIManager.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -786,11 +814,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE25D0AA2B229B84004DFB66 /* CommentRequest.swift in Sources */,
+				CEFCACA42B2845FE00DA68EC /* APIType.swift in Sources */,
 				CEBDFBF02B0B2CA800D43BF9 /* PostAPI.swift in Sources */,
 				CE28C85B2B130D0A00820F1A /* ImageCollectionViewCell.swift in Sources */,
 				CEDC33802B0F917C00A5788E /* BoardReadViewController.swift in Sources */,
 				CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */,
 				CEECBF172B0601D70031947E /* CommonError.swift in Sources */,
+				CEFCACA02B2844F000DA68EC /* ProfileAPI.swift in Sources */,
 				CEECBF962B0A42EA0031947E /* BoardWriteViewController.swift in Sources */,
 				CEC7DF862B1D9478003D02D3 /* ImageManager.swift in Sources */,
 				CE290E932B04B285007DFCAE /* Image.swift in Sources */,
@@ -858,6 +888,7 @@
 				CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */,
 				CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */,
 				CEA10ADA2B22F09B00969A8B /* CommentWriteView.swift in Sources */,
+				CEFCAC9B2B283B7D00DA68EC /* MyProfileResponse.swift in Sources */,
 				CEBDFBF62B0B31CA00D43BF9 /* PostWrite.swift in Sources */,
 				CEBDFBF82B0B4AE200D43BF9 /* Post.swift in Sources */,
 				CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */,
@@ -887,6 +918,7 @@
 				CECD6A532B27595200B7732C /* LikeResponse.swift in Sources */,
 				CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */,
 				CEE80AFC2B19A92F0041AC36 /* BoardCommentCell.swift in Sources */,
+				CEFCACA22B28450100DA68EC /* ProfileAPIManager.swift in Sources */,
 				CE5CA5402B27E6A700534A08 /* MyPageViewController.swift in Sources */,
 				CEED52B32B050354007E12FA /* JoinError.swift in Sources */,
 				CEC7DF8D2B1EAC0C003D02D3 /* BoardReadView.swift in Sources */,
