@@ -67,11 +67,16 @@ final class MyPageViewController: BaseViewController {
         
         mainView.profileView.editButton.rx.tap
             .bind(with: self) { owner, _ in
-                guard let profile = profile else {
+                guard let info = profile else {
                     owner.showOKAlert(title: "", message: "문제가 발생하였습니다.") { }
                     return
                 }
-                let vc = UpdateProfileViewController(nick: profile.nick, image: profile.profile )
+                let vc = UpdateProfileViewController(nick: info.nick, image: info.profile )
+                vc.updateHandler = { value in
+                    profile = value
+                    owner.mainView.profileView.nicknameLabel.text = value.nick
+                    NotificationCenter.default.post(name: .refresh, object: nil)
+                }
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)

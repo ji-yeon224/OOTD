@@ -15,21 +15,25 @@ final class UpdateProfileViewModel {
     
     struct Input {
         let nickNameText: ControlProperty<String>
-        
+        let updateProfile: PublishRelay<ProfileUpdateRequest>
     }
     
     struct Output {
         
-        
         let nickNameValid: PublishRelay<(Bool, String)>
-        
+        let updateSuccess: PublishRelay<MyProfileResponse>
+        let errorMsg: PublishRelay<String>
+        let loginRequest: PublishRelay<Bool>
     }
     
     
     func transform(input: Input) -> Output {
         
         let nickNameValid = PublishRelay<(Bool, String)>()
-        // 닉네임 조건 충족, 원래 닉네임과 달라야 함
+        let updateSuccess = PublishRelay<MyProfileResponse>()
+        let errorMsg = PublishRelay<String>()
+        let loginRequest = PublishRelay<Bool>()
+        
         input.nickNameText
             .map {
                 $0.trimmingCharacters(in: .whitespaces)
@@ -40,7 +44,32 @@ final class UpdateProfileViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(nickNameValid: nickNameValid)
+        input.updateProfile
+            .flatMap {
+                ProfileAPIManager.shared.request(api: .update(data: $0), type: MyProfileResponse.self)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let value):
+                    updateSuccess.accept(value)
+                case .failure(let error):
+                    guard let errorType = ProfileError(rawValue: error.statusCode) else {
+                        if let common = CommonError(rawValue: error.statusCode) {
+                            errorMsg.accept(common.localizedDescription)
+                        }
+                        else {
+                            loginRequest.accept(true)
+                        }
+                        return
+                    }
+                    errorMsg.accept(errorType.localizedDescription)
+                }
+            }
+            .disposed(by: disposeBag)
+            
+        
+        
+        return Output(nickNameValid: nickNameValid, updateSuccess: updateSuccess, errorMsg: errorMsg, loginRequest: loginRequest)
         
     }
     

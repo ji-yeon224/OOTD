@@ -16,9 +16,12 @@ final class UpdateProfileViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     private let nicknameTextField = PublishRelay<String>()
+    private let updateProfile = PublishRelay<ProfileUpdateRequest>()
     
     private var nickname: String?
     private var profile: String?
+    
+    var updateHandler: ((MyProfileResponse) -> Void)?
     
     init(nick: String, image: String?) {
         super.init(nibName: nil, bundle: nil)
@@ -55,8 +58,8 @@ final class UpdateProfileViewController: BaseViewController {
         
         
         let input = UpdateProfileViewModel.Input(
-            nickNameText: mainView.nickNameTextField.rx.text.orEmpty
-            
+            nickNameText: mainView.nickNameTextField.rx.text.orEmpty,
+            updateProfile: updateProfile
         )
         
         let output = viewModel.transform(input: input)
@@ -68,6 +71,16 @@ final class UpdateProfileViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.updateSuccess
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "", message: "프로필 변경이 완료되었습니다.") {
+                    owner.updateHandler?(value)
+                    owner.navigationController?.popViewController(animated: true)
+                }
+                
+                
+            }
+            .disposed(by: disposeBag)
         
         
     }
@@ -90,7 +103,10 @@ extension UpdateProfileViewController {
     
     @objc private func updateButton() {
         view.endEditing(true)
-        
+        if let nickname = mainView.nickNameTextField.text {
+            let update = ProfileUpdateRequest(nick: nickname.trimmingCharacters(in: .whitespaces), profile: nil)
+            updateProfile.accept(update)
+        }
     }
     
     @objc private func backButton() {

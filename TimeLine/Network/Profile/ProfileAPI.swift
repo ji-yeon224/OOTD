@@ -10,7 +10,7 @@ import Moya
 
 enum ProfileAPI {
     case myProfile
-    case update
+    case update(data: ProfileUpdateRequest)
 }
 
 extension ProfileAPI: TargetType {
@@ -39,8 +39,8 @@ extension ProfileAPI: TargetType {
         switch self {
         case .myProfile:
             return .requestPlain
-        case .update:
-            return .requestPlain
+        case .update(let data):
+            return .uploadMultipart(convertToMultipart(data: data))
         }
     }
     
@@ -60,4 +60,31 @@ extension ProfileAPI: TargetType {
     }
     
     
+}
+
+extension ProfileAPI {
+    
+    private func convertToMultipart(data: ProfileUpdateRequest) -> [MultipartFormData] {
+        
+        var multipart: [MultipartFormData] = []
+        
+        let params = data.convertToMap()
+        
+        for param in params {
+            multipart.append(MultipartFormData(provider: .data(param.value), name: param.key))
+
+        }
+        if let profile = data.profile {
+            multipart.append(MultipartFormData(provider: .data(profile), name: "file", fileName: "image.jpeg", mimeType: "image/jpg"))
+        }
+        
+        return multipart
+    }
+    
+}
+
+extension ProfileAPI {
+    var validationType: ValidationType {
+        return .successCodes
+    }
 }

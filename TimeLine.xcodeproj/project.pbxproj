@@ -13,6 +13,8 @@
 		CE2021F42B2870E200603194 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F32B2870E200603194 /* UpdateProfileView.swift */; };
 		CE2021F62B2870EA00603194 /* UpdateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F52B2870EA00603194 /* UpdateProfileViewModel.swift */; };
 		CE2021F82B28718E00603194 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F72B28718E00603194 /* ProfileImageView.swift */; };
+		CE2021FA2B28B16600603194 /* ProfileUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021F92B28B16600603194 /* ProfileUpdateRequest.swift */; };
+		CE2022002B28B7D100603194 /* ProfileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2021FF2B28B7D100603194 /* ProfileError.swift */; };
 		CE25D0A42B220E6C004DFB66 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A32B220E6C004DFB66 /* Comment.swift */; };
 		CE25D0A62B220EE6004DFB66 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A52B220EE6004DFB66 /* Creator.swift */; };
 		CE25D0A82B22109F004DFB66 /* CommentDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25D0A72B22109F004DFB66 /* CommentDelete.swift */; };
@@ -144,6 +146,8 @@
 		CE2021F32B2870E200603194 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
 		CE2021F52B2870EA00603194 /* UpdateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewModel.swift; sourceTree = "<group>"; };
 		CE2021F72B28718E00603194 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		CE2021F92B28B16600603194 /* ProfileUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateRequest.swift; sourceTree = "<group>"; };
+		CE2021FF2B28B7D100603194 /* ProfileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileError.swift; sourceTree = "<group>"; };
 		CE25D0A32B220E6C004DFB66 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		CE25D0A52B220EE6004DFB66 /* Creator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		CE25D0A72B22109F004DFB66 /* CommentDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDelete.swift; sourceTree = "<group>"; };
@@ -494,6 +498,7 @@
 				CEC2FBDE2B026DF9002E3046 /* ErrorModel.swift */,
 				CEC2FBE02B0270DC002E3046 /* NetworkError.swift */,
 				CEECBF162B0601D70031947E /* CommonError.swift */,
+				CE2021FF2B28B7D100603194 /* ProfileError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -732,6 +737,7 @@
 			isa = PBXGroup;
 			children = (
 				CEFCAC9A2B283B7D00DA68EC /* MyProfileResponse.swift */,
+				CE2021F92B28B16600603194 /* ProfileUpdateRequest.swift */,
 			);
 			path = ProfileModel;
 			sourceTree = "<group>";
@@ -915,6 +921,7 @@
 				CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */,
 				CEA10ADA2B22F09B00969A8B /* CommentWriteView.swift in Sources */,
 				CEFCAC9B2B283B7D00DA68EC /* MyProfileResponse.swift in Sources */,
+				CE2021FA2B28B16600603194 /* ProfileUpdateRequest.swift in Sources */,
 				CEBDFBF62B0B31CA00D43BF9 /* PostWrite.swift in Sources */,
 				CEBDFBF82B0B4AE200D43BF9 /* Post.swift in Sources */,
 				CEECBF1A2B0665590031947E /* RefreshResult.swift in Sources */,
@@ -929,6 +936,7 @@
 				CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */,
 				CEFCAC982B28318400DA68EC /* ProfileView.swift in Sources */,
 				CEECBF912B0A40520031947E /* TabBarController.swift in Sources */,
+				CE2022002B28B7D100603194 /* ProfileError.swift in Sources */,
 				CEED52B12B04FB6F007E12FA /* RefreshError.swift in Sources */,
 				CE75C3DC2B1605DE00A08615 /* UIImage+Extension.swift in Sources */,
 				CEED52A92B04EE49007E12FA /* HomeViewController.swift in Sources */,
