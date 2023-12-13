@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import PhotosUI
+
 import RxSwift
 import RxCocoa
 
@@ -49,8 +51,8 @@ final class UpdateProfileViewController: BaseViewController {
         super.configure()
         
         configNavBar()
-        
-        
+        configGesture()
+        mainView.delegate = self
         
     }
     
@@ -90,6 +92,31 @@ final class UpdateProfileViewController: BaseViewController {
 
 extension UpdateProfileViewController {
     
+    private func configGesture() {
+        
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+        mainView.profileImageView.addGestureRecognizer(imageTap)
+        
+    }
+    
+    @objc private func didTapView() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let delete = UIAlertAction(title: "사진 삭제", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.mainView.profileImageView.image = Constants.Image.person
+        }
+        let selectPhoto = UIAlertAction(title: "사진 선택", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.present(self.mainView.configPHPicker(limit: 1), animated: true)
+            
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        [delete, selectPhoto, cancel].forEach {
+            alert.addAction($0)
+        }
+        present(alert, animated: true)
+    }
+    
     private func configNavBar() {
         navigationController?.navigationBar.isHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.back, style: .plain, target: self, action: #selector(backButton))
@@ -112,5 +139,34 @@ extension UpdateProfileViewController {
     @objc private func backButton() {
         navigationController?.popViewController(animated: true)
     }
+    
+}
+
+extension UpdateProfileViewController: PhPickerProtocol {
+    
+    func didFinishPicking(picker: PHPickerViewController, results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        if results.isEmpty {
+            return
+        }
+        
+        if let select = results.first {
+            let item = select.itemProvider
+            if item.canLoadObject(ofClass: UIImage.self) {
+                item.loadObject(ofClass: UIImage.self) { [weak self] img, error in
+                    guard let self = self, let image = img as? UIImage else { return }
+                    DispatchQueue.main.async {
+                        self.mainView.profileImageView.image = image
+                    }
+                }
+            }
+        }
+        
+        
+        
+    }
+    
+    
     
 }

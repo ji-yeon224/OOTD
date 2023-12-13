@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import PhotosUI
 
 final class UpdateProfileView: BaseView {
     
     private let imageBackView = UIView()
     
     let profileImageView = ProfileImageView(frame: .zero)
+    weak var delegate: PhPickerProtocol?
     
     let editImage = {
         let view = UIImageView()
@@ -59,6 +61,7 @@ final class UpdateProfileView: BaseView {
         
         nickNameValidLabel.isHidden = true
         nickNameValidLabel.text = "2글자 이상 8글자 이하로 작성해주세요!"
+        profileImageView.isUserInteractionEnabled = true
     }
     
     override func setConstraints() {
@@ -95,5 +98,23 @@ final class UpdateProfileView: BaseView {
         }
         
     }
+    func configPHPicker(limit: Int = 1) -> PHPickerViewController {
+        
+        var photoConfiguration = PHPickerConfiguration()
+        photoConfiguration.selectionLimit = limit
+        photoConfiguration.filter = .images
+        let picker = PHPickerViewController(configuration: photoConfiguration)
+        picker.delegate = self
+        return picker
+    }
+}
+
+
+// PHPicker
+extension UpdateProfileView: PHPickerViewControllerDelegate {
     
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        delegate?.didFinishPicking(picker: picker, results: results)
+    }
 }
