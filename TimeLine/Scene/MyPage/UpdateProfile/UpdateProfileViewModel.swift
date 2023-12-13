@@ -12,7 +12,7 @@ import RxCocoa
 final class UpdateProfileViewModel {
     
     private let disposeBag = DisposeBag()
-    
+    var selectedImg: SelectedImage?
     struct Input {
         let nickNameText: ControlProperty<String>
         let updateProfile: PublishRelay<ProfileUpdateRequest>
@@ -45,6 +45,10 @@ final class UpdateProfileViewModel {
             .disposed(by: disposeBag)
         
         input.updateProfile
+            .map {
+                let img = self.selectedImg?.image.jpegData(compressionQuality: 1.0)
+                return ProfileUpdateRequest(nick: $0.nick, profile: img )
+            }
             .flatMap {
                 ProfileAPIManager.shared.request(api: .update(data: $0), type: MyProfileResponse.self)
             }
@@ -53,6 +57,7 @@ final class UpdateProfileViewModel {
                 case .success(let value):
                     updateSuccess.accept(value)
                 case .failure(let error):
+                    print(error)
                     guard let errorType = ProfileError(rawValue: error.statusCode) else {
                         if let common = CommonError(rawValue: error.statusCode) {
                             errorMsg.accept(common.localizedDescription)

@@ -19,6 +19,7 @@ final class UpdateProfileViewController: BaseViewController {
     
     private let nicknameTextField = PublishRelay<String>()
     private let updateProfile = PublishRelay<ProfileUpdateRequest>()
+    private let update = PublishRelay<(String, SelectedImage)>()
     
     private var nickname: String?
     private var profile: String?
@@ -65,6 +66,12 @@ final class UpdateProfileViewController: BaseViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.errorMsg
+            .bind(with: self) { owner, value in
+                owner.showToastMessage(message: value, position: .top)
+            }
+            .disposed(by: disposeBag)
         
         output.nickNameValid
             .bind(with: self) { owner, value in
@@ -145,23 +152,34 @@ extension UpdateProfileViewController {
 extension UpdateProfileViewController: PhPickerProtocol {
     
     func didFinishPicking(picker: PHPickerViewController, results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        
-        if results.isEmpty {
-            return
-        }
-        
-        if let select = results.first {
-            let item = select.itemProvider
-            if item.canLoadObject(ofClass: UIImage.self) {
-                item.loadObject(ofClass: UIImage.self) { [weak self] img, error in
-                    guard let self = self, let image = img as? UIImage else { return }
-                    DispatchQueue.main.async {
-                        self.mainView.profileImageView.image = image
+            picker.dismiss(animated: true)
+            
+            if results.isEmpty {
+                return
+            }
+            
+            if let select = results.first {
+                let item = select.itemProvider
+                if item.canLoadObject(ofClass: UIImage.self) {
+                    
+                    item.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                        guard let self = self, let img = image as? UIImage else { return }
+                        DispatchQueue.main.async {
+                            if let resizeImg = img.resizeV3(to: self.mainView.imageViewSize){
+                                self.mainView.profileImageView.image = resizeImg
+                                
+                                self.viewModel.selectedImg = SelectedImage(image: resizeImg)
+                            }
+                            
+                        }
                     }
+                    
                 }
             }
-        }
+            
+            
+            
+        
         
         
         
