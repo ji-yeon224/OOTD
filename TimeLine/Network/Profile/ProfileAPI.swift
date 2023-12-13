@@ -75,8 +75,10 @@ extension ProfileAPI {
 
         }
         if let profile = data.profile {
-            print(profile.convertToMb)
             multipart.append(MultipartFormData(provider: .data(profile), name: "profile", fileName: "image.jpeg", mimeType: "image/jpg"))
+        } else {
+            print("profile nil")
+            multipart.append(MultipartFormData(provider: .data(Data()), name: "profile"))
         }
         
         return multipart

@@ -66,6 +66,7 @@ final class LoginViewModel {
 //                    UserDefaultsHelper.refreshToken = result.refreshToken
 //                    UserDefaultsHelper.isLogin = true
                     UserDefaultsHelper.setNewInfo(login: result)
+                    print("---refresh---", result.token)
                 case .failure(let error):
                     let code = error.statusCode
                     print(error)

@@ -88,7 +88,6 @@ final class UpdateProfileViewController: BaseViewController {
         
         updatePhoto
             .bind(with: self) { owner, value in
-                print(value, nickValid)
                 if nickValid && value {
                     owner.navigationItem.rightBarButtonItem?.isEnabled = value
                 }
@@ -141,6 +140,8 @@ extension UpdateProfileViewController {
         let delete = UIAlertAction(title: "사진 삭제", style: .default) { [weak self] _ in
             guard let self = self else { return }
             self.mainView.profileImageView.image = Constants.Image.person
+            self.viewModel.selectedImg = nil
+            self.updatePhoto.accept(true)
         }
         let selectPhoto = UIAlertAction(title: "사진 선택", style: .default) { [weak self] _ in
             guard let self = self else { return }

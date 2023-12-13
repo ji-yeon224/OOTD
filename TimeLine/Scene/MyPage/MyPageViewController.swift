@@ -78,6 +78,7 @@ final class MyPageViewController: BaseViewController {
         output.profile
             .bind(with: self) { owner, value in
                 profile = value
+                print(value)
                 owner.mainView.setInfo(nick: value.nick, profile: value.profile)
             }
             .disposed(by: disposeBag)
