@@ -68,7 +68,7 @@ final class BoardCommentCell: BaseTableViewCell {
         profileImage.snp.makeConstraints { make in
             make.centerY.equalTo(profileView)
             make.leading.equalTo(profileView.snp.leading)
-            make.size.equalTo(20)
+            make.size.equalTo(25)
         }
         nicknameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(profileView)

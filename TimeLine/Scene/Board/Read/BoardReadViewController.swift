@@ -78,6 +78,10 @@ final class BoardReadViewController: BaseViewController {
         mainView.contentLabel.text = post.content
         mainView.commentLabel.text = "댓글 \(post.comments.count)개"
         
+        if let profile = post.creator.profile {
+            mainView.profileImage.setImage(with: profile, resize: 70)
+        }
+        
         comments = post.comments.reversed()
         for i in 0..<post.image.count {
             
@@ -270,6 +274,11 @@ final class BoardReadViewController: BaseViewController {
             cell.nicknameLabel.text = itemIdentifier.creator.nick
             cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
             cell.contentLabel.text = itemIdentifier.content
+            
+            if let profile = itemIdentifier.creator.profile {
+                cell.profileImage.setImage(with: profile, resize: 30)
+            }
+            
             if itemIdentifier.creator.id == UserDefaultsHelper.userID {
                 cell.deleteButton.isHidden = false
                 cell.deleteButton.rx.tap
