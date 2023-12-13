@@ -20,12 +20,14 @@ final class MyPageViewModel {
     struct Output {
         let profile: PublishRelay<MyProfileResponse>
         let errorMsg: PublishRelay<String>
+        let loginRequest: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output {
         
         let profile = PublishRelay<MyProfileResponse>()
         let errorMsg = PublishRelay<String>()
+        let loginRequest = PublishRelay<Bool>()
         
         input.requestProfile
             .flatMap { _ in
@@ -35,8 +37,9 @@ final class MyPageViewModel {
                 switch result {
                 case .success(let value):
                     profile.accept(value)
-                case .failure(let error):
-                    errorMsg.accept(error.localizedDescription)
+                case .failure(_):
+                    loginRequest.accept(true)
+//                    errorMsg.accept(error.localizedDescription)
                 }
             }
             .disposed(by: disposeBag)
@@ -46,7 +49,8 @@ final class MyPageViewModel {
         
         return Output(
             profile: profile,
-            errorMsg: errorMsg
+            errorMsg: errorMsg,
+            loginRequest: loginRequest
         )
     }
     

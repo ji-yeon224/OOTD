@@ -107,6 +107,20 @@ final class UpdateProfileViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.loginRequest
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "문제가 발생하였습니다.", message: "로그인 후 다시 시도해주세요.") {
+                    UserDefaultsHelper.isLogin = false
+                    // 로그인 뷰로 present
+                    let vc = LoginViewController()
+                    vc.transition = .presnt
+                    vc.modalPresentationStyle = .fullScreen
+                    vc.modalTransitionStyle = .crossDissolve
+                    
+                    owner.present(vc, animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
         
     }
     
