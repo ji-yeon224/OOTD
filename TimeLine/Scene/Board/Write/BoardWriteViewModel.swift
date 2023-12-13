@@ -180,7 +180,7 @@ final class BoardWriteViewModel {
     
 }
 
-private enum Compression: CGFloat, CaseIterable {
+enum Compression: CGFloat, CaseIterable {
     case lowest  = 0
     case low     = 0.25
     case medium  = 0.5
