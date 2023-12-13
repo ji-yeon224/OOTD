@@ -32,6 +32,16 @@ final class MyPageView: BaseView {
         }
     }
     
+    func setInfo(nick: String, profile: String?) {
+        
+        profileView.nicknameLabel.text = nick
+        if let profile = profile {
+            profileView.profileImageView.setImage(with: profile, resize: 100)
+        } else {
+            profileView.profileImageView.image = Constants.Image.person
+        }
+        
+    }
     
     
 }

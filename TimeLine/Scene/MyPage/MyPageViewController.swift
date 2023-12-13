@@ -61,7 +61,7 @@ final class MyPageViewController: BaseViewController {
         output.profile
             .bind(with: self) { owner, value in
                 profile = value
-                owner.mainView.profileView.nicknameLabel.text = value.nick
+                owner.mainView.setInfo(nick: value.nick, profile: value.profile)
             }
             .disposed(by: disposeBag)
         
@@ -74,7 +74,7 @@ final class MyPageViewController: BaseViewController {
                 let vc = UpdateProfileViewController(nick: info.nick, image: info.profile )
                 vc.updateHandler = { value in
                     profile = value
-                    owner.mainView.profileView.nicknameLabel.text = value.nick
+                    owner.mainView.setInfo(nick: value.nick, profile: value.profile)
                     NotificationCenter.default.post(name: .refresh, object: nil)
                 }
                 owner.navigationController?.pushViewController(vc, animated: true)

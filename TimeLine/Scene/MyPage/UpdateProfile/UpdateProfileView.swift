@@ -107,6 +107,16 @@ final class UpdateProfileView: BaseView {
         picker.delegate = self
         return picker
     }
+    
+    func setProfile(nick: String, image: String?) {
+        nickNameTextField.text = nick
+        if let image = image {
+            profileImageView.setImage(with: image, resize: 100)
+        } else {
+            profileImageView.image = Constants.Image.person
+        }
+        
+    }
 }
 
 

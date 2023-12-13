@@ -13,14 +13,17 @@ final class UpdateProfileViewModel {
     
     private let disposeBag = DisposeBag()
     var selectedImg: SelectedImage?
+    var originNick: String?
+    
     struct Input {
         let nickNameText: ControlProperty<String>
         let updateProfile: PublishRelay<ProfileUpdateRequest>
+        let updatePhoto: BehaviorRelay<Bool>
     }
     
     struct Output {
         
-        let nickNameValid: PublishRelay<(Bool, String)>
+        let nickNameValid: PublishRelay<Bool>
         let updateSuccess: PublishRelay<MyProfileResponse>
         let errorMsg: PublishRelay<String>
         let loginRequest: PublishRelay<Bool>
@@ -29,18 +32,21 @@ final class UpdateProfileViewModel {
     
     func transform(input: Input) -> Output {
         
-        let nickNameValid = PublishRelay<(Bool, String)>()
+        let nickNameValid = PublishRelay<Bool>()
         let updateSuccess = PublishRelay<MyProfileResponse>()
         let errorMsg = PublishRelay<String>()
         let loginRequest = PublishRelay<Bool>()
+        
+        
+        var nickValid = false
         
         input.nickNameText
             .map {
                 $0.trimmingCharacters(in: .whitespaces)
             }
             .bind(with: self) { owner, value in
-                let valid = value.count >= 2 && value.count <= 8
-                nickNameValid.accept((valid, value))
+                nickValid = value.count >= 2 && value.count <= 8 && owner.originNick != value
+                nickNameValid.accept(nickValid)
             }
             .disposed(by: disposeBag)
         
@@ -71,7 +77,7 @@ final class UpdateProfileViewModel {
                 }
             }
             .disposed(by: disposeBag)
-            
+        
         
         
         return Output(nickNameValid: nickNameValid, updateSuccess: updateSuccess, errorMsg: errorMsg, loginRequest: loginRequest)

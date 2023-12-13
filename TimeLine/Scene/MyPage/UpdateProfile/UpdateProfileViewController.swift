@@ -19,7 +19,8 @@ final class UpdateProfileViewController: BaseViewController {
     
     private let nicknameTextField = PublishRelay<String>()
     private let updateProfile = PublishRelay<ProfileUpdateRequest>()
-    private let update = PublishRelay<(String, SelectedImage)>()
+    private let updatePhoto = BehaviorRelay(value: false)
+    
     
     private var nickname: String?
     private var profile: String?
@@ -28,7 +29,8 @@ final class UpdateProfileViewController: BaseViewController {
     
     init(nick: String, image: String?) {
         super.init(nibName: nil, bundle: nil)
-        mainView.nickNameTextField.text = nick
+        mainView.setProfile(nick: nick, image: image)
+        viewModel.originNick = nick
         nickname = nick
         profile = image
     }
@@ -59,10 +61,12 @@ final class UpdateProfileViewController: BaseViewController {
     
     private func bind() {
         
+        var nickValid = true
         
         let input = UpdateProfileViewModel.Input(
             nickNameText: mainView.nickNameTextField.rx.text.orEmpty,
-            updateProfile: updateProfile
+            updateProfile: updateProfile,
+            updatePhoto: updatePhoto
         )
         
         let output = viewModel.transform(input: input)
@@ -75,10 +79,22 @@ final class UpdateProfileViewController: BaseViewController {
         
         output.nickNameValid
             .bind(with: self) { owner, value in
-                owner.navigationItem.rightBarButtonItem?.isEnabled = (value.1 != owner.nickname) && value.0
-                owner.mainView.nickNameValidLabel.isHidden = value.0
+                print(value)
+                owner.navigationItem.rightBarButtonItem?.isEnabled = value
+                nickValid = value
+                owner.mainView.nickNameValidLabel.isHidden = value
             }
             .disposed(by: disposeBag)
+        
+        updatePhoto
+            .bind(with: self) { owner, value in
+                print(value, nickValid)
+                if nickValid && value {
+                    owner.navigationItem.rightBarButtonItem?.isEnabled = value
+                }
+            }
+            .disposed(by: disposeBag)
+        
         
         output.updateSuccess
             .bind(with: self) { owner, value in
@@ -118,7 +134,7 @@ extension UpdateProfileViewController {
             
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
-        [delete, selectPhoto, cancel].forEach {
+        [selectPhoto, delete, cancel].forEach {
             alert.addAction($0)
         }
         present(alert, animated: true)
@@ -167,9 +183,10 @@ extension UpdateProfileViewController: PhPickerProtocol {
                         DispatchQueue.main.async {
                             if let resizeImg = img.resizeV3(to: self.mainView.imageViewSize){
                                 self.mainView.profileImageView.image = resizeImg
-                                
                                 self.viewModel.selectedImg = SelectedImage(image: resizeImg)
+                                
                             }
+                            self.updatePhoto.accept(true)
                             
                         }
                     }
