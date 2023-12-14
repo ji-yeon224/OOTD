@@ -12,84 +12,77 @@ extension UIImageView {
     
     func setImage(with urlString: String, resize width: CGFloat) {
         let cornerImageProcessor = RoundCornerImageProcessor(cornerRadius: 15)
-        self.kf.indicatorType = .activity
-        guard let url = URL(string: getPhotoURL(urlString)) else { return }
-        self.kf.setImage(with: url, options: [
+        
+        ImageCache.default.retrieveImage(forKey: urlString, options: [
             .requestModifier(ImageLoadManager.shared.getModifier()),
             .transition(.fade(1.0)),
             .processor(cornerImageProcessor)
         ]) { [weak self] result in
             guard let self = self else { return }
+            self.kf.indicatorType = .activity
             switch result {
-            case .success(let result):
-                self.image = result.image.resize(width: width)
+            case .success(let value):
                 
-            case .failure(_):
-                self.image = Constants.Image.photo?.withTintColor(Constants.Color.placeholder)
-                
-                
+                if let image = value.image {
+                    self.image = image.resize(width: width)
+                } else {
+                    guard let url = URL(string: self.getPhotoURL(urlString)) else { return }
+                    let resource = ImageResource(downloadURL: url, cacheKey: urlString)
+                    self.kf.setImage(with: resource, options: [
+                        .requestModifier(ImageLoadManager.shared.getModifier()),
+                        .transition(.fade(1.0)),
+                        .processor(cornerImageProcessor)
+                    ]) { [weak self] result in
+                        guard let self = self else { return }
+                        switch result {
+                        case .success(let result):
+                            self.image = result.image.resize(width: width)
+                            
+                        case .failure(_):
+                            self.image = Constants.Image.errorPhoto?.withTintColor(Constants.Color.placeholder)
+                            
+                            
+                        }
+                        
+                    }
+                }
+            case .failure(let error):
+                print(error)
             }
-            
         }
         
+        
+        
     }
-//
-//    func downSample1(scale: CGFloat) -> UIImage {
-//        let imageSourceOption = [kCGImageSourceShouldCache: false] as CFDictionary
-//        let data = self.pngData()! as CFData
-//        let imageSource = CGImageSourceCreateWithData(data, nil)!
-//        let maxPixel = max(self.size.width, self.size.height) * scale
-//        let downSampleOptions = [
-//            kCGImageSourceCreateThumbnailFromImageAlways: true,
-//            kCGImageSourceShouldCacheImmediately: true,
-//            kCGImageSourceCreateThumbnailWithTransform: true,
-//            kCGImageSourceThumbnailMaxPixelSize: maxPixel
-//        ] as CFDictionary
-//
-//        let downSampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downSampleOptions)!
-//
-//        let newImage = UIImage(cgImage: downSampledImage)
-//        printDataSize(newImage)
-//        return newImage
-//    }
-//    
+    
     
 //    func setImage(with urlString: String, resize width: CGFloat) {
+//        let cornerImageProcessor = RoundCornerImageProcessor(cornerRadius: 15)
 //        self.kf.indicatorType = .activity
-//        ImageCache.default.retrieveImage(forKey: getPhotoURL(urlString), options: nil) { result in
+//        guard let url = URL(string: getPhotoURL(urlString)) else { return }
+//        self.kf.setImage(with: url, options: [
+//            .requestModifier(ImageLoadManager.shared.getModifier()),
+//            .transition(.fade(1.0)),
+//            .processor(cornerImageProcessor)
+//        ]) { [weak self] result in
+//            guard let self = self else { return }
 //            switch result {
-//            case .success(let value):
-//                if let image = value.image {
-//                    //캐시가 존재하는 경우
-//                    print("cache", urlString)
-//                    self.image = image.resize(width: width)
-//                } else {
-//                    //캐시가 존재하지 않는 경우
-//                    print("cache x")
-//                    guard let url = URL(string: self.getPhotoURL(urlString)) else { return }
-//                    let resource = KF.ImageResource(downloadURL: url, cacheKey: urlString)
-//                    self.kf.setImage(
-//                        with: resource,
-//                        options: [
-//                            .requestModifier(ImageLoadManager.shared.getModifier()),
-//                            .transition(.fade(1.0))
-//                            
-//                        ]) { [weak self] result in
-//                            guard let self = self else { return }
-//                            switch result {
-//                            case .success(let data):
-//                                self.image = data.image.resize(size: width)
-//                            case .failure(_):
-//                                self.image = UIImage(systemName: "person")
-//                            }
-//                        }
-//                }
-//            case .failure(let error):
-//                print("[IMAGE ERROR]", error)
+//            case .success(let result):
+//                self.image = result.image.resize(width: width) //result.image.resize(width: width)
+//                
+//            case .failure(_):
+//                self.image = Constants.Image.photo?.withTintColor(Constants.Color.placeholder)
+//                
+//                
 //            }
+//            
 //        }
+//        
 //    }
-//    
+    
+    
+ 
+    
     // 서버에서 받을 이미지 full url
     private func getPhotoURL(_ url: String) -> String {
         return BaseURL.baseURL + "/" + url

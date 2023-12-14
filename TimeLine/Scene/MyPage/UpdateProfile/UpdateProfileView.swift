@@ -11,7 +11,7 @@ import PhotosUI
 final class UpdateProfileView: BaseView {
     
     private let imageBackView = UIView()
-    let imageViewSize = CGSize(width: 100, height: 100)
+    let imageViewSize: CGFloat = 100 //CGSize(width: 100, height: 100)
     let profileImageView = ProfileImageView(frame: .zero)
     weak var delegate: PhPickerProtocol?
     

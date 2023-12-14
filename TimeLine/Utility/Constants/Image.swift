@@ -17,6 +17,7 @@ extension Constants {
         static let xmark = UIImage(systemName: "xmark")
         static let xmarkCircle = UIImage(systemName: "x.circle.fill")
         static let photo = UIImage(systemName: "photo.on.rectangle")
+        static let errorPhoto = UIImage(named: "placeholder")
         static let keyboardDown = UIImage(systemName: "keyboard.chevron.compact.down")
         
         static let board = UIImage(systemName: "doc.text.image")

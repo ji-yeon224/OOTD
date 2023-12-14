@@ -58,12 +58,12 @@ extension UIImage {
         return renderImage
     }
     
-    func resizeV3(to size: CGSize) -> UIImage? {
+    func resizeV3(to size: CGFloat) -> UIImage? {
         let options: [CFString: Any] = [
             kCGImageSourceShouldCache: false,
             kCGImageSourceCreateThumbnailFromImageAlways: true,
             kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
-            kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height) * 3,
+            kCGImageSourceThumbnailMaxPixelSize: size * 3,
             kCGImageSourceCreateThumbnailWithTransform: true
         ]
         
