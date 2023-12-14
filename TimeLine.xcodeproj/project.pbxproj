@@ -62,6 +62,8 @@
 		CEBDFC022B0BB52100D43BF9 /* ProductId.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDFC012B0BB52100D43BF9 /* ProductId.swift */; };
 		CEC086CB2B298C2000501364 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086CA2B298C2000501364 /* Data+Extension.swift */; };
 		CEC086CF2B29960800501364 /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086CE2B29960800501364 /* CGImage+Extension.swift */; };
+		CEC086D22B2AAD1200501364 /* MyPageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086D12B2AAD1200501364 /* MyPageSection.swift */; };
+		CEC086D42B2AAD3100501364 /* MyPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086D32B2AAD3100501364 /* MyPageContent.swift */; };
 		CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */; };
 		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
 		CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */; };
@@ -196,6 +198,8 @@
 		CEBDFC012B0BB52100D43BF9 /* ProductId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductId.swift; sourceTree = "<group>"; };
 		CEC086CA2B298C2000501364 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		CEC086CE2B29960800501364 /* CGImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+Extension.swift"; sourceTree = "<group>"; };
+		CEC086D12B2AAD1200501364 /* MyPageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSection.swift; sourceTree = "<group>"; };
+		CEC086D32B2AAD3100501364 /* MyPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageContent.swift; sourceTree = "<group>"; };
 		CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIManager.swift; sourceTree = "<group>"; };
@@ -425,6 +429,7 @@
 		CEA903022B146F8200F09FB8 /* RxDataSource */ = {
 			isa = PBXGroup;
 			children = (
+				CEC086D02B2AAD0500501364 /* MyPage */,
 				CEA903032B146F9B00F09FB8 /* SelectImageModel.swift */,
 				CEA903052B146FE800F09FB8 /* SelectedImage.swift */,
 			);
@@ -471,6 +476,15 @@
 				CE25D0A52B220EE6004DFB66 /* Creator.swift */,
 			);
 			path = Read;
+			sourceTree = "<group>";
+		};
+		CEC086D02B2AAD0500501364 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				CEC086D12B2AAD1200501364 /* MyPageSection.swift */,
+				CEC086D32B2AAD3100501364 /* MyPageContent.swift */,
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		CEC2FBD22B02174A002E3046 /* Model */ = {
@@ -896,6 +910,7 @@
 				CE2021F82B28718E00603194 /* ProfileImageView.swift in Sources */,
 				CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */,
 				CE290E902B04A3B1007DFCAE /* DateFormatter+Extension.swift in Sources */,
+				CEC086D42B2AAD3100501364 /* MyPageContent.swift in Sources */,
 				CE76E0162B1747F900A38041 /* ReusableProtocol.swift in Sources */,
 				CEC2FBDF2B026DF9002E3046 /* ErrorModel.swift in Sources */,
 				CEED52B52B05056E007E12FA /* EmailValidationError.swift in Sources */,
@@ -923,6 +938,7 @@
 				CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */,
 				CEDC338C2B103C4600A5788E /* BoardViewModel.swift in Sources */,
 				CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */,
+				CEC086D22B2AAD1200501364 /* MyPageSection.swift in Sources */,
 				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
 				CEBDFBF42B0B31B900D43BF9 /* PostAPIManager.swift in Sources */,
 				CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */,
