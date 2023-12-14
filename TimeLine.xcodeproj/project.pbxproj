@@ -65,6 +65,8 @@
 		CEC086D22B2AAD1200501364 /* MyPageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086D12B2AAD1200501364 /* MyPageSection.swift */; };
 		CEC086D42B2AAD3100501364 /* MyPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086D32B2AAD3100501364 /* MyPageContent.swift */; };
 		CEC086D62B2B392200501364 /* MyPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086D52B2B392200501364 /* MyPageType.swift */; };
+		CEC086D92B2B55ED00501364 /* LikePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086D82B2B55ED00501364 /* LikePostViewController.swift */; };
+		CEC086DB2B2B563800501364 /* LikePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086DA2B2B563800501364 /* LikePostViewModel.swift */; };
 		CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */; };
 		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
 		CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */; };
@@ -202,6 +204,8 @@
 		CEC086D12B2AAD1200501364 /* MyPageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSection.swift; sourceTree = "<group>"; };
 		CEC086D32B2AAD3100501364 /* MyPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageContent.swift; sourceTree = "<group>"; };
 		CEC086D52B2B392200501364 /* MyPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageType.swift; sourceTree = "<group>"; };
+		CEC086D82B2B55ED00501364 /* LikePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikePostViewController.swift; sourceTree = "<group>"; };
+		CEC086DA2B2B563800501364 /* LikePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikePostViewModel.swift; sourceTree = "<group>"; };
 		CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIManager.swift; sourceTree = "<group>"; };
@@ -376,6 +380,7 @@
 		CE5CA53E2B27E68400534A08 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				CEC086D72B2B55DA00501364 /* LikePost */,
 				CE2021F02B2870BC00603194 /* UpdateProfile */,
 				CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */,
 				CE5CA5412B27E6BC00534A08 /* MyPageView.swift */,
@@ -487,6 +492,15 @@
 				CEC086D32B2AAD3100501364 /* MyPageContent.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		CEC086D72B2B55DA00501364 /* LikePost */ = {
+			isa = PBXGroup;
+			children = (
+				CEC086D82B2B55ED00501364 /* LikePostViewController.swift */,
+				CEC086DA2B2B563800501364 /* LikePostViewModel.swift */,
+			);
+			path = LikePost;
 			sourceTree = "<group>";
 		};
 		CEC2FBD22B02174A002E3046 /* Model */ = {
@@ -926,6 +940,7 @@
 				CEECBF292B08FC120031947E /* ValidStackView.swift in Sources */,
 				CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */,
 				CEDC33842B0F919000A5788E /* BoardReadViewModel.swift in Sources */,
+				CEC086D92B2B55ED00501364 /* LikePostViewController.swift in Sources */,
 				CEE80ACE2B186E8D0041AC36 /* BoardContentSection.swift in Sources */,
 				CEE80AD02B1873680041AC36 /* SectionType.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
@@ -983,6 +998,7 @@
 				CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */,
 				CEE80AFC2B19A92F0041AC36 /* BoardCommentCell.swift in Sources */,
 				CEFCACA22B28450100DA68EC /* ProfileAPIManager.swift in Sources */,
+				CEC086DB2B2B563800501364 /* LikePostViewModel.swift in Sources */,
 				CE5CA5402B27E6A700534A08 /* MyPageViewController.swift in Sources */,
 				CEED52B32B050354007E12FA /* JoinError.swift in Sources */,
 				CEC7DF8D2B1EAC0C003D02D3 /* BoardReadView.swift in Sources */,

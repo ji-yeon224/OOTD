@@ -27,7 +27,7 @@ final class MyPageViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-        
+        print(UserDefaultsHelper.token)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -82,7 +82,6 @@ final class MyPageViewController: BaseViewController {
         output.profile
             .bind(with: self) { owner, value in
                 profile = value
-                print(value)
                 owner.mainView.setInfo(nick: value.nick, profile: value.profile)
             }
             .disposed(by: disposeBag)
@@ -132,6 +131,9 @@ final class MyPageViewController: BaseViewController {
                 let type = list[value.row].type
                 switch type {
                 case .likeboard: print("likeboard")
+                    let vc = BoardViewController()
+                    vc.boardType = .my
+                    owner.navigationController?.pushViewController(vc, animated: true)
                 case .mypost: print("post")
                 case .withdraw: print("witdraw")
                     owner.showAlertWithCancel(title: "탈퇴 하시겠어요?", message: "") {

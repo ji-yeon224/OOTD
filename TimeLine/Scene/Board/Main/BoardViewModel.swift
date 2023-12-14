@@ -13,7 +13,7 @@ final class BoardViewModel {
     
     var data: [Post] = []
     private var nextCursor: String? = nil
-   
+    var boardType: BoardViewType = .main
     
     let disposeBag = DisposeBag()
     
@@ -47,11 +47,18 @@ final class BoardViewModel {
             .disposed(by: disposeBag)
         
         refresh
-            .flatMap {_ in
-                return PostAPIManager.shared.postrequest(api: .read(productId: ProductId.OOTDBoard.rawValue, limit: 10, next: self.nextCursor), type: ReadResponse.self)
+            .map { _ in
+                switch self.boardType {
+                case .main:
+                    return PostAPI.read(productId: ProductId.OOTDBoard.rawValue, limit: 10, next: self.nextCursor)
+                case .my:
+                    return PostAPI.myLike(limit: 10, next: self.nextCursor)
+                }
             }
-            .subscribe(with: self) { owner, response in
-                switch response {
+            .flatMap { api in
+                return PostAPIManager.shared.postrequest(api: api, type: ReadResponse.self)
+            }
+            .subscribe(with: self) { owner, response in                switch response {
                 case .success(let result):
 //                    debugPrint("[BoardVM Success]")
                     owner.nextCursor = result.nextCursor

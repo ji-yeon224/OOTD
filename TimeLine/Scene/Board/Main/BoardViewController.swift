@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
+
 final class BoardViewController: BaseViewController {
     
     private let mainView = BoardView()
@@ -19,6 +20,8 @@ final class BoardViewController: BaseViewController {
     
     private let refreshList = PublishRelay<Bool>()
     
+    var boardType: BoardViewType = .main
+    
     override func loadView() {
         self.view = mainView
         
@@ -27,8 +30,8 @@ final class BoardViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        viewModel.boardType = boardType
         refreshList.accept(true)
-        
         
         
     }
@@ -39,8 +42,16 @@ final class BoardViewController: BaseViewController {
     }
     
     override func configure() {
-        mainView.tableView.refreshControl = UIRefreshControl()
-        mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        if boardType == .main {
+            mainView.tableView.refreshControl = UIRefreshControl()
+            mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+            mainView.writeButton.isHidden = false
+        } else {
+            mainView.writeButton.isHidden = true
+            navigationController?.navigationBar.isHidden = false
+            title = "My Like List"
+        }
+        
         
     }
     
@@ -131,4 +142,9 @@ final class BoardViewController: BaseViewController {
     
     
     
+}
+
+
+enum BoardViewType {
+    case main, my
 }
