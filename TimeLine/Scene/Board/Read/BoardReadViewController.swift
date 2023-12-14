@@ -183,6 +183,9 @@ final class BoardReadViewController: BaseViewController {
         output?.likeValue
             .bind(with: self, onNext: { owner, value in
                 owner.mainView.setLikeButton(like: value)
+                NotificationCenter.default.post(name: .refresh, object: nil)
+                let msg = value ? "좋아요" : "좋아요 취소"
+                owner.showToastMessage(message: msg, position: .top)
             })
             .disposed(by: disposeBag)
         

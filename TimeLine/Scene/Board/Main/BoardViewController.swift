@@ -47,6 +47,7 @@ final class BoardViewController: BaseViewController {
             mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
             mainView.writeButton.isHidden = false
         } else {
+            
             mainView.writeButton.isHidden = true
             navigationController?.navigationBar.isHidden = false
             title = "My Like List"
