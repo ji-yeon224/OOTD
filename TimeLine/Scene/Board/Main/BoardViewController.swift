@@ -46,13 +46,13 @@ final class BoardViewController: BaseViewController {
             mainView.tableView.refreshControl = UIRefreshControl()
             mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
             mainView.writeButton.isHidden = false
-        } else {
-            
+        } else { // 마이페이지 -> 좋아요 게시글
+            configNavBar()
             mainView.writeButton.isHidden = true
             navigationController?.navigationBar.isHidden = false
             title = "My Like List"
         }
-        configNavBar()
+        
         
     }
     

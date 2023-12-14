@@ -130,18 +130,18 @@ final class MyPageViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 let type = list[value.row].type
                 switch type {
-                case .likeboard: print("likeboard")
+                case .likeboard:
                     let vc = BoardViewController()
                     vc.boardType = .my
                     owner.navigationController?.pushViewController(vc, animated: true)
                 case .mypost: print("post")
-                case .withdraw: print("witdraw")
+                case .withdraw:
                     owner.showAlertWithCancel(title: "탈퇴 하시겠어요?", message: "") {
                         withdrawTap.accept(true)
                     } cancelHandler: {  }
 
                     
-                case .logout: print("logout")
+                case .logout:
                     logoutTap.accept(true)
                 }
                 

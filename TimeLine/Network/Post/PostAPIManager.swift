@@ -19,7 +19,7 @@ final class PostAPIManager {
     func postrequest<T: Decodable>(api: PostAPI, type: T.Type) -> Single<Result<T, NetworkError>> {
         return Single.create { single in
             self.provider.request(api) { result in
-                print("PostAPIManager response ", result)
+//                print("PostAPIManager response ", result)
                 switch result {
                 case .success(let response):
                     let statusCode = response.statusCode
