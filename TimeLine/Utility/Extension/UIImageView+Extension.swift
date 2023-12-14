@@ -22,7 +22,6 @@ extension UIImageView {
             self.kf.indicatorType = .activity
             switch result {
             case .success(let value):
-                
                 if let image = value.image {
                     self.image = image.resize(width: width)
                 } else {
