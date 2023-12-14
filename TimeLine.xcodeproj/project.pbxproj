@@ -64,6 +64,7 @@
 		CEC086CF2B29960800501364 /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086CE2B29960800501364 /* CGImage+Extension.swift */; };
 		CEC086D22B2AAD1200501364 /* MyPageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086D12B2AAD1200501364 /* MyPageSection.swift */; };
 		CEC086D42B2AAD3100501364 /* MyPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086D32B2AAD3100501364 /* MyPageContent.swift */; };
+		CEC086D62B2B392200501364 /* MyPageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC086D52B2B392200501364 /* MyPageType.swift */; };
 		CEC2FBCF2B0212AF002E3046 /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */; };
 		CEC2FBD42B021750002E3046 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD32B021750002E3046 /* Login.swift */; };
 		CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */; };
@@ -200,6 +201,7 @@
 		CEC086CE2B29960800501364 /* CGImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+Extension.swift"; sourceTree = "<group>"; };
 		CEC086D12B2AAD1200501364 /* MyPageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSection.swift; sourceTree = "<group>"; };
 		CEC086D32B2AAD3100501364 /* MyPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageContent.swift; sourceTree = "<group>"; };
+		CEC086D52B2B392200501364 /* MyPageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageType.swift; sourceTree = "<group>"; };
 		CEC2FBCE2B0212AF002E3046 /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		CEC2FBD32B021750002E3046 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		CEC2FBD52B021796002E3046 /* AuthenticationAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPIManager.swift; sourceTree = "<group>"; };
@@ -694,6 +696,7 @@
 				CE7A0C6B2B1B6162003F247B /* BoardMode.swift */,
 				CEC7DF852B1D9478003D02D3 /* ImageManager.swift */,
 				CEFCACA32B2845FE00DA68EC /* APIType.swift */,
+				CEC086D52B2B392200501364 /* MyPageType.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -973,6 +976,7 @@
 				CEBDFBFE2B0B9EB700D43BF9 /* UIScrollView+Extension.swift in Sources */,
 				CE290E8D2B049ACF007DFCAE /* JoinView.swift in Sources */,
 				CEDC33932B106F1400A5788E /* PlainLabel.swift in Sources */,
+				CEC086D62B2B392200501364 /* MyPageType.swift in Sources */,
 				CE2021F62B2870EA00603194 /* UpdateProfileViewModel.swift in Sources */,
 				CEC2FBD42B021750002E3046 /* Login.swift in Sources */,
 				CECD6A532B27595200B7732C /* LikeResponse.swift in Sources */,

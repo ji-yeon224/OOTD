@@ -18,6 +18,8 @@ final class MyPageView: BaseView {
     
     var dataSource: UICollectionViewDiffableDataSource<String, MyPageContent>!
     
+    
+    
     override func configure() {
         addSubview(titleLabel)
         addSubview(profileView)
@@ -26,6 +28,8 @@ final class MyPageView: BaseView {
         
         configureDataSource()
         updateSnapShot()
+        collectionView.isScrollEnabled = false
+        
     }
     
     override func setConstraints() {
@@ -58,7 +62,7 @@ final class MyPageView: BaseView {
     
     private func configureDataSource() {
         
-        // UICollectionView.CellRegistration iOS 14, 메서드 대신 제네릭 사용, 셀이 생성될 때 마다 클로저가 호출
+        
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, MyPageContent> { cell, indexPath, itemIdentifier in
             
             // 셀 디자인 및 데이터 처리
@@ -79,22 +83,28 @@ final class MyPageView: BaseView {
             
             cell.contentConfiguration = content
             
+            var backgroundConfig = UIBackgroundConfiguration.listPlainCell()
+            backgroundConfig.backgroundColor = Constants.Color.background
+            
+            cell.backgroundConfiguration = backgroundConfig
         }
         
+        
         //CellForItemAt
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<String, MyPageContent>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+            
             return cell
         })
         
         
     }
     
-    func updateSnapShot() {
+    private func updateSnapShot() {
         var snapshot = NSDiffableDataSourceSnapshot<String, MyPageContent>()
-        snapshot.appendSections(["내 활동", "계정"])
-        snapshot.appendItems(myActivity, toSection: "내 활동")
-        snapshot.appendItems(account, toSection: "계정")
+        snapshot.appendSections([""])
+        snapshot.appendItems(list)
+//        snapshot.appendItems(account, toSection: "계정")
         dataSource.apply(snapshot)
     }
     

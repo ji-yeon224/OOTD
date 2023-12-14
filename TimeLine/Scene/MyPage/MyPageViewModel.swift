@@ -15,12 +15,14 @@ final class MyPageViewModel {
     
     struct Input {
         let requestProfile: BehaviorRelay<Bool>
+        let withdrawTap: PublishRelay<Bool>
     }
     
     struct Output {
         let profile: PublishRelay<MyProfileResponse>
         let errorMsg: PublishRelay<String>
         let loginRequest: PublishRelay<Bool>
+        let withdraw: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -28,6 +30,7 @@ final class MyPageViewModel {
         let profile = PublishRelay<MyProfileResponse>()
         let errorMsg = PublishRelay<String>()
         let loginRequest = PublishRelay<Bool>()
+        let withdraw = PublishRelay<Bool>()
         
         input.requestProfile
             .flatMap { _ in
@@ -44,13 +47,29 @@ final class MyPageViewModel {
             }
             .disposed(by: disposeBag)
         
+        input.withdrawTap
+            .flatMap { _ in
+                AuthenticationAPIManager.shared.request(api: .withdraw, successType: UserInfoResponse.self)
+            }
+            .subscribe(with: self) { owner, response in
+                switch response {
+                case .success(let result):
+                    print("-----success------", result)
+                    withdraw.accept(true)
+                case .failure(let error):
+                    print("----error-----", error)
+                    loginRequest.accept(true)
+                }
+            }
+            .disposed(by: disposeBag)
        
         
         
         return Output(
             profile: profile,
             errorMsg: errorMsg,
-            loginRequest: loginRequest
+            loginRequest: loginRequest,
+            withdraw: withdraw
         )
     }
     
