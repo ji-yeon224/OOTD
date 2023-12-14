@@ -52,7 +52,7 @@ final class BoardViewController: BaseViewController {
             navigationController?.navigationBar.isHidden = false
             title = "My Like List"
         }
-        
+        configNavBar()
         
     }
     
@@ -143,6 +143,17 @@ final class BoardViewController: BaseViewController {
     
     
     
+}
+
+extension BoardViewController {
+    private func configNavBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.back, style: .plain, target: self, action: #selector(backButton))
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+    }
+    
+    @objc private func backButton() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 

@@ -61,6 +61,12 @@ final class BoardReadViewController: BaseViewController {
         }
     }
     
+    override func configure() {
+        super.configure()
+        configLeftNavBar()
+        configureDataSource()
+    }
+    
     private func configData() {
         
         guard let post = postData else {
@@ -84,20 +90,22 @@ final class BoardReadViewController: BaseViewController {
         
         comments = post.comments.reversed()
         for i in 0..<post.image.count {
-            
             mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-30)
-            
         }
         
+        // 게시글 작성자와 로그인 계정이 같다면 수정/삭제 가능
         if post.creator.id == UserDefaultsHelper.userID {
-            configNavBar()
+            configRightNavBar()
         }
         
+        // 좋아요 누른 게시글이면
         if post.likes.contains(UserDefaultsHelper.userID) {
             viewModel.like = true
             mainView.setLikeButton(like: true)
         }
-        configureDataSource()
+        
+        
+        
         
     }
     
@@ -229,46 +237,6 @@ final class BoardReadViewController: BaseViewController {
     
     
     
-    private func configNavBar() {
-        var menuItems: [UIAction] = []
-        
-        let editAction = UIAction(title: "Edit") { [weak self] action in
-            guard let self = self else { return }
-            guard let data = postData else {
-                self.showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { }
-                return
-            }
-            
-            let vc = BoardWriteViewController()
-            vc.boardMode = .edit(data: data)
-            vc.modalPresentationStyle = .fullScreen
-            vc.postHandler = { value in
-                self.postData = value
-//                print(value)
-                self.updateSnapShot()
-                
-            }
-            self.navigationController?.pushViewController(vc, animated: false)
-        }
-        let deleteAction = UIAction(title: "Delete") { [weak self] action in
-            guard let self = self else { return }
-            self.showAlertWithCancel(title: "", message: "해당 게시글을 삭제하시겠어요?") {
-                self.deletePost.accept(true)
-            } cancelHandler: {
-                
-            }
-            
-        }
-        menuItems.append(editAction)
-        menuItems.append(deleteAction)
-        
-        var menu: UIMenu {
-            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
-        }
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image:  Constants.Image.menuButton, primaryAction: nil, menu: menu)
-        navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
-    }
     
     func configureDataSource() {
         
@@ -302,5 +270,63 @@ final class BoardReadViewController: BaseViewController {
         
     }
     
+    
+}
+
+// NavBar
+extension BoardReadViewController {
+    private func configLeftNavBar() {
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.back, style: .plain, target: self, action: #selector(backButton))
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+        
+        
+    }
+    
+    private func configRightNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image:  Constants.Image.menuButton, primaryAction: nil, menu: setMenuItem())
+        navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
+    }
+    
+    private func setMenuItem() -> UIMenu {
+        var menuItems: [UIAction] = []
+        
+        let editAction = UIAction(title: "Edit") { [weak self] action in
+            guard let self = self else { return }
+            guard let data = postData else {
+                self.showOKAlert(title: "", message: "데이터를 로드하는데 문제가 발생하였습니다.") { }
+                return
+            }
+            
+            let vc = BoardWriteViewController()
+            vc.boardMode = .edit(data: data)
+            vc.modalPresentationStyle = .fullScreen
+            vc.postHandler = { value in
+                self.postData = value
+//                print(value)
+                self.updateSnapShot()
+                
+            }
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        let deleteAction = UIAction(title: "Delete") { [weak self] action in
+            guard let self = self else { return }
+            self.showAlertWithCancel(title: "", message: "해당 게시글을 삭제하시겠어요?") {
+                self.deletePost.accept(true)
+            } cancelHandler: {
+                
+            }
+            
+        }
+        menuItems.append(editAction)
+        menuItems.append(deleteAction)
+        
+        return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
+    }
+    
+    @objc private func backButton() {
+        navigationController?.popViewController(animated: true)
+    }
     
 }
