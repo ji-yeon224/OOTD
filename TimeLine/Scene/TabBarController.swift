@@ -24,12 +24,14 @@ final class TabBarController: UITabBarController {
         let boardVC = BoardViewController()
         boardVC.tabBarItem.image = Constants.Image.board
         boardVC.tabBarItem.title = "Board"
+        let boarcNav = UINavigationController(rootViewController: boardVC)
         
-        let homeVC = HomeViewController()
-        homeVC.tabBarItem.image = Constants.Image.myPage
-        homeVC.tabBarItem.title = "MY"
+        let myPageVC = MyPageViewController()
+        myPageVC.tabBarItem.image = Constants.Image.myPage
+        myPageVC.tabBarItem.title = "MyPage"
+        let myPageNav = UINavigationController(rootViewController: myPageVC)
         
-        viewControllers = [boardVC, homeVC]
+        viewControllers = [boarcNav, myPageNav]
         
     }
     

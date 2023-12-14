@@ -23,13 +23,15 @@ final class BoardReadView: BaseView {
         return view
     }()
     private let infoView = UIView()
-    let profileImage = {
-        let view = UIImageView()
-        view.image = Constants.Image.person
-        view.tintColor = Constants.Color.placeholder
-        view.clipsToBounds = true
-        return view
-    }()
+//    let profileImage = {
+//        let view = UIImageView()
+//        view.image = Constants.Image.person
+//        view.tintColor = Constants.Color.placeholder
+//        view.clipsToBounds = true
+//        return view
+//    }()
+    
+    let profileImage = ProfileImageView(frame: .zero)
     
     let nickname = PlainLabel(size: 14, color: Constants.Color.basicText, line: 1)
     let date = PlainLabel(size: 14, color: Constants.Color.placeholder, line: 1)
@@ -63,7 +65,7 @@ final class BoardReadView: BaseView {
     
     private let lineView = {
         let view = UIView()
-        view.backgroundColor = Constants.Color.lightBorder
+        view.backgroundColor = Constants.Color.lightGrayColor
         return view
     }()
     

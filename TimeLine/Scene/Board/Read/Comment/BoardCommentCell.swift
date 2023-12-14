@@ -23,13 +23,8 @@ final class BoardCommentCell: BaseTableViewCell {
     }()
     
     private let profileView = UIView()
-    let profileImage = {
-        let view = UIImageView()
-        view.image = Constants.Image.person
-        view.tintColor = Constants.Color.placeholder
-        view.contentMode = .scaleAspectFill
-        return view
-    }()
+    let profileImage = ProfileImageView(frame: .zero)
+    
     let nicknameLabel = PlainLabel(size: 13, color: Constants.Color.basicText, line: 1)
     let contentLabel = PlainLabel(size: 14, color: Constants.Color.basicText, line: 0)
     let dateLabel = PlainLabel(size: 12, color: Constants.Color.subText, line: 1)
@@ -73,7 +68,7 @@ final class BoardCommentCell: BaseTableViewCell {
         profileImage.snp.makeConstraints { make in
             make.centerY.equalTo(profileView)
             make.leading.equalTo(profileView.snp.leading)
-            make.size.equalTo(20)
+            make.size.equalTo(25)
         }
         nicknameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(profileView)

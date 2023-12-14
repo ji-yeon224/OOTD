@@ -14,6 +14,7 @@ enum PostAPI {
     case delete(id: String)
     case update(id: String, data: PostWrite)
     case like(id: String)
+    case myLike(limit: Int, next: String?)
 }
 
 extension PostAPI: TargetType {
@@ -31,6 +32,8 @@ extension PostAPI: TargetType {
             return "post/\(id)"
         case .like(let id):
             return "post/like/\(id)"
+        case .myLike:
+            return "post/like/me"
         }
     }
     
@@ -38,7 +41,7 @@ extension PostAPI: TargetType {
         switch self {
         case .write, .like:
             return .post
-        case .read:
+        case .read, .myLike:
             return .get
         case .delete:
             return .delete
@@ -59,6 +62,12 @@ extension PostAPI: TargetType {
             }
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         case .delete, .like: return .requestPlain
+        case .myLike(let limit, let next):
+            var parameters: [String:Any] = ["limit": limit]
+            if let next = next {
+                parameters["next"] = next
+            }
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }
     
@@ -70,7 +79,7 @@ extension PostAPI: TargetType {
                 "SesacKey": APIKey.key,
                 "Authorization": UserDefaultsHelper.token
             ]
-        case .read, .delete, .like:
+        case .read, .delete, .like, .myLike:
             return ["Authorization": UserDefaultsHelper.token,
                     "SesacKey": APIKey.key]
        

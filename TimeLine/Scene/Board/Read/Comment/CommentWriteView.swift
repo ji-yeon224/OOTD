@@ -36,7 +36,7 @@ final class CommentWriteView: BaseView {
         addSubview(postButton)
         textView.addSubview(placeholderLabel)
         layer.borderWidth = 0.8
-        layer.borderColor = Constants.Color.lightBorder.cgColor
+        layer.borderColor = Constants.Color.lightGrayColor.cgColor
     }
     
     override func setConstraints() {

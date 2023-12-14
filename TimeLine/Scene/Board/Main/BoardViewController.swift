@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
+
 final class BoardViewController: BaseViewController {
     
     private let mainView = BoardView()
@@ -19,6 +20,8 @@ final class BoardViewController: BaseViewController {
     
     private let refreshList = PublishRelay<Bool>()
     
+    var boardType: BoardViewType = .main
+    
     override func loadView() {
         self.view = mainView
         
@@ -27,7 +30,10 @@ final class BoardViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        viewModel.boardType = boardType
         refreshList.accept(true)
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,8 +42,18 @@ final class BoardViewController: BaseViewController {
     }
     
     override func configure() {
-        mainView.tableView.refreshControl = UIRefreshControl()
-        mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        if boardType == .main {
+            mainView.tableView.refreshControl = UIRefreshControl()
+            mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+            mainView.writeButton.isHidden = false
+        } else { // 마이페이지 -> 좋아요 게시글
+            configNavBar()
+            mainView.writeButton.isHidden = true
+            navigationController?.navigationBar.isHidden = false
+            title = "My Like List"
+        }
+        
+        
     }
     
     private func bind() {
@@ -53,6 +69,7 @@ final class BoardViewController: BaseViewController {
             let vc = BoardReadViewController()
             vc.postData = value
             vc.modalPresentationStyle = .overFullScreen
+            vc.hidesBottomBarWhenPushed = true
             owner.navigationController?.pushViewController(vc, animated: true)
             
         }
@@ -126,5 +143,20 @@ final class BoardViewController: BaseViewController {
     
     
     
+}
+
+extension BoardViewController {
+    private func configNavBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.back, style: .plain, target: self, action: #selector(backButton))
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+    }
     
+    @objc private func backButton() {
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+
+enum BoardViewType {
+    case main, my
 }

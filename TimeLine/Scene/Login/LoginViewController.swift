@@ -67,7 +67,7 @@ final class LoginViewController: BaseViewController {
                     UserDefaultsHelper.isLogin = true
                     switch owner.transition {
                     case .root:
-                        owner.view?.window?.rootViewController = UINavigationController(rootViewController: TabBarController())
+                        owner.view?.window?.rootViewController = TabBarController()// UINavigationController(rootViewController: TabBarController())
                         owner.view.window?.makeKeyAndVisible()
                     case .push:
                         owner.navigationController?.popViewController(animated: true)

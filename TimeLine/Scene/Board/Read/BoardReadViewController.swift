@@ -61,6 +61,12 @@ final class BoardReadViewController: BaseViewController {
         }
     }
     
+    override func configure() {
+        super.configure()
+        configLeftNavBar()
+        configureDataSource()
+    }
+    
     private func configData() {
         
         guard let post = postData else {
@@ -78,22 +84,28 @@ final class BoardReadViewController: BaseViewController {
         mainView.contentLabel.text = post.content
         mainView.commentLabel.text = "댓글 \(post.comments.count)개"
         
+        if let profile = post.creator.profile {
+            mainView.profileImage.setImage(with: profile, resize: 70)
+        }
+        
         comments = post.comments.reversed()
         for i in 0..<post.image.count {
-            
             mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-30)
-            
         }
         
+        // 게시글 작성자와 로그인 계정이 같다면 수정/삭제 가능
         if post.creator.id == UserDefaultsHelper.userID {
-            configNavBar()
+            configRightNavBar()
         }
         
+        // 좋아요 누른 게시글이면
         if post.likes.contains(UserDefaultsHelper.userID) {
             viewModel.like = true
             mainView.setLikeButton(like: true)
         }
-        configureDataSource()
+        
+        
+        
         
     }
     
@@ -179,6 +191,9 @@ final class BoardReadViewController: BaseViewController {
         output?.likeValue
             .bind(with: self, onNext: { owner, value in
                 owner.mainView.setLikeButton(like: value)
+                NotificationCenter.default.post(name: .refresh, object: nil)
+                let msg = value ? "좋아요" : "좋아요 취소"
+                owner.showToastMessage(message: msg, position: .top)
             })
             .disposed(by: disposeBag)
         
@@ -222,7 +237,59 @@ final class BoardReadViewController: BaseViewController {
     
     
     
-    private func configNavBar() {
+    
+    func configureDataSource() {
+        
+        mainView.dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: mainView.tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
+            cell.nicknameLabel.text = itemIdentifier.creator.nick
+            cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
+            cell.contentLabel.text = itemIdentifier.content
+            
+            if let profile = itemIdentifier.creator.profile {
+                cell.profileImage.setImage(with: profile, resize: 30)
+            }
+            
+            if itemIdentifier.creator.id == UserDefaultsHelper.userID {
+                cell.deleteButton.isHidden = false
+                cell.deleteButton.rx.tap
+                    .bind(with: self) { owner, _ in
+                        owner.showAlertWithCancel(title: "", message: "해당 댓글을 삭제하시겠어요?") {
+                            owner.commentDelete.accept((itemIdentifier.id, indexPath.row))
+                        } cancelHandler: { }
+
+                        
+                    }
+                    .disposed(by: cell.disposeBag)
+                
+            }
+            return cell
+        })
+        
+        
+        
+    }
+    
+    
+}
+
+// NavBar
+extension BoardReadViewController {
+    private func configLeftNavBar() {
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.back, style: .plain, target: self, action: #selector(backButton))
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+        
+        
+    }
+    
+    private func configRightNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image:  Constants.Image.menuButton, primaryAction: nil, menu: setMenuItem())
+        navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
+    }
+    
+    private func setMenuItem() -> UIMenu {
         var menuItems: [UIAction] = []
         
         let editAction = UIAction(title: "Edit") { [weak self] action in
@@ -255,40 +322,11 @@ final class BoardReadViewController: BaseViewController {
         menuItems.append(editAction)
         menuItems.append(deleteAction)
         
-        var menu: UIMenu {
-            return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
-        }
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", image:  Constants.Image.menuButton, primaryAction: nil, menu: menu)
-        navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
+        return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
     }
     
-    func configureDataSource() {
-        
-        mainView.dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: mainView.tableView, cellProvider: { tableView, indexPath, itemIdentifier in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
-            cell.nicknameLabel.text = itemIdentifier.creator.nick
-            cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
-            cell.contentLabel.text = itemIdentifier.content
-            if itemIdentifier.creator.id == UserDefaultsHelper.userID {
-                cell.deleteButton.isHidden = false
-                cell.deleteButton.rx.tap
-                    .bind(with: self) { owner, _ in
-                        owner.showAlertWithCancel(title: "", message: "해당 댓글을 삭제하시겠어요?") {
-                            owner.commentDelete.accept((itemIdentifier.id, indexPath.row))
-                        } cancelHandler: { }
-
-                        
-                    }
-                    .disposed(by: cell.disposeBag)
-                
-            }
-            return cell
-        })
-        
-        
-        
+    @objc private func backButton() {
+        navigationController?.popViewController(animated: true)
     }
-    
     
 }

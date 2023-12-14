@@ -61,7 +61,7 @@ final class BoardWriteView: BaseView {
     
     
     
-    var delegate: PhPickerProtocol?
+    weak var delegate: PhPickerProtocol?
     
     
     override func configure() {

@@ -8,6 +8,6 @@
 import Foundation
 import PhotosUI
 
-protocol PhPickerProtocol {
+protocol PhPickerProtocol: AnyObject {
     func didFinishPicking(picker: PHPickerViewController, results: [PHPickerResult])
 }
