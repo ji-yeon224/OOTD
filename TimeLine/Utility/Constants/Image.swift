@@ -33,5 +33,9 @@ extension Constants {
         static let delete = UIImage(systemName: "trash.fill")
         
         static let pencil = UIImage(systemName: "pencil.circle.fill")
+        
+        static let blackLogo = UIImage(named: "black_logo")
+        static let mainLogo = UIImage(named: "main_logo")
+        
     }
 }
