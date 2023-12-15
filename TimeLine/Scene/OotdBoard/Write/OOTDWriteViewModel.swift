@@ -38,6 +38,7 @@ final class OOTDWriteViewModel {
                 switch result {
                 case .success(_):
                     successPost.accept((true, ""))
+                    NotificationCenter.default.post(name: .refreshPhoto, object: nil)
                 case .failure(let error):
                     let code = error.statusCode
                     debugPrint("[ERROR] ", code, error.localizedDescription)

@@ -60,8 +60,8 @@ final class OOTDView: BaseView {
         }
         
         cell.nicknameLabel.text = item.creator.nick
-        cell.imageView.image = UIImage(named: "img2")?.resize(width: deviceWidth)
-        //cell.imageView.setImage(with: item.image[0], resize: deviceWidth )
+//        cell.imageView.image = UIImage(named: "img2")?.resize(width: deviceWidth)
+        cell.imageView.setImage(with: item.image[0], resize: deviceWidth )
         cell.contentLabel.text = item.content
         cell.layoutIfNeeded()
         

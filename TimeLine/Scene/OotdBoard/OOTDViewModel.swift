@@ -11,41 +11,77 @@ import RxCocoa
 
 final class OOTDViewModel {
     
-    lazy var model = [PostListModel(section: "", items: dummy)]
+    private var nextCursor: String? = nil
+    var data: [Post] = []
+    
     private let disposeBag = DisposeBag()
     
-    let dummy: [Post] = [
-        Post(likes: [], image: [], hashTags: [], comments: [], id: "id1", creator: Creator(id: "id1", nick: "test1", profile: nil), time: "", title: "", content: "content11", productID: ""),
-        Post(likes: [], image: [], hashTags: [], comments: [], id: "id2", creator: Creator(id: "id2", nick: "test2", profile: nil), time: "", title: "", content: "content22", productID: ""),
-        Post(likes: [], image: [], hashTags: [], comments: [], id: "id3", creator: Creator(id: "id3", nick: "test3", profile: nil), time: "", title: "", content: "content33", productID: "")
-        
-    
-    ]
-    
     struct Input {
-        let requestPost: BehaviorRelay<Bool>
+        let callFirstPage: PublishRelay<Bool>
+        let page: ControlEvent<[IndexPath]>
     }
     
     struct Output {
         let items: BehaviorRelay<[PostListModel]>
+        let errorMsg: PublishRelay<String>
+        let loginRequest: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output {
+        
         let items: BehaviorRelay<[PostListModel]> = BehaviorRelay(value: [])
-        input.requestPost
-            .map { _ in
-                return self.model
-            }
+        let errorMsg = PublishRelay<String>()
+        let loginRequest = PublishRelay<Bool>()
+        
+        let requestPost = PublishRelay<String?>()
+        
+        input.callFirstPage
             .bind(with: self) { owner, value in
-                print(value[0].items.count)
-                items.accept([PostListModel(section: "", items: owner.dummy)])
+                owner.data.removeAll()
+                owner.nextCursor = nil
+                requestPost.accept(owner.nextCursor)
+            }
+            .disposed(by: disposeBag)
+        
+        requestPost
+            .flatMap { next in
+                PostAPIManager.shared.postrequest(api: .read(productId: ProductId.OOTDPhoto.rawValue, limit: 5, next: next), type: ReadResponse.self)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let value):
+                    owner.nextCursor = value.nextCursor
+                    owner.data.append(contentsOf: value.data)
+                    items.accept([PostListModel(section: "", items: owner.data)])
+                case .failure(let error):
+                    let code = error.statusCode
+                    guard let errorType = PostReadError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            errorMsg.accept(commonError.localizedDescription)
+                        }
+                        loginRequest.accept(true)
+                        return
+                    }
+                    errorMsg.accept(errorType.localizedDescription)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        input.page
+            .compactMap(\.last?.item)
+            .withUnretained(self)
+            .bind { owner, item in
+                if item == owner.data.count - 1 && owner.nextCursor != "0" {
+                    requestPost.accept(owner.nextCursor)
+                }
             }
             .disposed(by: disposeBag)
         
         
-        
         return Output(
-            items: items
+            items: items,
+            errorMsg: errorMsg,
+            loginRequest: loginRequest
         )
         
     }

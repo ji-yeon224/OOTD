@@ -55,8 +55,6 @@ final class OOTDWriteViewController: BaseViewController {
             return
         }
         mainView.imageView.image = image
-//        imageData = image.resize(width: UIScreen.main.bounds.size.width).jpegData(compressionQuality: 0.5)
-        print(imageData?.convertToMb)
     }
     
     
