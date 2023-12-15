@@ -42,6 +42,9 @@
 		CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0172B17719600A38041 /* PlainImageView.swift */; };
 		CE7A0C6C2B1B6162003F247B /* BoardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A0C6B2B1B6162003F247B /* BoardMode.swift */; };
 		CE96ADF62B2C20B200509644 /* BoardReactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96ADF52B2C20B200509644 /* BoardReactView.swift */; };
+		CE96ADF92B2C2ADA00509644 /* OOTDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96ADF82B2C2ADA00509644 /* OOTDViewController.swift */; };
+		CE96ADFB2B2C2AE400509644 /* OOTDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96ADFA2B2C2AE400509644 /* OOTDView.swift */; };
+		CE96ADFD2B2C2D4500509644 /* OOTDCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96ADFC2B2C2D4500509644 /* OOTDCollectionViewCell.swift */; };
 		CEA10AD52B22E6EF00969A8B /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */; };
 		CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD62B22E76B00969A8B /* BoardTableView.swift */; };
 		CEA10ADA2B22F09B00969A8B /* CommentWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */; };
@@ -179,6 +182,9 @@
 		CE76E0172B17719600A38041 /* PlainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainImageView.swift; sourceTree = "<group>"; };
 		CE7A0C6B2B1B6162003F247B /* BoardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMode.swift; sourceTree = "<group>"; };
 		CE96ADF52B2C20B200509644 /* BoardReactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReactView.swift; sourceTree = "<group>"; };
+		CE96ADF82B2C2ADA00509644 /* OOTDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDViewController.swift; sourceTree = "<group>"; };
+		CE96ADFA2B2C2AE400509644 /* OOTDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDView.swift; sourceTree = "<group>"; };
+		CE96ADFC2B2C2D4500509644 /* OOTDCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		CEA10AD62B22E76B00969A8B /* BoardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableView.swift; sourceTree = "<group>"; };
 		CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWriteView.swift; sourceTree = "<group>"; };
@@ -376,13 +382,22 @@
 		CE5CA53E2B27E68400534A08 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				CEC086D72B2B55DA00501364 /* LikePost */,
 				CE2021F02B2870BC00603194 /* UpdateProfile */,
 				CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */,
 				CE5CA5412B27E6BC00534A08 /* MyPageView.swift */,
 				CE2021EE2B284E0E00603194 /* MyPageViewModel.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		CE96ADF72B2C2AA000509644 /* OotdBoard */ = {
+			isa = PBXGroup;
+			children = (
+				CE96ADF82B2C2ADA00509644 /* OOTDViewController.swift */,
+				CE96ADFA2B2C2AE400509644 /* OOTDView.swift */,
+				CE96ADFC2B2C2D4500509644 /* OOTDCollectionViewCell.swift */,
+			);
+			path = OotdBoard;
 			sourceTree = "<group>";
 		};
 		CEA10AD82B22F07800969A8B /* Comment */ = {
@@ -488,13 +503,6 @@
 				CEC086D32B2AAD3100501364 /* MyPageContent.swift */,
 			);
 			path = MyPage;
-			sourceTree = "<group>";
-		};
-		CEC086D72B2B55DA00501364 /* LikePost */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LikePost;
 			sourceTree = "<group>";
 		};
 		CEC086DC2B2B67C600501364 /* Enumerated */ = {
@@ -655,6 +663,7 @@
 		CEEA876B2B01EC7D00AC375F /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				CE96ADF72B2C2AA000509644 /* OotdBoard */,
 				CE5CA53E2B27E68400534A08 /* MyPage */,
 				CEECBF8B2B0A3E9B0031947E /* Board */,
 				CEED52A72B04EE3F007E12FA /* Home */,
@@ -945,6 +954,7 @@
 				CEE80AD02B1873680041AC36 /* SectionType.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
 				CEA903042B146F9B00F09FB8 /* SelectImageModel.swift in Sources */,
+				CE96ADF92B2C2ADA00509644 /* OOTDViewController.swift in Sources */,
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,
 				CEEA879D2B02028A00AC375F /* TextFieldUnderline.swift in Sources */,
 				CEDC337E2B0F47D300A5788E /* ImageLoadManager.swift in Sources */,
@@ -954,6 +964,7 @@
 				CE25D0A62B220EE6004DFB66 /* Creator.swift in Sources */,
 				CEE80B002B1ACB6B0041AC36 /* DeleteResponse.swift in Sources */,
 				CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */,
+				CE96ADFD2B2C2D4500509644 /* OOTDCollectionViewCell.swift in Sources */,
 				CEDC338C2B103C4600A5788E /* BoardViewModel.swift in Sources */,
 				CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */,
 				CEC086D22B2AAD1200501364 /* MyPageSection.swift in Sources */,
@@ -984,6 +995,7 @@
 				CE75C3DC2B1605DE00A08615 /* UIImage+Extension.swift in Sources */,
 				CEED52A92B04EE49007E12FA /* HomeViewController.swift in Sources */,
 				CECD6A512B274CEB00B7732C /* LikeError.swift in Sources */,
+				CE96ADFB2B2C2AE400509644 /* OOTDView.swift in Sources */,
 				CEEA87992B01F9FF00AC375F /* MainButton.swift in Sources */,
 				CE25D0A42B220E6C004DFB66 /* Comment.swift in Sources */,
 				CEEA87572B01E30000AC375F /* SceneDelegate.swift in Sources */,
