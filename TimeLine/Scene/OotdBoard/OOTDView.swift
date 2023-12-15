@@ -41,8 +41,9 @@ final class OOTDView: BaseView {
         group.interItemSpacing = .fixed(10) // 아이템 옆 간격
         let section = NSCollectionLayoutSection(group: group)
 //        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        section.orthogonalScrollingBehavior = .continuous
-        //section.interGroupSpacing = 10 // 줄 간격
+        
+//        section.orthogonalScrollingBehavior = .paging
+        section.interGroupSpacing = 10 // 줄 간격
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
@@ -59,7 +60,7 @@ final class OOTDView: BaseView {
         }
         
         cell.nicknameLabel.text = item.creator.nick
-        cell.imageView.image = UIImage(named: "img1")?.resize(width: deviceWidth)
+        cell.imageView.image = UIImage(named: "img2")?.resize(width: deviceWidth)
         //cell.imageView.setImage(with: item.image[0], resize: deviceWidth )
         cell.contentLabel.text = item.content
         cell.layoutIfNeeded()

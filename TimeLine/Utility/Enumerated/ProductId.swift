@@ -8,5 +8,5 @@
 import Foundation
 
 enum ProductId: String {
-    case OOTDBoard
+    case OOTDBoard, OOTDPhoto
 }
