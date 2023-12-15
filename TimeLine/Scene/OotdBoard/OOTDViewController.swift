@@ -59,8 +59,9 @@ extension OOTDViewController {
     }
     
     @objc private func writeButtonTap() {
-        let vc = OOTDWriteViewController()
-        navigationController?.pushViewController(vc, animated: true)
+       
+        PHPickerService.shared.presentPicker(vc: self)
+        
     }
     
     
