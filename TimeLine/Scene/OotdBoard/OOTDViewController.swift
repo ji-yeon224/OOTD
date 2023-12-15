@@ -28,7 +28,7 @@ final class OOTDViewController: BaseViewController {
     
     override func configure() {
         super.configure()
-        
+        configNavBar()
     }
     
     private func bind() {
@@ -46,6 +46,22 @@ final class OOTDViewController: BaseViewController {
         
     }
     
+    
+    
+}
+
+extension OOTDViewController {
+    
+    private func configNavBar() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.Image.plus, style: .plain, target: self, action: #selector(writeButtonTap))
+        
+    }
+    
+    @objc private func writeButtonTap() {
+        let vc = OOTDWriteViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     
 }

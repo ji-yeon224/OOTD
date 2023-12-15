@@ -36,7 +36,7 @@ final class TabBarController: UITabBarController {
         myPageVC.tabBarItem.title = "MyPage"
         let myPageNav = UINavigationController(rootViewController: myPageVC)
         
-        viewControllers = [boarcNav, photoNav, myPageNav]
+        viewControllers = [photoNav, boarcNav, myPageNav]
         
     }
     
