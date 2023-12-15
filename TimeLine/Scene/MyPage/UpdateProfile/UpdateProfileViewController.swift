@@ -79,7 +79,6 @@ final class UpdateProfileViewController: BaseViewController {
         
         output.nickNameValid
             .bind(with: self) { owner, value in
-                print(value)
                 owner.navigationItem.rightBarButtonItem?.isEnabled = value
                 nickValid = value
                 owner.mainView.nickNameValidLabel.isHidden = value

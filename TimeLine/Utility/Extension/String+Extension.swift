@@ -25,4 +25,13 @@ extension String {
         
         return ""
     }
+    
+    static func convertOnlyDate(date: String) -> String {
+        if let dateType = String.convertToDate(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ", date: date) {
+            return DateFormatter.convertToString(format: "yyyy.MM.dd", date: dateType)
+            
+        }
+        
+        return ""
+    }
 }

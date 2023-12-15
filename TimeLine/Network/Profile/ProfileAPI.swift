@@ -74,13 +74,14 @@ extension ProfileAPI {
             multipart.append(MultipartFormData(provider: .data(param.value), name: param.key))
 
         }
+        print(data.profile)
         if let profile = data.profile {
             multipart.append(MultipartFormData(provider: .data(profile), name: "profile", fileName: "image.jpeg", mimeType: "image/jpg"))
         } else {
             print("profile nil")
             multipart.append(MultipartFormData(provider: .data(Data()), name: "profile"))
         }
-        
+        print(multipart)
         return multipart
     }
     

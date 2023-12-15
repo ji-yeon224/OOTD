@@ -45,6 +45,8 @@ final class BoardView: BaseView {
             
         }
         
+        cell.setReactLabel(comment: item.comments.count, heart: item.likes.count)
+        
         return cell
     }
     
