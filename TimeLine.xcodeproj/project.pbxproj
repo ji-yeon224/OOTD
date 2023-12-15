@@ -41,6 +41,7 @@
 		CE76E0162B1747F900A38041 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0152B1747F900A38041 /* ReusableProtocol.swift */; };
 		CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0172B17719600A38041 /* PlainImageView.swift */; };
 		CE7A0C6C2B1B6162003F247B /* BoardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A0C6B2B1B6162003F247B /* BoardMode.swift */; };
+		CE96ADF62B2C20B200509644 /* BoardReactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96ADF52B2C20B200509644 /* BoardReactView.swift */; };
 		CEA10AD52B22E6EF00969A8B /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */; };
 		CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD62B22E76B00969A8B /* BoardTableView.swift */; };
 		CEA10ADA2B22F09B00969A8B /* CommentWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */; };
@@ -177,6 +178,7 @@
 		CE76E0152B1747F900A38041 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
 		CE76E0172B17719600A38041 /* PlainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainImageView.swift; sourceTree = "<group>"; };
 		CE7A0C6B2B1B6162003F247B /* BoardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMode.swift; sourceTree = "<group>"; };
+		CE96ADF52B2C20B200509644 /* BoardReactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReactView.swift; sourceTree = "<group>"; };
 		CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		CEA10AD62B22E76B00969A8B /* BoardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableView.swift; sourceTree = "<group>"; };
 		CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWriteView.swift; sourceTree = "<group>"; };
@@ -765,6 +767,7 @@
 			isa = PBXGroup;
 			children = (
 				CEFCAC972B28318400DA68EC /* ProfileView.swift */,
+				CE96ADF52B2C20B200509644 /* BoardReactView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -973,6 +976,7 @@
 				CE2021F22B2870D300603194 /* UpdateProfileViewController.swift in Sources */,
 				CEC9A6DE2B20464C004207F9 /* String+Extension.swift in Sources */,
 				CEED52AB2B04EE58007E12FA /* HomeView.swift in Sources */,
+				CE96ADF62B2C20B200509644 /* BoardReactView.swift in Sources */,
 				CEFCAC982B28318400DA68EC /* ProfileView.swift in Sources */,
 				CEECBF912B0A40520031947E /* TabBarController.swift in Sources */,
 				CE2022002B28B7D100603194 /* ProfileError.swift in Sources */,
