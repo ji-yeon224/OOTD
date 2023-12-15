@@ -51,6 +51,7 @@ final class LoginView: BaseView {
         }
         
         errorLabel.isHidden = true
+        passwordTextField.isSecureTextEntry = true
     }
     
     override func setConstraints() {
