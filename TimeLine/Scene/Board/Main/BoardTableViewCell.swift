@@ -16,6 +16,8 @@ final class BoardTableViewCell: UITableViewCell {
     
     let createrLabel = PlainLabel(size: 13, color: Constants.Color.subText)
     
+    private let reactView = BoardReactView()
+    
     let thumbnailImage = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
@@ -35,6 +37,7 @@ final class BoardTableViewCell: UITableViewCell {
         view.addArrangedSubview(titleLabel)
         view.addArrangedSubview(contentLabel)
         view.addArrangedSubview(createrLabel)
+        view.addArrangedSubview(reactView)
         return view
     }()
     
@@ -57,19 +60,19 @@ final class BoardTableViewCell: UITableViewCell {
         createrLabel.text = nil
         thumbnailImage.isHidden = false
         thumbnailImage.image = nil
+        reactView.commentView.isHidden = false
+        reactView.likeView.isHidden = false
     }
     
     private func configure() {
         contentView.addSubview(textStackView)
         contentView.addSubview(thumbnailImage)
-        
-        
     }
     
     private func setConstraints() {
         
         thumbnailImage.snp.makeConstraints { make in
-            make.size.equalTo(70)
+            make.size.equalTo(80)
             make.top.trailing.equalTo(contentView).inset(18)
             
         }
@@ -84,9 +87,23 @@ final class BoardTableViewCell: UITableViewCell {
             make.height.equalTo(15)
         }
         
+        reactView.snp.makeConstraints { make in
+            make.height.equalTo(15)
+        }
+        
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(textStackView)
         }
+    }
+    
+    func setReactLabel(comment: Int, heart: Int) {
+        if comment == 0 {
+            reactView.commentView.isHidden = true
+        }
+        if heart == 0 {
+            reactView.likeView.isHidden = true
+        }
+        reactView.setLabel(comment, heart)
         
     }
     

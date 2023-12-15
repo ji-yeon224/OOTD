@@ -245,7 +245,7 @@ final class BoardReadViewController: BaseViewController {
             cell.nicknameLabel.text = itemIdentifier.creator.nick
             cell.dateLabel.text = String.convertDateFormat(date: itemIdentifier.time)
             cell.contentLabel.text = itemIdentifier.content
-            
+            cell.selectionStyle = .none
             if let profile = itemIdentifier.creator.profile {
                 cell.profileImage.setImage(with: profile, resize: 30)
             }

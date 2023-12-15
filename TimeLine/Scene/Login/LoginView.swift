@@ -9,6 +9,12 @@ import UIKit
 
 final class LoginView: BaseView {
     
+    private let mainLogo = {
+        let view = UIImageView()
+        view.image = Constants.Image.mainLogo
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
     
     let emailTextField = CustomTextField(placeholder: "이메일을 입력하세요")
     let passwordTextField = CustomTextField(placeholder: "비밀번호를 입력하세요")
@@ -40,19 +46,25 @@ final class LoginView: BaseView {
     override func configure() {
         super.configure()
         
-        [emailTextField, emailUnderLineView, passwordTextField, passwordUnderLineView, stackView, signUpButton].forEach {
+        [mainLogo, emailTextField, emailUnderLineView, passwordTextField, passwordUnderLineView, stackView, signUpButton].forEach {
             addSubview($0)
         }
         
         errorLabel.isHidden = true
+        passwordTextField.isSecureTextEntry = true
     }
     
     override func setConstraints() {
         
+        mainLogo.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(100)
+            make.height.equalTo(80)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide)
+        }
         
         emailTextField.snp.makeConstraints { make in
             make.height.equalTo(50)
-            make.top.equalTo(safeAreaLayoutGuide).offset(200)
+            make.top.equalTo(mainLogo.snp.bottom).offset(100)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(30)
         }
         

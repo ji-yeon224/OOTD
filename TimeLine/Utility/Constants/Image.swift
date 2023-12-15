@@ -24,6 +24,8 @@ extension Constants {
         static let myPage = UIImage(systemName: "person")
         static let heart = UIImage(systemName: "heart")
         static let heartFill = UIImage(systemName: "heart.fill")
+        static let comment = UIImage(systemName: "ellipsis.bubble")
+        
         static let person = UIImage(systemName: "person.fill")
         static let menuButton = UIImage(systemName: "ellipsis.circle")
         static let sideMenu = UIImage(systemName: "list.bullet")
@@ -31,5 +33,9 @@ extension Constants {
         static let delete = UIImage(systemName: "trash.fill")
         
         static let pencil = UIImage(systemName: "pencil.circle.fill")
+        
+        static let blackLogo = UIImage(named: "black_logo")
+        static let mainLogo = UIImage(named: "main_logo")
+        
     }
 }

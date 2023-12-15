@@ -81,6 +81,7 @@ final class BoardReadView: BaseView {
         view.rowHeight = UITableView.automaticDimension
         view.register(BoardCommentCell.self, forCellReuseIdentifier: BoardCommentCell.identifier)
         view.separatorStyle = .none
+        
         return view
         
     }()

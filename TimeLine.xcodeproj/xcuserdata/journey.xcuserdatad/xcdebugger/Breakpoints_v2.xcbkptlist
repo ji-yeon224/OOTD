@@ -18,6 +18,38 @@
             endingLineNumber = "31"
             landmarkName = "request(api:type:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9FE37035-820A-4BE1-8AD4-61E826FA44B2 - b14188e208c0db09"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in closure #1 ((Swift.Result&lt;Swift.Result&lt;&#x3c4;_0_0, TimeLine.NetworkError&gt;, Swift.Error&gt;) -&gt; ()) -&gt; RxSwift.Disposable in TimeLine.ProfileAPIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(api: TimeLine.ProfileAPI, type: &#x3c4;_0_0.Type) -&gt; RxSwift.PrimitiveSequence&lt;RxSwift.SingleTrait, Swift.Result&lt;&#x3c4;_0_0, TimeLine.NetworkError&gt;&gt;"
+                  moduleName = "TimeLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/journey/workspace/dev/SeSAC/TimeLine/TimeLine/Network/Profile/ProfileAPIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "1096">
+               </Location>
+               <Location
+                  uuid = "9FE37035-820A-4BE1-8AD4-61E826FA44B2 - b14188e208c0db09"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in closure #1 ((Swift.Result&lt;Swift.Result&lt;&#x3c4;_0_0, TimeLine.NetworkError&gt;, Swift.Error&gt;) -&gt; ()) -&gt; RxSwift.Disposable in TimeLine.ProfileAPIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(api: TimeLine.ProfileAPI, type: &#x3c4;_0_0.Type) -&gt; RxSwift.PrimitiveSequence&lt;RxSwift.SingleTrait, Swift.Result&lt;&#x3c4;_0_0, TimeLine.NetworkError&gt;&gt;"
+                  moduleName = "TimeLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/journey/workspace/dev/SeSAC/TimeLine/TimeLine/Network/Profile/ProfileAPIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "1228">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -34,6 +66,38 @@
             endingLineNumber = "39"
             landmarkName = "request(api:type:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B6CA9248-6AA8-49D4-955D-95EED7360888 - b14188e208c0daf1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in closure #1 ((Swift.Result&lt;Swift.Result&lt;&#x3c4;_0_0, TimeLine.NetworkError&gt;, Swift.Error&gt;) -&gt; ()) -&gt; RxSwift.Disposable in TimeLine.ProfileAPIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(api: TimeLine.ProfileAPI, type: &#x3c4;_0_0.Type) -&gt; RxSwift.PrimitiveSequence&lt;RxSwift.SingleTrait, Swift.Result&lt;&#x3c4;_0_0, TimeLine.NetworkError&gt;&gt;"
+                  moduleName = "TimeLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/journey/workspace/dev/SeSAC/TimeLine/TimeLine/Network/Profile/ProfileAPIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "1736">
+               </Location>
+               <Location
+                  uuid = "B6CA9248-6AA8-49D4-955D-95EED7360888 - b14188e208c0daf1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in closure #1 ((Swift.Result&lt;Swift.Result&lt;&#x3c4;_0_0, TimeLine.NetworkError&gt;, Swift.Error&gt;) -&gt; ()) -&gt; RxSwift.Disposable in TimeLine.ProfileAPIManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(api: TimeLine.ProfileAPI, type: &#x3c4;_0_0.Type) -&gt; RxSwift.PrimitiveSequence&lt;RxSwift.SingleTrait, Swift.Result&lt;&#x3c4;_0_0, TimeLine.NetworkError&gt;&gt;"
+                  moduleName = "TimeLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/journey/workspace/dev/SeSAC/TimeLine/TimeLine/Network/Profile/ProfileAPIManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "1928">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
