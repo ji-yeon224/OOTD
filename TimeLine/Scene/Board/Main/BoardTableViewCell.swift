@@ -113,7 +113,7 @@ final class BoardTableViewCell: UITableViewCell {
     private func setConstraints() {
         
         thumbnailImage.snp.makeConstraints { make in
-            make.size.equalTo(70)
+            make.size.equalTo(80)
             make.top.trailing.equalTo(contentView).inset(18)
             
         }
