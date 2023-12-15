@@ -14,8 +14,6 @@ final class PHPickerService {
     static let shared = PHPickerService()
     private init() { }
     private weak var viewController: UIViewController?
-    var selectImg: PublishSubject<([String], UIViewController)> = .init()
-    var selectedImage: PublishSubject<(UIImage?, UIViewController)> = .init()
     
     func presentPicker(vc: UIViewController, prevIdentifiers:[String]? = nil) {
         self.viewController = vc
@@ -55,10 +53,9 @@ extension PHPickerService: PHPickerViewControllerDelegate {
                         
                         DispatchQueue.main.async {
                             guard let img = image as? UIImage else {
-                                self.selectedImage.onNext((nil, viewController))
                                 return
                             }
-                            self.selectedImage.onNext((img, viewController))
+                            
                             let vc = OOTDWriteViewController(selectImage: img)
 //                            vc.selectImage = img
                             viewController.navigationController?.pushViewController(vc, animated: true)
@@ -73,23 +70,5 @@ extension PHPickerService: PHPickerViewControllerDelegate {
             }
         }
         
-//        let identifiers = results.map(\.assetIdentifier!) // 이미지에 존재하는 identifier만 가져온다.
-        
-//        selectImg.onNext((identifiers, viewController))
-        
-//        if let select = results.first {
-//            let item = select.itemProvider
-//            item.loadObject(ofClass: UIImage.self) { image, error in
-//                
-//                DispatchQueue.main.async {
-//                    guard let img = image as? UIImage else {
-//                        self.selectedImage.onNext((nil, viewController))
-//                        return
-//                    }
-//                    self.selectedImage.onNext((img, viewController))
-//                }
-//                
-//            }
-//        }
     }
 }

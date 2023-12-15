@@ -76,4 +76,27 @@ extension UIImage {
         let resizedImage = UIImage(cgImage: cgImage)
         return resizedImage
     }
+    
+    
+    func compressionImage() -> Data {
+        let destSize = 1 * 1000 * 1000
+        let compression = Compression.allCases.sorted(by: { $0.rawValue > $1.rawValue })
+        var imgData = Data()
+        var image = self
+        if image.size.width > 700 || image.size.height > 700 {
+            image = image.resize(size: 700)
+        }
+        
+        for value in compression {
+            guard let data = image.jpegData(compressionQuality: value.rawValue) else { return Data() }
+            if data.count < destSize {
+                imgData = data
+                break
+            }
+        }
+        
+        
+        return imgData
+    }
+    
 }

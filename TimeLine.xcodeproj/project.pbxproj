@@ -49,6 +49,9 @@
 		CE96AE042B2C685200509644 /* OOTDWriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96AE032B2C685200509644 /* OOTDWriteViewController.swift */; };
 		CE96AE062B2C685D00509644 /* OOTDWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96AE052B2C685D00509644 /* OOTDWriteView.swift */; };
 		CE96AE082B2C7C4800509644 /* PHPickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96AE072B2C7C4800509644 /* PHPickerService.swift */; };
+		CE96AE0A2B2C8CCF00509644 /* OOTDWriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96AE092B2C8CCF00509644 /* OOTDWriteViewModel.swift */; };
+		CE96AE0C2B2C96E700509644 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96AE0B2B2C96E700509644 /* Compression.swift */; };
+		CE96AE0E2B2C973B00509644 /* ImageCompressionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96AE0D2B2C973B00509644 /* ImageCompressionManager.swift */; };
 		CEA10AD52B22E6EF00969A8B /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */; };
 		CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD62B22E76B00969A8B /* BoardTableView.swift */; };
 		CEA10ADA2B22F09B00969A8B /* CommentWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */; };
@@ -193,6 +196,9 @@
 		CE96AE032B2C685200509644 /* OOTDWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDWriteViewController.swift; sourceTree = "<group>"; };
 		CE96AE052B2C685D00509644 /* OOTDWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDWriteView.swift; sourceTree = "<group>"; };
 		CE96AE072B2C7C4800509644 /* PHPickerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerService.swift; sourceTree = "<group>"; };
+		CE96AE092B2C8CCF00509644 /* OOTDWriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDWriteViewModel.swift; sourceTree = "<group>"; };
+		CE96AE0B2B2C96E700509644 /* Compression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compression.swift; sourceTree = "<group>"; };
+		CE96AE0D2B2C973B00509644 /* ImageCompressionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressionManager.swift; sourceTree = "<group>"; };
 		CEA10AD42B22E6EF00969A8B /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		CEA10AD62B22E76B00969A8B /* BoardTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTableView.swift; sourceTree = "<group>"; };
 		CEA10AD92B22F09B00969A8B /* CommentWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWriteView.swift; sourceTree = "<group>"; };
@@ -414,6 +420,7 @@
 			children = (
 				CE96AE032B2C685200509644 /* OOTDWriteViewController.swift */,
 				CE96AE052B2C685D00509644 /* OOTDWriteView.swift */,
+				CE96AE092B2C8CCF00509644 /* OOTDWriteViewModel.swift */,
 			);
 			path = Write;
 			sourceTree = "<group>";
@@ -531,6 +538,7 @@
 				CE7A0C6B2B1B6162003F247B /* BoardMode.swift */,
 				CEE80ACF2B1873680041AC36 /* SectionType.swift */,
 				CEDC339A2B10C9B200A5788E /* TransitionType.swift */,
+				CE96AE0B2B2C96E700509644 /* Compression.swift */,
 			);
 			path = Enumerated;
 			sourceTree = "<group>";
@@ -741,6 +749,7 @@
 				CE76E0152B1747F900A38041 /* ReusableProtocol.swift */,
 				CEC7DF852B1D9478003D02D3 /* ImageManager.swift */,
 				CE96AE072B2C7C4800509644 /* PHPickerService.swift */,
+				CE96AE0D2B2C973B00509644 /* ImageCompressionManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -915,6 +924,7 @@
 				CEBDFBF02B0B2CA800D43BF9 /* PostAPI.swift in Sources */,
 				CE28C85B2B130D0A00820F1A /* ImageCollectionViewCell.swift in Sources */,
 				CEDC33802B0F917C00A5788E /* BoardReadViewController.swift in Sources */,
+				CE96AE0E2B2C973B00509644 /* ImageCompressionManager.swift in Sources */,
 				CEEA878D2B01F3C700AC375F /* LoginViewController.swift in Sources */,
 				CEECBF172B0601D70031947E /* CommonError.swift in Sources */,
 				CEFCACA02B2844F000DA68EC /* ProfileAPI.swift in Sources */,
@@ -964,6 +974,7 @@
 				CEED52B52B05056E007E12FA /* EmailValidationError.swift in Sources */,
 				CEC086CF2B29960800501364 /* CGImage+Extension.swift in Sources */,
 				CE76E0142B17295E00A38041 /* NSNotification.Name+Extension.swift in Sources */,
+				CE96AE0C2B2C96E700509644 /* Compression.swift in Sources */,
 				CEA10ADF2B232EA700969A8B /* TokenManager.swift in Sources */,
 				CE290E972B04B2A2007DFCAE /* Design.swift in Sources */,
 				CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */,
@@ -987,6 +998,7 @@
 				CEE80B002B1ACB6B0041AC36 /* DeleteResponse.swift in Sources */,
 				CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */,
 				CE96ADFD2B2C2D4500509644 /* OOTDCollectionViewCell.swift in Sources */,
+				CE96AE0A2B2C8CCF00509644 /* OOTDWriteViewModel.swift in Sources */,
 				CEDC338C2B103C4600A5788E /* BoardViewModel.swift in Sources */,
 				CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */,
 				CEC086D22B2AAD1200501364 /* MyPageSection.swift in Sources */,

@@ -29,8 +29,7 @@ final class OOTDWriteView: BaseView {
     }()
     
     let placeHolderLabel = {
-        let view = UILabel()
-        view.textColor = Constants.Color.placeholder
+        let view = PlainLabel(size: 15, color: Constants.Color.placeholder)
         view.text = "오늘의 옷 정보를 공유해주세요!"
         view.textAlignment = .left
         return view
