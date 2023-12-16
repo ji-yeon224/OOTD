@@ -128,9 +128,10 @@ extension OOTDViewController {
 }
 
 extension OOTDViewController: OOTDCellProtocol {
-    func showComment(comments: [Comment]) {
+    func showComment(comments: [Comment], id: String) {
         let vc = OOTDCommentViewController()
         vc.comments = comments
+        vc.id = id
         let nav = UINavigationController(rootViewController: vc)
         if let sheet = nav.sheetPresentationController {
             sheet.detents = [.medium(), .large()]

@@ -65,7 +65,7 @@ final class OOTDWriteView: BaseView {
         contentTextView.snp.makeConstraints { make in
             make.top.equalTo(imageBackView.snp.bottom)
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(10)
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(10)
+            make.bottom.lessThanOrEqualTo(safeAreaLayoutGuide).inset(10)
 
         }
         

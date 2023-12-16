@@ -35,12 +35,14 @@ final class OOTDCommentView: BaseView {
         
         tableView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-80)
         }
         
         commentWriteView.snp.makeConstraints { make in
-            make.top.equalTo(tableView.snp.bottom)
-            make.bottom.equalToSuperview()
+//            make.top.equalTo(tableView.snp.bottom)
+            make.bottom.equalTo(keyboardLayoutGuide.snp.top)
             make.width.equalToSuperview()
+            make.height.equalTo(70)
         }
     }
     

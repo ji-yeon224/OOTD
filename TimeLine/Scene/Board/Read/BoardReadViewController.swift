@@ -168,6 +168,7 @@ final class BoardReadViewController: BaseViewController {
                     owner.view.endEditing(true)
                     owner.isNeedRefresh = true
                     owner.mainView.commentLabel.text = "댓글 \(owner.comments.count)개"
+                    owner.mainView.commentWriteView.placeholderLabel.isHidden = false
                 }
                 
                 

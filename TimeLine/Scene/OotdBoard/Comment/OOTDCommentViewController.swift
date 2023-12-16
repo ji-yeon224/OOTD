@@ -8,12 +8,15 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import IQKeyboardManagerSwift
 
 final class OOTDCommentViewController: BaseViewController {
     
     private let mainView = OOTDCommentView()
+    private let viewModel = OOTDCommentViewModel()
     private let disposeBag = DisposeBag()
     var comments: [Comment] = []
+    var id: String?
     
     override func loadView() {
         self.view = mainView
@@ -23,16 +26,67 @@ final class OOTDCommentViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        
+        title = "댓글 \(comments.count)개"
+        IQKeyboardManager.shared.enable = false
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        IQKeyboardManager.shared.enable = true
     }
     
     override func configure() {
         super.configure()
         configureDataSource()
         updateSnapShot()
+        guard let id = id else { return }
+        viewModel.id = id
     }
     
     private func bind() {
+        
+        let commentWrite = PublishRelay<CommentRequest>()
+        
+        let input = OOTDCommentViewModel.Input(
+            commentWrite: commentWrite,
+            commentContent: mainView.commentWriteView.textView.rx.text.orEmpty)
+        
+        let output = viewModel.transform(input: input)
+        
+        output.commentWrite
+            .bind(with: self, onNext: { owner, value in
+                owner.comments.append(value)
+                owner.updateSnapShot()
+                owner.mainView.commentWriteView.textView.text = ""
+                owner.showOKAlert(title: "", message: "댓글 작성이 완료되었습니다!") {
+                    owner.mainView.commentWriteView.placeholderLabel.isHidden = false
+                    owner.title = "댓글 \(owner.comments.count)개"
+                }
+                
+                
+            })
+            .disposed(by: disposeBag)
+        
+        output.errorMsg
+            .bind(with: self, onNext: { owner, value in
+                owner.showToastMessage(message: value, position: .top)
+            })
+            .disposed(by: disposeBag)
+        
+        output.loginRequest
+            .bind(with: self) { owner, value in
+                owner.showOKAlert(title: "문제가 발생하였습니다.", message: "로그인 후 다시 시도해주세요.") {
+                    UserDefaultsHelper.initToken()
+                    // 로그인 뷰로 present
+                    let vc = LoginViewController()
+                    vc.transition = .presnt
+                    vc.modalPresentationStyle = .fullScreen
+                    vc.modalTransitionStyle = .crossDissolve
+                    
+                    owner.present(vc, animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
         
         mainView.commentWriteView.textView.rx.didChange
             .bind(with: self) { owner, _ in
@@ -59,6 +113,16 @@ final class OOTDCommentViewController: BaseViewController {
                 owner.sheetPresentationController?.animateChanges {
                     owner.sheetPresentationController?.selectedDetentIdentifier = .large
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.commentWriteView.postButton.rx.tap
+            .withLatestFrom(mainView.commentWriteView.textView.rx.text.orEmpty) { _, text in
+                return CommentRequest(content: text)
+            }
+            .bind(with: self) { owner, value in
+                owner.view.endEditing(true)
+                commentWrite.accept(value)
             }
             .disposed(by: disposeBag)
         
