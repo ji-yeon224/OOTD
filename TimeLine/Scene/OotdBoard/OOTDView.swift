@@ -79,7 +79,7 @@ final class OOTDView: BaseView {
         }
         cell.commentButton.rx.tap
             .bind(with: self) { owner, _ in
-                owner.delegate?.showComment(id: item.id)
+                owner.delegate?.showComment(comments: item.comments.reversed())
             }
             .disposed(by: cell.disposeBag)
         

@@ -33,6 +33,9 @@
 		CE290E9C2B04BF51007DFCAE /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE290E9B2B04BF51007DFCAE /* LoginError.swift */; };
 		CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A15152B05B13E009B913F /* HomeViewModel.swift */; };
 		CE526F942B2D483100F46EBE /* OOTDCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE526F932B2D483100F46EBE /* OOTDCellProtocol.swift */; };
+		CE526F972B2D7A3D00F46EBE /* OOTDCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE526F962B2D7A3D00F46EBE /* OOTDCommentViewController.swift */; };
+		CE526F992B2D7A4900F46EBE /* OOTDCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE526F982B2D7A4900F46EBE /* OOTDCommentView.swift */; };
+		CE526F9B2B2D7A5400F46EBE /* OOTDCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE526F9A2B2D7A5400F46EBE /* OOTDCommentViewModel.swift */; };
 		CE5CA5402B27E6A700534A08 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */; };
 		CE5CA5422B27E6BC00534A08 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CA5412B27E6BC00534A08 /* MyPageView.swift */; };
 		CE75C3DC2B1605DE00A08615 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75C3DB2B1605DE00A08615 /* UIImage+Extension.swift */; };
@@ -182,6 +185,9 @@
 		CE290E9B2B04BF51007DFCAE /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		CE3A15152B05B13E009B913F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CE526F932B2D483100F46EBE /* OOTDCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDCellProtocol.swift; sourceTree = "<group>"; };
+		CE526F962B2D7A3D00F46EBE /* OOTDCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDCommentViewController.swift; sourceTree = "<group>"; };
+		CE526F982B2D7A4900F46EBE /* OOTDCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDCommentView.swift; sourceTree = "<group>"; };
+		CE526F9A2B2D7A5400F46EBE /* OOTDCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDCommentViewModel.swift; sourceTree = "<group>"; };
 		CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		CE5CA5412B27E6BC00534A08 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		CE75C3DB2B1605DE00A08615 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -394,6 +400,16 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		CE526F952B2D7A2E00F46EBE /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				CE526F962B2D7A3D00F46EBE /* OOTDCommentViewController.swift */,
+				CE526F982B2D7A4900F46EBE /* OOTDCommentView.swift */,
+				CE526F9A2B2D7A5400F46EBE /* OOTDCommentViewModel.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		CE5CA53E2B27E68400534A08 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +424,7 @@
 		CE96ADF72B2C2AA000509644 /* OotdBoard */ = {
 			isa = PBXGroup;
 			children = (
+				CE526F952B2D7A2E00F46EBE /* Comment */,
 				CE96AE022B2C681300509644 /* Write */,
 				CE96ADF82B2C2ADA00509644 /* OOTDViewController.swift */,
 				CE96ADFA2B2C2AE400509644 /* OOTDView.swift */,
@@ -953,6 +970,7 @@
 				CEE80AFE2B1AC9120041AC36 /* PostDeleteError.swift in Sources */,
 				CEBDFC022B0BB52100D43BF9 /* ProductId.swift in Sources */,
 				CEDC33992B10C6AD00A5788E /* PostReadError.swift in Sources */,
+				CE526F9B2B2D7A5400F46EBE /* OOTDCommentViewModel.swift in Sources */,
 				CEA10AD52B22E6EF00969A8B /* BaseTableViewCell.swift in Sources */,
 				CE290E952B04B29A007DFCAE /* Color.swift in Sources */,
 				CE2021EF2B284E0E00603194 /* MyPageViewModel.swift in Sources */,
@@ -982,6 +1000,7 @@
 				CE290E972B04B2A2007DFCAE /* Design.swift in Sources */,
 				CE290E892B049ABD007DFCAE /* JoinViewController.swift in Sources */,
 				CEED52B92B050893007E12FA /* RefreshToken.swift in Sources */,
+				CE526F992B2D7A4900F46EBE /* OOTDCommentView.swift in Sources */,
 				CEECBF292B08FC120031947E /* ValidStackView.swift in Sources */,
 				CE3A15162B05B13E009B913F /* HomeViewModel.swift in Sources */,
 				CEDC33842B0F919000A5788E /* BoardReadViewModel.swift in Sources */,
@@ -1049,6 +1068,7 @@
 				CECD6A532B27595200B7732C /* LikeResponse.swift in Sources */,
 				CEECBF272B08E7750031947E /* ValidationLabel.swift in Sources */,
 				CE96AE042B2C685200509644 /* OOTDWriteViewController.swift in Sources */,
+				CE526F972B2D7A3D00F46EBE /* OOTDCommentViewController.swift in Sources */,
 				CEE80AFC2B19A92F0041AC36 /* BoardCommentCell.swift in Sources */,
 				CEFCACA22B28450100DA68EC /* ProfileAPIManager.swift in Sources */,
 				CE5CA5402B27E6A700534A08 /* MyPageViewController.swift in Sources */,

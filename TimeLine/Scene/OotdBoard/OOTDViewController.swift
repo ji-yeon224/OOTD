@@ -128,8 +128,16 @@ extension OOTDViewController {
 }
 
 extension OOTDViewController: OOTDCellProtocol {
-    func showComment(id: String) {
-        
+    func showComment(comments: [Comment]) {
+        let vc = OOTDCommentViewController()
+        vc.comments = comments
+        let nav = UINavigationController(rootViewController: vc)
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersGrabberVisible = true
+        }
+        present(nav, animated: true)
         
         
     }
