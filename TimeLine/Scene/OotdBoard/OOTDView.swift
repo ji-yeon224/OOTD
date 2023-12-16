@@ -63,7 +63,7 @@ final class OOTDView: BaseView {
         if let img = item.creator.profile {
             cell.profileImage.setImage(with: img, resize: 30)
         } else {
-            cell.profileImage.image = Constants.Image.person
+            cell.profileImage.image = Constants.Image.placeholderProfile
         }
         
         cell.nicknameLabel.text = item.creator.nick

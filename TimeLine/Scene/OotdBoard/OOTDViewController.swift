@@ -37,6 +37,19 @@ final class OOTDViewController: BaseViewController {
         super.configure()
         configNavBar()
         mainView.delegate = self
+        
+        mainView.collectionView.refreshControl = UIRefreshControl()
+        mainView.collectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
+    }
+    
+    @objc func refreshData() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+            guard let self = self else { return }
+            self.requestPost.accept(true)
+            self.mainView.collectionView.refreshControl?.endRefreshing()
+            
+        }
     }
     
     private func bind() {
@@ -116,8 +129,10 @@ extension OOTDViewController {
     
     private func configNavBar() {
         
+        navigationController?.navigationBar.backgroundColor = Constants.Color.background
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.plus, style: .plain, target: self, action: nil)
-        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.background
+        navigationItem.leftBarButtonItem?.tintColor = .clear
         
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.Image.plus, style: .plain, target: self, action: #selector(writeButtonTap))

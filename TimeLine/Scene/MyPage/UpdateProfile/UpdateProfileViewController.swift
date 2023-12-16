@@ -139,8 +139,13 @@ extension UpdateProfileViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let delete = UIAlertAction(title: "사진 삭제", style: .default) { [weak self] _ in
             guard let self = self else { return }
-            self.mainView.profileImageView.image = Constants.Image.person
-            self.viewModel.selectedImg = nil
+            self.mainView.profileImageView.image = Constants.Image.placeholderProfile
+            if let img = Constants.Image.placeholderProfile {
+                self.viewModel.selectedImg = SelectedImage(image: img)
+            } else {
+                self.viewModel.selectedImg = nil
+            }
+           
             self.updatePhoto.accept(true)
         }
         let selectPhoto = UIAlertAction(title: "사진 선택", style: .default) { [weak self] _ in

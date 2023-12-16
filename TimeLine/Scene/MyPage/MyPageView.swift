@@ -115,7 +115,7 @@ final class MyPageView: BaseView {
         if let profile = profile {
             profileView.profileImageView.setImage(with: profile, resize: 100)
         } else {
-            profileView.profileImageView.image = Constants.Image.person
+            profileView.profileImageView.image = Constants.Image.placeholderProfile
         }
         
     }

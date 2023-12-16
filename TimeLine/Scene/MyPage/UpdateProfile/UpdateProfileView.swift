@@ -113,7 +113,7 @@ final class UpdateProfileView: BaseView {
         if let image = image {
             profileImageView.setImage(with: image, resize: 100)
         } else {
-            profileImageView.image = Constants.Image.person
+            profileImageView.image = Constants.Image.placeholderProfile
         }
         
     }
