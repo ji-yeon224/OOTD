@@ -15,6 +15,9 @@ final class OOTDCommentViewController: BaseViewController {
     private let mainView = OOTDCommentView()
     private let viewModel = OOTDCommentViewModel()
     private let disposeBag = DisposeBag()
+    
+    private let commentDelete = PublishRelay<(String, Int)>()
+    
     var comments: [Comment] = []
     var id: String?
     
@@ -49,7 +52,9 @@ final class OOTDCommentViewController: BaseViewController {
         
         let input = OOTDCommentViewModel.Input(
             commentWrite: commentWrite,
-            commentContent: mainView.commentWriteView.textView.rx.text.orEmpty)
+            commentContent: mainView.commentWriteView.textView.rx.text.orEmpty,
+            commentDelete: commentDelete
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -63,6 +68,16 @@ final class OOTDCommentViewController: BaseViewController {
                     owner.title = "댓글 \(owner.comments.count)개"
                 }
                 
+                
+            })
+            .disposed(by: disposeBag)
+        
+        output.successCommentDelete
+            .bind(with: self, onNext: { owner, value in
+                owner.showToastMessage(message: "댓글 삭제가 완료되었습니다!", position: .center)
+                owner.comments.remove(at: value)
+                owner.title = "댓글 \(owner.comments.count)개"
+                owner.updateSnapShot()
                 
             })
             .disposed(by: disposeBag)
@@ -152,7 +167,7 @@ final class OOTDCommentViewController: BaseViewController {
                 cell.deleteButton.rx.tap
                     .bind(with: self) { owner, _ in
                         owner.showAlertWithCancel(title: "", message: "해당 댓글을 삭제하시겠어요?") {
-//                            owner.commentDelete.accept((itemIdentifier.id, indexPath.row))
+                            owner.commentDelete.accept((itemIdentifier.id, indexPath.row))
                         } cancelHandler: { }
 
                         

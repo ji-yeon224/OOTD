@@ -18,7 +18,7 @@ final class OOTDCommentViewModel {
         
         let commentWrite: PublishRelay<CommentRequest>
         let commentContent: ControlProperty<String>
-//        let commentDelete: PublishRelay<(String, Int)>
+        let commentDelete: PublishRelay<(String, Int)>
     }
     
     struct Output {
@@ -26,6 +26,7 @@ final class OOTDCommentViewModel {
         let loginRequest: PublishRelay<Bool>
         let commentIsEnable: BehaviorRelay<Bool>
         let commentWrite: PublishRelay<Comment>
+        let successCommentDelete: PublishRelay<Int>
     }
     
     func transform(input: Input) -> Output {
@@ -34,6 +35,8 @@ final class OOTDCommentViewModel {
         let loginRequest = PublishRelay<Bool>()
         let commentWrite = PublishRelay<Comment>()
         let commentIsEnable = BehaviorRelay(value: false)
+        let successCommentDelete = PublishRelay<Int>()
+        var deleteCommentIdx: Int?
         
         input.commentWrite
             .flatMap {
@@ -70,7 +73,46 @@ final class OOTDCommentViewModel {
                 }
             }
             .disposed(by: disposeBag)
-        return Output(errorMsg: errorMsg, loginRequest: loginRequest, commentIsEnable: commentIsEnable, commentWrite: commentWrite)
+        
+        input.commentDelete
+            .map {
+                deleteCommentIdx = $0.1
+                return $0.0
+            }
+            .flatMap {
+                CommentAPIManager.shared.request(api: .delete(id: self.id, commentID: $0), type: CommentDelete.self)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(_):
+                    if let idx = deleteCommentIdx {
+                        successCommentDelete.accept(idx)
+                    }
+                    
+                case .failure(let error):
+                    let code = error.statusCode
+                    
+                    guard let errorType = CommentError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            errorMsg.accept(commonError.localizedDescription)
+                        }
+                        loginRequest.accept(true)
+                        return
+                    }
+                    
+                    errorMsg.accept(errorType.localizedDescription)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        
+        return Output(
+            errorMsg: errorMsg,
+            loginRequest: loginRequest,
+            commentIsEnable: commentIsEnable,
+            commentWrite: commentWrite,
+            successCommentDelete: successCommentDelete
+        )
     }
     
     
