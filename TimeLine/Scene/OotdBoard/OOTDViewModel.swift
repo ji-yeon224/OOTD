@@ -19,12 +19,14 @@ final class OOTDViewModel {
     struct Input {
         let callFirstPage: PublishRelay<Bool>
         let page: ControlEvent<[IndexPath]>
+        let deleteRequest: PublishRelay<(String, Int)>
     }
     
     struct Output {
         let items: BehaviorRelay<[PostListModel]>
         let errorMsg: PublishRelay<String>
         let loginRequest: PublishRelay<Bool>
+        let successDelete: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -32,8 +34,10 @@ final class OOTDViewModel {
         let items: BehaviorRelay<[PostListModel]> = BehaviorRelay(value: [])
         let errorMsg = PublishRelay<String>()
         let loginRequest = PublishRelay<Bool>()
-        
         let requestPost = PublishRelay<String?>()
+        let successDelete = PublishRelay<Bool>()
+        
+        var idx: Int?
         
         input.callFirstPage
             .bind(with: self) { owner, value in
@@ -77,11 +81,48 @@ final class OOTDViewModel {
             }
             .disposed(by: disposeBag)
         
+        input.deleteRequest
+            .map {
+                idx = $0.1
+                return $0.0
+            }
+            .flatMap {
+                PostAPIManager.shared.postrequest(api: .delete(id: $0), type: DeleteResponse.self)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(_):
+                    debugPrint("[DELETE POST SUCCESS]")
+                    successDelete.accept(true)
+                    if let idx = idx {
+                        owner.data.remove(at: idx)
+                        items.accept([PostListModel(section: "", items: owner.data)])
+                    } else {
+                        input.callFirstPage.accept(true)
+                    }
+                    
+                case .failure(let error):
+                    let code = error.statusCode
+                    guard let errorType = PostDeleteError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            errorMsg.accept(commonError.localizedDescription)
+                        }
+                        return
+                    }
+                    debugPrint("[DEBUG-POST] ", error.statusCode, error.description)
+                    errorMsg.accept(errorType.localizedDescription)
+                    
+                    
+                }
+            }
+            .disposed(by: disposeBag)
+        
         
         return Output(
             items: items,
             errorMsg: errorMsg,
-            loginRequest: loginRequest
+            loginRequest: loginRequest,
+            successDelete: successDelete
         )
         
     }

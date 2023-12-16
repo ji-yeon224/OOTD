@@ -16,10 +16,11 @@ final class OOTDViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     
     private let requestPost = PublishRelay<Bool>()
+    private let requestDelete = PublishRelay<(String, Int)>()
     
     override func loadView() {
         self.view = mainView
-        mainView.delegate = self
+        
     }
     
     override func viewDidLoad() {
@@ -33,13 +34,15 @@ final class OOTDViewController: BaseViewController {
     override func configure() {
         super.configure()
         configNavBar()
+        mainView.delegate = self
     }
     
     private func bind() {
         
         let input = OOTDViewModel.Input(
             callFirstPage: requestPost,
-            page: mainView.collectionView.rx.prefetchItems
+            page: mainView.collectionView.rx.prefetchItems,
+            deleteRequest: requestDelete
         )
         
         let output = viewModel.transform(input: input)
@@ -112,8 +115,13 @@ extension OOTDViewController: OOTDCellProtocol {
         print("edit", item.content)
     }
     
-    func deletePost(id: String) {
+    func deletePost(id: String, idx: Int) {
         print("delete", id)
+        showAlertWithCancel(title: "삭제", message: "해당 게시글을 삭제하시겠어요?") {
+            self.requestDelete.accept((id, idx))
+        } cancelHandler: { }
+
+        
     }
     
 }

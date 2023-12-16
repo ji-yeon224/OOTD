@@ -8,6 +8,6 @@
 import Foundation
 
 protocol OOTDCellProtocol: AnyObject {
-    func deletePost(id: String)
+    func deletePost(id: String, idx: Int)
     func editPost(item: Post)
 }

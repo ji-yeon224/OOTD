@@ -7,12 +7,10 @@
 
 import UIKit
 import RxDataSources
-import RxCocoa
 
 final class OOTDView: BaseView {
     
     private let deviceWidth = UIScreen.main.bounds.size.width
-    private let menuButtonTap = PublishRelay<Post>()
     
     weak var delegate: OOTDCellProtocol?
     
@@ -72,7 +70,7 @@ final class OOTDView: BaseView {
         
         if item.creator.id == UserDefaultsHelper.userID {
             cell.menuButton.isHidden = false
-            cell.menuButton.menu = self.setMenuItem(item: item)
+            cell.menuButton.menu = self.setMenuItem(item: item, idx: indexPath.row)
             cell.menuButton.showsMenuAsPrimaryAction = true
         }
         
@@ -81,14 +79,16 @@ final class OOTDView: BaseView {
     
     
     
-    private func setMenuItem(item: Post) -> UIMenu {
+    private func setMenuItem(item: Post, idx: Int) -> UIMenu {
         var menuItems: [UIAction] = []
         
-        let editAction = UIAction(title: "Edit") { action in
+        let editAction = UIAction(title: "Edit") { [weak self] action in
+            guard let self = self else { return }
             self.delegate?.editPost(item: item)
         }
-        let deleteAction = UIAction(title: "Delete") { action in
-            self.delegate?.deletePost(id: item.id)
+        let deleteAction = UIAction(title: "Delete") { [weak self] action in
+            guard let self = self else { return }
+            self.delegate?.deletePost(id: item.id, idx: idx)
             
         }
         menuItems.append(editAction)

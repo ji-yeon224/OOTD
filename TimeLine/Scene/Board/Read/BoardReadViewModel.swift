@@ -45,7 +45,7 @@ final class BoardReadViewModel {
         let commentIsEnable = BehaviorRelay(value: false)
         let loginRequest = PublishRelay<Bool>()
         let successCommentDelete = PublishRelay<Int>()
-        var likeValue = PublishRelay<Bool>()
+        let likeValue = PublishRelay<Bool>()
         
         var deleteCommentIdx: Int?
         
@@ -154,7 +154,7 @@ final class BoardReadViewModel {
                 case .failure(let error):
                     let code = error.statusCode
                     
-                    guard let errorType = LikeError(rawValue: code) else {
+                    guard let _ = LikeError(rawValue: code) else {
                         if let commonError = CommonError(rawValue: code) {
                             errorMsg.accept(commonError.localizedDescription)
                         }
