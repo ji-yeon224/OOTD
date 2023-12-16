@@ -21,6 +21,7 @@ extension Constants {
         static let keyboardDown = UIImage(systemName: "keyboard.chevron.compact.down")
         
         static let board = UIImage(systemName: "doc.text.image")
+        static let ootd = UIImage(systemName: "tshirt")
         static let myPage = UIImage(systemName: "person")
         static let heart = UIImage(systemName: "heart")
         static let heartFill = UIImage(systemName: "heart.fill")
@@ -36,6 +37,7 @@ extension Constants {
         
         static let blackLogo = UIImage(named: "black_logo")
         static let mainLogo = UIImage(named: "main_logo")
+        static let placeholderProfile = UIImage(named: "person_placeholder")
         
     }
 }

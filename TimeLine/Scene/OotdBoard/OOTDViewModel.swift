@@ -20,6 +20,7 @@ final class OOTDViewModel {
         let callFirstPage: PublishRelay<Bool>
         let page: ControlEvent<[IndexPath]>
         let deleteRequest: PublishRelay<(String, Int)>
+        let likeButton: PublishRelay<String>
     }
     
     struct Output {
@@ -27,6 +28,7 @@ final class OOTDViewModel {
         let errorMsg: PublishRelay<String>
         let loginRequest: PublishRelay<Bool>
         let successDelete: PublishRelay<Bool>
+        let likeSuccess: PublishRelay<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -36,6 +38,7 @@ final class OOTDViewModel {
         let loginRequest = PublishRelay<Bool>()
         let requestPost = PublishRelay<String?>()
         let successDelete = PublishRelay<Bool>()
+        let likeSuccess = PublishRelay<Bool>()
         
         var idx: Int?
         
@@ -117,12 +120,35 @@ final class OOTDViewModel {
             }
             .disposed(by: disposeBag)
         
+        input.likeButton
+            .flatMap {
+                PostAPIManager.shared.postrequest(api: .like(id: $0), type: LikeResponse.self)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(_):
+                    print("success")
+                    likeSuccess.accept(true)
+                case .failure(let error):
+                    let code = error.statusCode
+                    likeSuccess.accept(false)
+                    guard let _ = LikeError(rawValue: code) else {
+                        if let commonError = CommonError(rawValue: code) {
+                            errorMsg.accept(commonError.localizedDescription)
+                        }
+                        loginRequest.accept(true)
+                        return
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
         
         return Output(
             items: items,
             errorMsg: errorMsg,
             loginRequest: loginRequest,
-            successDelete: successDelete
+            successDelete: successDelete,
+            likeSuccess: likeSuccess
         )
         
     }

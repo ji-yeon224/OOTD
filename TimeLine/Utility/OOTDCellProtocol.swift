@@ -11,4 +11,5 @@ protocol OOTDCellProtocol: AnyObject {
     func deletePost(id: String, idx: Int)
     func editPost(item: Post)
     func showComment(comments: [Comment], id: String)
+    func likeButtonTap(id: String)
 }

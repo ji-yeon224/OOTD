@@ -11,7 +11,7 @@ final class ProfileImageView: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        image = Constants.Image.person
+        image = Constants.Image.placeholderProfile
         tintColor = Constants.Color.placeholder
         backgroundColor = Constants.Color.background
         contentMode = .scaleAspectFill

@@ -18,6 +18,7 @@ final class OOTDViewController: BaseViewController {
     
     private let requestPost = PublishRelay<Bool>()
     private let requestDelete = PublishRelay<(String, Int)>()
+    private let likeButton = PublishRelay<String>()
     
     override func loadView() {
         self.view = mainView
@@ -36,6 +37,19 @@ final class OOTDViewController: BaseViewController {
         super.configure()
         configNavBar()
         mainView.delegate = self
+        
+        mainView.collectionView.refreshControl = UIRefreshControl()
+        mainView.collectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
+    }
+    
+    @objc func refreshData() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+            guard let self = self else { return }
+            self.requestPost.accept(true)
+            self.mainView.collectionView.refreshControl?.endRefreshing()
+            
+        }
     }
     
     private func bind() {
@@ -43,7 +57,8 @@ final class OOTDViewController: BaseViewController {
         let input = OOTDViewModel.Input(
             callFirstPage: requestPost,
             page: mainView.collectionView.rx.prefetchItems,
-            deleteRequest: requestDelete
+            deleteRequest: requestDelete,
+            likeButton: likeButton
         )
         
         let output = viewModel.transform(input: input)
@@ -85,6 +100,16 @@ final class OOTDViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.likeSuccess
+            .bind(with: self) { owner, value in
+                if value {
+                    owner.mainView.likeData.accept(true)
+                } else { // 좋아요 반영 실패 시 -> 통신 오류
+                    owner.mainView.likeData.accept(false)
+                }
+            }
+            .disposed(by: disposeBag)
+        
         NotificationCenter.default.rx.notification(.refreshPhoto)
             .bind(with: self) { owner, noti in
                 owner.requestPost.accept(true)
@@ -104,8 +129,10 @@ extension OOTDViewController {
     
     private func configNavBar() {
         
+        navigationController?.navigationBar.backgroundColor = Constants.Color.background
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.plus, style: .plain, target: self, action: nil)
-        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.background
+        navigationItem.leftBarButtonItem?.tintColor = .clear
         
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.Image.plus, style: .plain, target: self, action: #selector(writeButtonTap))
@@ -128,6 +155,10 @@ extension OOTDViewController {
 }
 
 extension OOTDViewController: OOTDCellProtocol {
+    func likeButtonTap(id: String) {
+        likeButton.accept(id)
+    }
+    
     func showComment(comments: [Comment], id: String) {
         let vc = OOTDCommentViewController()
         vc.comments = comments

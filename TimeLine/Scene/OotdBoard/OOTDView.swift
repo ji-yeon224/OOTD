@@ -8,11 +8,13 @@
 import UIKit
 import RxDataSources
 import RxCocoa
+import RxSwift
 
 final class OOTDView: BaseView {
     
     private let deviceWidth = UIScreen.main.bounds.size.width
     
+    let likeData = PublishRelay<Bool>()
     weak var delegate: OOTDCellProtocol?
     
     lazy var collectionView = {
@@ -61,7 +63,7 @@ final class OOTDView: BaseView {
         if let img = item.creator.profile {
             cell.profileImage.setImage(with: img, resize: 30)
         } else {
-            cell.profileImage.image = Constants.Image.person
+            cell.profileImage.image = Constants.Image.placeholderProfile
         }
         
         cell.nicknameLabel.text = item.creator.nick
@@ -88,20 +90,32 @@ final class OOTDView: BaseView {
             cell.likeButton.setImage(Constants.Image.heartFill, for: .normal)
             cell.likeButton.tintColor = Constants.Color.heart
         }
+        
         cell.likeButton.rx.tap
             .bind(with: self) { owner, _ in
                 likeValue.toggle()
-                
-                if likeValue {
-                    cell.likeButton.setImage(Constants.Image.heartFill, for: .normal)
-                    cell.likeButton.tintColor = Constants.Color.heart
-                } else {
-                    cell.likeButton.setImage(Constants.Image.heart, for: .normal)
-                    cell.likeButton.tintColor = Constants.Color.basicText
-                }
+                owner.delegate?.likeButtonTap(id: item.id)
             }
             .disposed(by: cell.disposeBag)
         
+        Observable.combineLatest(cell.likeButton.rx.tap, self.likeData)
+            .map { return $1 }
+            .bind(with: self) { owner, value in
+                
+                if !value { likeValue.toggle() } // 좋아요 반영 실패
+                else {
+                    if likeValue {
+                        cell.likeButton.setImage(Constants.Image.heartFill, for: .normal)
+                        cell.likeButton.tintColor = Constants.Color.heart
+                    } else {
+                        cell.likeButton.setImage(Constants.Image.heart, for: .normal)
+                        cell.likeButton.tintColor = Constants.Color.basicText
+                    }
+                }
+                
+                
+            }
+            .disposed(by: cell.disposeBag)
         
         return cell
     }
