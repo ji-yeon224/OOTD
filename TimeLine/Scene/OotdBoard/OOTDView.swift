@@ -7,6 +7,7 @@
 
 import UIKit
 import RxDataSources
+import RxCocoa
 
 final class OOTDView: BaseView {
     
@@ -56,7 +57,7 @@ final class OOTDView: BaseView {
     
     lazy var dataSource = RxCollectionViewSectionedReloadDataSource<PostListModel> { dataSource, collectionView, indexPath, item in
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OOTDCollectionViewCell.identifier, for: indexPath) as? OOTDCollectionViewCell else { return UICollectionViewCell()}
-        
+        var likeValue: Bool = false
         if let img = item.creator.profile {
             cell.profileImage.setImage(with: img, resize: 30)
         } else {
@@ -76,6 +77,31 @@ final class OOTDView: BaseView {
             cell.menuButton.menu = self.setMenuItem(item: item, idx: indexPath.row)
             cell.menuButton.showsMenuAsPrimaryAction = true
         }
+        cell.commentButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.delegate?.showComment(comments: item.comments.reversed(), id: item.id)
+            }
+            .disposed(by: cell.disposeBag)
+        
+        if item.likes.contains(UserDefaultsHelper.userID) {
+            likeValue = true
+            cell.likeButton.setImage(Constants.Image.heartFill, for: .normal)
+            cell.likeButton.tintColor = Constants.Color.heart
+        }
+        cell.likeButton.rx.tap
+            .bind(with: self) { owner, _ in
+                likeValue.toggle()
+                
+                if likeValue {
+                    cell.likeButton.setImage(Constants.Image.heartFill, for: .normal)
+                    cell.likeButton.tintColor = Constants.Color.heart
+                } else {
+                    cell.likeButton.setImage(Constants.Image.heart, for: .normal)
+                    cell.likeButton.tintColor = Constants.Color.basicText
+                }
+            }
+            .disposed(by: cell.disposeBag)
+        
         
         return cell
     }

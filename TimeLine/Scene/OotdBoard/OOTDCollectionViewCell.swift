@@ -49,7 +49,8 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
     
     override func prepareForReuse() {
         menuButton.isHidden = true
-        likeButton.setImage(Constants.Image.heart, for: .normal)
+//        likeButton.setImage(Constants.Image.heart, for: .normal)
+//        likeButton.setTitleColor(Constants.Color.basicText, for: .normal)
         disposeBag = DisposeBag()
     }
     

@@ -19,7 +19,7 @@ extension Constants{
         static let valid = UIColor.green
         static let placeholder = UIColor.lightGray
         static let lightGrayColor = UIColor.systemGray5
-        
+        static let heart = UIColor.systemRed
         
         static let mainColor = UIColor(named: "MainColor")
         

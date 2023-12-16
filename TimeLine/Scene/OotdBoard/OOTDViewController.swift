@@ -128,6 +128,21 @@ extension OOTDViewController {
 }
 
 extension OOTDViewController: OOTDCellProtocol {
+    func showComment(comments: [Comment], id: String) {
+        let vc = OOTDCommentViewController()
+        vc.comments = comments
+        vc.id = id
+        let nav = UINavigationController(rootViewController: vc)
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersGrabberVisible = true
+        }
+        present(nav, animated: true)
+        
+        
+    }
+    
     func editPost(item: Post) {
         print("edit", item.content)
         let vc = OOTDWriteViewController(imgString: item.image[0])
