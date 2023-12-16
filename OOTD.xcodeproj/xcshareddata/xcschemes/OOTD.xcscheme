@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEEA87502B01E30000AC375F"
-               BuildableName = "TimeLine.app"
-               BlueprintName = "TimeLine"
-               ReferencedContainer = "container:TimeLine.xcodeproj">
+               BuildableName = "OOTD.app"
+               BlueprintName = "OOTD"
+               ReferencedContainer = "container:OOTD.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEEA87502B01E30000AC375F"
-            BuildableName = "TimeLine.app"
-            BlueprintName = "TimeLine"
-            ReferencedContainer = "container:TimeLine.xcodeproj">
+            BuildableName = "OOTD.app"
+            BlueprintName = "OOTD"
+            ReferencedContainer = "container:OOTD.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -78,9 +78,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEEA87502B01E30000AC375F"
-            BuildableName = "TimeLine.app"
-            BlueprintName = "TimeLine"
-            ReferencedContainer = "container:TimeLine.xcodeproj">
+            BuildableName = "OOTD.app"
+            BlueprintName = "OOTD"
+            ReferencedContainer = "container:OOTD.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

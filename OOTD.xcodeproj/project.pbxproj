@@ -262,7 +262,7 @@
 		CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentCell.swift; sourceTree = "<group>"; };
 		CEE80AFD2B1AC9120041AC36 /* PostDeleteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDeleteError.swift; sourceTree = "<group>"; };
 		CEE80AFF2B1ACB6B0041AC36 /* DeleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteResponse.swift; sourceTree = "<group>"; };
-		CEEA87512B01E30000AC375F /* TimeLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEEA87512B01E30000AC375F /* OOTD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OOTD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEA87542B01E30000AC375F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEEA87562B01E30000AC375F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CEEA87582B01E30000AC375F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -676,7 +676,7 @@
 		CEEA87482B01E30000AC375F = {
 			isa = PBXGroup;
 			children = (
-				CEEA87532B01E30000AC375F /* TimeLine */,
+				CEEA87532B01E30000AC375F /* OOTD */,
 				CEEA87522B01E30000AC375F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -684,12 +684,12 @@
 		CEEA87522B01E30000AC375F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CEEA87512B01E30000AC375F /* TimeLine.app */,
+				CEEA87512B01E30000AC375F /* OOTD.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CEEA87532B01E30000AC375F /* TimeLine */ = {
+		CEEA87532B01E30000AC375F /* OOTD */ = {
 			isa = PBXGroup;
 			children = (
 				CEC2FBDA2B021D35002E3046 /* Error */,
@@ -707,7 +707,7 @@
 				CEEA87622B01E30200AC375F /* Info.plist */,
 				CEEA87702B01ECF300AC375F /* .gitIgnore */,
 			);
-			path = TimeLine;
+			path = OOTD;
 			sourceTree = "<group>";
 		};
 		CEEA876B2B01EC7D00AC375F /* Scene */ = {
@@ -855,9 +855,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CEEA87502B01E30000AC375F /* TimeLine */ = {
+		CEEA87502B01E30000AC375F /* OOTD */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CEEA87652B01E30200AC375F /* Build configuration list for PBXNativeTarget "TimeLine" */;
+			buildConfigurationList = CEEA87652B01E30200AC375F /* Build configuration list for PBXNativeTarget "OOTD" */;
 			buildPhases = (
 				CEEA874D2B01E30000AC375F /* Sources */,
 				CEEA874E2B01E30000AC375F /* Frameworks */,
@@ -867,7 +867,7 @@
 			);
 			dependencies = (
 			);
-			name = TimeLine;
+			name = OOTD;
 			packageProductDependencies = (
 				CEEA87792B01EEAA00AC375F /* SnapKit */,
 				CEEA877C2B01EECB00AC375F /* RxCocoa */,
@@ -881,7 +881,7 @@
 				CE526F9F2B2DCF5100F46EBE /* NVActivityIndicatorViewExtended */,
 			);
 			productName = TimeLine;
-			productReference = CEEA87512B01E30000AC375F /* TimeLine.app */;
+			productReference = CEEA87512B01E30000AC375F /* OOTD.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -899,7 +899,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CEEA874C2B01E30000AC375F /* Build configuration list for PBXProject "TimeLine" */;
+			buildConfigurationList = CEEA874C2B01E30000AC375F /* Build configuration list for PBXProject "OOTD" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -922,7 +922,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CEEA87502B01E30000AC375F /* TimeLine */,
+				CEEA87502B01E30000AC375F /* OOTD */,
 			);
 		};
 /* End PBXProject section */
@@ -1236,18 +1236,20 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DJP8DYB9HG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TimeLine/Info.plist;
+				INFOPLIST_FILE = OOTD/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = good;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiyeon.TimeLine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiyeon.OOTD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1264,18 +1266,20 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DJP8DYB9HG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TimeLine/Info.plist;
+				INFOPLIST_FILE = OOTD/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = good;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiyeon.TimeLine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiyeon.OOTD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1286,7 +1290,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CEEA874C2B01E30000AC375F /* Build configuration list for PBXProject "TimeLine" */ = {
+		CEEA874C2B01E30000AC375F /* Build configuration list for PBXProject "OOTD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CEEA87632B01E30200AC375F /* Debug */,
@@ -1295,7 +1299,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CEEA87652B01E30200AC375F /* Build configuration list for PBXNativeTarget "TimeLine" */ = {
+		CEEA87652B01E30200AC375F /* Build configuration list for PBXNativeTarget "OOTD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CEEA87662B01E30200AC375F /* Debug */,
