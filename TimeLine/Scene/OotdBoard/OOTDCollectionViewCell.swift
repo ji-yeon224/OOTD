@@ -6,14 +6,22 @@
 //
 
 import UIKit
+import RxSwift
 
 final class OOTDCollectionViewCell: BaseCollectionViewCell {
     
-    static let id = "OOTDCollectionViewCell"
+    var disposeBag = DisposeBag()
     
     private let topView = UIView()
     let profileImage = ProfileImageView(frame: .zero)
     let nicknameLabel = PlainLabel(size: 13, color: Constants.Color.basicText, line: 1)
+    let menuButton = {
+        let view = UIButton()
+        view.setImage(Constants.Image.menuButton, for: .normal)
+        view.tintColor = Constants.Color.basicText
+        view.isHidden = true
+        return view
+    }()
     
     let imageView = {
         let view = UIImageView()
@@ -39,7 +47,11 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
     
     let contentLabel = PlainLabel(size: 14, color: Constants.Color.basicText, line: 0)
     
-    
+    override func prepareForReuse() {
+        menuButton.isHidden = true
+        likeButton.setImage(Constants.Image.heart, for: .normal)
+        disposeBag = DisposeBag()
+    }
     
     override func configure() {
         
@@ -47,7 +59,7 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
             contentView.addSubview($0)
         }
         
-        [profileImage, nicknameLabel].forEach {
+        [profileImage, nicknameLabel, menuButton].forEach {
             topView.addSubview($0)
         }
         
@@ -100,9 +112,15 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
         nicknameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(topView)
             make.leading.equalTo(profileImage.snp.trailing).offset(14)
-            make.trailing.equalTo(topView)
+            make.trailing.equalTo(menuButton.snp.leading)
             make.verticalEdges.equalTo(topView)
             
+        }
+        
+        menuButton.snp.makeConstraints { make in
+            make.centerY.equalTo(topView)
+            make.trailing.equalTo(topView).inset(5)
+            make.size.equalTo(40)
         }
         
     }
@@ -123,6 +141,7 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
         
         
     }
+    
     
     
 }

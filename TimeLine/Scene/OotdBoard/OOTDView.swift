@@ -7,15 +7,20 @@
 
 import UIKit
 import RxDataSources
+import RxCocoa
 
 final class OOTDView: BaseView {
     
-    private static let deviceWidth = UIScreen.main.bounds.size.width
+    private let deviceWidth = UIScreen.main.bounds.size.width
+    private let menuButtonTap = PublishRelay<Post>()
+    
+    weak var delegate: OOTDCellProtocol?
     
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
-        view.register(OOTDCollectionViewCell.self, forCellWithReuseIdentifier: OOTDCollectionViewCell.id)
+        view.register(OOTDCollectionViewCell.self, forCellWithReuseIdentifier: OOTDCollectionViewCell.identifier)
         view.showsVerticalScrollIndicator = false
+        
         return view
     }()
     
@@ -50,8 +55,9 @@ final class OOTDView: BaseView {
         
     }
     
-    let dataSource = RxCollectionViewSectionedReloadDataSource<PostListModel> { dataSource, collectionView, indexPath, item in
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OOTDCollectionViewCell.id, for: indexPath) as? OOTDCollectionViewCell else { return UICollectionViewCell()}
+    
+    lazy var dataSource = RxCollectionViewSectionedReloadDataSource<PostListModel> { dataSource, collectionView, indexPath, item in
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OOTDCollectionViewCell.identifier, for: indexPath) as? OOTDCollectionViewCell else { return UICollectionViewCell()}
         
         if let img = item.creator.profile {
             cell.profileImage.setImage(with: img, resize: 30)
@@ -60,12 +66,35 @@ final class OOTDView: BaseView {
         }
         
         cell.nicknameLabel.text = item.creator.nick
-//        cell.imageView.image = UIImage(named: "img2")?.resize(width: deviceWidth)
-        cell.imageView.setImage(with: item.image[0], resize: deviceWidth )
+        
+        cell.imageView.setImage(with: item.image[0], resize: self.deviceWidth )
         cell.contentLabel.text = item.content
-        cell.layoutIfNeeded()
+        
+        if item.creator.id == UserDefaultsHelper.userID {
+            cell.menuButton.isHidden = false
+            cell.menuButton.menu = self.setMenuItem(item: item)
+            cell.menuButton.showsMenuAsPrimaryAction = true
+        }
         
         return cell
+    }
+    
+    
+    
+    private func setMenuItem(item: Post) -> UIMenu {
+        var menuItems: [UIAction] = []
+        
+        let editAction = UIAction(title: "Edit") { action in
+            self.delegate?.editPost(item: item)
+        }
+        let deleteAction = UIAction(title: "Delete") { action in
+            self.delegate?.deletePost(id: item.id)
+            
+        }
+        menuItems.append(editAction)
+        menuItems.append(deleteAction)
+        
+        return UIMenu(title: "", image: nil, identifier: nil, options: [], children: menuItems)
     }
     
 }

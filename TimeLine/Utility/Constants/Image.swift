@@ -27,7 +27,7 @@ extension Constants {
         static let comment = UIImage(systemName: "ellipsis.bubble")
         
         static let person = UIImage(systemName: "person.fill")
-        static let menuButton = UIImage(systemName: "ellipsis.circle")
+        static let menuButton = UIImage(systemName: "ellipsis")
         static let sideMenu = UIImage(systemName: "list.bullet")
         static let post = UIImage(systemName: "paperplane.fill")
         static let delete = UIImage(systemName: "trash.fill")

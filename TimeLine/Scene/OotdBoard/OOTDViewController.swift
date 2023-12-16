@@ -19,13 +19,16 @@ final class OOTDViewController: BaseViewController {
     
     override func loadView() {
         self.view = mainView
+        mainView.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
         requestPost.accept(true)
+        
     }
+    
     
     override func configure() {
         super.configure()
@@ -40,6 +43,10 @@ final class OOTDViewController: BaseViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+        
+        
+        
         
         output.items
             .bind(to:  mainView.collectionView.rx.items(dataSource: mainView.dataSource))
@@ -74,6 +81,9 @@ final class OOTDViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        
+        
+        
     }
     
     
@@ -94,5 +104,16 @@ extension OOTDViewController {
         
     }
     
+    
+}
+
+extension OOTDViewController: OOTDCellProtocol {
+    func editPost(item: Post) {
+        print("edit", item.content)
+    }
+    
+    func deletePost(id: String) {
+        print("delete", id)
+    }
     
 }
