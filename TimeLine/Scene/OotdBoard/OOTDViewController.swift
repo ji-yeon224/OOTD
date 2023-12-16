@@ -18,6 +18,7 @@ final class OOTDViewController: BaseViewController {
     
     private let requestPost = PublishRelay<Bool>()
     private let requestDelete = PublishRelay<(String, Int)>()
+    private let likeButton = PublishRelay<String>()
     
     override func loadView() {
         self.view = mainView
@@ -43,7 +44,8 @@ final class OOTDViewController: BaseViewController {
         let input = OOTDViewModel.Input(
             callFirstPage: requestPost,
             page: mainView.collectionView.rx.prefetchItems,
-            deleteRequest: requestDelete
+            deleteRequest: requestDelete,
+            likeButton: likeButton
         )
         
         let output = viewModel.transform(input: input)
@@ -82,6 +84,16 @@ final class OOTDViewController: BaseViewController {
         output.successDelete
             .bind(with: self) { owner, _ in
                 owner.showOKAlert(title: "삭제", message: "삭제가 완료되었습니다.") {  }
+            }
+            .disposed(by: disposeBag)
+        
+        output.likeSuccess
+            .bind(with: self) { owner, value in
+                if value {
+                    owner.mainView.likeData.accept(true)
+                } else { // 좋아요 반영 실패 시 -> 통신 오류
+                    owner.mainView.likeData.accept(false)
+                }
             }
             .disposed(by: disposeBag)
         
@@ -128,6 +140,10 @@ extension OOTDViewController {
 }
 
 extension OOTDViewController: OOTDCellProtocol {
+    func likeButtonTap(id: String) {
+        likeButton.accept(id)
+    }
+    
     func showComment(comments: [Comment], id: String) {
         let vc = OOTDCommentViewController()
         vc.comments = comments
