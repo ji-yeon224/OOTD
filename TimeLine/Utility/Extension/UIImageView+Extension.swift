@@ -10,8 +10,8 @@ import Kingfisher
 
 extension UIImageView {
     
-    func setImage(with urlString: String, resize width: CGFloat? = nil) {
-        let cornerImageProcessor = RoundCornerImageProcessor(cornerRadius: 15)
+    func setImage(with urlString: String, resize width: CGFloat? = nil, cornerRadius: CGFloat = 15) {
+        let cornerImageProcessor = RoundCornerImageProcessor(cornerRadius: cornerRadius)
         
         ImageCache.default.retrieveImage(forKey: urlString, options: [
             .requestModifier(ImageLoadManager.shared.getModifier()),
@@ -48,7 +48,7 @@ extension UIImageView {
                             
                             
                         case .failure(_):
-                            self.image = Constants.Image.errorPhoto?.withTintColor(Constants.Color.placeholder)
+                            self.image = Constants.Image.errorPhoto?.withTintColor(Constants.Color.background)
                             
                             
                         }

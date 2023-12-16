@@ -45,6 +45,13 @@ final class BoardViewController: BaseViewController {
         if boardType == .main {
             mainView.tableView.refreshControl = UIRefreshControl()
             mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+            
+            let imageView = UIImageView(frame: .zero)
+            imageView.contentMode = .scaleAspectFit
+            let image = Constants.Image.mainLogo
+                imageView.image = image
+                navigationItem.titleView = imageView
+            
             mainView.writeButton.isHidden = false
         } else { // 마이페이지 -> 좋아요 게시글
             configNavBar()
@@ -149,6 +156,8 @@ extension BoardViewController {
     private func configNavBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.back, style: .plain, target: self, action: #selector(backButton))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.basicText
+        
+        
     }
     
     @objc private func backButton() {

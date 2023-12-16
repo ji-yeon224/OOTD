@@ -104,7 +104,17 @@ extension OOTDViewController {
     
     private func configNavBar() {
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.plus, style: .plain, target: self, action: nil)
+        navigationItem.leftBarButtonItem?.tintColor = Constants.Color.background
+        
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.Image.plus, style: .plain, target: self, action: #selector(writeButtonTap))
+        navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 20))
+            imageView.contentMode = .scaleAspectFit
+        let image = Constants.Image.mainLogo
+            imageView.image = image
+            navigationItem.titleView = imageView
         
     }
     

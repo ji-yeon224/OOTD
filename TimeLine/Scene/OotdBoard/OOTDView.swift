@@ -66,7 +66,7 @@ final class OOTDView: BaseView {
         cell.nicknameLabel.text = item.creator.nick
         
         if item.image.count > 0 {
-            cell.imageView.setImage(with: item.image[0], resize: self.deviceWidth )
+            cell.imageView.setImage(with: item.image[0], resize: self.deviceWidth, cornerRadius: 0 )
         }
         
         cell.contentLabel.text = item.content
