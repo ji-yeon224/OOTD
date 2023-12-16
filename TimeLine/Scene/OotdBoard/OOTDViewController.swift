@@ -128,6 +128,12 @@ extension OOTDViewController {
 }
 
 extension OOTDViewController: OOTDCellProtocol {
+    func showComment(id: String) {
+        
+        
+        
+    }
+    
     func editPost(item: Post) {
         print("edit", item.content)
         let vc = OOTDWriteViewController(imgString: item.image[0])
