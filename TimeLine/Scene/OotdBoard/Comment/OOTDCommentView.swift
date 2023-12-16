@@ -16,7 +16,7 @@ final class OOTDCommentView: BaseView {
         view.rowHeight = UITableView.automaticDimension
         view.register(BoardCommentCell.self, forCellReuseIdentifier: BoardCommentCell.identifier)
         view.separatorStyle = .none
-        
+        view.keyboardDismissMode = .onDrag
         return view
         
     }()
