@@ -33,13 +33,8 @@ final class BoardViewController: BaseViewController {
         viewModel.boardType = boardType
         refreshList.accept(true)
         
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        refreshList.accept(true)
-//        viewModel.data.removeAll()
-    }
+    
     
     override func configure() {
         if boardType == .main {
