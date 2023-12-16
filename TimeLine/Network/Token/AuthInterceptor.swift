@@ -13,7 +13,7 @@ final class AuthInterceptor: RequestInterceptor {
     static let shared = AuthInterceptor()
     private init() { }
     private let disposeBag = DisposeBag()
-    private let retryDelay: TimeInterval = 1
+    private let retryDelay: TimeInterval = 0.5
     private let retryLimit = 2
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {

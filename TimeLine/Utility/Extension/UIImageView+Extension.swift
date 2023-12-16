@@ -10,8 +10,8 @@ import Kingfisher
 
 extension UIImageView {
     
-    func setImage(with urlString: String, resize width: CGFloat) {
-        let cornerImageProcessor = RoundCornerImageProcessor(cornerRadius: 15)
+    func setImage(with urlString: String, resize width: CGFloat? = nil, cornerRadius: CGFloat = 15) {
+        let cornerImageProcessor = RoundCornerImageProcessor(cornerRadius: cornerRadius)
         
         ImageCache.default.retrieveImage(forKey: urlString, options: [
             .requestModifier(ImageLoadManager.shared.getModifier()),
@@ -23,7 +23,12 @@ extension UIImageView {
             switch result {
             case .success(let value):
                 if let image = value.image {
-                    self.image = image.resize(width: width)
+                    if let width = width {
+                        self.image = image.resize(width: width)
+                    } else {
+                        self.image = image
+                    }
+                    
                 } else {
                     guard let url = URL(string: self.getPhotoURL(urlString)) else { return }
                     let resource = ImageResource(downloadURL: url, cacheKey: urlString)
@@ -35,10 +40,15 @@ extension UIImageView {
                         guard let self = self else { return }
                         switch result {
                         case .success(let result):
-                            self.image = result.image.resize(width: width)
+                            if let width = width {
+                                self.image = result.image.resize(width: width)
+                            } else {
+                                self.image = result.image
+                            }
+                            
                             
                         case .failure(_):
-                            self.image = Constants.Image.errorPhoto?.withTintColor(Constants.Color.placeholder)
+                            self.image = Constants.Image.errorPhoto?.withTintColor(Constants.Color.background)
                             
                             
                         }
