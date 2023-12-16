@@ -16,18 +16,22 @@ final class OOTDWriteViewController: BaseViewController {
     
     private var selectImage: UIImage?
     private var imageData: Data?
+    private var imgString: String?
     
     private let disposeBag = DisposeBag()
     
-    private let uploadButton = PublishRelay<Bool>()
+//    private let uploadButton = PublishRelay<Bool>()
+    private let uploadButton = PublishRelay<BoardMode>()
+    var boardMode: BoardMode = .add
     
     override func loadView() {
         self.view = mainView
     }
     
-    init(selectImage: UIImage? = nil) {
+    init(selectImage: UIImage? = nil, imgString: String? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.selectImage = selectImage
+        self.imgString = imgString
     }
     
     @available(*, unavailable)
@@ -46,23 +50,24 @@ final class OOTDWriteViewController: BaseViewController {
         super.configure()
         
         configNavBar()
+        configData()
         
-        title = "게시물 작성"
-        guard let image = selectImage else {
-            self.showOKAlert(title: "문제가 발생하였습니다.", message: "이미지를 불러올 수 없습니다.") {
-                self.navigationController?.popViewController(animated: true)
-            }
-            return
-        }
-        mainView.imageView.image = image
+        
+        
+        
     }
+    
     
     
     private func bind() {
         
         let postRequest = PublishRelay<PostWrite>()
+        let updateRequest = PublishRelay<(PostWrite, String)>()
         
-        let input = OOTDWriteViewModel.Input(postRequest: postRequest)
+        let input = OOTDWriteViewModel.Input(
+            postRequest: postRequest,
+            updateRequest: updateRequest
+        )
         let output = viewModel.transform(input: input)
         
         
@@ -71,7 +76,15 @@ final class OOTDWriteViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 let success = value.0
                 if success {
-                    owner.showOKAlert(title: "완료", message: "게시물 업로드를 완료했습니다.") {
+                    var msg: String = ""
+                    switch owner.boardMode {
+                    case .edit:
+                        msg = "게시물 수정을 완료했습니다."
+                    case .add:
+                        msg = "게시물 업로드를 완료했습니다."
+                    }
+                    owner.showOKAlert(title: "완료", message: msg) {
+                        NotificationCenter.default.post(name: .refreshPhoto, object: nil)
                         owner.navigationController?.popViewController(animated: true)
                     }
                 } else {
@@ -115,8 +128,15 @@ final class OOTDWriteViewController: BaseViewController {
         uploadButton
             .withLatestFrom(mainView.contentTextView.rx.text.orEmpty)
             .bind(with: self) { owner, content in
-                let data = PostWrite(title: "", content: content.trimmingCharacters(in: .whitespaces), file: [owner.selectImage?.compressionImage()], product_id: ProductId.OOTDPhoto.rawValue)
-                postRequest.accept(data)
+                switch owner.boardMode {
+                case .add:
+                    let post = PostWrite(title: "", content: content.trimmingCharacters(in: .whitespaces), file: [owner.selectImage?.compressionImage()], product_id: ProductId.OOTDPhoto.rawValue)
+                    postRequest.accept(post)
+                case .edit(let data):
+                    let post = PostWrite(title: "", content: content.trimmingCharacters(in: .whitespaces), file: [owner.mainView.imageView.image?.compressionImage()], product_id: ProductId.OOTDPhoto.rawValue)
+                    updateRequest.accept((post, data.id))
+                }
+                
             }
             .disposed(by: disposeBag)
     }
@@ -124,6 +144,31 @@ final class OOTDWriteViewController: BaseViewController {
 }
 
 extension OOTDWriteViewController {
+    
+    private func configData() {
+        switch boardMode {
+        case .edit(let data):
+            title = "게시물 수정"
+            guard let imgString = imgString else {
+                self.showOKAlert(title: "문제가 발생하였습니다.", message: "이미지를 불러올 수 없습니다.") {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                return
+            }
+            mainView.imageView.setImage(with: data.image[0])
+            mainView.contentTextView.text = data.content
+        case .add:
+            title = "게시물 작성"
+            guard let image = selectImage else {
+                self.showOKAlert(title: "문제가 발생하였습니다.", message: "이미지를 불러올 수 없습니다.") {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                return
+            }
+            mainView.imageView.image = image
+        }
+    }
+    
     
     private func configNavBar() {
         
@@ -136,8 +181,9 @@ extension OOTDWriteViewController {
     }
     
     @objc private func uploadButtonTap() {
+        uploadButton.accept(boardMode)
         
-        uploadButton.accept(true)
+        
     }
     
     @objc private func backButtonTap() {

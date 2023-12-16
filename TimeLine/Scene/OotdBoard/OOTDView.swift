@@ -65,7 +65,10 @@ final class OOTDView: BaseView {
         
         cell.nicknameLabel.text = item.creator.nick
         
-        cell.imageView.setImage(with: item.image[0], resize: self.deviceWidth )
+        if item.image.count > 0 {
+            cell.imageView.setImage(with: item.image[0], resize: self.deviceWidth )
+        }
+        
         cell.contentLabel.text = item.content
         
         if item.creator.id == UserDefaultsHelper.userID {

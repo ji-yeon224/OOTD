@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
 final class OOTDViewController: BaseViewController {
     
     private let mainView = OOTDView()
@@ -78,6 +79,12 @@ final class OOTDViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        output.successDelete
+            .bind(with: self) { owner, _ in
+                owner.showOKAlert(title: "삭제", message: "삭제가 완료되었습니다.") {  }
+            }
+            .disposed(by: disposeBag)
+        
         NotificationCenter.default.rx.notification(.refreshPhoto)
             .bind(with: self) { owner, noti in
                 owner.requestPost.accept(true)
@@ -113,6 +120,9 @@ extension OOTDViewController {
 extension OOTDViewController: OOTDCellProtocol {
     func editPost(item: Post) {
         print("edit", item.content)
+        let vc = OOTDWriteViewController(imgString: item.image[0])
+        vc.boardMode = .edit(data: item)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func deletePost(id: String, idx: Int) {
