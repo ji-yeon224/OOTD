@@ -132,7 +132,7 @@ final class BoardReadViewController: BaseViewController {
         
         output?.successDelete
             .bind(with: self, onNext: { owner, value in
-                owner.showOKAlert(title: "", message: "삭제가 완료되었습니다.") {
+                owner.showOKAlert(title: "삭제", message: "삭제가 완료되었습니다.") {
                     NotificationCenter.default.post(name: .refresh, object: nil)
                     owner.navigationController?.popViewController(animated: true)
                 }

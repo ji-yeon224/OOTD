@@ -32,6 +32,11 @@ final class OOTDViewController: BaseViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mainView.collectionView.layoutIfNeeded()
+    }
+    
     
     override func configure() {
         super.configure()
