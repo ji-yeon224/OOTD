@@ -106,6 +106,7 @@ final class OOTDViewController: BaseViewController {
                     owner.mainView.likeData.accept(true)
                 } else { // 좋아요 반영 실패 시 -> 통신 오류
                     owner.mainView.likeData.accept(false)
+                    owner.showToastMessage(message: "좋아요 반영에 실패하였습니다.", position: .top)
                 }
             }
             .disposed(by: disposeBag)

@@ -98,6 +98,7 @@ final class UpdateProfileViewController: BaseViewController {
                 owner.showOKAlert(title: "", message: "프로필 변경이 완료되었습니다.") {
                     owner.updateHandler?(value)
                     owner.navigationController?.popViewController(animated: true)
+                    NotificationCenter.default.post(name: .refreshPhoto, object: nil)
                 }
                 
                 
