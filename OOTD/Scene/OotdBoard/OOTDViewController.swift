@@ -32,6 +32,11 @@ final class OOTDViewController: BaseViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mainView.collectionView.layoutIfNeeded()
+    }
+    
     
     override func configure() {
         super.configure()
@@ -106,6 +111,7 @@ final class OOTDViewController: BaseViewController {
                     owner.mainView.likeData.accept(true)
                 } else { // 좋아요 반영 실패 시 -> 통신 오류
                     owner.mainView.likeData.accept(false)
+                    owner.showToastMessage(message: "좋아요 반영에 실패하였습니다.", position: .top)
                 }
             }
             .disposed(by: disposeBag)
@@ -147,7 +153,13 @@ extension OOTDViewController {
     
     @objc private func writeButtonTap() {
        
-        PHPickerService.shared.presentPicker(vc: self)
+        PHPickerService.shared.presentPicker(vc: self, fullScreenType: true)
+        PHPickerService.shared.selectedImage
+            .bind(with: self) { owner, image in
+                let vc = OOTDWriteViewController(selectImage: image.first)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: PHPickerService.shared.disposeBag)
         
     }
     

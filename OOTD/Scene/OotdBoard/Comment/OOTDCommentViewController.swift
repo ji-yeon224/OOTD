@@ -20,6 +20,7 @@ final class OOTDCommentViewController: BaseViewController {
     
     var comments: [Comment] = []
     var id: String?
+    private var isNeedRefresh = false
     
     override func loadView() {
         self.view = mainView
@@ -36,6 +37,9 @@ final class OOTDCommentViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         IQKeyboardManager.shared.enable = true
+        if isNeedRefresh {
+            NotificationCenter.default.post(name: .refreshPhoto, object: nil)
+        }
     }
     
     override func configure() {
@@ -66,6 +70,7 @@ final class OOTDCommentViewController: BaseViewController {
                 owner.showOKAlert(title: "", message: "댓글 작성이 완료되었습니다!") {
                     owner.mainView.commentWriteView.placeholderLabel.isHidden = false
                     owner.title = "댓글 \(owner.comments.count)개"
+                    owner.isNeedRefresh = true
                 }
                 
                 
@@ -78,6 +83,7 @@ final class OOTDCommentViewController: BaseViewController {
                 owner.comments.remove(at: value)
                 owner.title = "댓글 \(owner.comments.count)개"
                 owner.updateSnapShot()
+                owner.isNeedRefresh = true
                 
             })
             .disposed(by: disposeBag)

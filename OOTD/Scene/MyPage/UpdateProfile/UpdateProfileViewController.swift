@@ -56,8 +56,6 @@ final class UpdateProfileViewController: BaseViewController {
         
         configNavBar()
         configGesture()
-        mainView.delegate = self
-        
     }
     
     private func bind() {
@@ -100,6 +98,7 @@ final class UpdateProfileViewController: BaseViewController {
                 owner.showOKAlert(title: "", message: "프로필 변경이 완료되었습니다.") {
                     owner.updateHandler?(value)
                     owner.navigationController?.popViewController(animated: true)
+                    NotificationCenter.default.post(name: .refreshPhoto, object: nil)
                 }
                 
                 
@@ -150,7 +149,19 @@ extension UpdateProfileViewController {
         }
         let selectPhoto = UIAlertAction(title: "사진 선택", style: .default) { [weak self] _ in
             guard let self = self else { return }
-            self.present(self.mainView.configPHPicker(limit: 1), animated: true)
+            
+            PHPickerService.shared.presentPicker(vc: self, fullScreenType: false)
+            PHPickerService.shared.selectedImage
+                .subscribe(with: self) { owner, image in
+                    guard let img = image.first?.resizeV3(to: self.mainView.imageViewSize) else {
+                        owner.showOKAlert(title: "", message: "이미지를 불러올 수 없습니다.") { }
+                        return
+                    }
+                    owner.viewModel.selectedImg = SelectedImage(image: img)
+                    owner.mainView.profileImageView.image = img
+                    self.updatePhoto.accept(true)
+                }
+                .disposed(by: PHPickerService.shared.disposeBag)
             
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -185,43 +196,3 @@ extension UpdateProfileViewController {
     
 }
 
-extension UpdateProfileViewController: PhPickerProtocol {
-    
-    func didFinishPicking(picker: PHPickerViewController, results: [PHPickerResult]) {
-            picker.dismiss(animated: true)
-            
-            if results.isEmpty {
-                return
-            }
-            
-            if let select = results.first {
-                let item = select.itemProvider
-                if item.canLoadObject(ofClass: UIImage.self) {
-                    
-                    item.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                        guard let self = self, let img = image as? UIImage else { return }
-                        DispatchQueue.main.async {
-                            if let resizeImg = img.resizeV3(to: self.mainView.imageViewSize){
-                                self.mainView.profileImageView.image = resizeImg
-                                self.viewModel.selectedImg = SelectedImage(image: resizeImg)
-                                
-                            }
-                            self.updatePhoto.accept(true)
-                            
-                        }
-                    }
-                    
-                }
-            }
-            
-            
-            
-        
-        
-        
-        
-    }
-    
-    
-    
-}

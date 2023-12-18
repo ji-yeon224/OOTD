@@ -12,6 +12,15 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
     
     var disposeBag = DisposeBag()
     
+    private let stackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.distribution = .fill
+        view.isLayoutMarginsRelativeArrangement = true
+        return view
+        
+    }()
+    
     private let topView = UIView()
     let profileImage = ProfileImageView(frame: .zero)
     let nicknameLabel = PlainLabel(size: 13, color: Constants.Color.basicText, line: 1)
@@ -45,10 +54,15 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
         return view
     }()
     
+    private let contentBackView = UIView()
     let contentLabel = PlainLabel(size: 14, color: Constants.Color.basicText, line: 0)
+    
+    private let dateView = UIView()
+    let dateLabel = PlainLabel(size: 12, color: Constants.Color.subText)
     
     override func prepareForReuse() {
         menuButton.isHidden = true
+        
 //        likeButton.setImage(Constants.Image.heart, for: .normal)
 //        likeButton.setTitleColor(Constants.Color.basicText, for: .normal)
         disposeBag = DisposeBag()
@@ -56,8 +70,10 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
     
     override func configure() {
         
-        [topView, imageView, bottomView, contentLabel].forEach {
-            contentView.addSubview($0)
+        contentView.addSubview(stackView)
+        
+        [topView, imageView, bottomView, contentBackView, dateView].forEach {
+            stackView.addArrangedSubview($0)
         }
         
         [profileImage, nicknameLabel, menuButton].forEach {
@@ -68,34 +84,49 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
             bottomView.addSubview($0)
         }
         
-        
+        contentBackView.addSubview(contentLabel)
+        dateView.addSubview(dateLabel)
         
     }
     
     override func setConstraints() {
         
+        stackView.snp.makeConstraints { make in
+            make.edges.equalTo(contentView)
+        }
+        
         topView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(contentView)
+//            make.top.horizontalEdges.equalTo(contentView)
             make.height.equalTo(50)
         }
         
         topViewConstraints()
         
         imageView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(contentView)
-            make.top.equalTo(topView.snp.bottom)
-            make.bottom.equalTo(bottomView.snp.top)
+            make.width.equalTo(stackView)
+//            make.horizontalEdges.equalTo(contentView)
+//            make.top.equalTo(topView.snp.bottom)
+//            make.bottom.equalTo(bottomView.snp.top)
         }
         
         bottomView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(contentView)
+//            make.horizontalEdges.equalTo(contentView)
             make.height.equalTo(50)
         }
         bottomConstraints()
+        
         contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(bottomView.snp.bottom)
-            make.horizontalEdges.equalTo(contentView).inset(14)
-            make.bottom.equalTo(contentView)
+            make.verticalEdges.equalTo(contentBackView)
+            make.horizontalEdges.equalTo(contentBackView).inset(14)
+//            make.bottom.equalTo(contentView)
+        }
+        dateView.snp.makeConstraints { make in
+            make.height.equalTo(25)
+        }
+        dateLabel.snp.makeConstraints { make in
+            make.verticalEdges.equalTo(dateView).inset(5)
+            make.horizontalEdges.equalTo(dateView).inset(14)
+            
         }
         
     }

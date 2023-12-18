@@ -132,7 +132,7 @@ final class BoardReadViewController: BaseViewController {
         
         output?.successDelete
             .bind(with: self, onNext: { owner, value in
-                owner.showOKAlert(title: "", message: "삭제가 완료되었습니다.") {
+                owner.showOKAlert(title: "삭제", message: "삭제가 완료되었습니다.") {
                     NotificationCenter.default.post(name: .refresh, object: nil)
                     owner.navigationController?.popViewController(animated: true)
                 }
@@ -239,7 +239,7 @@ final class BoardReadViewController: BaseViewController {
     
     
     
-    func configureDataSource() {
+    private func configureDataSource() {
         
         mainView.dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: mainView.tableView, cellProvider: { tableView, indexPath, itemIdentifier in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }

@@ -119,19 +119,6 @@ final class BoardWriteView: BaseView {
         
     }
     
-    
-    func configPHPicker(limit: Int = 3) -> PHPickerViewController {
-        
-        var photoConfiguration = PHPickerConfiguration()
-        photoConfiguration.selectionLimit = limit
-        photoConfiguration.filter = .images
-        let picker = PHPickerViewController(configuration: photoConfiguration)
-        picker.delegate = self
-        return picker
-    }
-    
-
-    
     func configureCollectionLayout() -> UICollectionViewLayout{
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1.0))
@@ -152,14 +139,5 @@ final class BoardWriteView: BaseView {
     }
     
     
-    
-}
-
-extension BoardWriteView: PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        
-        delegate?.didFinishPicking(picker: picker, results: results)
-
-    }
     
 }

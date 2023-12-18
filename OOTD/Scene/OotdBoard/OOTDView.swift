@@ -117,6 +117,8 @@ final class OOTDView: BaseView {
             }
             .disposed(by: cell.disposeBag)
         
+        cell.dateLabel.text = String.convertDateFormat(date: item.time)
+        
         return cell
     }
     

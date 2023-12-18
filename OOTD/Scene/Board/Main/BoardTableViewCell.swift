@@ -78,8 +78,8 @@ final class BoardTableViewCell: UITableViewCell {
         }
         textStackView.snp.makeConstraints { make in
             make.leading.top.equalTo(contentView).inset(18)
-            make.trailing.greaterThanOrEqualTo(thumbnailImage.snp.leading).offset(-12)
-            make.trailing.lessThanOrEqualTo(contentView).offset(-18)
+            make.trailing.lessThanOrEqualTo(thumbnailImage.snp.leading).offset(-12)
+//            make.trailing.lessThanOrEqualTo(contentView).offset(-18)
             make.bottom.equalTo(contentView).offset(-12)
         }
         
