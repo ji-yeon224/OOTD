@@ -239,7 +239,7 @@ final class BoardReadViewController: BaseViewController {
     
     
     
-    func configureDataSource() {
+    private func configureDataSource() {
         
         mainView.dataSource = UITableViewDiffableDataSource<Int, Comment>(tableView: mainView.tableView, cellProvider: { tableView, indexPath, itemIdentifier in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BoardCommentCell.identifier, for: indexPath) as? BoardCommentCell else { return UITableViewCell() }
