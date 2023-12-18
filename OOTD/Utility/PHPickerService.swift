@@ -14,22 +14,27 @@ final class PHPickerService {
     static let shared = PHPickerService()
     private init() { }
     private weak var viewController: UIViewController?
+    private var fullScreenType: Bool = false
+    let selectedImage = PublishSubject<UIImage>()
+    let disposeBag = DisposeBag()
     
-    func presentPicker(vc: UIViewController, prevIdentifiers:[String]? = nil) {
+    func presentPicker(vc: UIViewController, selectLimit: Int = 1, fullScreenType: Bool) {
         self.viewController = vc
+        self.fullScreenType = fullScreenType
         let filter = PHPickerFilter.images
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
         configuration.filter = filter
         configuration.preferredAssetRepresentationMode = .automatic
         configuration.selection = .ordered
-        configuration.selectionLimit = 1
-        if let prevIdentifiers{
-            configuration.preselectedAssetIdentifiers = prevIdentifiers
-        }
+        configuration.selectionLimit = selectLimit
+        
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
-        picker.modalPresentationStyle = .fullScreen
-        picker.modalTransitionStyle = .crossDissolve
+        if fullScreenType {
+            picker.modalPresentationStyle = .fullScreen
+            picker.modalTransitionStyle = .crossDissolve
+        }
+        
         
         viewController?.present(picker, animated: true)
     }
@@ -44,7 +49,9 @@ extension PHPickerService: PHPickerViewControllerDelegate {
         if results.isEmpty {
             viewController.dismiss(animated: true)
         } else {
-            viewController.dismiss(animated: false) {
+            
+            
+            viewController.dismiss(animated: !fullScreenType) {
                 
                 
                 if let select = results.first {
@@ -55,17 +62,14 @@ extension PHPickerService: PHPickerViewControllerDelegate {
                             guard let img = image as? UIImage else {
                                 return
                             }
-                            
-                            let vc = OOTDWriteViewController(selectImage: img)
+                            self.selectedImage.onNext(img)
+//                            let vc = OOTDWriteViewController(selectImage: img)
 //                            vc.selectImage = img
-                            viewController.navigationController?.pushViewController(vc, animated: true)
+//                            viewController.navigationController?.pushViewController(vc, animated: true)
                         }
                         
                     }
                 }
-                
-                
-                
                 
             }
         }

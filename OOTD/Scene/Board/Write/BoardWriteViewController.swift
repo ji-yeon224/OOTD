@@ -168,6 +168,7 @@ final class BoardWriteViewController: BaseViewController {
             .bind(with: self) { owner, _ in
                 if output.enableAddImage.value {
                     owner.view.endEditing(true)
+//                    PHPickerService.shared.presentPicker(vc: self, selectLimit: owner.viewModel.selectCount)
                     owner.present(owner.mainView.configPHPicker(limit: owner.viewModel.selectCount), animated: true)
                 } else {
                     owner.showToastMessage(message: "이미지는 최대 3장까지 선택할 수 있습니다.", position: .center)

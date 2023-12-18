@@ -150,7 +150,14 @@ extension UpdateProfileViewController {
         }
         let selectPhoto = UIAlertAction(title: "사진 선택", style: .default) { [weak self] _ in
             guard let self = self else { return }
-            self.present(self.mainView.configPHPicker(limit: 1), animated: true)
+//            self.present(self.mainView.configPHPicker(limit: 1), animated: true)
+            PHPickerService.shared.presentPicker(vc: self, fullScreenType: false)
+            PHPickerService.shared.selectedImage
+                .subscribe(with: self) { owner, image in
+                    owner.viewModel.selectedImg = SelectedImage(image: image)
+                    owner.mainView.profileImageView.image = image
+                }
+                .disposed(by: PHPickerService.shared.disposeBag)
             
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
