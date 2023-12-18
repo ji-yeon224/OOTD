@@ -150,7 +150,7 @@ extension OOTDViewController {
         PHPickerService.shared.presentPicker(vc: self, fullScreenType: true)
         PHPickerService.shared.selectedImage
             .bind(with: self) { owner, image in
-                let vc = OOTDWriteViewController(selectImage: image)
+                let vc = OOTDWriteViewController(selectImage: image.first)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: PHPickerService.shared.disposeBag)

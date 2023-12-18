@@ -15,12 +15,16 @@ final class PHPickerService {
     private init() { }
     private weak var viewController: UIViewController?
     private var fullScreenType: Bool = false
-    let selectedImage = PublishSubject<UIImage>()
-    let disposeBag = DisposeBag()
+    
+    private let group = DispatchGroup()
+    
+    let selectedImage = PublishSubject<[UIImage]>()
+    var disposeBag = DisposeBag()
     
     func presentPicker(vc: UIViewController, selectLimit: Int = 1, fullScreenType: Bool) {
         self.viewController = vc
         self.fullScreenType = fullScreenType
+        self.disposeBag = DisposeBag()
         let filter = PHPickerFilter.images
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
         configuration.filter = filter
@@ -44,34 +48,28 @@ extension PHPickerService: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         
-        
+        var imgList: [UIImage] = []
         guard let viewController else {return}
         if results.isEmpty {
             viewController.dismiss(animated: true)
         } else {
-            
-            
-            viewController.dismiss(animated: !fullScreenType) {
-                
-                
-                if let select = results.first {
-                    let item = select.itemProvider
-                    item.loadObject(ofClass: UIImage.self) { image, error in
-                        
-                        DispatchQueue.main.async {
-                            guard let img = image as? UIImage else {
-                                return
-                            }
-                            self.selectedImage.onNext(img)
-//                            let vc = OOTDWriteViewController(selectImage: img)
-//                            vc.selectImage = img
-//                            viewController.navigationController?.pushViewController(vc, animated: true)
-                        }
-                        
+            results.forEach {
+                self.group.enter()
+                let item = $0.itemProvider
+                item.loadObject(ofClass: UIImage.self) { image, error in
+                    DispatchQueue.main.async {
+                        guard let img = image as? UIImage else { return }
+                        imgList.append(img)
+                        self.group.leave()
                     }
                 }
-                
             }
+            
+            group.notify(queue: DispatchQueue.main) {
+                self.selectedImage.onNext(imgList)
+                self.viewController?.dismiss(animated: !self.fullScreenType)
+            }
+
         }
         
     }

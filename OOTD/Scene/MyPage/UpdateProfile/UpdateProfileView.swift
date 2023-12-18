@@ -98,15 +98,6 @@ final class UpdateProfileView: BaseView {
         }
         
     }
-    func configPHPicker(limit: Int = 1) -> PHPickerViewController {
-        
-        var photoConfiguration = PHPickerConfiguration()
-        photoConfiguration.selectionLimit = limit
-        photoConfiguration.filter = .images
-        let picker = PHPickerViewController(configuration: photoConfiguration)
-        picker.delegate = self
-        return picker
-    }
     
     func setProfile(nick: String, image: String?) {
         nickNameTextField.text = nick
@@ -116,15 +107,5 @@ final class UpdateProfileView: BaseView {
             profileImageView.image = Constants.Image.placeholderProfile
         }
         
-    }
-}
-
-
-// PHPicker
-extension UpdateProfileView: PHPickerViewControllerDelegate {
-    
-    
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        delegate?.didFinishPicking(picker: picker, results: results)
     }
 }

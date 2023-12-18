@@ -72,7 +72,7 @@ final class BoardWriteViewController: BaseViewController {
         super.configure()
         configNavBar()
         configToolBar()
-        mainView.delegate = self
+        
     }
 
 
@@ -83,12 +83,13 @@ final class BoardWriteViewController: BaseViewController {
         let rxDataSource = RxCollectionViewSectionedReloadDataSource<SelectImageModel> { dataSource, collectionView, indexPath, item in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
             
-            cell.imageView.image = item.image
+            cell.imageView.image = item.image.resize(multiplier: 30)
             cell.cancelButton.rx.tap
                 .bind(with: self) { owner, _ in
                     imageDelete.accept(indexPath.item)
                 }
                 .disposed(by: cell.disposeBag)
+            cell.layoutIfNeeded()
             
             return cell
         }
@@ -168,8 +169,7 @@ final class BoardWriteViewController: BaseViewController {
             .bind(with: self) { owner, _ in
                 if output.enableAddImage.value {
                     owner.view.endEditing(true)
-//                    PHPickerService.shared.presentPicker(vc: self, selectLimit: owner.viewModel.selectCount)
-                    owner.present(owner.mainView.configPHPicker(limit: owner.viewModel.selectCount), animated: true)
+                    owner.configSelectedImage()
                 } else {
                     owner.showToastMessage(message: "이미지는 최대 3장까지 선택할 수 있습니다.", position: .center)
                 }
@@ -184,7 +184,15 @@ final class BoardWriteViewController: BaseViewController {
         
     }
     
-    
+    private func configSelectedImage() {
+        PHPickerService.shared.presentPicker(vc: self, selectLimit: viewModel.selectCount, fullScreenType: false)
+        PHPickerService.shared.selectedImage
+            .bind(with: self) { owner, image in
+                let imgList = image.map { return SelectedImage(image: $0)}
+                owner.viewModel.setImageItems(imgList)
+            }
+            .disposed(by: PHPickerService.shared.disposeBag)
+    }
     
     private func configNavBar() {
         
@@ -211,47 +219,5 @@ final class BoardWriteViewController: BaseViewController {
     
 }
 
-extension BoardWriteViewController: PhPickerProtocol {
-  
-
-    func didFinishPicking(picker: PHPickerViewController, results: [PHPickerResult]) {
-
-        picker.dismiss(animated: true)
-        
-        if results.isEmpty {
-            return
-        }
-        var imageList: [SelectedImage] = []
-        let dispatchGroup = DispatchGroup()
-        
-        results.forEach {
-            dispatchGroup.enter()
-            let item = $0.itemProvider
-            
-            if item.canLoadObject(ofClass: UIImage.self) {
-                // loadObject -> 비동기로 동작
-                item.loadObject(ofClass: UIImage.self) { (image, error) in
-                    DispatchQueue.main.async {
-                        guard let img = image as? UIImage else { return }
-                        imageList.append(SelectedImage(image: img))
-                        dispatchGroup.leave()
-                        
-                    }
-                    
-                }
-
-            } else {
-                print("이미지 로드 실패")
-            }
-        }
-        dispatchGroup.notify(queue: DispatchQueue.main) { [weak self] in
-            guard let self = self else { return }
-            self.viewModel.setImageItems(imageList)
-        }
-        
-    }
-    
-    
-}
 
 
