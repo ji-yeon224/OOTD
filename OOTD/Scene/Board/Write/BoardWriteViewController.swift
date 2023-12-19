@@ -185,13 +185,13 @@ final class BoardWriteViewController: BaseViewController {
     }
     
     private func configSelectedImage() {
-        PHPickerService.shared.presentPicker(vc: self, selectLimit: viewModel.selectCount, fullScreenType: false)
-        PHPickerService.shared.selectedImage
+        PHPickerManager.shared.presentPicker(vc: self, selectLimit: viewModel.selectCount, fullScreenType: false)
+        PHPickerManager.shared.selectedImage
             .bind(with: self) { owner, image in
                 let imgList = image.map { return SelectedImage(image: $0)}
                 owner.viewModel.setImageItems(imgList)
             }
-            .disposed(by: PHPickerService.shared.disposeBag)
+            .disposed(by: PHPickerManager.shared.disposeBag)
     }
     
     private func configNavBar() {

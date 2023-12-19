@@ -119,6 +119,8 @@ final class OOTDView: BaseView {
         
         cell.dateLabel.text = String.convertDateFormat(date: item.time)
         
+        cell.layoutIfNeeded()
+        
         return cell
     }
     

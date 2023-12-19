@@ -9,9 +9,9 @@ import UIKit
 import PhotosUI
 import RxSwift
 
-final class PHPickerService {
+final class PHPickerManager {
     
-    static let shared = PHPickerService()
+    static let shared = PHPickerManager()
     private init() { }
     private weak var viewController: UIViewController?
     private var fullScreenType: Bool = false
@@ -44,7 +44,7 @@ final class PHPickerService {
     }
 }
 
-extension PHPickerService: PHPickerViewControllerDelegate {
+extension PHPickerManager: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         

@@ -153,13 +153,13 @@ extension OOTDViewController {
     
     @objc private func writeButtonTap() {
        
-        PHPickerService.shared.presentPicker(vc: self, fullScreenType: true)
-        PHPickerService.shared.selectedImage
+        PHPickerManager.shared.presentPicker(vc: self, fullScreenType: true)
+        PHPickerManager.shared.selectedImage
             .bind(with: self) { owner, image in
                 let vc = OOTDWriteViewController(selectImage: image.first)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            .disposed(by: PHPickerService.shared.disposeBag)
+            .disposed(by: PHPickerManager.shared.disposeBag)
         
     }
     
