@@ -51,8 +51,8 @@ final class UpdateProfileViewModel {
             .disposed(by: disposeBag)
         
         input.updateProfile
-            .map {
-                let img = self.selectedImg?.image.jpegData(compressionQuality: 1.0)
+            .map { [weak self] in
+                let img = self?.selectedImg?.image.jpegData(compressionQuality: 1.0)
                 return ProfileUpdateRequest(nick: $0.nick, profile: img )
             }
             .flatMap {
