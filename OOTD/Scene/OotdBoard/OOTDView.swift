@@ -13,9 +13,11 @@ import RxSwift
 final class OOTDView: BaseView {
     
     private let deviceWidth = UIScreen.main.bounds.size.width
-    
+    let layoutRefresh = PublishRelay<Bool>()
     let likeData = PublishRelay<Bool>()
     weak var delegate: OOTDCellProtocol?
+    
+    
     
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
@@ -36,19 +38,18 @@ final class OOTDView: BaseView {
         }
     }
     
+    
+    
     private func configureCollectionLayout() -> UICollectionViewLayout{
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(500))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(500))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(500))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 1)
         group.interItemSpacing = .fixed(10) // 아이템 옆 간격
         let section = NSCollectionLayoutSection(group: group)
-//        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        
-//        section.orthogonalScrollingBehavior = .paging
         section.interGroupSpacing = 10 // 줄 간격
         let layout = UICollectionViewCompositionalLayout(section: section)
         
@@ -60,6 +61,16 @@ final class OOTDView: BaseView {
     lazy var dataSource = RxCollectionViewSectionedReloadDataSource<PostListModel> { dataSource, collectionView, indexPath, item in
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OOTDCollectionViewCell.identifier, for: indexPath) as? OOTDCollectionViewCell else { return UICollectionViewCell()}
         var likeValue: Bool = false
+        
+        
+        if item.image.count > 0 {
+            cell.imageView.setImage(with: item.image[0], resize: self.deviceWidth, cornerRadius: 0 ) {
+                collectionView.collectionViewLayout.invalidateLayout()
+            }
+            
+        }
+       
+        
         if let img = item.creator.profile {
             cell.profileImage.setImage(with: img, resize: 30)
         } else {
@@ -68,9 +79,7 @@ final class OOTDView: BaseView {
         
         cell.nicknameLabel.text = item.creator.nick
         
-        if item.image.count > 0 {
-            cell.imageView.setImage(with: item.image[0], resize: self.deviceWidth, cornerRadius: 0 )
-        }
+        
         
         cell.contentLabel.text = item.content
         
@@ -118,10 +127,10 @@ final class OOTDView: BaseView {
             .disposed(by: cell.disposeBag)
         
         cell.dateLabel.text = String.convertDateFormat(date: item.time)
+        cell.layoutIfNeeded()
         
         return cell
     }
-    
     
     
     private func setMenuItem(item: Post, idx: Int) -> UIMenu {

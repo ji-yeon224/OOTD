@@ -10,7 +10,7 @@ import Kingfisher
 
 extension UIImageView {
     
-    func setImage(with urlString: String, resize width: CGFloat? = nil, cornerRadius: CGFloat = 15) {
+    func setImage(with urlString: String, resize width: CGFloat? = nil, cornerRadius: CGFloat = 15, completion: (() -> Void)? = nil) {
         let cornerImageProcessor = RoundCornerImageProcessor(cornerRadius: cornerRadius)
         
         ImageCache.default.retrieveImage(forKey: urlString, options: [
@@ -28,7 +28,7 @@ extension UIImageView {
                     } else {
                         self.image = image
                     }
-                    
+                    completion?()
                 } else {
                     guard let url = URL(string: self.getPhotoURL(urlString)) else { return }
                     let resource = ImageResource(downloadURL: url, cacheKey: urlString)
@@ -45,7 +45,7 @@ extension UIImageView {
                             } else {
                                 self.image = result.image
                             }
-                            
+                            completion?()
                             
                         case .failure(_):
                             self.image = Constants.Image.errorPhoto?.withTintColor(Constants.Color.background)
@@ -58,38 +58,13 @@ extension UIImageView {
             case .failure(let error):
                 print(error)
             }
+            
         }
         
         
         
     }
-    
-    
-//    func setImage(with urlString: String, resize width: CGFloat) {
-//        let cornerImageProcessor = RoundCornerImageProcessor(cornerRadius: 15)
-//        self.kf.indicatorType = .activity
-//        guard let url = URL(string: getPhotoURL(urlString)) else { return }
-//        self.kf.setImage(with: url, options: [
-//            .requestModifier(ImageLoadManager.shared.getModifier()),
-//            .transition(.fade(1.0)),
-//            .processor(cornerImageProcessor)
-//        ]) { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let result):
-//                self.image = result.image.resize(width: width) //result.image.resize(width: width)
-//                
-//            case .failure(_):
-//                self.image = Constants.Image.photo?.withTintColor(Constants.Color.placeholder)
-//                
-//                
-//            }
-//            
-//        }
-//        
-//    }
-    
-    
+
  
     
     // 서버에서 받을 이미지 full url

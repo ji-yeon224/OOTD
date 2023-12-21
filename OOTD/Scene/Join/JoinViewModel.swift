@@ -25,6 +25,7 @@ final class JoinViewModel {
         let nickText: ControlProperty<String>
         let birthText: ControlProperty<String>
         let buttonTap: ControlEvent<Void>
+        let date: ControlEvent<Date>
         
     }
     
@@ -122,15 +123,14 @@ final class JoinViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.birthText
-            .bind(with: self, onNext: { owner, value in
-                owner.birthday.accept(value)
-                let date = DateFormatter.stringToDate(date: owner.birthday.value)
-                let valid = owner.getAge(birthday: date)
+        input.date
+            .bind(with: self) { owner, value in
+                
+                owner.birthday.accept(DateFormatter.convertDate(date: value))
+                let valid = owner.getAge(birthday: value)
                 birthValid.accept(valid)
-            })
+            }
             .disposed(by: disposeBag)
-        
         
         input.buttonTap
             .debug()

@@ -32,8 +32,10 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
         return view
     }()
     
+    private let imageBackView = UIView()
+    
     let imageView = {
-        let view = UIImageView()
+        let view = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.size.width, height: .zero)))
         view.contentMode = .scaleAspectFit
         return view
     }()
@@ -72,7 +74,7 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
         
         contentView.addSubview(stackView)
         
-        [topView, imageView, bottomView, contentBackView, dateView].forEach {
+        [topView, imageBackView, bottomView, contentBackView, dateView].forEach {
             stackView.addArrangedSubview($0)
         }
         
@@ -80,6 +82,8 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
             topView.addSubview($0)
         }
         
+        imageBackView.addSubview(imageView)
+        imageView.backgroundColor = .gray
         [likeButton, commentButton].forEach {
             bottomView.addSubview($0)
         }
@@ -102,11 +106,15 @@ final class OOTDCollectionViewCell: BaseCollectionViewCell {
         
         topViewConstraints()
         
-        imageView.snp.makeConstraints { make in
+        imageBackView.snp.makeConstraints { make in
             make.width.equalTo(stackView)
+            
 //            make.horizontalEdges.equalTo(contentView)
 //            make.top.equalTo(topView.snp.bottom)
 //            make.bottom.equalTo(bottomView.snp.top)
+        }
+        imageView.snp.makeConstraints { make in
+            make.edges.equalTo(imageBackView)
         }
         
         bottomView.snp.makeConstraints { make in

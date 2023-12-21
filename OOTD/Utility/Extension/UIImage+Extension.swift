@@ -63,7 +63,7 @@ extension UIImage {
             kCGImageSourceShouldCache: false,
             kCGImageSourceCreateThumbnailFromImageAlways: true,
             kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
-            kCGImageSourceThumbnailMaxPixelSize: size * 3,
+            kCGImageSourceThumbnailMaxPixelSize: size * UIScreen.main.scale,
             kCGImageSourceCreateThumbnailWithTransform: true
         ]
         

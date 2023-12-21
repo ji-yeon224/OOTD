@@ -53,6 +53,10 @@ final class BoardWriteViewController: BaseViewController {
         
     }
     
+    deinit {
+        print("write deinit")
+    }
+    
     private func configEditData(_ data: Post) {
         mainView.titleTextField.text = data.title
         mainView.contentTextView.text = data.content
@@ -185,13 +189,13 @@ final class BoardWriteViewController: BaseViewController {
     }
     
     private func configSelectedImage() {
-        PHPickerService.shared.presentPicker(vc: self, selectLimit: viewModel.selectCount, fullScreenType: false)
-        PHPickerService.shared.selectedImage
+        PHPickerManager.shared.presentPicker(vc: self, selectLimit: viewModel.selectCount, fullScreenType: false)
+        PHPickerManager.shared.selectedImage
             .bind(with: self) { owner, image in
                 let imgList = image.map { return SelectedImage(image: $0)}
                 owner.viewModel.setImageItems(imgList)
             }
-            .disposed(by: PHPickerService.shared.disposeBag)
+            .disposed(by: PHPickerManager.shared.disposeBag)
     }
     
     private func configNavBar() {

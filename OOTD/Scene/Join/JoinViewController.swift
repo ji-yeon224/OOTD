@@ -31,7 +31,7 @@ final class JoinViewController: BaseViewController {
     
     override func configure() {
         super.configure()
-        mainView.datePickerview.addTarget(self, action: #selector(dateChange), for: .valueChanged)
+
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Constants.Image.back, style: .plain, target: self, action: #selector(backButtonTap))
         navigationItem.leftBarButtonItem?.tintColor = Constants.Color.mainColor
     }
@@ -48,7 +48,8 @@ final class JoinViewController: BaseViewController {
             passText: mainView.passwordTextField.rx.text.orEmpty,
             nickText: mainView.nicknameTextField.rx.text.orEmpty,
             birthText: mainView.birthdayTextField.rx.text.orEmpty,
-            buttonTap: mainView.joinButton.rx.tap
+            buttonTap: mainView.joinButton.rx.tap,
+            date: mainView.datePickerview.rx.date.changed
         )
         
         let output = viewModel.transform(input: input)
@@ -85,7 +86,7 @@ final class JoinViewController: BaseViewController {
         
         output.joinValidation
             .bind(with: self) { owner, value in
-                
+                owner.mainView.joinButton.isEnabled = value
                 owner.mainView.joinButton.backgroundColor = value ? Constants.Color.mainColor : Constants.Color.disableTint
             }
             .disposed(by: disposeBag)
@@ -111,12 +112,15 @@ final class JoinViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        mainView.datePickerview.rx.date.changed
+            .bind(with: self) { owner, value in
+                owner.mainView.birthdayTextField.text = DateFormatter.convertTextFieldDate(date: value)
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     
-    @objc private func dateChange(_ sender: UIDatePicker) {
-        mainView.birthdayTextField.text = DateFormatter.convertDate(date: sender.date)
-    }
     
     
     

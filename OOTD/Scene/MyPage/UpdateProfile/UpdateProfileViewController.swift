@@ -150,8 +150,8 @@ extension UpdateProfileViewController {
         let selectPhoto = UIAlertAction(title: "사진 선택", style: .default) { [weak self] _ in
             guard let self = self else { return }
             
-            PHPickerService.shared.presentPicker(vc: self, fullScreenType: false)
-            PHPickerService.shared.selectedImage
+            PHPickerManager.shared.presentPicker(vc: self, fullScreenType: false)
+            PHPickerManager.shared.selectedImage
                 .subscribe(with: self) { owner, image in
                     guard let img = image.first?.resizeV3(to: self.mainView.imageViewSize) else {
                         owner.showOKAlert(title: "", message: "이미지를 불러올 수 없습니다.") { }
@@ -161,7 +161,7 @@ extension UpdateProfileViewController {
                     owner.mainView.profileImageView.image = img
                     self.updatePhoto.accept(true)
                 }
-                .disposed(by: PHPickerService.shared.disposeBag)
+                .disposed(by: PHPickerManager.shared.disposeBag)
             
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
