@@ -15,6 +15,7 @@ enum PostAPI {
     case update(id: String, data: PostWrite)
     case like(id: String)
     case myLike(limit: Int, next: String?)
+    case userPosts(id: String, productId: String, limit: Int, next: String?)
 }
 
 extension PostAPI: TargetType {
@@ -34,6 +35,9 @@ extension PostAPI: TargetType {
             return "post/like/\(id)"
         case .myLike:
             return "post/like/me"
+        case .userPosts(let id, _, _, _):
+            return "post/user/\(id)"
+            
         }
     }
     
@@ -41,7 +45,7 @@ extension PostAPI: TargetType {
         switch self {
         case .write, .like:
             return .post
-        case .read, .myLike:
+        case .read, .myLike, .userPosts:
             return .get
         case .delete:
             return .delete
@@ -55,8 +59,8 @@ extension PostAPI: TargetType {
         switch self {
         case .write(let data), .update(_, let data):
             return .uploadMultipart(convertToMultipart(data: data))
-        case .read(let id, let limit, let next):
-            var parameters: [String:Any] = ["product_id" : id, "limit": limit]
+        case .read(let productId, let limit, let next), .userPosts(_, let productId, let limit, let next):
+            var parameters: [String:Any] = ["product_id" : productId, "limit": limit]
             if let next = next {
                 parameters["next"] = next
             }
@@ -79,7 +83,7 @@ extension PostAPI: TargetType {
                 "SesacKey": APIKey.key,
                 "Authorization": UserDefaultsHelper.token
             ]
-        case .read, .delete, .like, .myLike:
+        case .read, .delete, .like, .myLike, .userPosts:
             return ["Authorization": UserDefaultsHelper.token,
                     "SesacKey": APIKey.key]
        
