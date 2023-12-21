@@ -47,6 +47,9 @@
 		CE76E0162B1747F900A38041 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0152B1747F900A38041 /* ReusableProtocol.swift */; };
 		CE76E0182B17719600A38041 /* PlainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76E0172B17719600A38041 /* PlainImageView.swift */; };
 		CE7A0C6C2B1B6162003F247B /* BoardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A0C6B2B1B6162003F247B /* BoardMode.swift */; };
+		CE92B8FB2B34667400506455 /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92B8FA2B34667400506455 /* AccountSettingViewController.swift */; };
+		CE92B8FD2B34668600506455 /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92B8FC2B34668600506455 /* AccountSettingView.swift */; };
+		CE92B8FF2B34669500506455 /* AccountSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE92B8FE2B34669500506455 /* AccountSettingViewModel.swift */; };
 		CE96ADF62B2C20B200509644 /* BoardReactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96ADF52B2C20B200509644 /* BoardReactView.swift */; };
 		CE96ADF92B2C2ADA00509644 /* OOTDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96ADF82B2C2ADA00509644 /* OOTDViewController.swift */; };
 		CE96ADFB2B2C2AE400509644 /* OOTDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96ADFA2B2C2AE400509644 /* OOTDView.swift */; };
@@ -197,6 +200,9 @@
 		CE76E0152B1747F900A38041 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
 		CE76E0172B17719600A38041 /* PlainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainImageView.swift; sourceTree = "<group>"; };
 		CE7A0C6B2B1B6162003F247B /* BoardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardMode.swift; sourceTree = "<group>"; };
+		CE92B8FA2B34667400506455 /* AccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
+		CE92B8FC2B34668600506455 /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
+		CE92B8FE2B34669500506455 /* AccountSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewModel.swift; sourceTree = "<group>"; };
 		CE96ADF52B2C20B200509644 /* BoardReactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardReactView.swift; sourceTree = "<group>"; };
 		CE96ADF82B2C2ADA00509644 /* OOTDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDViewController.swift; sourceTree = "<group>"; };
 		CE96ADFA2B2C2AE400509644 /* OOTDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OOTDView.swift; sourceTree = "<group>"; };
@@ -415,12 +421,23 @@
 		CE5CA53E2B27E68400534A08 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				CE92B8F92B34665A00506455 /* AccountSetting */,
 				CE2021F02B2870BC00603194 /* UpdateProfile */,
 				CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */,
 				CE5CA5412B27E6BC00534A08 /* MyPageView.swift */,
 				CE2021EE2B284E0E00603194 /* MyPageViewModel.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		CE92B8F92B34665A00506455 /* AccountSetting */ = {
+			isa = PBXGroup;
+			children = (
+				CE92B8FA2B34667400506455 /* AccountSettingViewController.swift */,
+				CE92B8FC2B34668600506455 /* AccountSettingView.swift */,
+				CE92B8FE2B34669500506455 /* AccountSettingViewModel.swift */,
+			);
+			path = AccountSetting;
 			sourceTree = "<group>";
 		};
 		CE96ADF72B2C2AA000509644 /* OotdBoard */ = {
@@ -953,6 +970,8 @@
 				CEFCACA02B2844F000DA68EC /* ProfileAPI.swift in Sources */,
 				CEECBF962B0A42EA0031947E /* BoardWriteViewController.swift in Sources */,
 				CEC7DF862B1D9478003D02D3 /* ImageManager.swift in Sources */,
+				CE92B8FB2B34667400506455 /* AccountSettingViewController.swift in Sources */,
+				CE92B8FD2B34668600506455 /* AccountSettingView.swift in Sources */,
 				CE290E932B04B285007DFCAE /* Image.swift in Sources */,
 				CEEA87592B01E30000AC375F /* ViewController.swift in Sources */,
 				CE290E8B2B049AC6007DFCAE /* JoinViewModel.swift in Sources */,
@@ -1011,6 +1030,7 @@
 				CEE80AD02B1873680041AC36 /* SectionType.swift in Sources */,
 				CEEA878B2B01F1A400AC375F /* BaseViewController.swift in Sources */,
 				CE96AE062B2C685D00509644 /* OOTDWriteView.swift in Sources */,
+				CE92B8FF2B34669500506455 /* AccountSettingViewModel.swift in Sources */,
 				CEA903042B146F9B00F09FB8 /* SelectImageModel.swift in Sources */,
 				CE96ADF92B2C2ADA00509644 /* OOTDViewController.swift in Sources */,
 				CEEA87972B01F87500AC375F /* CustomTextField.swift in Sources */,

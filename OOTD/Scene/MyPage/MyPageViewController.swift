@@ -35,12 +35,12 @@ final class MyPageViewController: BaseViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-    
-   
-    
     override func configure() {
         super.configure()
         navigationController?.navigationBar.isHidden = true
+        
+        configNavBar()
+        
     }
     
     private func bind() {
@@ -148,6 +148,27 @@ final class MyPageViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        mainView.menuButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let vc = AccountSettingViewController()
+                
+                let detentIdentifier = UISheetPresentationController.Detent.Identifier("customDetent")
+                let customDetent = UISheetPresentationController.Detent.custom(identifier: detentIdentifier) { _ in
+                    // safe area bottom을 구하기 위한 선언.
+                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                    let safeAreaBottom = windowScene?.windows.first?.safeAreaInsets.bottom ?? 0
+
+                    return 200 - safeAreaBottom
+                }
+                if let sheet = vc.sheetPresentationController {
+                    sheet.detents = [customDetent]
+                    sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                    sheet.prefersGrabberVisible = true
+                }
+                owner.present(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
 //        Observable.zip(mainView.collectionView.rx.itemSelected, mainView.collectionView.rx.modelSelected(MyPageContent.self))
 //            .bind(with: self) { owner, value in
 //                print(value.1)
@@ -172,5 +193,10 @@ final class MyPageViewController: BaseViewController {
     }
     
     
+    
+    private func configNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.Image.menuButton, style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
+    }
     
 }

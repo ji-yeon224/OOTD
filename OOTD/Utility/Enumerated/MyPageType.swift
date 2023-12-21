@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum MyPageType {
+enum MyPageType: String {
     case likeboard, mypost, logout, withdraw
 }

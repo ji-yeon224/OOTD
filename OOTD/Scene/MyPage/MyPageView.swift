@@ -10,7 +10,16 @@ import RxDataSources
 
 final class MyPageView: BaseView {
     
+    private let topView = UIView()
+    
     private let titleLabel = PlainLabel(size: 30, color: Constants.Color.basicText, weight: .bold)
+    var menuButton = {
+        let view = UIButton()
+        view.setImage(Constants.Image.menuButton, for: .normal)
+        view.tintColor = Constants.Color.basicText
+        view.backgroundColor = .clear
+        return view
+    }()
     
     var profileView = ProfileView()
     
@@ -21,7 +30,10 @@ final class MyPageView: BaseView {
     
     
     override func configure() {
-        addSubview(titleLabel)
+        addSubview(topView)
+        topView.addSubview(titleLabel)
+        topView.addSubview(menuButton)
+        
         addSubview(profileView)
         addSubview(collectionView)
         titleLabel.text = "MyPage"
@@ -33,9 +45,21 @@ final class MyPageView: BaseView {
     }
     
     override func setConstraints() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(10)
+        topView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(50)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.verticalEdges.equalTo(topView)
+            make.leading.equalTo(topView).inset(14)
+            make.trailing.equalTo(menuButton.snp.leading).offset(-10)
+        }
+        
+        menuButton.snp.makeConstraints { make in
+            make.size.equalTo(25)
+            make.centerY.equalTo(topView)
+            make.trailing.equalTo(topView).inset(14)
         }
         
         profileView.snp.makeConstraints { make in
