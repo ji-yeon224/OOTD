@@ -47,6 +47,10 @@ final class BoardReadViewController: BaseViewController {
         
     }
     
+    deinit {
+        print("read deinit")
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

@@ -122,8 +122,6 @@
 		CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87722B01ED4700AC375F /* APIKey.swift */; };
 		CEEA87752B01ED5000AC375F /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87742B01ED5000AC375F /* BaseURL.swift */; };
 		CEEA877A2B01EEAA00AC375F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA87792B01EEAA00AC375F /* SnapKit */; };
-		CEEA877D2B01EECB00AC375F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA877C2B01EECB00AC375F /* RxCocoa */; };
-		CEEA877F2B01EECB00AC375F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA877E2B01EECB00AC375F /* RxSwift */; };
 		CEEA87822B01EEDB00AC375F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = CEEA87812B01EEDB00AC375F /* RxDataSources */; };
 		CEEA87872B01F0A000AC375F /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87862B01F0A000AC375F /* BaseView.swift */; };
 		CEEA87892B01F10900AC375F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA87882B01F10900AC375F /* Constants.swift */; };
@@ -153,6 +151,8 @@
 		CEED52B52B05056E007E12FA /* EmailValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B42B05056E007E12FA /* EmailValidationError.swift */; };
 		CEED52B72B050652007E12FA /* WithdrawError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B62B050652007E12FA /* WithdrawError.swift */; };
 		CEED52B92B050893007E12FA /* RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEED52B82B050893007E12FA /* RefreshToken.swift */; };
+		CEF61E5E2B32DC8100A24BE3 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CEF61E5D2B32DC8100A24BE3 /* RxCocoa */; };
+		CEF61E602B32DC8100A24BE3 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEF61E5F2B32DC8100A24BE3 /* RxSwift */; };
 		CEFCAC982B28318400DA68EC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCAC972B28318400DA68EC /* ProfileView.swift */; };
 		CEFCAC9B2B283B7D00DA68EC /* MyProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCAC9A2B283B7D00DA68EC /* MyProfileResponse.swift */; };
 		CEFCACA02B2844F000DA68EC /* ProfileAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFCAC9F2B2844F000DA68EC /* ProfileAPI.swift */; };
@@ -309,13 +309,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF61E5E2B32DC8100A24BE3 /* RxCocoa in Frameworks */,
 				CE75C3DF2B16239A00A08615 /* Toast in Frameworks */,
-				CEEA877F2B01EECB00AC375F /* RxSwift in Frameworks */,
+				CEF61E602B32DC8100A24BE3 /* RxSwift in Frameworks */,
 				CE526F9E2B2DCF5100F46EBE /* NVActivityIndicatorView in Frameworks */,
 				CEEA87822B01EEDB00AC375F /* RxDataSources in Frameworks */,
 				CED961582B0CF73B0067C424 /* Kingfisher in Frameworks */,
 				CEC2FBDD2B026DD9002E3046 /* Moya in Frameworks */,
-				CEEA877D2B01EECB00AC375F /* RxCocoa in Frameworks */,
 				CEEA877A2B01EEAA00AC375F /* SnapKit in Frameworks */,
 				CEEA87942B01F82000AC375F /* IQKeyboardManagerSwift in Frameworks */,
 				CE526FA02B2DCF5100F46EBE /* NVActivityIndicatorViewExtended in Frameworks */,
@@ -867,8 +867,6 @@
 			name = OOTD;
 			packageProductDependencies = (
 				CEEA87792B01EEAA00AC375F /* SnapKit */,
-				CEEA877C2B01EECB00AC375F /* RxCocoa */,
-				CEEA877E2B01EECB00AC375F /* RxSwift */,
 				CEEA87812B01EEDB00AC375F /* RxDataSources */,
 				CEEA87932B01F82000AC375F /* IQKeyboardManagerSwift */,
 				CEC2FBDC2B026DD9002E3046 /* Moya */,
@@ -876,6 +874,8 @@
 				CE75C3DE2B16239A00A08615 /* Toast */,
 				CE526F9D2B2DCF5100F46EBE /* NVActivityIndicatorView */,
 				CE526F9F2B2DCF5100F46EBE /* NVActivityIndicatorViewExtended */,
+				CEF61E5D2B32DC8100A24BE3 /* RxCocoa */,
+				CEF61E5F2B32DC8100A24BE3 /* RxSwift */,
 			);
 			productName = TimeLine;
 			productReference = CEEA87512B01E30000AC375F /* OOTD.app */;
@@ -907,13 +907,13 @@
 			mainGroup = CEEA87482B01E30000AC375F;
 			packageReferences = (
 				CEEA87782B01EEAA00AC375F /* XCRemoteSwiftPackageReference "SnapKit" */,
-				CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CEEA87802B01EEDB00AC375F /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				CEEA87922B01F82000AC375F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				CEC2FBDB2B026DD9002E3046 /* XCRemoteSwiftPackageReference "Moya" */,
 				CED961562B0CF73B0067C424 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CE75C3DD2B16239900A08615 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				CE526F9C2B2DCF5100F46EBE /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+				CEF61E5C2B32DC8100A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = CEEA87522B01E30000AC375F /* Products */;
 			projectDirPath = "";
@@ -1347,14 +1347,6 @@
 				minimumVersion = 5.6.0;
 			};
 		};
-		CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.6.0;
-			};
-		};
 		CEEA87802B01EEDB00AC375F /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
@@ -1369,6 +1361,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.5.16;
+			};
+		};
+		CEF61E5C2B32DC8100A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1404,16 +1404,6 @@
 			package = CEEA87782B01EEAA00AC375F /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		CEEA877C2B01EECB00AC375F /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		CEEA877E2B01EECB00AC375F /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CEEA877B2B01EECB00AC375F /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
 		CEEA87812B01EEDB00AC375F /* RxDataSources */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CEEA87802B01EEDB00AC375F /* XCRemoteSwiftPackageReference "RxDataSources" */;
@@ -1423,6 +1413,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CEEA87922B01F82000AC375F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		CEF61E5D2B32DC8100A24BE3 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEF61E5C2B32DC8100A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		CEF61E5F2B32DC8100A24BE3 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEF61E5C2B32DC8100A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

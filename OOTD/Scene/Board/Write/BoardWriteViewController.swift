@@ -53,6 +53,10 @@ final class BoardWriteViewController: BaseViewController {
         
     }
     
+    deinit {
+        print("write deinit")
+    }
+    
     private func configEditData(_ data: Post) {
         mainView.titleTextField.text = data.title
         mainView.contentTextView.text = data.content

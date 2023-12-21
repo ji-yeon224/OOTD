@@ -146,7 +146,7 @@ final class BoardWriteViewModel {
     
     private func imageToData() -> [Data] {
         var imgData: [Data] = []
-        let destSize = 1 * 1000 * 1000
+        let destSize = 1 * 1024 * 1024
         let compression = Compression.allCases.sorted(by: { $0.rawValue > $1.rawValue })
         imageModel.items.forEach {
             
