@@ -63,9 +63,6 @@ final class OOTDViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         
-        
-        
-        
         output.items
             .bind(to:  mainView.collectionView.rx.items(dataSource: mainView.dataSource))
             .disposed(by: disposeBag)

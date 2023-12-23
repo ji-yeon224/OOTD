@@ -23,7 +23,6 @@ final class BoardReadViewController: BaseViewController {
     private let commentDelete = PublishRelay<(String, Int)>()
     private let dispatchGroup = DispatchGroup()
     
-    private let deviceWidth = UIScreen.main.bounds.size.width
     private var isNeedRefresh = false
     
     
@@ -94,7 +93,7 @@ final class BoardReadViewController: BaseViewController {
         
         comments = post.comments.reversed()
         for i in 0..<post.image.count {
-            mainView.imgList[i].setImage(with: post.image[i], resize: deviceWidth-30)
+            mainView.imgList[i].setImage(with: post.image[i], resize: Constants.Design.deviceWidth-30)
         }
         
         // 게시글 작성자와 로그인 계정이 같다면 수정/삭제 가능

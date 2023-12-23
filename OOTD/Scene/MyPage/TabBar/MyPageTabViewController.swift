@@ -9,7 +9,7 @@ import UIKit
 import Tabman
 import Pageboy
 
-final class TabBarViewController: TabmanViewController {
+final class MyPageTabViewController: TabmanViewController {
     
     private var viewControllers: Array<UIViewController> = []
     private var id: String?
@@ -36,11 +36,10 @@ final class TabBarViewController: TabmanViewController {
     }
     
     private func config() {
+        let vc1 =  OOTDCollectViewController()
         
-        let vc1 = BoardViewController()
-        vc1.boardType = .user(id: id ?? UserDefaultsHelper.userID)
-        
-        let vc2 =  TestViewController()
+        let vc2 = BoardViewController()
+        vc2.boardType = .user(id: id ?? UserDefaultsHelper.userID)
         viewControllers.append(vc1)
         viewControllers.append(vc2)
     }
@@ -71,16 +70,16 @@ final class TabBarViewController: TabmanViewController {
 }
 
 
-extension TabBarViewController: PageboyViewControllerDataSource, TMBarDataSource {
+extension MyPageTabViewController: PageboyViewControllerDataSource, TMBarDataSource {
    
    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
   
        // MARK: -Tab 안 글씨들
        switch index {
        case 0:
-           return TMBarItem(title: "example 1")
+           return TMBarItem(title: "OOTD")
        case 1:
-           return TMBarItem(title: "example 2")
+           return TMBarItem(title: "Board")
        default:
            let title = "Page \(index)"
            return TMBarItem(title: title)

@@ -11,5 +11,6 @@ extension Constants {
     enum Design {
         static let buttonRadius: CGFloat = 10
         static let defaultFontSize: CGFloat = 15
+        static let deviceWidth: CGFloat = UIScreen.main.bounds.size.width
     }
 }

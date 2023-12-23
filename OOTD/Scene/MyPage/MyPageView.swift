@@ -25,7 +25,7 @@ final class MyPageView: BaseView {
     var profileView = ProfileView()
     
     
-    private lazy var vc = TabBarViewController(id: self.userId ?? UserDefaultsHelper.userID)
+    private lazy var vc = MyPageTabViewController(id: self.userId ?? UserDefaultsHelper.userID)
     private var contentView: UIView {
         self.vc.view
     }
