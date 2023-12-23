@@ -86,19 +86,7 @@ final class MyPageViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        output.withdraw
-            .bind(with: self) { owner, value in
-                if value {
-                    owner.showOKAlert(title: "탈퇴가 완료되었습니다.", message: "") {
-                        UserDefaultsHelper.initToken()
-                        // 로그인 뷰로 present
-                        owner.view?.window?.rootViewController = LoginViewController()
-                        owner.view.window?.makeKeyAndVisible()
-                    }
-                }
-            }
-            .disposed(by: disposeBag)
-        
+       
         
         mainView.profileView.editButton.rx.tap
             .bind(with: self) { owner, _ in
@@ -126,28 +114,6 @@ final class MyPageViewController: BaseViewController {
 
         
         
-        mainView.collectionView.rx.itemSelected
-            .bind(with: self) { owner, value in
-                let type = list[value.row].type
-                switch type {
-                case .likeboard:
-                    let vc = BoardViewController()
-                    vc.boardType = .my
-                    owner.navigationController?.pushViewController(vc, animated: true)
-                case .mypost: print("post")
-                case .withdraw:
-                    owner.showAlertWithCancel(title: "탈퇴 하시겠어요?", message: "") {
-                        withdrawTap.accept(true)
-                    } cancelHandler: {  }
-
-                    
-                case .logout:
-                    logoutTap.accept(true)
-                }
-                
-            }
-            .disposed(by: disposeBag)
-        
         mainView.menuButton.rx.tap
             .bind(with: self) { owner, _ in
                 let vc = AccountSettingViewController()
@@ -169,27 +135,7 @@ final class MyPageViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-//        Observable.zip(mainView.collectionView.rx.itemSelected, mainView.collectionView.rx.modelSelected(MyPageContent.self))
-//            .bind(with: self) { owner, value in
-//                print(value.1)
-//            }
-//            .map {
-//                return $1.type
-//            }
-//            .bind(with: self) { owner, type in
-//                switch type {
-//                case .likeboard: print("likeboard")
-//                case .mypost: print("post")
-//                case .withdraw: print("witdraw")
-//                    //withdrawTap.accept(true)
-//                case .logout: print("logout")
-//                    //logoutTap.accept(true)
-//                }
-//            }
-//            .disposed(by: disposeBag)
-        
-        
-    
+
     }
     
     

@@ -110,6 +110,9 @@
 		CEDC33992B10C6AD00A5788E /* PostReadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC33982B10C6AD00A5788E /* PostReadError.swift */; };
 		CEDC339B2B10C9B200A5788E /* TransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC339A2B10C9B200A5788E /* TransitionType.swift */; };
 		CEDC339D2B11BC3400A5788E /* NextCursorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC339C2B11BC3400A5788E /* NextCursorType.swift */; };
+		CEDD43472B36C45900BDACFB /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = CEDD43462B36C45900BDACFB /* Tabman */; };
+		CEDD434A2B36C47300BDACFB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD43492B36C47300BDACFB /* TabBarViewController.swift */; };
+		CEDD434C2B36C5E800BDACFB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD434B2B36C5E800BDACFB /* TestViewController.swift */; };
 		CEE80ACE2B186E8D0041AC36 /* BoardContentSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80ACD2B186E8D0041AC36 /* BoardContentSection.swift */; };
 		CEE80AD02B1873680041AC36 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80ACF2B1873680041AC36 /* SectionType.swift */; };
 		CEE80AFC2B19A92F0041AC36 /* BoardCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */; };
@@ -261,6 +264,8 @@
 		CEDC33982B10C6AD00A5788E /* PostReadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReadError.swift; sourceTree = "<group>"; };
 		CEDC339A2B10C9B200A5788E /* TransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionType.swift; sourceTree = "<group>"; };
 		CEDC339C2B11BC3400A5788E /* NextCursorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCursorType.swift; sourceTree = "<group>"; };
+		CEDD43492B36C47300BDACFB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		CEDD434B2B36C5E800BDACFB /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		CEE80ACD2B186E8D0041AC36 /* BoardContentSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardContentSection.swift; sourceTree = "<group>"; };
 		CEE80ACF2B1873680041AC36 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
 		CEE80AFB2B19A92F0041AC36 /* BoardCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCommentCell.swift; sourceTree = "<group>"; };
@@ -322,6 +327,7 @@
 				CEEA87822B01EEDB00AC375F /* RxDataSources in Frameworks */,
 				CED961582B0CF73B0067C424 /* Kingfisher in Frameworks */,
 				CEC2FBDD2B026DD9002E3046 /* Moya in Frameworks */,
+				CEDD43472B36C45900BDACFB /* Tabman in Frameworks */,
 				CEEA877A2B01EEAA00AC375F /* SnapKit in Frameworks */,
 				CEEA87942B01F82000AC375F /* IQKeyboardManagerSwift in Frameworks */,
 				CE526FA02B2DCF5100F46EBE /* NVActivityIndicatorViewExtended in Frameworks */,
@@ -421,6 +427,7 @@
 		CE5CA53E2B27E68400534A08 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				CEDD43482B36C46700BDACFB /* TabBar */,
 				CE92B8F92B34665A00506455 /* AccountSetting */,
 				CE2021F02B2870BC00603194 /* UpdateProfile */,
 				CE5CA53F2B27E6A700534A08 /* MyPageViewController.swift */,
@@ -680,6 +687,15 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		CEDD43482B36C46700BDACFB /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				CEDD43492B36C47300BDACFB /* TabBarViewController.swift */,
+				CEDD434B2B36C5E800BDACFB /* TestViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		CEE80ACC2B18511D0041AC36 /* BoardReadCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -893,6 +909,7 @@
 				CE526F9F2B2DCF5100F46EBE /* NVActivityIndicatorViewExtended */,
 				CEF61E5D2B32DC8100A24BE3 /* RxCocoa */,
 				CEF61E5F2B32DC8100A24BE3 /* RxSwift */,
+				CEDD43462B36C45900BDACFB /* Tabman */,
 			);
 			productName = TimeLine;
 			productReference = CEEA87512B01E30000AC375F /* OOTD.app */;
@@ -931,6 +948,7 @@
 				CE75C3DD2B16239900A08615 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				CE526F9C2B2DCF5100F46EBE /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 				CEF61E5C2B32DC8100A24BE3 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				CEDD43452B36C45900BDACFB /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = CEEA87522B01E30000AC375F /* Products */;
 			projectDirPath = "";
@@ -1048,11 +1066,13 @@
 				CED961502B0CEE8C0067C424 /* ReadResponse.swift in Sources */,
 				CEC086D22B2AAD1200501364 /* MyPageSection.swift in Sources */,
 				CEEA87732B01ED4700AC375F /* APIKey.swift in Sources */,
+				CEDD434A2B36C47300BDACFB /* TabBarViewController.swift in Sources */,
 				CEBDFBF42B0B31B900D43BF9 /* PostAPIManager.swift in Sources */,
 				CEA10AD72B22E76B00969A8B /* BoardTableView.swift in Sources */,
 				CEC2FBD62B021796002E3046 /* AuthenticationAPIManager.swift in Sources */,
 				CEA10ADA2B22F09B00969A8B /* CommentWriteView.swift in Sources */,
 				CEFCAC9B2B283B7D00DA68EC /* MyProfileResponse.swift in Sources */,
+				CEDD434C2B36C5E800BDACFB /* TestViewController.swift in Sources */,
 				CE2021FA2B28B16600603194 /* ProfileUpdateRequest.swift in Sources */,
 				CEBDFBF62B0B31CA00D43BF9 /* PostWrite.swift in Sources */,
 				CEBDFBF82B0B4AE200D43BF9 /* Post.swift in Sources */,
@@ -1359,6 +1379,14 @@
 				minimumVersion = 7.10.0;
 			};
 		};
+		CEDD43452B36C45900BDACFB /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
 		CEEA87782B01EEAA00AC375F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1418,6 +1446,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CED961562B0CF73B0067C424 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		CEDD43462B36C45900BDACFB /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEDD43452B36C45900BDACFB /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
 		};
 		CEEA87792B01EEAA00AC375F /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
