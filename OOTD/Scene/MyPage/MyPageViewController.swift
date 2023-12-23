@@ -25,8 +25,9 @@ final class MyPageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("mypage")
         bind()
+        mainView.userId = UserDefaultsHelper.userID
         print(UserDefaultsHelper.token)
         
     }
@@ -83,6 +84,7 @@ final class MyPageViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 profile = value
                 owner.mainView.setInfo(nick: value.nick, profile: value.profile)
+                owner.mainView.userId = value._id
             }
             .disposed(by: disposeBag)
         

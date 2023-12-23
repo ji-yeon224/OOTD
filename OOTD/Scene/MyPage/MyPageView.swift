@@ -11,6 +11,7 @@ import RxDataSources
 final class MyPageView: BaseView {
     
     private let topView = UIView()
+    var userId: String?
     
     private let titleLabel = PlainLabel(size: 30, color: Constants.Color.basicText, weight: .bold)
     var menuButton = {
@@ -24,9 +25,9 @@ final class MyPageView: BaseView {
     var profileView = ProfileView()
     
     
-    private let vc = TabBarViewController()
+    private lazy var vc = TabBarViewController(id: self.userId ?? UserDefaultsHelper.userID)
     private var contentView: UIView {
-      self.vc.view
+        self.vc.view
     }
     
     override func configure() {

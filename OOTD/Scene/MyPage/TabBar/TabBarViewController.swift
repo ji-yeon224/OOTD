@@ -12,6 +12,17 @@ import Pageboy
 final class TabBarViewController: TabmanViewController {
     
     private var viewControllers: Array<UIViewController> = []
+    private var id: String?
+    
+    init(id: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.id = id
+    }
+    
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +36,9 @@ final class TabBarViewController: TabmanViewController {
     }
     
     private func config() {
+        
         let vc1 = BoardViewController()
-        vc1.boardType = .my
+        vc1.boardType = .user(id: id ?? UserDefaultsHelper.userID)
         
         let vc2 =  TestViewController()
         viewControllers.append(vc1)
