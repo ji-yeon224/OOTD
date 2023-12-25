@@ -13,7 +13,7 @@ final class MyPageTabViewController: TabmanViewController {
     
     var viewControllers: Array<UIViewController> = []
     private var id: String?
-    let vc1 =  OOTDCollectViewController()
+    
     init(id: String) {
         super.init(nibName: nil, bundle: nil)
         self.id = id
@@ -33,11 +33,13 @@ final class MyPageTabViewController: TabmanViewController {
         let bar = TMBar.ButtonBar()
         settingTabBar(ctBar: bar)
         addBar(bar, dataSource: self, at: .top)
+        print("id")
+        
     }
     
     private func config() {
         
-        
+        let vc1 =  OOTDCollectViewController()
         let vc2 = BoardViewController()
         vc2.boardType = .user(id: id ?? UserDefaultsHelper.userID)
         viewControllers.append(vc1)

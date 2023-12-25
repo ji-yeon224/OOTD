@@ -25,21 +25,16 @@ final class MyPageView: BaseView {
     var profileView = ProfileView()
     
     
-    private lazy var vc = MyPageTabViewController(id: self.userId ?? UserDefaultsHelper.userID)
-    var contentView: UIView {
-        self.vc.view
-    }
+    var contentView = UIView()
     
     override func configure() {
         addSubview(topView)
         topView.addSubview(titleLabel)
         topView.addSubview(menuButton)
-        
         addSubview(profileView)
         
         titleLabel.text = "MyPage"
         addSubview(contentView)
-        
     }
     
     override func setConstraints() {
@@ -65,10 +60,11 @@ final class MyPageView: BaseView {
             make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(14)
             make.height.equalTo(150)
         }
-        
+        contentView.backgroundColor = .gray
         contentView.snp.makeConstraints { make in
             make.top.equalTo(profileView.snp.bottom).offset(10)
-            make.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.horizontalEdges.equalToSuperview()
         }
         
         

@@ -18,6 +18,7 @@ final class MyPageViewController: BaseViewController {
     
     
     private let requestProfile = BehaviorRelay(value: true)
+    private let vc = MyPageTabViewController(id: UserDefaultsHelper.userID)
     
     override func loadView() {
         self.view = mainView
@@ -30,10 +31,20 @@ final class MyPageViewController: BaseViewController {
         mainView.userId = UserDefaultsHelper.userID
         print(UserDefaultsHelper.token)
         
+        configChildView()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        vc.willMove(toParent: nil)
+        vc.removeFromParent()
+        view.removeFromSuperview()
     }
     
     override func configure() {
@@ -42,6 +53,20 @@ final class MyPageViewController: BaseViewController {
         
         configNavBar()
         
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        configChildView()
+//    }
+    
+    private func configChildView() {
+        mainView.layoutSubviews()
+        addChild(vc)
+        
+        vc.view.frame = mainView.contentView.frame
+        mainView.contentView.addSubview(vc.view)
+        vc.didMove(toParent: self)
     }
     
     private func bind() {

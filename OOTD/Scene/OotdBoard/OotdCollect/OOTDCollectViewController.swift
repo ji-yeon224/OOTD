@@ -83,7 +83,8 @@ final class OOTDCollectViewController: BaseViewController {
         
         mainView.collectionView.rx.itemSelected
             .bind(with: self) { owner, _ in
-                owner.present(DetailPhotoViewController(), animated: true)
+                print("select")
+//                owner.present(DetailPhotoViewController(), animated: true)
             }
             .disposed(by: disposeBag)
         
