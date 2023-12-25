@@ -29,6 +29,8 @@ final class OOTDCollectView: BaseView {
         }
     }
     
+    
+    
     lazy var dataSource = RxCollectionViewSectionedReloadDataSource<PostListModel> { dataSource, collectionView, indexPath, item in
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OOTDCollectCell.identifier, for: indexPath) as? OOTDCollectCell else { return UICollectionViewCell() }
         

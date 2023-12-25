@@ -137,7 +137,16 @@ final class MyPageViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-
+        NotificationCenter.default.rx.notification(.transitionDetail)
+            .bind(with: self) { owner, _ in
+                print("noti")
+                let nav = UINavigationController(rootViewController: DetailPhotoViewController())
+                owner.present(nav, animated: true)
+//                owner.navigationController?.pushViewController(nav, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        
     }
     
     

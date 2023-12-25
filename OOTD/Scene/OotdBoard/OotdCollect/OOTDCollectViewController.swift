@@ -15,6 +15,8 @@ final class OOTDCollectViewController: BaseViewController {
     private let viewModel = OOTDCollectViewModel()
     private let disposeBag = DisposeBag()
     
+    let trans = PublishRelay<Bool>()
+    
     private let requestPost = PublishRelay<String>()
     var userId: String?
     
@@ -67,6 +69,25 @@ final class OOTDCollectViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+//        Observable.zip(mainView.collectionView.rx.itemSelected, mainView.collectionView.rx.modelSelected(Post.self)) { index, data in
+//            return (index, data)
+//        }.bind(with: self) { owner, value in
+//            print(value)
+//            let vc = DetailPhotoViewController()
+//            vc.post = value.1
+//            owner.trans.accept(true)
+////            NotificationCenter.default.post(name: .transitionDetail, object: nil)
+//            
+//        }
+//        .disposed(by: disposeBag)
+        
+        mainView.collectionView.rx.itemSelected
+            .bind(with: self) { owner, _ in
+                owner.present(DetailPhotoViewController(), animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        
         NotificationCenter.default.rx.notification(.refreshPhoto)
             .bind(with: self) { owner, _ in
                 owner.requestPost.accept(UserDefaultsHelper.userID)
@@ -75,4 +96,9 @@ final class OOTDCollectViewController: BaseViewController {
         
     }
     
+}
+
+enum OotdBoardMode {
+    case main
+    case user(id: String)
 }

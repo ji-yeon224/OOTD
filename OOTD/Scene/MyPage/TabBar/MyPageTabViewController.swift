@@ -11,9 +11,9 @@ import Pageboy
 
 final class MyPageTabViewController: TabmanViewController {
     
-    private var viewControllers: Array<UIViewController> = []
+    var viewControllers: Array<UIViewController> = []
     private var id: String?
-    
+    let vc1 =  OOTDCollectViewController()
     init(id: String) {
         super.init(nibName: nil, bundle: nil)
         self.id = id
@@ -36,7 +36,7 @@ final class MyPageTabViewController: TabmanViewController {
     }
     
     private func config() {
-        let vc1 =  OOTDCollectViewController()
+        
         
         let vc2 = BoardViewController()
         vc2.boardType = .user(id: id ?? UserDefaultsHelper.userID)

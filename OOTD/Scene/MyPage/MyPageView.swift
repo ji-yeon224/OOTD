@@ -26,7 +26,7 @@ final class MyPageView: BaseView {
     
     
     private lazy var vc = MyPageTabViewController(id: self.userId ?? UserDefaultsHelper.userID)
-    private var contentView: UIView {
+    var contentView: UIView {
         self.vc.view
     }
     

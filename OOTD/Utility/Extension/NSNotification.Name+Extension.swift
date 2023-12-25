@@ -11,4 +11,5 @@ extension NSNotification.Name {
     static let refresh = NSNotification.Name("refresh")
     static let reloadHeader = NSNotification.Name("reloadHeader")
     static let refreshPhoto = NSNotification.Name("refreshPhoto")
+    static let transitionDetail = NSNotification.Name("transDetail")
 }
