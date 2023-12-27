@@ -13,7 +13,7 @@
   
 
 ## ✏️ 한 줄 소개
--  사용자들 간 옷 정보를 공유할 수 있는 커뮤니티 어플이케이션
+-  사용자들 간 옷 정보를 공유할 수 있는 커뮤니티 어플리케이션
 
 </br>
 
@@ -28,6 +28,14 @@
 - `Tabman`, `Toast`, `IQKeyboardManager`
 
 </br>
+
+## 📖 프로젝트 목표
+
+- 서버와의 통신을 통해 `Error Handling` 
+- `Moya Intercepter`를 통해 JWT Token 관리하여 사용자 인증 처리
+- `RxSwift`와 `MVVM` `Input-Ouput 패턴`을 적용하여 코드의 가독성 높이기
+</br>
+
 
 ##  🔎 주요 기능
 ### ✔️ 회원가입, 로그인
