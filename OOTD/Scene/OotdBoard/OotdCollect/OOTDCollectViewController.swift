@@ -43,8 +43,7 @@ final class OOTDCollectViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.items
-            .asDriver()
-            .drive(mainView.collectionView.rx.items(dataSource: mainView.dataSource))
+            .bind(to: mainView.collectionView.rx.items(dataSource: mainView.dataSource))
             .disposed(by: disposeBag)
         
         output.errorMsg

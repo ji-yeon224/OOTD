@@ -10,12 +10,7 @@ import RxDataSources
 
 final class OOTDCollectView: BaseView {
     
-    var error: Bool = false {
-        didSet {
-            collectionView.isHidden = error
-            placeholder.isHidden = !error
-        }
-    }
+    
     
     lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
@@ -25,25 +20,17 @@ final class OOTDCollectView: BaseView {
         return view
     }()
     
-    let placeholder = {
-        let view = UIView()
-        view.backgroundColor = Constants.Color.background
-        return view
-    }()
-    
     override func configure() {
         super.configure()
         addSubview(collectionView)
-        addSubview(placeholder)
+        
     }
     
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        placeholder.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        
     }
     
     
