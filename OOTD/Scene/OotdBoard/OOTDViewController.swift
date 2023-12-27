@@ -20,6 +20,8 @@ final class OOTDViewController: BaseViewController {
     private let requestDelete = PublishRelay<(String, Int)>()
     private let likeButton = PublishRelay<String>()
     
+    var mode: OotdBoardMode = .main
+    
     override func loadView() {
         self.view = mainView
         
@@ -39,7 +41,7 @@ final class OOTDViewController: BaseViewController {
         
         mainView.collectionView.refreshControl = UIRefreshControl()
         mainView.collectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        
+       
     }
     
     @objc func refreshData() {
@@ -63,12 +65,10 @@ final class OOTDViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         
-        
-        
-        
         output.items
             .bind(to:  mainView.collectionView.rx.items(dataSource: mainView.dataSource))
             .disposed(by: disposeBag)
+        
        
         output.errorMsg
             .bind(with: self) { owner, value in

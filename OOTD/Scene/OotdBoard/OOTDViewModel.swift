@@ -103,6 +103,7 @@ final class OOTDViewModel {
                     } else {
                         input.callFirstPage.accept(true)
                     }
+                    NotificationCenter.default.post(name: .refreshPhoto, object: nil)
                     
                 case .failure(let error):
                     let code = error.statusCode

@@ -56,7 +56,8 @@ extension UIImageView {
                     }
                 }
             case .failure(let error):
-                print(error)
+                self.backgroundColor = Constants.Color.background
+                debugPrint(error)
             }
             
         }

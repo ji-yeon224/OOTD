@@ -18,6 +18,7 @@ final class MyPageViewController: BaseViewController {
     
     
     private let requestProfile = BehaviorRelay(value: true)
+    private let vc = MyPageTabViewController(id: UserDefaultsHelper.userID)
     
     override func loadView() {
         self.view = mainView
@@ -25,22 +26,47 @@ final class MyPageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("mypage")
         bind()
+        mainView.userId = UserDefaultsHelper.userID
         print(UserDefaultsHelper.token)
+        
+        configChildView()
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        
     }
     
-    
-   
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        vc.willMove(toParent: nil)
+        vc.removeFromParent()
+        view.removeFromSuperview()
+    }
     
     override func configure() {
         super.configure()
         navigationController?.navigationBar.isHidden = true
+        
+        configNavBar()
+        
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        configChildView()
+//    }
+    
+    private func configChildView() {
+        mainView.layoutSubviews()
+        addChild(vc)
+        
+        vc.view.frame = mainView.contentView.frame
+        mainView.contentView.addSubview(vc.view)
+        vc.didMove(toParent: self)
     }
     
     private func bind() {
@@ -83,22 +109,11 @@ final class MyPageViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 profile = value
                 owner.mainView.setInfo(nick: value.nick, profile: value.profile)
+                owner.mainView.userId = value._id
             }
             .disposed(by: disposeBag)
         
-        output.withdraw
-            .bind(with: self) { owner, value in
-                if value {
-                    owner.showOKAlert(title: "탈퇴가 완료되었습니다.", message: "") {
-                        UserDefaultsHelper.initToken()
-                        // 로그인 뷰로 present
-                        owner.view?.window?.rootViewController = LoginViewController()
-                        owner.view.window?.makeKeyAndVisible()
-                    }
-                }
-            }
-            .disposed(by: disposeBag)
-        
+       
         
         mainView.profileView.editButton.rx.tap
             .bind(with: self) { owner, _ in
@@ -126,51 +141,44 @@ final class MyPageViewController: BaseViewController {
 
         
         
-        mainView.collectionView.rx.itemSelected
-            .bind(with: self) { owner, value in
-                let type = list[value.row].type
-                switch type {
-                case .likeboard:
-                    let vc = BoardViewController()
-                    vc.boardType = .my
-                    owner.navigationController?.pushViewController(vc, animated: true)
-                case .mypost: print("post")
-                case .withdraw:
-                    owner.showAlertWithCancel(title: "탈퇴 하시겠어요?", message: "") {
-                        withdrawTap.accept(true)
-                    } cancelHandler: {  }
-
-                    
-                case .logout:
-                    logoutTap.accept(true)
-                }
+        mainView.menuButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let vc = AccountSettingViewController()
                 
+                let detentIdentifier = UISheetPresentationController.Detent.Identifier("customDetent")
+                let customDetent = UISheetPresentationController.Detent.custom(identifier: detentIdentifier) { _ in
+                    // safe area bottom을 구하기 위한 선언.
+                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                    let safeAreaBottom = windowScene?.windows.first?.safeAreaInsets.bottom ?? 0
+
+                    return 200 - safeAreaBottom
+                }
+                if let sheet = vc.sheetPresentationController {
+                    sheet.detents = [customDetent]
+                    sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                    sheet.prefersGrabberVisible = true
+                }
+                owner.present(vc, animated: true)
             }
             .disposed(by: disposeBag)
         
-//        Observable.zip(mainView.collectionView.rx.itemSelected, mainView.collectionView.rx.modelSelected(MyPageContent.self))
-//            .bind(with: self) { owner, value in
-//                print(value.1)
-//            }
-//            .map {
-//                return $1.type
-//            }
-//            .bind(with: self) { owner, type in
-//                switch type {
-//                case .likeboard: print("likeboard")
-//                case .mypost: print("post")
-//                case .withdraw: print("witdraw")
-//                    //withdrawTap.accept(true)
-//                case .logout: print("logout")
-//                    //logoutTap.accept(true)
-//                }
-//            }
-//            .disposed(by: disposeBag)
+        NotificationCenter.default.rx.notification(.transitionDetail)
+            .bind(with: self) { owner, _ in
+                print("noti")
+                let nav = UINavigationController(rootViewController: DetailPhotoViewController())
+                owner.present(nav, animated: true)
+//                owner.navigationController?.pushViewController(nav, animated: true)
+            }
+            .disposed(by: disposeBag)
         
         
-    
     }
     
     
+    
+    private func configNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Constants.Image.menuButton, style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem?.tintColor = Constants.Color.basicText
+    }
     
 }

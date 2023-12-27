@@ -12,7 +12,6 @@ import RxSwift
 
 final class OOTDView: BaseView {
     
-    private let deviceWidth = UIScreen.main.bounds.size.width
     let layoutRefresh = PublishRelay<Bool>()
     let likeData = PublishRelay<Bool>()
     weak var delegate: OOTDCellProtocol?
@@ -64,7 +63,7 @@ final class OOTDView: BaseView {
         
         
         if item.image.count > 0 {
-            cell.imageView.setImage(with: item.image[0], resize: self.deviceWidth, cornerRadius: 0 ) {
+            cell.imageView.setImage(with: item.image[0], resize: Constants.Design.deviceWidth, cornerRadius: 0 ) {
                 collectionView.collectionViewLayout.invalidateLayout()
             }
             

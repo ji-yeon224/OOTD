@@ -14,7 +14,6 @@ final class BoardViewModel {
     var data: [Post] = []
     private var nextCursor: String? = nil
     var boardType: BoardViewType = .main
-    
     let disposeBag = DisposeBag()
     
     struct Input {
@@ -51,8 +50,10 @@ final class BoardViewModel {
                 switch self.boardType {
                 case .main:
                     return PostAPI.read(productId: ProductId.OOTDBoard.rawValue, limit: 10, next: self.nextCursor)
-                case .my:
-                    return PostAPI.myLike(limit: 10, next: self.nextCursor)
+                case .user(let id):
+                    let userId = id ?? UserDefaultsHelper.userID
+                    return PostAPI.userPosts(id: userId, productId: ProductId.OOTDBoard.rawValue, limit: 10, next: self.nextCursor)
+                    
                 }
             }
             .flatMap { api in
@@ -66,7 +67,7 @@ final class BoardViewModel {
                     items.accept([PostListModel(section: "", items: owner.data)])
                 case .failure(let error):
                     debugPrint("[BoardVM error] ", error)
-                    
+                print(owner.boardType)
                     let code = error.statusCode
                     guard let errorType = PostReadError(rawValue: code) else {
                         if let commonError = CommonError(rawValue: code) {

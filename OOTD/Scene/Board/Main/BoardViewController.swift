@@ -37,7 +37,9 @@ final class BoardViewController: BaseViewController {
     
     
     override func configure() {
-        if boardType == .main {
+        
+        switch boardType {
+        case .main:
             mainView.tableView.refreshControl = UIRefreshControl()
             mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
             
@@ -48,13 +50,31 @@ final class BoardViewController: BaseViewController {
                 navigationItem.titleView = imageView
             
             mainView.writeButton.isHidden = false
-        } else { // 마이페이지 -> 좋아요 게시글
+        case .user(let id):
             configNavBar()
             mainView.writeButton.isHidden = true
             navigationController?.navigationBar.isHidden = false
             title = "My Like List"
         }
         
+//        if boardType == .main {
+//            mainView.tableView.refreshControl = UIRefreshControl()
+//            mainView.tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+//            
+//            let imageView = UIImageView(frame: .zero)
+//            imageView.contentMode = .scaleAspectFit
+//            let image = Constants.Image.mainLogo
+//                imageView.image = image
+//                navigationItem.titleView = imageView
+//            
+//            mainView.writeButton.isHidden = false
+//        } else if boardType == .user(let id){ // 마이페이지 -> 좋아요 게시글
+//            configNavBar()
+//            mainView.writeButton.isHidden = true
+//            navigationController?.navigationBar.isHidden = false
+//            title = "My Like List"
+//        }
+//        
         
     }
     
@@ -162,5 +182,6 @@ extension BoardViewController {
 
 
 enum BoardViewType {
-    case main, my
+    case main
+    case user(id: String?)
 }
