@@ -1,20 +1,25 @@
 
-![[qpplogo.png]]
+<img src = "https://github.com/ji-yeon224/OOTD/assets/69784492/155a5f0d-35eb-4013-b34c-62affc336fc3" width="20%"/>
+
 # 👕 OOTD
 
-## 미리보기
-
-![[미리보기.png]]
+<img src = "https://github.com/ji-yeon224/OOTD/assets/69784492/f779e1b1-e0b4-43f7-bc3a-06ffc2328653" width="80%"/>
+</br>
 
 ## 🗓️ 프로젝트
 - 개인 프로젝트
 - 2023.11.13 ~ 2023.12.23
+</br>
+  
 
 ## ✏️ 한 줄 소개
 -  사용자들 간 옷 정보를 공유할 수 있는 커뮤니티 어플이케이션
 
+</br>
+
+
 ## 💻 기술 스택
-- `MVVM
+- `MVVM`
 - `RxSwift`, `RxDataSource`
 - `UIKit`
 - `Moya`, `Codable`, `Kingfisher`
@@ -23,25 +28,32 @@
 - `SeSAC API`
 - `Tabman`, `Toast`, `IQKeyboardManager`
 
+</br>
+
 ##  🔎 주요 기능
-### 회원가입, 로그인
-![[로그인및회원가입.png]]
+### ✔️ 회원가입, 로그인
+<img src = "https://github.com/ji-yeon224/OOTD/assets/69784492/32588db8-d6d1-4692-88c7-04dedbfdac8d" width="80%"/>
 
 - 이메일 유효성 체크 api를 통해 서버 내에 이미 존재하는 이메일인지 확인하도록 하였다.
+</br>
 
-### JWT Token 관리
+### ✔️ JWT Token 관리
 - `Alamofire Intercepter`를 이용하여 token 값이 유효한지 체크하여 토큰 갱신을 하거나 refresh token이 만료됐을 시 다시 로그인 하도록 유도하였다.
+</br>
 
-### 게시물 작성 및 조회, 댓글 작성
-![[게시물.png]]
+### ✔️ 게시물 작성 및 조회, 댓글 작성
+<img src = "https://github.com/ji-yeon224/OOTD/assets/69784492/3db28b84-e702-434f-9d2d-5e4c4f3effd1" width="90%"/>
 
 - `Compositional Layout`과 `RxDataSource`를 사용하여 서버에서 받아온 데이터를 CollectionView와 TableView를 통해 구현하였다. 
 - `PHPickerViewController`를 통해 게시물 작성 시 사용자의 앨범에 있는 사진을 업로드할 수 있도록 하였다. 
+</br>
 
-### 내 정보 조회 및 수정
-![[마이페이지.png]]
+### ✔️ 내 정보 조회 및 수정
+<img src = "https://github.com/ji-yeon224/OOTD/assets/69784492/32caaec8-a942-48cf-8285-997f343bccd4" width="80%"/>
+
 - `Tabman` 라이브러리를 이용하여 사용자가 작성한 게시글을 카테고리 별로 나눠 볼 수 있도록 구현하였다. 
 
+</br>
 
 
 
@@ -161,7 +173,7 @@ extension PHPickerManager: PHPickerViewControllerDelegate {
 }
 ```
 
-![[Pasted image 20231226153814.png]]
+<img src = "https://github.com/ji-yeon224/OOTD/assets/69784492/666121f5-3398-421b-9416-1c3ce8e00a3f" width="85%"/>
 
 ### Codable TypeMismatch
 - 커서 기반 페이지네이션 구현 중 서버에서 응답받은 커서 값이 마지막 페이지일 때는 Int로, 다음 페이지가 있을 때는 String으로 반환하여 **디코딩 TypeMismatch 오류**가 발생하였다. 
