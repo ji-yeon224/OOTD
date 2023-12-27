@@ -25,7 +25,6 @@
 - `Moya`, `Codable`, `Kingfisher`
 - `Snapkit`, `AutoLayout`
 - `DiffableDataSource`, `CompositionalLayout`
-- `SeSAC API`
 - `Tabman`, `Toast`, `IQKeyboardManager`
 
 </br>
